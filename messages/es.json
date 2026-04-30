@@ -1,0 +1,423 @@
+{
+  "common": {
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "view": "Ver",
+    "create": "Crear",
+    "search": "Buscar",
+    "clear": "Limpiar",
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito",
+    "confirm": "Confirmar",
+    "back": "Volver",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "yes": "Sí",
+    "no": "No",
+    "actions": "Acciones",
+    "status": "Estado",
+    "date": "Fecha",
+    "name": "Nombre",
+    "email": "Correo electrónico",
+    "phone": "Teléfono",
+    "noResults": "Sin resultados",
+    "noData": "No hay datos disponibles",
+    "required": "Obligatorio",
+    "active": "Activo",
+    "inactive": "Inactivo",
+    "unnamed": "Sin nombre",
+    "never": "Nunca",
+    "unknown": "Desconocido"
+  },
+  "nav": {
+    "dashboard": "Inicio",
+    "offers": "Ofertas",
+    "candidates": "Candidatos",
+    "applications": "Solicitudes",
+    "settings": "Configuración",
+    "syncOutlook": "Sincronizar Outlook",
+    "lastSync": "Última sincronización",
+    "logout": "Cerrar sesión"
+  },
+  "auth": {
+    "login": "Iniciar sesión",
+    "loginTitle": "Bienvenido a AntiGravity",
+    "loginSubtitle": "Accede a tu cuenta para continuar",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "orContinueWith": "O CONTINUAR CON",
+    "signInMicrosoft": "Entrar con Microsoft",
+    "invalidCredentials": "Credenciales incorrectas",
+    "sessionExpired": "Tu sesión ha expirado. Por favor, inicia sesión de nuevo."
+  },
+  "dashboard": {
+    "title": "Panel de control",
+    "subtitle": "Vista general de contratación y actividad reciente.",
+    "kpi": {
+      "activeOffers": "Ofertas activas",
+      "totalCandidates": "Total candidatos",
+      "applications": "Solicitudes",
+      "hiredThisMonth": "Contratados este mes",
+      "avgAiScore": "Puntuación IA media",
+      "gdprPending": "GDPR pendientes"
+    },
+    "pipeline": {
+      "title": "Embudo de selección",
+      "subtitle": "Candidatos por etapa"
+    },
+    "recentActivity": {
+      "title": "Actividad reciente",
+      "empty": "Sin actividad reciente"
+    },
+    "topOffers": {
+      "title": "Ofertas destacadas",
+      "columns": {
+        "offer": "Oferta",
+        "candidates": "Candidatos",
+        "inInterview": "En entrevista",
+        "hired": "Contratados"
+      },
+      "empty": "No hay ofertas activas."
+    }
+  },
+  "offers": {
+    "title": "Ofertas de empleo",
+    "subtitle": "Gestiona las vacantes y su embudo de selección.",
+    "newOffer": "Nueva oferta",
+    "editOffer": "Editar oferta",
+    "filters": {
+      "all": "Todas",
+      "active": "Activas",
+      "paused": "Pausadas",
+      "closed": "Cerradas"
+    },
+    "status": {
+      "draft": "Borrador",
+      "published": "Publicada",
+      "paused": "Pausada",
+      "closed": "Cerrada",
+      "archived": "Archivada"
+    },
+    "jobType": {
+      "full_time": "Jornada completa",
+      "full-time": "Jornada completa",
+      "part_time": "Media jornada",
+      "part-time": "Media jornada",
+      "contract": "Contrato",
+      "internship": "Prácticas"
+    },
+    "form": {
+      "title": "Título del puesto",
+      "description": "Descripción",
+      "requirements": "Requisitos",
+      "salaryMin": "Salario mínimo",
+      "salaryMax": "Salario máximo",
+      "department": "Departamento",
+      "location": "Ubicación",
+      "jobType": "Tipo de jornada",
+      "saveAsDraft": "Guardar como borrador",
+      "publish": "Publicar oferta",
+      "placeholders": {
+        "title": "p. ej. Senior Frontend Engineer",
+        "department": "p. ej. Ingeniería",
+        "location": "p. ej. Madrid / Remoto",
+        "description": "Describe responsabilidades, equipo e impacto...",
+        "requirements": "Introduce requisitos y experiencia necesaria, uno por línea..."
+      }
+    },
+    "detail": {
+      "daysOpen": "{days} días publicada",
+      "daysOpenOne": "1 día publicada",
+      "daysOpenToday": "Publicada hoy",
+      "funnel": "Embudo de candidatos",
+      "candidates": "Candidatos aplicados",
+      "overview": "Resumen",
+      "requirements": "Requisitos"
+    },
+    "actions": {
+      "pause": "Pausar oferta",
+      "activate": "Activar oferta",
+      "close": "Cerrar oferta",
+      "edit": "Editar oferta"
+    },
+    "stats": {
+      "candidates": "candidatos",
+      "interviews": "entrevistas",
+      "hired": "contratados"
+    },
+    "empty": "No hay ofertas que mostrar"
+    ,
+    "analytics": "Analítica",
+    "showing": "Mostrando {count} ofertas",
+    "emptyHint": "Prueba a cambiar el filtro de estado o crea una nueva.",
+    "details": "Detalles de la oferta",
+    "createTitle": "Crear oferta",
+    "createSubtitle": "Rellena los detalles para publicar una nueva oportunidad.",
+    "breadcrumbNew": "Nueva posición",
+    "notFound": "Oferta no encontrada",
+    "backToList": "Volver al listado",
+    "publishedOn": "Publicada el {date}",
+    "quickStats": "Estadísticas rápidas",
+    "applicants": "Candidatos",
+    "salaryYear": "{min} - {max} / año",
+    "totalRejections": "Descartes totales",
+    "conversionRate": "{rate}% tasa de conversión"
+  },
+  "candidates": {
+    "title": "Candidatos",
+    "subtitle": "Gestiona y descubre candidatos con búsqueda asistida por IA.",
+    "addCandidate": "Añadir candidato",
+    "registered": "Registrado",
+    "yearsShort": "{years} a.",
+    "search": {
+      "title": "Búsqueda avanzada",
+      "skills": "Habilidades",
+      "skillsPlaceholder": "Escribe y pulsa Enter para añadir",
+      "mode": {
+        "and": "Y (todos)",
+        "or": "O (alguno)"
+      },
+      "experienceMin": "Exp. mínima (años)",
+      "experienceMax": "Exp. máxima (años)",
+      "seniority": "Nivel",
+      "seniorityOptions": {
+        "all": "Todos los niveles",
+        "junior": "Junior",
+        "mid": "Intermedio",
+        "senior": "Senior",
+        "lead": "Lead"
+      },
+      "results": "{count} candidatos encontrados"
+    },
+    "table": {
+      "name": "Nombre",
+      "email": "Correo",
+      "skills": "Habilidades",
+      "experience": "Experiencia",
+      "seniority": "Nivel",
+      "lastContact": "Último contacto",
+      "actions": "Acciones",
+      "selectAll": "Seleccionar todos los candidatos de esta página",
+      "selectCandidate": "Seleccionar {name}"
+    },
+    "detail": {
+      "profile": "Perfil",
+      "applications": "Solicitudes",
+      "communications": "Comunicaciones",
+      "editProfile": "Editar perfil",
+      "linkedIn": "Ver LinkedIn",
+      "downloadCv": "Descargar CV",
+      "gdprConsent": "Consentimiento otorgado el {date}",
+      "gdprDeletion": "Eliminación programada: {date}",
+      "noApplications": "Este candidato no tiene solicitudes",
+      "noCommunications": "No hay comunicaciones registradas"
+    },
+    "cv": {
+      "upload": "Arrastra el CV aquí o haz clic para seleccionar",
+      "uploadHint": "Solo PDF, máximo 5 MB",
+      "parse": "Analizar CV con IA",
+      "parsing": "Claude está leyendo el CV...",
+      "parsed": "Datos extraídos del CV",
+      "confirm": "Confirmar datos",
+      "discard": "Descartar cambios",
+      "errorSize": "El archivo supera los 5 MB",
+      "errorType": "Solo se permiten archivos PDF",
+      "previewLoading": "Cargando vista previa del PDF...",
+      "previewError": "No se ha podido mostrar este PDF.",
+      "page": "Página {page}"
+    },
+    "aiScore": {
+      "title": "Puntuación IA",
+      "rescore": "Volver a puntuar",
+      "matched": "Habilidades que encajan",
+      "missing": "Habilidades ausentes",
+      "strengths": "Puntos fuertes",
+      "gaps": "Carencias",
+      "noScore": "Sin puntuación todavía",
+      "recommendation": "Recomendación",
+      "explanation": "Explicación"
+    },
+    "form": {
+      "fullName": "Nombre completo",
+      "email": "Correo electrónico",
+      "phone": "Teléfono",
+      "linkedinUrl": "URL de LinkedIn",
+      "source": "Origen",
+      "sources": {
+        "manual": "Manual",
+        "linkedin": "LinkedIn",
+        "email": "Correo",
+        "referral": "Referencia"
+      },
+      "gdprConsent": "El candidato ha dado su consentimiento para el tratamiento de datos personales (obligatorio)"
+    },
+    "export": "Exportar CSV",
+    "bulkEdit": "Edición masiva",
+    "bulkArchive": "{count} candidatos seleccionados",
+    "bulkChangeTo": "Cambiar estado a...",
+    "bulkConfirmTitle": "¿Archivar candidatos seleccionados?",
+    "bulkConfirm": "¿Archivar {count} candidatos? Esta acción no se puede deshacer.",
+    "bulkSuccess": "{count} candidatos archivados correctamente",
+    "archive": "Archivar",
+    "empty": "No se han encontrado candidatos."
+  },
+  "applications": {
+    "title": "Solicitudes",
+    "subtitle": "Seguimiento del proceso de selección por candidato y oferta.",
+    "status": {
+      "prospect": "Prospecto",
+      "applied": "Aplicado",
+      "screening": "Criba",
+      "interview_1": "1.ª entrevista",
+      "interview_2": "2.ª entrevista",
+      "interview_3": "3.ª entrevista",
+      "offer": "Oferta enviada",
+      "hired": "Contratado",
+      "rejected": "Descartado"
+    },
+    "table": {
+      "candidate": "Candidato",
+      "offer": "Oferta",
+      "status": "Estado",
+      "aiScore": "Puntuación IA",
+      "lastContact": "Último contacto",
+      "appliedAt": "Fecha de aplicación",
+      "recruiter": "Reclutador"
+    },
+    "detail": {
+      "changeStatus": "Cambiar etapa",
+      "confirmChange": "¿Confirmar cambio de etapa a {status}?",
+      "internalNotes": "Notas internas",
+      "saveNote": "Guardar nota",
+      "timeline": "Historial",
+      "sendEmail": "Enviar correo",
+      "overview": "Resumen de la solicitud"
+    },
+    "timeline": {
+      "statusChanged": "Estado cambiado a {status}",
+      "emailSent": "Correo enviado",
+      "emailReceived": "Correo recibido",
+      "aiScored": "Puntuación IA actualizada",
+      "cvParsed": "CV analizado con IA",
+      "empty": "No hay eventos en el historial"
+    }
+  },
+  "communications": {
+    "inbound": "Entrante",
+    "outbound": "Saliente",
+    "email": "Correo",
+    "subjectFallback": "Sin asunto"
+  },
+  "email": {
+    "compose": "Redactar correo",
+    "template": "Plantilla",
+    "selectTemplate": "Selecciona una plantilla...",
+    "to": "Para",
+    "subject": "Asunto",
+    "body": "Mensaje",
+    "send": "Enviar vía Outlook",
+    "sent": "Correo enviado correctamente",
+    "error": "Error al enviar el correo",
+    "templates": {
+      "title": "Plantillas de correo",
+      "new": "Nueva plantilla",
+      "name": "Nombre de la plantilla",
+      "variables": "Variables disponibles",
+      "active": "Activa",
+      "inactive": "Inactiva"
+    }
+  },
+  "gdpr": {
+    "title": "Cumplimiento GDPR",
+    "pending": "Candidatos pendientes de anonimización",
+    "anonymize": "Anonimizar ahora",
+    "confirmAnonymize": "¿Anonimizar los datos de {name}? Esta acción es irreversible.",
+    "anonymized": "Candidato anonimizado correctamente",
+    "scheduledFor": "Eliminación programada para {date}",
+    "empty": "No hay candidatos pendientes de anonimización"
+  },
+  "settings": {
+    "title": "Configuración",
+    "subtitle": "Gestiona usuarios, plantillas reutilizables e integraciones de servicio.",
+    "tabs": {
+      "users": "Usuarios",
+      "templates": "Plantillas de correo",
+      "integrations": "Integraciones"
+    },
+    "users": {
+      "title": "Usuarios",
+      "description": "Controla roles y acceso de las personas del equipo.",
+      "invite": "Invitar usuario",
+      "sendInvite": "Enviar invitación",
+      "inviteEmail": "Correo electrónico",
+      "inviteRole": "Rol",
+      "roles": {
+        "admin": "Administrador",
+        "recruiter": "Reclutador",
+        "manager": "Manager",
+        "viewer": "Solo lectura"
+      },
+      "active": "Activo",
+      "inactive": "Inactivo",
+      "empty": "No hay usuarios."
+    },
+    "templates": {
+      "description": "Mensajes reutilizables con variables para flujos de candidatos.",
+      "create": "Crear plantilla",
+      "edit": "Editar plantilla",
+      "body": "Mensaje",
+      "noVariables": "Sin variables",
+      "variablesPlaceholder": "candidate_name, offer_title",
+      "empty": "Todavía no hay plantillas activas.",
+      "saved": "Plantilla guardada",
+      "deactivated": "Plantilla desactivada"
+    },
+    "integrations": {
+      "outlook": {
+        "title": "Microsoft Outlook",
+        "connected": "Conectado",
+        "disconnected": "Desconectado",
+        "lastSync": "Última sincronización: {date}",
+        "connect": "Conectar con Microsoft",
+        "disconnect": "Desconectar",
+        "syncNow": "Sincronizar ahora",
+        "synced": "Sincronización de Outlook completada",
+        "disconnectedToast": "Outlook desconectado"
+      },
+      "claude": {
+        "title": "Claude IA (Anthropic)",
+        "configured": "API Key configurada",
+        "notConfigured": "API Key no configurada",
+        "testConnection": "Probar conexión",
+        "description": "Solo se muestra el estado; la clave permanece oculta."
+      },
+      "azure": {
+        "title": "Azure Blob Storage",
+        "configured": "Almacenamiento configurado",
+        "notConfigured": "Sin configurar",
+        "testConnection": "Probar conexión",
+        "description": "Comprobación de conectividad con Blob Storage."
+      }
+    }
+  },
+  "toasts": {
+    "userInvited": "Usuario invitado",
+    "userUpdated": "Usuario actualizado",
+    "exported": "Candidatos exportados",
+    "exportFailed": "No se ha podido exportar",
+    "bulkFailed": "No se ha podido aplicar la edición masiva",
+    "unknownError": "Error desconocido"
+  },
+  "errors": {
+    "notFound": "Página no encontrada",
+    "notFoundDescription": "La página que buscáis no existe o se ha movido.",
+    "unauthorized": "No tienes permiso para acceder a esta sección",
+    "serverError": "Error interno del servidor. Por favor, inténtalo de nuevo.",
+    "networkError": "Error de conexión. Comprueba tu conexión a internet.",
+    "validationError": "Revisa los campos del formulario",
+    "tryAgain": "Intentarlo de nuevo"
+  }
+}

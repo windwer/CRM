@@ -1,0 +1,127 @@
+import { auth } from "../../../../../auth";
+import { db } from "@/lib/db";
+import { apiResponse, handleApiError, ApiError } from "@/lib/errors";
+import { NextRequest } from "next/server";
+import { startOfMonth } from "date-fns";
+
+export async function GET(req: NextRequest) {
+  try {
+    const session = await auth();
+    if (!session) throw new ApiError("UNAUTHORIZED", "Unauthorized", 401);
+
+    const now = new Date();
+    const monthStart = startOfMonth(now);
+
+    // Fetch all stats in parallel for efficiency
+    const [
+      activeOffers,
+      totalCandidates,
+      totalApplications,
+      hiredThisMonth,
+      avgAIScoreResult,
+      pendingGDPR,
+      pipelineStats,
+      recentActivity,
+      topOffers
+    ] = await Promise.all([
+      db.offer.count({ where: { status: "published" } }),
+      db.candidate.count({ where: { archivedAt: null } }),
+      db.application.count(),
+      db.application.count({ 
+        where: { 
+          status: "hired",
+          updatedAt: { gte: monthStart }
+        } 
+      }),
+      db.application.aggregate({
+        _avg: { aiScore: true },
+        where: { aiScore: { not: null } }
+      }),
+      db.candidate.count({ where: { consentPersonalData: false, archivedAt: null } }),
+      // Group by status
+      db.application.groupBy({
+        by: ["status"],
+        _count: { _all: true }
+      }),
+      // Recent activity (using communications and status history as proxy)
+      db.communication.findMany({
+        take: 10,
+        orderBy: { sentAt: "desc" },
+        include: {
+          application: {
+            include: {
+              candidate: true,
+              offer: true
+            }
+          }
+        }
+      }),
+      // Top offers by candidate count
+      db.offer.findMany({
+        where: { status: "published" },
+        take: 5,
+        orderBy: {
+          applications: { _count: "desc" }
+        },
+        select: {
+          id: true,
+          title: true,
+          _count: {
+            select: { applications: true }
+          },
+          applications: {
+            where: { status: "interview_1" }, // "in interview" proxy
+            select: { id: true }
+          }
+        }
+      })
+    ]);
+
+    // Format pipeline data
+    const pipeline: Record<string, number> = {
+      prospect: 0,
+      applied: 0,
+      screening: 0,
+      interview: 0,
+      offer: 0,
+      hired: 0
+    };
+
+    pipelineStats.forEach(stat => {
+      const status = stat.status.toLowerCase();
+      if (status.includes("interview")) {
+        pipeline.interview += stat._count._all;
+      } else if (pipeline.hasOwnProperty(status)) {
+        pipeline[status] += stat._count._all;
+      }
+    });
+
+    return apiResponse({
+      kpis: {
+        total_offers_active: activeOffers,
+        total_candidates: totalCandidates,
+        total_applications: totalApplications,
+        hired_this_month: hiredThisMonth,
+        avg_ai_score: avgAIScoreResult._avg.aiScore ? Number(avgAIScoreResult._avg.aiScore) : 0,
+        candidates_pending_gdpr: pendingGDPR
+      },
+      pipeline,
+      recent_activity: recentActivity.map(comm => ({
+        type: comm.isOutbound ? "email_sent" : "email_received",
+        candidate_name: comm.application.candidate.fullName,
+        offer_title: comm.application.offer.title,
+        description: comm.subject || "No subject",
+        created_at: comm.sentAt
+      })),
+      top_offers: topOffers.map(offer => ({
+        id: offer.id,
+        title: offer.title,
+        total_candidates: offer._count.applications,
+        in_interview: offer.applications.length,
+        hired: 0 // Would need another query or better grouping to get hired per offer
+      }))
+    });
+  } catch (error) {
+    return handleApiError(error);
+  }
+}
