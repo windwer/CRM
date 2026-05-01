@@ -1,20 +1,31 @@
-import { auth } from "../../../../auth";
 import { db } from "@/lib/db";
-import { apiResponse, handleApiError, ApiError } from "@/lib/errors";
+import { apiResponse, handleApiError } from "@/lib/errors";
+import { requireRole } from "@/lib/auth-helpers";
+import { parsePagination, buildMeta } from "@/lib/pagination";
 import { emailTemplateSchema } from "@/lib/validations/email";
 import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest) {
   try {
-    const session = await auth();
-    if (!session) throw new ApiError("UNAUTHORIZED", "Unauthorized", 401);
+    const { errorResponse } = await requireRole("viewer");
+    if (errorResponse) return errorResponse;
 
-    const templates = await db.emailTemplate.findMany({
-      where: { isActive: true },
-      orderBy: { createdAt: "desc" },
-    });
+    const { searchParams } = new URL(req.url);
+    const { page, limit, skip, take } = parsePagination(searchParams);
 
-    return apiResponse(templates);
+    const where = { isActive: true };
+
+    const [templates, total] = await db.$transaction([
+      db.emailTemplate.findMany({
+        where,
+        orderBy: { createdAt: "desc" },
+        skip,
+        take,
+      }),
+      db.emailTemplate.count({ where }),
+    ]);
+
+    return apiResponse(templates, buildMeta(total, page, limit));
   } catch (error) {
     return handleApiError(error);
   }
@@ -22,10 +33,8 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    const session = await auth();
-    if (!session || !session.user?.id) {
-      throw new ApiError("UNAUTHORIZED", "Unauthorized", 401);
-    }
+    const { session, errorResponse } = await requireRole("recruiter");
+    if (errorResponse) return errorResponse;
 
     const body = await req.json();
     const validatedData = emailTemplateSchema.parse(body);

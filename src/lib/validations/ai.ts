@@ -1,5 +1,36 @@
 import { z } from "zod";
 
+export const parseCVSchema = z.union([
+  z.object({
+    candidateId: z.string().uuid(),
+    blobId: z.string().min(1),
+  }).transform((data) => data),
+  z.object({
+    candidate_id: z.string().uuid(),
+    blob_id: z.string().min(1),
+  }).transform((data) => ({
+    candidateId: data.candidate_id,
+    blobId: data.blob_id,
+  })),
+]);
+
+export const scoreMatchSchema = z.union([
+  z.object({
+    candidateId: z.string().uuid(),
+    offerId: z.string().uuid(),
+    applicationId: z.string().uuid().optional(),
+  }).transform((data) => data),
+  z.object({
+    candidate_id: z.string().uuid(),
+    offer_id: z.string().uuid(),
+    application_id: z.string().uuid().optional(),
+  }).transform((data) => ({
+    candidateId: data.candidate_id,
+    offerId: data.offer_id,
+    applicationId: data.application_id,
+  })),
+]);
+
 export const parsedCVSchema = z.object({
   name: z.string().optional(),
   email: z.string().email().optional(),

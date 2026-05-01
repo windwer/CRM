@@ -1,15 +1,19 @@
-import { auth } from "../../../../../../auth";
 import { db } from "@/lib/db";
-import { apiResponse, handleApiError, ApiError } from "@/lib/errors";
+import { apiResponse, handleApiError } from "@/lib/errors";
+import { requireRole } from "@/lib/auth-helpers";
+import { validateId } from "@/lib/params";
 import { NextRequest } from "next/server";
 
 export async function GET(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
+  const { valid, response } = validateId(params.id);
+  if (!valid) return response!;
+
   try {
-    const session = await auth();
-    if (!session) throw new ApiError("UNAUTHORIZED", "Unauthorized", 401);
+    const { errorResponse } = await requireRole("viewer");
+    if (errorResponse) return errorResponse;
 
     const stats = await db.application.groupBy({
       by: ["status"],

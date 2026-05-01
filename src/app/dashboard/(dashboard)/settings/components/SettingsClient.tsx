@@ -7,17 +7,14 @@ import axios from "axios";
 import { formatDistanceToNow } from "date-fns";
 import { es } from "date-fns/locale";
 import {
-  Activity,
-  CheckCircle2,
   Cloud,
   Mail,
-  PlugZap,
   Plus,
   RefreshCw,
   Shield,
   Trash2,
-  XCircle,
 } from "lucide-react";
+import { AIProvidersPanel } from "@/components/settings/AIProvidersPanel";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -138,7 +135,6 @@ export function SettingsClient() {
     body: "",
     variables: "",
   });
-  const [claudeResult, setClaudeResult] = useState<TestResult | null>(null);
   const [azureResult, setAzureResult] = useState<TestResult | null>(null);
 
   const currentRole = (session?.user as { role?: string } | undefined)?.role;
@@ -240,12 +236,6 @@ export function SettingsClient() {
       queryClient.invalidateQueries({ queryKey: ["outlook-status"] });
       toast({ title: t("integrations.outlook.disconnectedToast") });
     },
-  });
-
-  const testClaudeMutation = useMutation({
-    mutationFn: async () =>
-      unwrap<TestResult>(await axios.get("/api/settings/test-claude")),
-    onSuccess: setClaudeResult,
   });
 
   const testAzureMutation = useMutation({
@@ -583,8 +573,11 @@ export function SettingsClient() {
         </TabsContent>
 
         <TabsContent value="integrations">
-          <div className="grid gap-4 lg:grid-cols-3">
-            <Card>
+          <div className="space-y-4">
+            <AIProvidersPanel />
+
+            <div className="grid gap-4 lg:grid-cols-2">
+              <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-xl">
                   <Mail className="h-5 w-5" />
@@ -644,49 +637,9 @@ export function SettingsClient() {
                   </Button>
                 </div>
               </CardContent>
-            </Card>
+              </Card>
 
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-xl">
-                  <PlugZap className="h-5 w-5" />
-                  {t("integrations.claude.title")}
-                </CardTitle>
-                <CardDescription>{t("integrations.claude.description")}</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <IntegrationStateBadge
-                    configured={claudeResult?.configured ?? true}
-                    ok={claudeResult?.ok}
-                    configuredLabel={t("integrations.claude.configured")}
-                    notConfiguredLabel={t("integrations.claude.notConfigured")}
-                    errorLabel={commonT("error")}
-                  />
-                  {claudeResult?.ok ? (
-                    <CheckCircle2 className="h-5 w-5 text-emerald-600" />
-                  ) : claudeResult?.error ? (
-                    <XCircle className="h-5 w-5 text-destructive" />
-                  ) : (
-                    <Activity className="h-5 w-5 text-muted-foreground" />
-                  )}
-                </div>
-                {claudeResult?.error && (
-                  <p className="text-sm text-destructive">
-                    {claudeResult.error}
-                  </p>
-                )}
-                <Button
-                  variant="outline"
-                  disabled={testClaudeMutation.isPending}
-                  onClick={() => testClaudeMutation.mutate()}
-                >
-                  {t("integrations.claude.testConnection")}
-                </Button>
-              </CardContent>
-            </Card>
-
-            <Card>
+              <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-xl">
                   <Cloud className="h-5 w-5" />
@@ -718,7 +671,8 @@ export function SettingsClient() {
                   {t("integrations.azure.testConnection")}
                 </Button>
               </CardContent>
-            </Card>
+              </Card>
+            </div>
           </div>
         </TabsContent>
       </Tabs>

@@ -11,11 +11,7 @@ export type ApiErrorResponse = {
 export type ApiSuccessResponse<T> = {
   success: true;
   data: T;
-  meta?: {
-    total: number;
-    page: number;
-    limit: number;
-  };
+  meta?: Record<string, unknown>;
 };
 
 export class ApiError extends Error {

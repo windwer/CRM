@@ -1,7 +1,8 @@
 import { NextRequest } from "next/server";
-import { auth } from "../../../../../auth";
 import { db } from "@/lib/db";
-import { apiResponse, handleApiError, ApiError } from "@/lib/errors";
+import { apiResponse, handleApiError } from "@/lib/errors";
+import { requireRole } from "@/lib/auth-helpers";
+import { parsePagination, buildMeta } from "@/lib/pagination";
 import { UserRole } from "@antigravity/database";
 import { z } from "zod";
 
@@ -11,32 +12,32 @@ const inviteUserSchema = z.object({
   name: z.string().optional(),
 });
 
-async function assertAdmin() {
-  const session = await auth();
-  if (!session) throw new ApiError("UNAUTHORIZED", "Unauthorized", 401);
-  if (session.user?.role !== "admin") {
-    throw new ApiError("FORBIDDEN", "Only admins can manage users", 403);
-  }
-  return session;
-}
-
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
-    await assertAdmin();
+    const { errorResponse } = await requireRole("admin");
+    if (errorResponse) return errorResponse;
+    const { page, limit, skip, take } = parsePagination(
+      new URL(req.url).searchParams
+    );
 
-    const users = await db.user.findMany({
-      orderBy: { createdAt: "desc" },
-      select: {
-        id: true,
-        name: true,
-        email: true,
-        role: true,
-        isActive: true,
-        createdAt: true,
-      },
-    });
+    const [users, total] = await db.$transaction([
+      db.user.findMany({
+        orderBy: { createdAt: "desc" },
+        skip,
+        take,
+        select: {
+          id: true,
+          name: true,
+          email: true,
+          role: true,
+          isActive: true,
+          createdAt: true,
+        },
+      }),
+      db.user.count(),
+    ]);
 
-    return apiResponse(users);
+    return apiResponse(users, buildMeta(total, page, limit));
   } catch (error) {
     return handleApiError(error);
   }
@@ -44,7 +45,8 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   try {
-    await assertAdmin();
+    const { errorResponse } = await requireRole("admin");
+    if (errorResponse) return errorResponse;
 
     const body = inviteUserSchema.parse(await req.json());
     const user = await db.user.create({
@@ -69,4 +71,3 @@ export async function POST(req: NextRequest) {
     return handleApiError(error);
   }
 }
-

@@ -1,24 +1,41 @@
-import { auth } from "../../../../../../auth";
 import { db } from "@/lib/db";
 import { apiResponse, handleApiError, ApiError } from "@/lib/errors";
+import { requireRole } from "@/lib/auth-helpers";
+import { validateId } from "@/lib/params";
 import { uploadBlob } from "@/lib/azure/blobService";
 import logger from "@/lib/logger";
 import { NextRequest } from "next/server";
+import { uploadCVSchema, validateCVFile } from "@/lib/validations/upload";
 
 export async function POST(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
+  const { valid, response } = validateId(params.id);
+  if (!valid) return response!;
+
   try {
-    const session = await auth();
-    if (!session) throw new ApiError("UNAUTHORIZED", "Unauthorized", 401);
+    const { errorResponse } = await requireRole("recruiter");
+    if (errorResponse) return errorResponse;
 
     const formData = await req.formData();
+    const metadataValidation = uploadCVSchema.safeParse({
+      candidateId: formData.get("candidate_id") ?? params.id,
+    });
+    if (!metadataValidation.success) {
+      throw new ApiError(
+        "VALIDATION_ERROR",
+        metadataValidation.error.issues[0]?.message ?? "Invalid upload metadata",
+        400
+      );
+    }
     const file = formData.get("file") as File;
 
     if (!file) throw new ApiError("BAD_REQUEST", "No file uploaded", 400);
-    if (file.type !== "application/pdf") throw new ApiError("BAD_REQUEST", "Only PDF files are allowed", 400);
-    if (file.size > 5 * 1024 * 1024) throw new ApiError("BAD_REQUEST", "File size exceeds 5MB limit", 400);
+    const fileValidation = validateCVFile(file);
+    if (!fileValidation.valid) {
+      throw new ApiError("BAD_REQUEST", fileValidation.error ?? "Invalid file", 400);
+    }
 
     const buffer = Buffer.from(await file.arrayBuffer());
     const blobId = await uploadBlob(buffer, file.name);

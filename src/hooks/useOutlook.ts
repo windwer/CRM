@@ -25,6 +25,7 @@ export function useOutlook() {
       });
     },
     onError: (error: any) => {
+      queryClient.invalidateQueries({ queryKey: ["outlook-status"] });
       toast({
         title: "Sync failed",
         description: error.response?.data?.error?.message || "Check your connection",

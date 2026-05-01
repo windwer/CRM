@@ -1,10 +1,11 @@
 import { describe, it, expect } from "vitest";
+import { NextRequest } from "next/server";
 import { GET } from "@/app/api/gdpr/route";
 
 describe("GDPR API Smoke Tests", () => {
   it("GET /api/gdpr should return 200 and success format", async () => {
-    // Note: GET doesn't take req in our implementation (it was removed to fix lint)
-    const response = await GET();
+    const request = new NextRequest("http://localhost/api/gdpr");
+    const response = await GET(request);
     const body = await response.json();
 
     expect(response.status).toBe(200);

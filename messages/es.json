@@ -40,7 +40,8 @@
     "settings": "Configuración",
     "syncOutlook": "Sincronizar Outlook",
     "lastSync": "Última sincronización",
-    "logout": "Cerrar sesión"
+    "logout": "Cerrar sesión",
+    "reconnectRequired": "Reconexión necesaria"
   },
   "auth": {
     "login": "Iniciar sesión",
@@ -262,7 +263,9 @@
     "bulkConfirm": "¿Archivar {count} candidatos? Esta acción no se puede deshacer.",
     "bulkSuccess": "{count} candidatos archivados correctamente",
     "archive": "Archivar",
-    "empty": "No se han encontrado candidatos."
+    "empty": "No se han encontrado candidatos.",
+    "exportTruncated": "La exportación está limitada a {max} candidatos. Aplica filtros para obtener todos los resultados.",
+    "exportSuccess": "Exportación completada"
   },
   "applications": {
     "title": "Solicitudes",
@@ -296,6 +299,12 @@
       "sendEmail": "Enviar correo",
       "overview": "Resumen de la solicitud"
     },
+    "internalNotes": "Notas internas",
+    "internalNotesPlaceholder": "Añade notas internas sobre este candidato...",
+    "saveNote": "Guardar nota",
+    "notesSaved": "Nota guardada correctamente",
+    "notesSaveError": "Error al guardar la nota. Inténtalo de nuevo.",
+    "unsavedChanges": "Tienes cambios sin guardar",
     "timeline": {
       "statusChanged": "Estado cambiado a {status}",
       "emailSent": "Correo enviado",
@@ -328,6 +337,13 @@
       "variables": "Variables disponibles",
       "active": "Activa",
       "inactive": "Inactiva"
+    },
+    "outlookDisconnected": "Outlook desconectado. Tu sesión de Microsoft ha expirado.",
+    "reconnect": "Reconectar con Microsoft",
+    "syncStatus": {
+      "connected": "Conectado",
+      "disconnected": "Desconectado",
+      "syncing": "Sincronizando..."
     }
   },
   "gdpr": {

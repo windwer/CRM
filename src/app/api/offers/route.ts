@@ -1,35 +1,34 @@
-import { auth } from "../../../../auth";
 import { db } from "@/lib/db";
 import { OfferStatus } from "@antigravity/database";
 import { apiResponse, handleApiError, ApiError } from "@/lib/errors";
+import { requireRole } from "@/lib/auth-helpers";
+import { parsePagination, buildMeta } from "@/lib/pagination";
 import { offerSchema } from "@/lib/validations/offer";
 import logger from "@/lib/logger";
 import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest) {
   try {
-    const session = await auth();
-    if (!session) throw new ApiError("UNAUTHORIZED", "Unauthorized", 401);
+    const { errorResponse } = await requireRole("viewer");
+    if (errorResponse) return errorResponse;
 
     const { searchParams } = new URL(req.url);
     const status = searchParams.get("status");
-    const page = parseInt(searchParams.get("page") || "1");
-    const limit = parseInt(searchParams.get("limit") || "10");
-    const skip = (page - 1) * limit;
+    const { page, limit, skip, take } = parsePagination(searchParams);
 
     const where = status ? { status: status as OfferStatus } : {};
 
-    const [offers, total] = await Promise.all([
+    const [offers, total] = await db.$transaction([
       db.offer.findMany({
         where,
         orderBy: { createdAt: "desc" },
         skip,
-        take: limit,
+        take,
       }),
       db.offer.count({ where }),
     ]);
 
-    return apiResponse(offers, { total, page, limit });
+    return apiResponse(offers, buildMeta(total, page, limit));
   } catch (error) {
     return handleApiError(error);
   }
@@ -37,13 +36,8 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    const session = await auth();
-    if (!session || !session.user) throw new ApiError("UNAUTHORIZED", "Unauthorized", 401);
-    
-    const role = session.user.role;
-    if (role !== "admin" && role !== "recruiter") {
-      throw new ApiError("FORBIDDEN", "Forbidden", 403);
-    }
+    const { session, errorResponse } = await requireRole("recruiter");
+    if (errorResponse) return errorResponse;
 
     const body = await req.json();
     const validatedData = offerSchema.parse(body);

@@ -1,21 +1,31 @@
-import { auth } from "../../../../../../auth";
 import { db } from "@/lib/db";
 import { apiResponse, handleApiError, ApiError } from "@/lib/errors";
+import { requireRole } from "@/lib/auth-helpers";
+import { validateId } from "@/lib/params";
 import logger from "@/lib/logger";
 import { NextRequest } from "next/server";
+import { applyOfferSchema } from "@/lib/validations/offer";
 
 export async function POST(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
+  const { valid, response } = validateId(params.id);
+  if (!valid) return response!;
+
   try {
-    const session = await auth();
-    if (!session) throw new ApiError("UNAUTHORIZED", "Unauthorized", 401);
+    const { session, errorResponse } = await requireRole("recruiter");
+    if (errorResponse) return errorResponse;
 
-    const body = await req.json();
-    const { candidateId } = body;
-
-    if (!candidateId) throw new ApiError("BAD_REQUEST", "candidateId is required", 400);
+    const validation = applyOfferSchema.safeParse(await req.json());
+    if (!validation.success) {
+      throw new ApiError(
+        "VALIDATION_ERROR",
+        validation.error.issues[0]?.message ?? "Invalid request body",
+        400
+      );
+    }
+    const { candidateId } = validation.data;
 
     // Check if already applied
     const existing = await db.application.findFirst({

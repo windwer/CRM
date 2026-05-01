@@ -1,14 +1,12 @@
-import { auth } from "../../../../../auth";
 import { db } from "@/lib/db";
-import { apiResponse, handleApiError, ApiError } from "@/lib/errors";
+import { apiResponse, handleApiError } from "@/lib/errors";
+import { requireRole } from "@/lib/auth-helpers";
 import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest) {
   try {
-    const session = await auth();
-    if (!session || !session.user?.id) {
-      throw new ApiError("UNAUTHORIZED", "Unauthorized", 401);
-    }
+    const { session, errorResponse } = await requireRole("recruiter");
+    if (errorResponse) return errorResponse;
 
     const [oauthAccount, syncState] = await Promise.all([
       db.oAuthAccount.findFirst({
@@ -32,10 +30,8 @@ export async function GET(req: NextRequest) {
 
 export async function DELETE(req: NextRequest) {
   try {
-    const session = await auth();
-    if (!session || !session.user?.id) {
-      throw new ApiError("UNAUTHORIZED", "Unauthorized", 401);
-    }
+    const { session, errorResponse } = await requireRole("recruiter");
+    if (errorResponse) return errorResponse;
 
     await Promise.all([
       db.oAuthAccount.deleteMany({

@@ -1,6 +1,7 @@
-import { auth } from "../../../../../auth";
 import { db } from "@/lib/db";
 import { apiResponse, handleApiError, ApiError } from "@/lib/errors";
+import { requireRole } from "@/lib/auth-helpers";
+import { validateId } from "@/lib/params";
 import { offerUpdateSchema } from "@/lib/validations/offer";
 import logger from "@/lib/logger";
 import { NextRequest } from "next/server";
@@ -9,9 +10,12 @@ export async function GET(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
+  const { valid, response } = validateId(params.id);
+  if (!valid) return response!;
+
   try {
-    const session = await auth();
-    if (!session) throw new ApiError("UNAUTHORIZED", "Unauthorized", 401);
+    const { errorResponse } = await requireRole("viewer");
+    if (errorResponse) return errorResponse;
 
     const offer = await db.offer.findUnique({
       where: { id: params.id },
@@ -34,9 +38,12 @@ export async function PUT(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
+  const { valid, response } = validateId(params.id);
+  if (!valid) return response!;
+
   try {
-    const session = await auth();
-    if (!session) throw new ApiError("UNAUTHORIZED", "Unauthorized", 401);
+    const { session, errorResponse } = await requireRole("recruiter");
+    if (errorResponse) return errorResponse;
 
     const body = await req.json();
     const validatedData = offerUpdateSchema.parse(body);
@@ -58,9 +65,12 @@ export async function DELETE(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
+  const { valid, response } = validateId(params.id);
+  if (!valid) return response!;
+
   try {
-    const session = await auth();
-    if (!session) throw new ApiError("UNAUTHORIZED", "Unauthorized", 401);
+    const { session, errorResponse } = await requireRole("admin");
+    if (errorResponse) return errorResponse;
 
     const offer = await db.offer.update({
       where: { id: params.id },

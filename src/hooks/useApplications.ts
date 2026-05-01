@@ -48,12 +48,30 @@ export function useApplication(id: string) {
     },
   });
 
-  const updateNotesMutation = useMutation({
-    mutationFn: (notes: string) => 
-      axios.patch(`/api/applications/${id}`, { internalNotes: notes }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["application", id] });
-      toast({ title: "Notes updated" });
+  const updateNotes = useMutation({
+    mutationFn: async ({
+      id,
+      internal_notes,
+    }: {
+      id: string;
+      internal_notes: string;
+    }) => {
+      const response = await axios.patch(`/api/applications/${id}`, {
+        internal_notes,
+      });
+      return response.data;
+    },
+    onSuccess: (_data, variables) => {
+      queryClient.invalidateQueries({ queryKey: ["application", variables.id] });
+      queryClient.invalidateQueries({ queryKey: ["applications"] });
+      toast({ title: "Nota guardada correctamente" });
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Error al guardar la nota. Inténtalo de nuevo.",
+        description: error.response?.data?.error?.message,
+        variant: "destructive",
+      });
     },
   });
 
@@ -63,6 +81,7 @@ export function useApplication(id: string) {
     error,
     updateStatus: updateStatusMutation.mutateAsync,
     isUpdatingStatus: updateStatusMutation.isPending,
-    updateNotes: updateNotesMutation.mutateAsync,
+    updateNotes: updateNotes.mutateAsync,
+    isUpdatingNotes: updateNotes.isPending,
   };
 }

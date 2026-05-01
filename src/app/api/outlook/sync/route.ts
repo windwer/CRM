@@ -1,14 +1,12 @@
-import { auth } from "../../../../../auth";
-import { apiResponse, handleApiError, ApiError } from "@/lib/errors";
+import { apiResponse, handleApiError } from "@/lib/errors";
+import { requireRole } from "@/lib/auth-helpers";
 import { syncInboxForUser } from "@/lib/outlook/syncService";
 import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
   try {
-    const session = await auth();
-    if (!session || !session.user?.id) {
-      throw new ApiError("UNAUTHORIZED", "Unauthorized", 401);
-    }
+    const { session, errorResponse } = await requireRole("recruiter");
+    if (errorResponse) return errorResponse;
 
     const result = await syncInboxForUser(session.user.id);
 

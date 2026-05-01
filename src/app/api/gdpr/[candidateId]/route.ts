@@ -1,5 +1,6 @@
-import { auth } from "../../../../../auth";
-import { apiResponse, handleApiError, ApiError } from "@/lib/errors";
+import { apiResponse, handleApiError } from "@/lib/errors";
+import { requireRole } from "@/lib/auth-helpers";
+import { validateId } from "@/lib/params";
 import { anonymizeCandidate } from "@/lib/gdpr";
 import { NextRequest } from "next/server";
 
@@ -7,13 +8,12 @@ export async function DELETE(
   _req: NextRequest,
   { params }: { params: { candidateId: string } }
 ) {
-  try {
-    const session = await auth();
-    if (!session || !session.user) throw new ApiError("UNAUTHORIZED", "Unauthorized", 401);
+  const { valid, response } = validateId(params.candidateId);
+  if (!valid) return response!;
 
-    if (session.user.role !== "admin") {
-      throw new ApiError("FORBIDDEN", "Only admins can execute GDPR deletion", 403);
-    }
+  try {
+    const { errorResponse } = await requireRole("admin");
+    if (errorResponse) return errorResponse;
 
     const result = await anonymizeCandidate(params.candidateId);
 

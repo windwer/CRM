@@ -1,7 +1,8 @@
 import { NextRequest } from "next/server";
-import { auth } from "../../../../../../auth";
 import { db } from "@/lib/db";
-import { apiResponse, handleApiError, ApiError } from "@/lib/errors";
+import { apiResponse, handleApiError } from "@/lib/errors";
+import { requireRole } from "@/lib/auth-helpers";
+import { validateId } from "@/lib/params";
 import { UserRole } from "@antigravity/database";
 import { z } from "zod";
 
@@ -10,21 +11,16 @@ const updateUserSchema = z.object({
   isActive: z.boolean().optional(),
 });
 
-async function assertAdmin() {
-  const session = await auth();
-  if (!session) throw new ApiError("UNAUTHORIZED", "Unauthorized", 401);
-  if (session.user?.role !== "admin") {
-    throw new ApiError("FORBIDDEN", "Only admins can manage users", 403);
-  }
-  return session;
-}
-
 export async function PATCH(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
+  const { valid, response } = validateId(params.id);
+  if (!valid) return response!;
+
   try {
-    await assertAdmin();
+    const { errorResponse } = await requireRole("admin");
+    if (errorResponse) return errorResponse;
 
     const body = updateUserSchema.parse(await req.json());
     const user = await db.user.update({
@@ -48,4 +44,3 @@ export async function PATCH(
     return handleApiError(error);
   }
 }
-

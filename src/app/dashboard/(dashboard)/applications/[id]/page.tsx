@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useApplication } from "@/hooks/useApplications";
 import { StatusStepper } from "@/components/applications/StatusStepper";
 import { ApplicationTimeline } from "@/components/applications/ApplicationTimeline";
@@ -13,7 +13,6 @@ import { Button } from "@/components/ui/button";
 import { 
   History, 
   MessageSquare, 
-  Brain, 
   Mail, 
   Save, 
   ArrowLeft 
@@ -29,15 +28,23 @@ export default function ApplicationDetailPage({ params }: { params: { id: string
     isLoading, 
     updateStatus, 
     isUpdatingStatus,
-    updateNotes 
+    updateNotes,
+    isUpdatingNotes,
   } = useApplication(params.id);
   
-  const [notes, setNotes] = useState(application?.internalNotes || "");
+  const [notes, setNotes] = useState("");
   const [showEmailComposer, setShowEmailComposer] = useState(false);
   const router = useRouter();
   const t = useTranslations("applications");
-  const emailT = useTranslations("email");
   const commonT = useTranslations("common");
+  const savedNotes = application?.internalNotes || "";
+  const hasUnsavedChanges = notes !== savedNotes;
+
+  useEffect(() => {
+    if (application) {
+      setNotes(application.internalNotes || "");
+    }
+  }, [application]);
 
   if (isLoading) {
     return (
@@ -60,7 +67,7 @@ export default function ApplicationDetailPage({ params }: { params: { id: string
   };
 
   const handleSaveNotes = async () => {
-    await updateNotes(notes);
+    await updateNotes({ id: application.id, internal_notes: notes });
   };
 
   return (
@@ -150,13 +157,22 @@ export default function ApplicationDetailPage({ params }: { params: { id: string
             </CardHeader>
             <CardContent className="p-6 space-y-4">
               <Textarea 
-                placeholder={t("detail.internalNotes")} 
+                placeholder={t("internalNotesPlaceholder")} 
                 className="min-h-[200px] resize-none border-none bg-muted/10 focus-visible:ring-1"
-                defaultValue={application.internalNotes || ""}
+                value={notes}
                 onChange={(e) => setNotes(e.target.value)}
               />
-              <Button className="w-full font-bold" onClick={handleSaveNotes}>
-                <Save className="mr-2 h-4 w-4" />
+              {hasUnsavedChanges && (
+                <p className="text-xs font-medium text-amber-600">
+                  {t("unsavedChanges")}
+                </p>
+              )}
+              <Button
+                className="w-full font-bold"
+                disabled={isUpdatingNotes}
+                onClick={handleSaveNotes}
+              >
+                <Save className={`mr-2 h-4 w-4 ${isUpdatingNotes ? "animate-spin" : ""}`} />
                 {t("detail.saveNote")}
               </Button>
             </CardContent>

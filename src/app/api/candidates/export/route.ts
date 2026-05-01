@@ -1,102 +1,135 @@
-import { auth } from "../../../../../auth";
 import { db } from "@/lib/db";
 import { ApiError, handleApiError } from "@/lib/errors";
+import { requireRole } from "@/lib/auth-helpers";
+import { PAGINATION_DEFAULTS } from "@/lib/pagination";
 import { Prisma, SeniorityLevel } from "@antigravity/database";
 import { NextRequest } from "next/server";
+import { z } from "zod";
+
+const exportFilterSchema = z
+  .object({
+    skills: z.array(z.string().max(50)).max(20).optional(),
+    skills_mode: z.enum(["AND", "OR"]).default("AND"),
+    exp_min: z.coerce.number().min(0).max(50).optional(),
+    exp_max: z.coerce.number().min(0).max(50).optional(),
+    seniority: z.enum(["junior", "mid", "senior", "lead"]).optional(),
+  })
+  .refine(
+    (data) =>
+      data.exp_min === undefined ||
+      data.exp_max === undefined ||
+      data.exp_min <= data.exp_max,
+    { message: "exp_min debe ser menor o igual que exp_max" }
+  );
 
 function csvCell(value: unknown) {
   const text = value === null || value === undefined ? "" : String(value);
-  return `"${text.replace(/"/g, '""')}"`;
+  if (text.includes(",") || text.includes('"') || text.includes("\n")) {
+    return `"${text.replace(/"/g, '""')}"`;
+  }
+  return text;
 }
 
 export async function GET(req: NextRequest) {
   try {
-    const session = await auth();
-    if (!session) throw new ApiError("UNAUTHORIZED", "Unauthorized", 401);
+    const { errorResponse } = await requireRole("viewer");
+    if (errorResponse) return errorResponse;
 
     const { searchParams } = new URL(req.url);
-    const skills = [
-      ...searchParams.getAll("skills[]"),
-      ...searchParams.getAll("skills"),
-    ].filter(Boolean);
-    const skillsMode = searchParams.get("skills_mode") || "AND";
-    const expMin = searchParams.get("exp_min")
-      ? parseInt(searchParams.get("exp_min")!, 10)
-      : undefined;
-    const expMax = searchParams.get("exp_max")
-      ? parseInt(searchParams.get("exp_max")!, 10)
-      : undefined;
-    const seniority = searchParams.get("seniority");
+    const filters = exportFilterSchema.parse({
+      skills: [
+        ...searchParams.getAll("skills[]"),
+        ...searchParams.getAll("skills"),
+      ].filter(Boolean),
+      skills_mode: searchParams.get("skills_mode") ?? "AND",
+      exp_min: searchParams.get("exp_min") ?? undefined,
+      exp_max: searchParams.get("exp_max") ?? undefined,
+      seniority: searchParams.get("seniority") || undefined,
+    });
 
     const where: Prisma.CandidateWhereInput = {
       archivedAt: null,
     };
 
-    if (skills.length > 0) {
+    if (filters.skills && filters.skills.length > 0) {
       where.skillsArray =
-        skillsMode === "AND" ? { hasEvery: skills } : { hasSome: skills };
+        filters.skills_mode === "AND"
+          ? { hasEvery: filters.skills }
+          : { hasSome: filters.skills };
     }
 
-    if (expMin !== undefined || expMax !== undefined) {
+    if (filters.exp_min !== undefined || filters.exp_max !== undefined) {
       where.experienceYears = {};
-      if (expMin !== undefined) where.experienceYears.gte = expMin;
-      if (expMax !== undefined) where.experienceYears.lte = expMax;
+      if (filters.exp_min !== undefined) where.experienceYears.gte = filters.exp_min;
+      if (filters.exp_max !== undefined) where.experienceYears.lte = filters.exp_max;
     }
 
-    if (seniority) {
-      where.seniorityLevel = seniority as SeniorityLevel;
+    if (filters.seniority) {
+      where.seniorityLevel = filters.seniority as SeniorityLevel;
     }
 
     const candidates = await db.candidate.findMany({
       where,
-      orderBy: { createdAt: "desc" },
-      include: {
+      take: PAGINATION_DEFAULTS.MAX_EXPORT,
+      orderBy: { fullName: "asc" },
+      select: {
+        fullName: true,
+        email: true,
+        phone: true,
+        skillsArray: true,
+        experienceYears: true,
+        seniorityLevel: true,
         applications: {
+          orderBy: { lastContactAt: "desc" },
+          take: 1,
           select: { lastContactAt: true },
         },
-        _count: {
-          select: { applications: true },
-        },
+        _count: { select: { applications: true } },
       },
     });
+    const truncated = candidates.length === PAGINATION_DEFAULTS.MAX_EXPORT;
 
-    const header = [
-      "Name",
-      "Email",
-      "Phone",
-      "Skills",
-      "Experience Years",
-      "Seniority",
-      "Last Contact",
-      "Applications Count",
+    const headers = [
+      "Nombre",
+      "Correo",
+      "Telefono",
+      "Habilidades",
+      "Anos experiencia",
+      "Nivel",
+      "Ultimo contacto",
+      "Solicitudes",
     ];
 
-    const rows = candidates.map((candidate) => {
-      const lastContact = candidate.applications
-        .map((application) => application.lastContactAt)
-        .filter((date): date is Date => Boolean(date))
-        .sort((a, b) => b.getTime() - a.getTime())[0];
+    const rows = candidates.map((candidate) => [
+      candidate.fullName,
+      candidate.email,
+      candidate.phone ?? "",
+      candidate.skillsArray.join("; "),
+      candidate.experienceYears ?? "",
+      candidate.seniorityLevel ?? "",
+      candidate.applications[0]?.lastContactAt?.toISOString() ?? "",
+      candidate._count.applications,
+    ]);
 
-      return [
-        candidate.fullName,
-        candidate.email,
-        candidate.phone,
-        candidate.skillsArray.join(", "),
-        candidate.experienceYears ?? "",
-        candidate.seniorityLevel ?? "",
-        lastContact ? lastContact.toISOString() : "",
-        candidate._count.applications,
-      ];
-    });
+    const csv = [
+      headers.join(","),
+      ...(truncated
+        ? [
+            `# AVISO: Exportacion limitada a ${PAGINATION_DEFAULTS.MAX_EXPORT} candidatos.`,
+            "# Aplica filtros para reducir los resultados.",
+          ]
+        : []),
+      ...rows.map((row) => row.map(csvCell).join(",")),
+    ].join("\n");
 
-    const csv = [header, ...rows]
-      .map((row) => row.map(csvCell).join(","))
-      .join("\r\n");
+    const date = new Date().toISOString().split("T")[0];
 
     return new Response(csv, {
       headers: {
         "Content-Type": "text/csv; charset=utf-8",
-        "Content-Disposition": "attachment; filename=candidates-export.csv",
+        "Content-Disposition": `attachment; filename="candidatos-${date}.csv"`,
+        "X-Total-Count": String(candidates.length),
+        "X-Truncated": String(truncated),
       },
     });
   } catch (error) {

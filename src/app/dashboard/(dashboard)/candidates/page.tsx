@@ -7,7 +7,6 @@ import { useCandidates } from "@/hooks/useCandidates";
 import { useFilterStore } from "@/stores/filterStore";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
-import axios from "axios";
 import { UserPlus, Download } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { 
@@ -48,24 +47,34 @@ export default function CandidatesPage() {
         params.append("seniority", candidateFilters.seniority);
       }
 
-      const response = await axios.get("/api/candidates/export", {
-        params,
-        responseType: "blob",
-      });
-      const url = URL.createObjectURL(response.data);
+      const response = await fetch(`/api/candidates/export?${params.toString()}`);
+      if (!response.ok) {
+        throw new Error(toastT("exportFailed"));
+      }
+
+      const truncated = response.headers.get("X-Truncated") === "true";
+      if (truncated) {
+        toast({
+          title: t("exportTruncated", { max: 5000 }),
+          variant: "destructive",
+        });
+      }
+
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       const date = new Date().toISOString().slice(0, 10);
       link.href = url;
-      link.download = `candidates-export-${date}.csv`;
+      link.download = `candidatos-${date}.csv`;
       document.body.appendChild(link);
       link.click();
       link.remove();
       URL.revokeObjectURL(url);
-      toast({ title: toastT("exported") });
+      toast({ title: t("exportSuccess") });
     } catch (error: any) {
       toast({
         title: toastT("exportFailed"),
-        description: error.response?.data?.error?.message || toastT("unknownError"),
+        description: error.message || toastT("unknownError"),
         variant: "destructive",
       });
     } finally {

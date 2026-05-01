@@ -1,5 +1,13 @@
 import NextAuth from "next-auth";
+import createMiddleware from "next-intl/middleware";
 import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+
+const intlMiddleware = createMiddleware({
+  locales: ["es"],
+  defaultLocale: "es",
+  localePrefix: "never",
+});
 
 // Using a partial auth config for middleware to avoid edge runtime issues with Prisma
 const { auth } = NextAuth({
@@ -24,7 +32,7 @@ export default auth((req) => {
     if (isLoggedIn) {
       return NextResponse.redirect(new URL("/dashboard", nextUrl));
     }
-    return NextResponse.next();
+    return intlMiddleware(req as unknown as NextRequest);
   }
 
   if (isDashboardRoute && !isLoggedIn) {
@@ -40,10 +48,14 @@ export default auth((req) => {
     }
   }
 
+  if (!nextUrl.pathname.startsWith("/api")) {
+    return intlMiddleware(req as unknown as NextRequest);
+  }
+
   return NextResponse.next();
 });
 
 // Optionally, don't invoke Middleware on some paths
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|.*\\.png$).*)"],
 };

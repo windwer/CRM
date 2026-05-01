@@ -1,13 +1,13 @@
-import { auth } from "../../../../../auth";
 import { db } from "@/lib/db";
-import { apiResponse, handleApiError, ApiError } from "@/lib/errors";
+import { apiResponse, handleApiError } from "@/lib/errors";
+import { requireRole } from "@/lib/auth-helpers";
 import { NextRequest } from "next/server";
 import { startOfMonth } from "date-fns";
 
 export async function GET(req: NextRequest) {
   try {
-    const session = await auth();
-    if (!session) throw new ApiError("UNAUTHORIZED", "Unauthorized", 401);
+    const { errorResponse } = await requireRole("viewer");
+    if (errorResponse) return errorResponse;
 
     const now = new Date();
     const monthStart = startOfMonth(now);

@@ -27,3 +27,14 @@ const salaryRefinementError = {
 export const offerSchema = offerBaseSchema.refine(salaryRefinement, salaryRefinementError);
 
 export const offerUpdateSchema = offerBaseSchema.partial().refine(salaryRefinement, salaryRefinementError);
+
+export const applyOfferSchema = z.union([
+  z.object({
+    candidateId: z.string().uuid(),
+  }).transform((data) => data),
+  z.object({
+    candidate_id: z.string().uuid(),
+  }).transform((data) => ({
+    candidateId: data.candidate_id,
+  })),
+]);
