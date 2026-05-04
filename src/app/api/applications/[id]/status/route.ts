@@ -18,8 +18,21 @@ const statusUpdateSchema = z.object({
     "offer",
     "hired",
     "rejected",
-  ]),
+  ]).optional(),
+  pipelineStageId: z.string().uuid().optional(),
+}).refine((data) => data.status || data.pipelineStageId, {
+  message: "status or pipelineStageId is required",
 });
+
+const stageToLegacyStatus: Record<string, ApplicationStatus> = {
+  pending: "applied",
+  awaiting_response: "applied",
+  interview_internal: "interview_1",
+  sent_to_review: "screening",
+  interview_client: "interview_2",
+  hired: "hired",
+  rejected: "rejected",
+};
 
 export async function PATCH(
   req: NextRequest,
@@ -33,22 +46,41 @@ export async function PATCH(
     if (errorResponse) return errorResponse;
 
     const body = await req.json();
-    const { status } = statusUpdateSchema.parse(body);
+    const { status, pipelineStageId } = statusUpdateSchema.parse(body);
 
     const oldApp = await db.application.findUnique({
       where: { id: params.id },
-      select: { status: true },
+      select: { status: true, pipelineStage: true },
     });
 
     if (!oldApp) throw new ApiError("NOT_FOUND", "Application not found", 404);
+
+    const pipelineStage = pipelineStageId
+      ? await db.pipelineStage.findFirst({
+          where: { id: pipelineStageId, isActive: true },
+        })
+      : null;
+
+    if (pipelineStageId && !pipelineStage) {
+      throw new ApiError("NOT_FOUND", "Pipeline stage not found", 404);
+    }
+
+    const nextStatus = pipelineStage
+      ? stageToLegacyStatus[pipelineStage.slug]
+      : (status as ApplicationStatus);
 
     const application = await db.$transaction(async (tx) => {
       const updated = await tx.application.update({
         where: { id: params.id },
         data: { 
-          status: status as ApplicationStatus,
+          status: nextStatus,
+          ...(pipelineStage ? { pipelineStageId: pipelineStage.id } : {}),
           lastContactAt: new Date(),
           lastContactedBy: session.user.id,
+        },
+        include: {
+          pipelineStage: true,
+          assignedTo: { select: { id: true, name: true, email: true, role: true, avatarUrl: true } },
         },
       });
 
@@ -57,7 +89,10 @@ export async function PATCH(
           applicationId: params.id,
           changedBy: session.user.id!,
           oldStatus: oldApp.status,
-          newStatus: status as ApplicationStatus,
+          newStatus: nextStatus,
+          reason: pipelineStage
+            ? `Pipeline stage: ${oldApp.pipelineStage?.name ?? oldApp.status} -> ${pipelineStage.name}`
+            : undefined,
         },
       });
 
@@ -67,7 +102,7 @@ export async function PATCH(
     logger.info("Application status updated", {
       applicationId: application.id,
       oldStatus: oldApp.status,
-      newStatus: status,
+      newStatus: nextStatus,
       userId: session.user.id,
     });
 

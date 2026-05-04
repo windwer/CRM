@@ -6,6 +6,16 @@ import logger from "@/lib/logger";
 import { NextRequest } from "next/server";
 import { applyOfferSchema } from "@/lib/validations/offer";
 
+const stageToLegacyStatus: Record<string, any> = {
+  pending: "applied",
+  awaiting_response: "applied",
+  interview_internal: "interview_1",
+  sent_to_review: "screening",
+  interview_client: "interview_2",
+  hired: "hired",
+  rejected: "rejected",
+};
+
 export async function POST(
   req: NextRequest,
   { params }: { params: { id: string } }
@@ -25,7 +35,7 @@ export async function POST(
         400
       );
     }
-    const { candidateId } = validation.data;
+    const { candidateId, assignedToId, candidateNotes, pipelineStageId } = validation.data;
 
     // Check if already applied
     const existing = await db.application.findFirst({
@@ -37,11 +47,44 @@ export async function POST(
 
     if (existing) throw new ApiError("CONFLICT", "Candidate already applied to this offer", 409);
 
+    const pipelineStage = pipelineStageId
+      ? await db.pipelineStage.findFirst({
+          where: { id: pipelineStageId, isActive: true },
+        })
+      : await db.pipelineStage.findFirst({
+          where: { isActive: true },
+          orderBy: { order: "asc" },
+        });
+
+    if (!pipelineStage) {
+      throw new ApiError("NOT_FOUND", "Pipeline stage not found", 404);
+    }
+
+    if (assignedToId) {
+      const assignedTo = await db.user.findFirst({
+        where: {
+          id: assignedToId,
+          role: { in: ["recruiter", "admin"] },
+          isActive: true,
+        },
+      });
+      if (!assignedTo) {
+        throw new ApiError("VALIDATION_ERROR", "Assigned user must be recruiter or admin", 400);
+      }
+    }
+
     const application = await db.application.create({
       data: {
         offerId: params.id,
         candidateId,
-        status: "applied",
+        status: stageToLegacyStatus[pipelineStage.slug] ?? "applied",
+        pipelineStageId: pipelineStage.id,
+        assignedToId: assignedToId || null,
+        candidateNotes,
+      },
+      include: {
+        pipelineStage: true,
+        assignedTo: { select: { id: true, name: true, email: true, role: true, avatarUrl: true } },
       },
     });
 

@@ -4,6 +4,7 @@ import { apiResponse, handleApiError, ApiError } from "@/lib/errors";
 import { requireRole } from "@/lib/auth-helpers";
 import { parsePagination, buildMeta } from "@/lib/pagination";
 import { offerSchema } from "@/lib/validations/offer";
+import { ALLOWED_TRANSITIONS } from "@/lib/offer-transitions";
 import logger from "@/lib/logger";
 import { NextRequest } from "next/server";
 
@@ -16,7 +17,12 @@ export async function GET(req: NextRequest) {
     const status = searchParams.get("status");
     const { page, limit, skip, take } = parsePagination(searchParams);
 
-    const where = status ? { status: status as OfferStatus } : {};
+    const where =
+      status === "closed"
+        ? { status: { in: ["closed_hired", "closed_no_hire"] as OfferStatus[] } }
+        : status
+          ? { status: status as OfferStatus }
+          : {};
 
     const [offers, total] = await db.$transaction([
       db.offer.findMany({
@@ -28,7 +34,13 @@ export async function GET(req: NextRequest) {
       db.offer.count({ where }),
     ]);
 
-    return apiResponse(offers, buildMeta(total, page, limit));
+    return apiResponse(
+      offers.map((offer) => ({
+        ...offer,
+        allowedTransitions: ALLOWED_TRANSITIONS[offer.status] ?? [],
+      })),
+      buildMeta(total, page, limit)
+    );
   } catch (error) {
     return handleApiError(error);
   }

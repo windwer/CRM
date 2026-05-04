@@ -89,18 +89,45 @@
     "subtitle": "Gestiona las vacantes y su embudo de selección.",
     "newOffer": "Nueva oferta",
     "editOffer": "Editar oferta",
+    "company": "Empresa",
+    "positionType": "Tipo de puesto",
+    "positionTypes": {
+      "developer": "Desarrollador",
+      "designer": "Disenador",
+      "manager": "Manager",
+      "product": "Producto",
+      "marketing": "Marketing",
+      "sales": "Ventas",
+      "data": "Datos",
+      "devops": "DevOps",
+      "qa": "QA",
+      "other": "Otro"
+    },
+    "isUrgent": "Urgente",
+    "markUrgent": "Marcar como oferta urgente",
+    "customTags": "Etiquetas personalizadas",
+    "customTagsPlaceholder": "Escribe y pulsa Enter para anadir",
+    "mustHaves": "Imprescindibles del perfil",
+    "mustHavesPlaceholder": "Lista los requisitos imprescindibles...",
+    "mustHavesHint": "Sera usado por la IA al puntuar candidatos",
+    "viewKanban": "Ver Kanban",
+    "addCandidate": "Anadir candidato",
     "filters": {
       "all": "Todas",
       "active": "Activas",
+      "published": "Publicadas",
+      "draft": "En borrador",
       "paused": "Pausadas",
-      "closed": "Cerradas"
+      "closed": "Cerradas",
+      "closedHired": "Con contratacion",
+      "closedNoHire": "Sin contratar"
     },
     "status": {
       "draft": "Borrador",
       "published": "Publicada",
       "paused": "Pausada",
-      "closed": "Cerrada",
-      "archived": "Archivada"
+      "closed_hired": "Cerrada · Contratado",
+      "closed_no_hire": "Cerrada · Sin contratar"
     },
     "jobType": {
       "full_time": "Jornada completa",
@@ -139,10 +166,29 @@
       "requirements": "Requisitos"
     },
     "actions": {
+      "publish": "Publicar oferta",
       "pause": "Pausar oferta",
       "activate": "Activar oferta",
+      "reopen": "Reabrir oferta",
       "close": "Cerrar oferta",
       "edit": "Editar oferta"
+    },
+    "close": {
+      "title": "Cerrar oferta",
+      "optionHired": "Posicion cubierta",
+      "optionHiredDesc": "Se ha contratado a un candidato para esta posicion. La oferta quedara cerrada permanentemente.",
+      "optionHiredBadge": "No se puede reabrir",
+      "optionNoHire": "Sin contratar",
+      "optionNoHireDesc": "La posicion se cierra sin haber contratado a nadie. Podras reabrirla en el futuro.",
+      "optionNoHireBadge": "Se puede reabrir",
+      "selectHired": "¿Que candidato fue contratado?",
+      "warningOthers": "El resto de candidatos seran movidos automaticamente a 'Pendiente'.",
+      "warningNoHire": "Todos los candidatos en curso seran movidos a 'Pendiente'.",
+      "confirm": "Cerrar oferta",
+      "closing": "Cerrando oferta...",
+      "success": "Oferta cerrada correctamente",
+      "successReopen": "Oferta reabierta correctamente",
+      "confirmReopen": "¿Reabrir esta oferta? Volvera al estado 'Publicada'."
     },
     "stats": {
       "candidates": "candidatos",
@@ -165,12 +211,32 @@
     "applicants": "Candidatos",
     "salaryYear": "{min} - {max} / año",
     "totalRejections": "Descartes totales",
-    "conversionRate": "{rate}% tasa de conversión"
+    "conversionRate": "{rate}% tasa de conversión",
+    "closedHiredInfo": "Posicion cubierta el {date}",
+    "closedNoHireInfo": "Oferta cerrada el {date}",
+    "hiredCandidate": "Candidato contratado",
+    "cannotReopenHired": "Las ofertas cerradas con contratacion no se pueden reabrir. Crea una nueva posicion si necesitas volver a contratar.",
+    "pendingCommunication": "Pdte comunicar cierre"
   },
   "candidates": {
     "title": "Candidatos",
     "subtitle": "Gestiona y descubre candidatos con búsqueda asistida por IA.",
     "addCandidate": "Añadir candidato",
+    "newCandidate": "Nuevo candidato",
+    "wizard": {
+      "step1": "Datos personales",
+      "step2": "Vinculacion a oferta",
+      "step3": "Confirmar",
+      "linkedOffer": "Oferta",
+      "selectOffer": "Selecciona una oferta...",
+      "assignedTo": "Responsable",
+      "unassigned": "Sin asignar",
+      "initialStage": "Estado inicial",
+      "candidateNotes": "Descripcion del candidato",
+      "candidateNotesPlaceholder": "Describe brevemente al candidato...",
+      "createAndLink": "Crear candidato y vincular a oferta",
+      "summary": "Resumen"
+    },
     "registered": "Registrado",
     "yearsShort": "{years} a.",
     "search": {
@@ -265,11 +331,22 @@
     "archive": "Archivar",
     "empty": "No se han encontrado candidatos.",
     "exportTruncated": "La exportación está limitada a {max} candidatos. Aplica filtros para obtener todos los resultados.",
-    "exportSuccess": "Exportación completada"
+    "exportSuccess": "Exportación completada",
+    "pendingCommunication": "Pdte comunicar cierre"
   },
   "applications": {
     "title": "Solicitudes",
     "subtitle": "Seguimiento del proceso de selección por candidato y oferta.",
+    "assignee": "Responsable",
+    "assignTo": "Asignar a...",
+    "removeAssignment": "Quitar asignacion",
+    "unassigned": "Sin asignar",
+    "candidateNotes": "Notas del candidato",
+    "saveNotes": "Guardar notas",
+    "closedOfferHired": "La posicion fue cubierta por otro candidato.",
+    "closedOfferNoHire": "La oferta fue cerrada sin contratar.",
+    "thisIsHired": "Este candidato fue contratado para esta posicion.",
+    "pendingCommunication": "Este candidato esta en 'Pendiente' para comunicarle la decision.",
     "status": {
       "prospect": "Prospecto",
       "applied": "Aplicado",
@@ -313,6 +390,14 @@
       "cvParsed": "CV analizado con IA",
       "empty": "No hay eventos en el historial"
     }
+  },
+  "pipeline": {
+    "todo": "Por hacer",
+    "inProgress": "En curso",
+    "done": "Finalizado",
+    "changeStage": "Cambiar etapa",
+    "changeStageConfirm": "¿Mover candidato a estado '{stage}'?",
+    "editingDisabled": "La edicion del pipeline estara disponible en proximas versiones."
   },
   "communications": {
     "inbound": "Entrante",

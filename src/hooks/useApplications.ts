@@ -32,8 +32,10 @@ export function useApplication(id: string) {
   });
 
   const updateStatusMutation = useMutation({
-    mutationFn: (newStatus: string) => 
-      axios.patch(`/api/applications/${id}/status`, { status: newStatus }),
+    mutationFn: (payload: string | { status?: string; pipelineStageId?: string }) => {
+      const body = typeof payload === "string" ? { status: payload } : payload;
+      return axios.patch(`/api/applications/${id}/status`, body);
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["application", id] });
       queryClient.invalidateQueries({ queryKey: ["applications"] });
@@ -50,14 +52,16 @@ export function useApplication(id: string) {
 
   const updateNotes = useMutation({
     mutationFn: async ({
-      id,
       internal_notes,
+      candidateNotes,
     }: {
       id: string;
-      internal_notes: string;
+      internal_notes?: string;
+      candidateNotes?: string;
     }) => {
       const response = await axios.patch(`/api/applications/${id}`, {
         internal_notes,
+        candidateNotes,
       });
       return response.data;
     },
@@ -75,6 +79,23 @@ export function useApplication(id: string) {
     },
   });
 
+  const assignMutation = useMutation({
+    mutationFn: (assignedToId: string | null) =>
+      axios.patch(`/api/applications/${id}/assign`, { assignedToId }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["application", id] });
+      queryClient.invalidateQueries({ queryKey: ["applications"] });
+      toast({ title: "Responsable actualizado" });
+    },
+    onError: (error: any) => {
+      toast({
+        title: "No se pudo actualizar el responsable",
+        description: error.response?.data?.error?.message,
+        variant: "destructive",
+      });
+    },
+  });
+
   return {
     application,
     isLoading,
@@ -83,5 +104,7 @@ export function useApplication(id: string) {
     isUpdatingStatus: updateStatusMutation.isPending,
     updateNotes: updateNotes.mutateAsync,
     isUpdatingNotes: updateNotes.isPending,
+    assignUser: assignMutation.mutateAsync,
+    isAssigning: assignMutation.isPending,
   };
 }

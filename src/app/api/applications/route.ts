@@ -25,8 +25,10 @@ export async function GET(req: NextRequest) {
       db.application.findMany({
         where,
         include: {
-          offer: { select: { title: true } },
+          offer: { select: { title: true, company: true, isUrgent: true } },
           candidate: { select: { fullName: true, email: true } },
+          pipelineStage: true,
+          assignedTo: { select: { id: true, name: true, email: true, role: true, avatarUrl: true } },
         },
         orderBy: { createdAt: "desc" },
         skip,

@@ -26,6 +26,8 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Loader2, Save } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { Badge } from "@/components/ui/badge";
+import { X } from "lucide-react";
 
 interface OfferFormProps {
   initialData?: any;
@@ -49,8 +51,27 @@ export function OfferForm({ initialData, onSubmit, isLoading }: OfferFormProps) 
       status: "draft",
       requirements: "",
       jobType: "full_time",
+      company: "",
+      positionType: "developer",
+      isUrgent: false,
+      customTags: [],
+      mustHaves: "",
     },
   });
+  const [tagInput, setTagInput] = React.useState("");
+  const customTags = form.watch("customTags") || [];
+  const addTag = () => {
+    const tag = tagInput.trim();
+    if (!tag || tag.length > 30 || customTags.includes(tag) || customTags.length >= 10) return;
+    form.setValue("customTags", [...customTags, tag], { shouldDirty: true, shouldValidate: true });
+    setTagInput("");
+  };
+  const removeTag = (tag: string) => {
+    form.setValue("customTags", customTags.filter((item: string) => item !== tag), {
+      shouldDirty: true,
+      shouldValidate: true,
+    });
+  };
 
   return (
     <Form {...form}>
@@ -88,6 +109,119 @@ export function OfferForm({ initialData, onSubmit, isLoading }: OfferFormProps) 
                 )}
               />
             </div>
+
+            <div className="space-y-6 rounded-2xl border bg-muted/20 p-6">
+              <h3 className="text-sm font-black uppercase tracking-widest text-muted-foreground">
+                Clasificacion
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <FormField
+                  control={form.control}
+                  name="company"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{offerT("company")}</FormLabel>
+                      <FormControl>
+                        <Input placeholder="AntiGravity" maxLength={100} {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="positionType"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{offerT("positionType")}</FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder={offerT("positionType")} />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {["developer", "designer", "manager", "product", "marketing", "sales", "data", "devops", "qa", "other"].map((type) => (
+                            <SelectItem key={type} value={type}>
+                              {offerT(`positionTypes.${type}`)}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <FormField
+                control={form.control}
+                name="isUrgent"
+                render={({ field }) => (
+                  <FormItem className="flex items-center gap-3 rounded-xl bg-background p-4">
+                    <FormControl>
+                      <input
+                        type="checkbox"
+                        checked={field.value}
+                        onChange={(event) => field.onChange(event.target.checked)}
+                        className="h-5 w-5 accent-primary"
+                      />
+                    </FormControl>
+                    <FormLabel className="m-0 font-bold">{offerT("markUrgent")}</FormLabel>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+
+            <div className="space-y-4 rounded-2xl border bg-muted/20 p-6">
+              <h3 className="text-sm font-black uppercase tracking-widest text-muted-foreground">
+                {offerT("customTags")}
+              </h3>
+              <Input
+                value={tagInput}
+                maxLength={30}
+                placeholder={offerT("customTagsPlaceholder")}
+                onChange={(event) => setTagInput(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter") {
+                    event.preventDefault();
+                    addTag();
+                  }
+                }}
+              />
+              <div className="flex flex-wrap gap-2">
+                {customTags.map((tag: string) => (
+                  <Badge key={tag} variant="secondary" className="gap-1 px-3 py-1">
+                    #{tag}
+                    <button type="button" onClick={() => removeTag(tag)} aria-label={`Remove ${tag}`}>
+                      <X className="h-3 w-3" />
+                    </button>
+                  </Badge>
+                ))}
+              </div>
+            </div>
+
+            <FormField
+              control={form.control}
+              name="mustHaves"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{offerT("mustHaves")}</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder={
+                        "Lista los requisitos imprescindibles que debe cumplir el candidato.\nEjemplo:\n- Mas de 3 anos de experiencia con React\n- Ingles nivel B2 o superior\n- Disponibilidad inmediata\n- Residencia en Madrid o alrededores"
+                      }
+                      className="min-h-[220px] resize-none"
+                      maxLength={2000}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormDescription>{offerT("mustHavesHint")}</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <FormField

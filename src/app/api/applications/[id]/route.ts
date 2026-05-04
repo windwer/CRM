@@ -3,13 +3,7 @@ import { apiResponse, handleApiError, ApiError } from "@/lib/errors";
 import { requireRole } from "@/lib/auth-helpers";
 import { validateId } from "@/lib/params";
 import { NextRequest } from "next/server";
-import { z } from "zod";
-
-const updateApplicationSchema = z
-  .object({
-    internal_notes: z.string().max(5000).optional(),
-  })
-  .strict();
+import { applicationUpdateSchema } from "@/lib/validations/application";
 
 export async function GET(
   req: NextRequest,
@@ -25,8 +19,21 @@ export async function GET(
     const application = await db.application.findUnique({
       where: { id: params.id },
       include: {
-        offer: true,
+        offer: {
+          include: {
+            hiredApplication: {
+              select: {
+                id: true,
+                candidate: { select: { id: true, fullName: true, email: true } },
+              },
+            },
+          },
+        },
         candidate: true,
+        pipelineStage: true,
+        assignedTo: {
+          select: { id: true, name: true, email: true, role: true, avatarUrl: true },
+        },
         statusHistory: {
           orderBy: { changedAt: "desc" },
           include: {
@@ -58,7 +65,7 @@ export async function PATCH(
     const { errorResponse } = await requireRole("recruiter");
     if (errorResponse) return errorResponse;
 
-    const validation = updateApplicationSchema.safeParse(await req.json());
+    const validation = applicationUpdateSchema.safeParse(await req.json());
     if (!validation.success) {
       throw new ApiError("VALIDATION_ERROR", validation.error.message, 400);
     }
@@ -78,7 +85,20 @@ export async function PATCH(
         ...(validation.data.internal_notes !== undefined
           ? { internalNotes: validation.data.internal_notes }
           : {}),
+        ...(validation.data.candidateNotes !== undefined
+          ? { candidateNotes: validation.data.candidateNotes }
+          : {}),
+        ...(validation.data.pipelineStageId !== undefined
+          ? { pipelineStageId: validation.data.pipelineStageId }
+          : {}),
+        ...(validation.data.assignedToId !== undefined
+          ? { assignedToId: validation.data.assignedToId }
+          : {}),
         updatedAt: new Date(),
+      },
+      include: {
+        pipelineStage: true,
+        assignedTo: { select: { id: true, name: true, email: true, role: true, avatarUrl: true } },
       },
     });
 

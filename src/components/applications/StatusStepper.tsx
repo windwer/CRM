@@ -1,115 +1,120 @@
 "use client";
 
 import React from "react";
-import { Check } from "lucide-react";
-import { 
-  Dialog, 
-  DialogContent, 
-  DialogDescription, 
-  DialogFooter, 
-  DialogHeader, 
-  DialogTitle, 
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
   DialogTrigger,
-  DialogClose
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { usePipelineStages } from "@/hooks/usePipelineStages";
 import { useTranslations } from "next-intl";
 
-const STAGES = [
-  "prospect",
-  "applied",
-  "screening",
-  "interview_1",
-  "interview_2",
-  "interview_3",
-  "offer",
-  "hired"
-];
+const legacyStatusToSlug: Record<string, string> = {
+  prospect: "pending",
+  applied: "pending",
+  screening: "sent_to_review",
+  interview_1: "interview_internal",
+  interview_2: "interview_client",
+  interview_3: "interview_client",
+  offer: "sent_to_review",
+  hired: "hired",
+  rejected: "rejected",
+};
+
+const categoryLabels: Record<string, string> = {
+  todo: "todo",
+  in_progress: "inProgress",
+  done: "done",
+};
 
 interface StatusStepperProps {
   currentStatus: string;
-  onStatusChange: (status: string) => Promise<void>;
+  currentPipelineStageId?: string | null;
+  onStatusChange: (payload: { pipelineStageId: string }) => Promise<void>;
   isUpdating: boolean;
 }
 
-export function StatusStepper({ currentStatus, onStatusChange, isUpdating }: StatusStepperProps) {
-  const t = useTranslations("applications");
+export function StatusStepper({
+  currentStatus,
+  currentPipelineStageId,
+  onStatusChange,
+  isUpdating,
+}: StatusStepperProps) {
+  const { data: stages = [], isLoading } = usePipelineStages();
+  const pipelineT = useTranslations("pipeline");
   const commonT = useTranslations("common");
-  const currentIndex = STAGES.indexOf(currentStatus?.toLowerCase() || "");
-  const isRejected = currentStatus?.toLowerCase() === "rejected";
+  const fallbackSlug = legacyStatusToSlug[currentStatus?.toLowerCase()] || "pending";
+  const activeStage =
+    stages.find((stage: any) => stage.id === currentPipelineStageId) ||
+    stages.find((stage: any) => stage.slug === fallbackSlug);
+  const grouped = ["todo", "in_progress", "done"].map((category) => ({
+    category,
+    stages: stages.filter((stage: any) => stage.category === category),
+  }));
+
+  if (isLoading) {
+    return <div className="h-28 animate-pulse rounded-2xl bg-muted" />;
+  }
 
   return (
-    <div className="w-full">
-      <div className="flex items-center justify-between mb-8 overflow-x-auto pb-4 custom-scrollbar">
-        {STAGES.map((stage, index) => {
-          const isCompleted = index < currentIndex;
-          const isActive = index === currentIndex;
-          const isPending = index > currentIndex;
-
-          return (
-            <React.Fragment key={stage}>
-              <Dialog>
-                <DialogTrigger asChild>
-                  <button
-                    disabled={isUpdating || isActive || isRejected}
-                    className={`
-                      flex flex-col items-center gap-2 group min-w-[80px] transition-all
-                      ${isActive ? "scale-110" : "hover:scale-105"}
-                      ${isRejected ? "opacity-50 cursor-not-allowed" : ""}
-                    `}
-                  >
-                    <div className={`
-                      h-8 w-8 rounded-full border-2 flex items-center justify-center transition-colors
-                      ${isCompleted ? "bg-emerald-500 border-emerald-500 text-white" : ""}
-                      ${isActive ? "bg-primary border-primary text-white shadow-lg shadow-primary/30" : ""}
-                      ${isPending ? "bg-background border-muted text-muted-foreground" : ""}
-                    `}>
-                      {isCompleted ? <Check className="h-4 w-4" /> : <span className="text-xs font-bold">{index + 1}</span>}
-                    </div>
-                    <span className={`
-                      text-[10px] font-black uppercase tracking-widest transition-colors
-                      ${isActive ? "text-primary" : "text-muted-foreground group-hover:text-foreground"}
-                    `}>
-                      {t(`status.${stage}`)}
-                    </span>
-                  </button>
-                </DialogTrigger>
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>{t("detail.changeStatus")}</DialogTitle>
-                    <DialogDescription>
-                      {t("detail.confirmChange", { status: t(`status.${stage}`) })}
-                    </DialogDescription>
-                  </DialogHeader>
-                  <DialogFooter>
-                    <DialogClose asChild>
-                      <Button variant="outline">{commonT("cancel")}</Button>
-                    </DialogClose>
-                    <DialogClose asChild>
-                      <Button onClick={() => onStatusChange(stage)}>
-                        {commonT("confirm")}
-                      </Button>
-                    </DialogClose>
-                  </DialogFooter>
-                </DialogContent>
-              </Dialog>
-
-              {index < STAGES.length - 1 && (
-                <div className={`h-[2px] w-full min-w-[20px] mx-2 ${isCompleted ? "bg-emerald-500" : "bg-muted"}`} />
-              )}
-            </React.Fragment>
-          );
-        })}
-      </div>
-
-      {isRejected && (
-        <div className="flex justify-center">
-          <Badge variant="destructive" className="px-8 py-2 text-sm font-black uppercase tracking-[0.2em] shadow-xl shadow-rose-500/20">
-            {t("status.rejected")}
-          </Badge>
+    <div className="space-y-6">
+      {grouped.map((group) => (
+        <div key={group.category} className="space-y-3">
+          <h3 className="text-xs font-black uppercase tracking-widest text-muted-foreground">
+            {pipelineT(categoryLabels[group.category])}
+          </h3>
+          <div className="flex flex-wrap gap-3">
+            {group.stages.map((stage: any) => {
+              const isActive = stage.id === activeStage?.id;
+              return (
+                <Dialog key={stage.id}>
+                  <DialogTrigger asChild>
+                    <button
+                      type="button"
+                      disabled={isUpdating || isActive}
+                      className={`rounded-xl border px-4 py-3 text-left transition hover:shadow-sm ${
+                        isActive
+                          ? "border-primary bg-primary/5 font-black text-primary shadow-sm"
+                          : "bg-background font-semibold"
+                      }`}
+                    >
+                      <span
+                        className="mr-2 inline-block h-2.5 w-2.5 rounded-full"
+                        style={{ backgroundColor: stage.color || "#94A3B8" }}
+                      />
+                      {stage.name}
+                    </button>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>{pipelineT("changeStage")}</DialogTitle>
+                      <DialogDescription>
+                        {pipelineT("changeStageConfirm", { stage: stage.name })}
+                      </DialogDescription>
+                    </DialogHeader>
+                    <DialogFooter>
+                      <DialogClose asChild>
+                        <Button variant="outline">{commonT("cancel")}</Button>
+                      </DialogClose>
+                      <DialogClose asChild>
+                        <Button onClick={() => onStatusChange({ pipelineStageId: stage.id })}>
+                          {commonT("confirm")}
+                        </Button>
+                      </DialogClose>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
+              );
+            })}
+          </div>
         </div>
-      )}
+      ))}
     </div>
   );
 }

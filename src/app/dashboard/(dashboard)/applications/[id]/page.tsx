@@ -5,6 +5,7 @@ import { useApplication } from "@/hooks/useApplications";
 import { StatusStepper } from "@/components/applications/StatusStepper";
 import { ApplicationTimeline } from "@/components/applications/ApplicationTimeline";
 import { ApplicationCard } from "@/components/applications/ApplicationCard";
+import { AssigneeSelector } from "@/components/applications/AssigneeSelector";
 import { EmailComposer } from "@/components/communications/EmailComposer";
 import { AIScoreCard } from "@/components/candidates/AIScoreCard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -15,7 +16,8 @@ import {
   MessageSquare, 
   Mail, 
   Save, 
-  ArrowLeft 
+  ArrowLeft,
+  UserPlus
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -33,16 +35,20 @@ export default function ApplicationDetailPage({ params }: { params: { id: string
   } = useApplication(params.id);
   
   const [notes, setNotes] = useState("");
+  const [candidateNotes, setCandidateNotes] = useState("");
   const [showEmailComposer, setShowEmailComposer] = useState(false);
   const router = useRouter();
   const t = useTranslations("applications");
   const commonT = useTranslations("common");
   const savedNotes = application?.internalNotes || "";
   const hasUnsavedChanges = notes !== savedNotes;
+  const savedCandidateNotes = application?.candidateNotes || "";
+  const hasUnsavedCandidateNotes = candidateNotes !== savedCandidateNotes;
 
   useEffect(() => {
     if (application) {
       setNotes(application.internalNotes || "");
+      setCandidateNotes(application.candidateNotes || "");
     }
   }, [application]);
 
@@ -62,13 +68,19 @@ export default function ApplicationDetailPage({ params }: { params: { id: string
     return <div className="p-12 text-center font-black">{commonT("noData")}</div>;
   }
 
-  const handleStatusChange = async (newStatus: string) => {
-    await updateStatus(newStatus);
+  const handleStatusChange = async (payload: { pipelineStageId: string }) => {
+    await updateStatus(payload);
   };
 
   const handleSaveNotes = async () => {
     await updateNotes({ id: application.id, internal_notes: notes });
   };
+
+  const handleSaveCandidateNotes = async () => {
+    await updateNotes({ id: application.id, candidateNotes });
+  };
+  const isOfferClosed = ["closed_hired", "closed_no_hire"].includes(application.offer.status);
+  const isHiredApplication = application.offer.hiredCandidateId === application.id;
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
@@ -87,9 +99,33 @@ export default function ApplicationDetailPage({ params }: { params: { id: string
         </div>
       </div>
 
+      {isOfferClosed && (
+        <div
+          className={`rounded-2xl border p-5 ${
+            application.offer.status === "closed_hired" && isHiredApplication
+              ? "border-emerald-200 bg-emerald-50 text-emerald-950"
+              : application.offer.status === "closed_no_hire"
+                ? "border-amber-200 bg-amber-50 text-amber-950"
+                : "border-slate-200 bg-slate-50 text-slate-900"
+          }`}
+        >
+          <p className="font-black">
+            {application.offer.status === "closed_hired" && isHiredApplication
+              ? t("thisIsHired")
+              : application.offer.status === "closed_hired"
+                ? t("closedOfferHired")
+                : t("closedOfferNoHire")}
+          </p>
+          {!isHiredApplication && (
+            <p className="mt-1 text-sm font-medium">{t("pendingCommunication")}</p>
+          )}
+        </div>
+      )}
+
       <div className="bg-background border border-muted/50 rounded-3xl p-8 shadow-sm">
         <StatusStepper 
           currentStatus={application.status} 
+          currentPipelineStageId={application.pipelineStageId}
           onStatusChange={handleStatusChange}
           isUpdating={isUpdatingStatus}
         />
@@ -147,6 +183,48 @@ export default function ApplicationDetailPage({ params }: { params: { id: string
             explanation={application.aiExplanation}
             aiScoreDetails={application.aiScoreDetails}
           />
+
+          <Card className="border-none shadow-sm overflow-hidden">
+            <CardHeader className="bg-muted/30">
+              <CardTitle className="text-sm font-bold uppercase tracking-widest text-muted-foreground flex items-center gap-2">
+                <UserPlus className="h-4 w-4" />
+                {t("assignee")}
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="p-6">
+              <AssigneeSelector applicationId={application.id} assignedTo={application.assignedTo} />
+            </CardContent>
+          </Card>
+
+          <Card className="border-none shadow-sm overflow-hidden">
+            <CardHeader className="bg-muted/30">
+              <CardTitle className="text-sm font-bold uppercase tracking-widest text-muted-foreground flex items-center gap-2">
+                <MessageSquare className="h-4 w-4" />
+                {t("candidateNotes")}
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="p-6 space-y-4">
+              <Textarea
+                placeholder={t("candidateNotes")}
+                className="min-h-[160px] resize-none border-none bg-muted/10 focus-visible:ring-1"
+                value={candidateNotes}
+                onChange={(e) => setCandidateNotes(e.target.value)}
+              />
+              {hasUnsavedCandidateNotes && (
+                <p className="text-xs font-medium text-amber-600">
+                  {t("unsavedChanges")}
+                </p>
+              )}
+              <Button
+                className="w-full font-bold"
+                disabled={isUpdatingNotes}
+                onClick={handleSaveCandidateNotes}
+              >
+                <Save className={`mr-2 h-4 w-4 ${isUpdatingNotes ? "animate-spin" : ""}`} />
+                {t("saveNotes")}
+              </Button>
+            </CardContent>
+          </Card>
 
           <Card className="border-none shadow-sm overflow-hidden">
             <CardHeader className="bg-muted/30">

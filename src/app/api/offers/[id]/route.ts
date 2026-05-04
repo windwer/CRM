@@ -3,6 +3,7 @@ import { apiResponse, handleApiError, ApiError } from "@/lib/errors";
 import { requireRole } from "@/lib/auth-helpers";
 import { validateId } from "@/lib/params";
 import { offerUpdateSchema } from "@/lib/validations/offer";
+import { ALLOWED_TRANSITIONS } from "@/lib/offer-transitions";
 import logger from "@/lib/logger";
 import { NextRequest } from "next/server";
 
@@ -20,6 +21,23 @@ export async function GET(
     const offer = await db.offer.findUnique({
       where: { id: params.id },
       include: {
+        closedBy: { select: { name: true } },
+        reopenedBy: { select: { name: true } },
+        hiredApplication: {
+          select: {
+            id: true,
+            candidate: { select: { id: true, fullName: true, email: true } },
+          },
+        },
+        applications: {
+          orderBy: { createdAt: "desc" },
+          select: {
+            id: true,
+            status: true,
+            candidate: { select: { id: true, fullName: true, email: true } },
+            pipelineStage: { select: { id: true, name: true, color: true, slug: true } },
+          },
+        },
         _count: {
           select: { applications: true },
         },
@@ -28,7 +46,10 @@ export async function GET(
 
     if (!offer) throw new ApiError("NOT_FOUND", "Offer not found", 404);
 
-    return apiResponse(offer);
+    return apiResponse({
+      ...offer,
+      allowedTransitions: ALLOWED_TRANSITIONS[offer.status] ?? [],
+    });
   } catch (error) {
     return handleApiError(error);
   }
@@ -74,7 +95,7 @@ export async function DELETE(
 
     const offer = await db.offer.update({
       where: { id: params.id },
-      data: { status: "archived" },
+      data: { status: "closed_no_hire", closedAt: new Date(), closedById: session.user.id! },
     });
 
     logger.info("Offer archived (soft delete)", { offerId: offer.id, userId: session.user.id });

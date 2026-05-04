@@ -14,14 +14,20 @@ const inviteUserSchema = z.object({
 
 export async function GET(req: NextRequest) {
   try {
-    const { errorResponse } = await requireRole("admin");
+    const { session, errorResponse } = await requireRole("recruiter");
     if (errorResponse) return errorResponse;
     const { page, limit, skip, take } = parsePagination(
       new URL(req.url).searchParams
     );
 
+    const where =
+      session.user.role === "admin"
+        ? {}
+        : { role: { in: [UserRole.recruiter, UserRole.admin] }, isActive: true };
+
     const [users, total] = await db.$transaction([
       db.user.findMany({
+        where,
         orderBy: { createdAt: "desc" },
         skip,
         take,
@@ -34,7 +40,7 @@ export async function GET(req: NextRequest) {
           createdAt: true,
         },
       }),
-      db.user.count(),
+      db.user.count({ where }),
     ]);
 
     return apiResponse(users, buildMeta(total, page, limit));

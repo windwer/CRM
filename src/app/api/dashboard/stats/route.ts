@@ -4,6 +4,8 @@ import { requireRole } from "@/lib/auth-helpers";
 import { NextRequest } from "next/server";
 import { startOfMonth } from "date-fns";
 
+const interviewStatuses = ["interview_1", "interview_2", "interview_3"] as const;
+
 export async function GET(req: NextRequest) {
   try {
     const { errorResponse } = await requireRole("viewer");
@@ -24,7 +26,7 @@ export async function GET(req: NextRequest) {
       recentActivity,
       topOffers
     ] = await Promise.all([
-      db.offer.count({ where: { status: "published" } }),
+      db.offer.count({ where: { status: { in: ["published", "draft", "paused"] } } }),
       db.candidate.count({ where: { archivedAt: null } }),
       db.application.count(),
       db.application.count({ 
@@ -58,7 +60,7 @@ export async function GET(req: NextRequest) {
       }),
       // Top offers by candidate count
       db.offer.findMany({
-        where: { status: "published" },
+        where: { status: { in: ["published", "draft", "paused"] } },
         take: 5,
         orderBy: {
           applications: { _count: "desc" }
@@ -66,12 +68,14 @@ export async function GET(req: NextRequest) {
         select: {
           id: true,
           title: true,
+          company: true,
+          status: true,
+          isUrgent: true,
           _count: {
             select: { applications: true }
           },
           applications: {
-            where: { status: "interview_1" }, // "in interview" proxy
-            select: { id: true }
+            select: { id: true, status: true }
           }
         }
       })
@@ -116,9 +120,14 @@ export async function GET(req: NextRequest) {
       top_offers: topOffers.map(offer => ({
         id: offer.id,
         title: offer.title,
+        company: offer.company,
+        status: offer.status,
+        is_urgent: offer.isUrgent,
         total_candidates: offer._count.applications,
-        in_interview: offer.applications.length,
-        hired: 0 // Would need another query or better grouping to get hired per offer
+        in_interview: offer.applications.filter((application) =>
+          interviewStatuses.includes(application.status as any)
+        ).length,
+        hired: offer.applications.filter((application) => application.status === "hired").length,
       }))
     });
   } catch (error) {

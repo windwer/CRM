@@ -5,27 +5,65 @@ import { useOffers } from "@/hooks/useOffers";
 import { OfferCard } from "./OfferCard";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Briefcase, Frown } from "lucide-react";
+import { Frown } from "lucide-react";
 import { useTranslations } from "next-intl";
 
+type ClosedSubFilter = "closed_hired" | "closed_no_hire" | null;
+
 export function OfferList() {
-  const [status, setStatus] = useState("published");
-  const { data, isLoading } = useOffers(status === "all" ? undefined : status);
+  const [status, setStatus] = useState("all");
+  const [closedSub, setClosedSub] = useState<ClosedSubFilter>(null);
   const t = useTranslations("offers");
 
+  const effectiveStatus =
+    status === "all" ? undefined : status === "closed" && closedSub ? closedSub : status;
+
+  const { data, isLoading } = useOffers(effectiveStatus);
   const offers = data?.data || [];
+
+  const handleTabChange = (value: string) => {
+    setStatus(value);
+    setClosedSub(null);
+  };
 
   return (
     <div className="space-y-8">
       <div className="flex items-center justify-between">
-        <Tabs value={status} onValueChange={setStatus} className="w-auto">
-          <TabsList className="bg-muted/50 p-1">
-            <TabsTrigger value="all">{t("filters.all")}</TabsTrigger>
-            <TabsTrigger value="published">{t("filters.active")}</TabsTrigger>
-            <TabsTrigger value="paused">{t("filters.paused")}</TabsTrigger>
-            <TabsTrigger value="closed">{t("filters.closed")}</TabsTrigger>
-          </TabsList>
-        </Tabs>
+        <div className="space-y-2">
+          <Tabs value={status} onValueChange={handleTabChange} className="w-auto">
+            <TabsList className="bg-muted/50 p-1">
+              <TabsTrigger value="all">{t("filters.all")}</TabsTrigger>
+              <TabsTrigger value="published">{t("filters.published")}</TabsTrigger>
+              <TabsTrigger value="draft">{t("filters.draft")}</TabsTrigger>
+              <TabsTrigger value="paused">{t("filters.paused")}</TabsTrigger>
+              <TabsTrigger value="closed">{t("filters.closed")}</TabsTrigger>
+            </TabsList>
+          </Tabs>
+          {status === "closed" && (
+            <div className="flex gap-2 pl-1">
+              <button
+                onClick={() => setClosedSub(closedSub === "closed_hired" ? null : "closed_hired")}
+                className={`rounded-full border px-3 py-0.5 text-xs font-semibold transition-colors ${
+                  closedSub === "closed_hired"
+                    ? "border-slate-900 bg-slate-900 text-white"
+                    : "border-muted-foreground/30 text-muted-foreground hover:border-slate-900 hover:text-slate-900"
+                }`}
+              >
+                {t("filters.closedHired")}
+              </button>
+              <button
+                onClick={() => setClosedSub(closedSub === "closed_no_hire" ? null : "closed_no_hire")}
+                className={`rounded-full border px-3 py-0.5 text-xs font-semibold transition-colors ${
+                  closedSub === "closed_no_hire"
+                    ? "border-rose-600 bg-rose-600 text-white"
+                    : "border-muted-foreground/30 text-muted-foreground hover:border-rose-600 hover:text-rose-600"
+                }`}
+              >
+                {t("filters.closedNoHire")}
+              </button>
+            </div>
+          )}
+        </div>
         <div className="text-sm text-muted-foreground font-medium">
           {t("showing", { count: offers.length })}
         </div>

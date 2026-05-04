@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
 import { UserPlus, Download } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 import { 
   Pagination, 
   PaginationContent, 
@@ -23,6 +24,7 @@ export default function CandidatesPage() {
   const toastT = useTranslations("toasts");
   const [page, setPage] = useState(1);
   const [isExporting, setIsExporting] = useState(false);
+  const router = useRouter();
   const limit = 20;
   const { data, isLoading } = useCandidates(page, limit);
   const { candidateFilters } = useFilterStore();
@@ -103,9 +105,12 @@ export default function CandidatesPage() {
             <Download className="mr-2 h-4 w-4" />
             {t("export")}
           </Button>
-          <Button className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/20">
+          <Button
+            className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/20"
+            onClick={() => router.push("/dashboard/candidates/new")}
+          >
             <UserPlus className="mr-2 h-4 w-4" />
-            {t("addCandidate")}
+            {t("newCandidate")}
           </Button>
         </div>
       </div>

@@ -25,21 +25,22 @@ const defaultDashboardStats = {
 
 export function useDashboard() {
   const { status } = useSession();
+  const isDev = process.env.NODE_ENV === "development";
   const { data, isLoading, error } = useQuery({
     queryKey: ["dashboard-stats"],
     queryFn: async () => {
       const { data } = await axios.get("/api/dashboard/stats");
       return data.data;
     },
-    enabled: status === "authenticated",
+    enabled: isDev || status === "authenticated",
     refetchInterval: 60000, // Every 60 seconds
     staleTime: 30000,      // 30 seconds
   });
 
   return {
     stats: data ?? defaultDashboardStats,
-    isLoading: status === "loading" || isLoading,
-    isAuthenticated: status === "authenticated",
+    isLoading: (!isDev && status === "loading") || isLoading,
+    isAuthenticated: isDev || status === "authenticated",
     error,
   };
 }
