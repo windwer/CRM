@@ -2,6 +2,8 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useFilterStore } from "@/stores/filterStore";
 import { toast } from "@/hooks/use-toast";
+import api from "@/lib/api";
+import { useTranslations } from "next-intl";
 
 export function useCandidates(page = 1, limit = 20) {
   const queryClient = useQueryClient();
@@ -79,4 +81,31 @@ export function useCandidates(page = 1, limit = 20) {
     isUpdating: updateMutation.isPending,
     isDeleting: deleteMutation.isPending,
   };
+}
+
+export function useBulkApplyCandidates() {
+  const queryClient = useQueryClient();
+  const t = useTranslations("errors");
+
+  return useMutation({
+    mutationFn: async (data: {
+      candidateIds: string[];
+      offerId: string;
+      pipelineStageId?: string;
+    }) => {
+      const response = await api.post("/candidates/bulk-apply", data);
+      return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["candidates"] });
+      queryClient.invalidateQueries({ queryKey: ["applications"] });
+    },
+    onError: (error: any) => {
+      toast({
+        title:
+          error?.response?.data?.error?.message ?? t("serverError"),
+        variant: "destructive",
+      });
+    },
+  });
 }

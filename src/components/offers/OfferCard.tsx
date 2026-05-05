@@ -38,6 +38,7 @@ export function OfferCard({ offer }: OfferCardProps) {
   const router = useRouter();
   const t = useTranslations("offers");
   const queryClient = useQueryClient();
+  const applicationsCount = offer.applicationsCount ?? offer._count?.applications ?? 0;
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -142,7 +143,7 @@ export function OfferCard({ offer }: OfferCardProps) {
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-1.5 text-xs font-semibold">
             <Users size={14} className="text-primary" />
-            <span>{offer.applicationsCount || 0} {t("stats.candidates")}</span>
+            <span>{applicationsCount} {t("stats.candidates")}</span>
           </div>
           <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
             <Clock size={14} />

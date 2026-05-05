@@ -12,12 +12,15 @@ export async function DELETE(
   if (!valid) return response!;
 
   try {
-    const { errorResponse } = await requireRole("admin");
+    const { session, errorResponse } = await requireRole("admin");
     if (errorResponse) return errorResponse;
 
-    const result = await anonymizeCandidate(params.candidateId);
+    const result = await anonymizeCandidate(params.candidateId, {
+      userId: session.user.id,
+      source: "manual",
+    });
 
-    return apiResponse({ success: true, candidateId: result.id });
+    return apiResponse({ success: true, ...result });
   } catch (error) {
     return handleApiError(error);
   }

@@ -30,6 +30,11 @@ export async function GET(req: NextRequest) {
         orderBy: { createdAt: "desc" },
         skip,
         take,
+        include: {
+          _count: {
+            select: { applications: true },
+          },
+        },
       }),
       db.offer.count({ where }),
     ]);
@@ -37,6 +42,7 @@ export async function GET(req: NextRequest) {
     return apiResponse(
       offers.map((offer) => ({
         ...offer,
+        applicationsCount: offer._count.applications,
         allowedTransitions: ALLOWED_TRANSITIONS[offer.status] ?? [],
       })),
       buildMeta(total, page, limit)

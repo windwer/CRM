@@ -29,7 +29,10 @@ export default function OfferKanbanPage({ params }: { params: { id: string } }) 
         </div>
       </div>
 
-      <div className="grid gap-4 overflow-x-auto pb-4 md:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-7">
+      <div
+        className="flex flex-row gap-4 overflow-x-auto overflow-y-visible pb-4"
+        style={{ minHeight: "calc(100vh - 200px)" }}
+      >
         {stages.map((stage: any) => {
           const stageApplications = applications.filter((application: any) => {
             if (application.pipelineStageId) return application.pipelineStageId === stage.id;
@@ -37,7 +40,7 @@ export default function OfferKanbanPage({ params }: { params: { id: string } }) 
           });
 
           return (
-            <Card key={stage.id} className="min-h-[520px] min-w-[260px]">
+            <Card key={stage.id} className="h-fit min-h-[520px] w-[280px] min-w-[280px] flex-shrink-0">
               <CardHeader className="space-y-2">
                 <CardTitle className="flex items-center justify-between text-sm font-black">
                   <span className="flex items-center gap-2">

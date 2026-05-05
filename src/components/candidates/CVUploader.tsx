@@ -1,18 +1,23 @@
 "use client";
 
 import React, { useCallback, useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import { useDropzone } from "react-dropzone";
 import { Upload, FileText, Loader2, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAI } from "@/hooks/useAI";
 import axios from "axios";
 import { toast } from "@/hooks/use-toast";
-import { Document, Page, pdfjs } from "react-pdf";
-import "react-pdf/dist/Page/AnnotationLayer.css";
-import "react-pdf/dist/Page/TextLayer.css";
 import { useTranslations } from "next-intl";
 
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.mjs`;
+const PDFViewer = dynamic(() => import("./PDFViewerInner"), {
+  ssr: false,
+  loading: () => (
+    <div className="flex h-48 items-center justify-center rounded border bg-gray-50">
+      <p className="text-sm text-gray-500">Cargando visor PDF...</p>
+    </div>
+  ),
+});
 
 interface CVUploaderProps {
   candidateId: string;
@@ -25,8 +30,6 @@ export function CVUploader({ candidateId, onUploadSuccess }: CVUploaderProps) {
   const toastT = useTranslations("toasts");
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  const [isPdfLoading, setIsPdfLoading] = useState(false);
-  const [pdfError, setPdfError] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [blobId, setBlobId] = useState<string | null>(null);
   const { parseCV, isParsing } = useAI();
@@ -35,22 +38,17 @@ export function CVUploader({ candidateId, onUploadSuccess }: CVUploaderProps) {
     if (acceptedFiles.length > 0) {
       setFile(acceptedFiles[0]);
       setBlobId(null);
-      setPdfError(null);
     }
   }, []);
 
   useEffect(() => {
     if (!file) {
       setPreviewUrl(null);
-      setIsPdfLoading(false);
-      setPdfError(null);
       return;
     }
 
     const objectUrl = URL.createObjectURL(file);
     setPreviewUrl(objectUrl);
-    setIsPdfLoading(true);
-    setPdfError(null);
 
     return () => {
       URL.revokeObjectURL(objectUrl);
@@ -129,35 +127,10 @@ export function CVUploader({ candidateId, onUploadSuccess }: CVUploaderProps) {
               <h4 className="text-sm font-bold">{t("page", { page: 1 })}</h4>
               <p className="text-xs text-muted-foreground">{t("uploadHint")}</p>
             </div>
-            {isPdfLoading ? (
-              <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
-            ) : null}
           </div>
 
-          <div className="flex min-h-[420px] items-center justify-center bg-slate-100 p-4">
-            {pdfError ? (
-              <div className="max-w-sm rounded-lg border border-destructive/30 bg-destructive/10 p-4 text-center">
-                <p className="text-sm font-bold text-destructive">{t("previewError")}</p>
-                <p className="mt-1 text-xs text-destructive/80">{pdfError}</p>
-              </div>
-            ) : (
-              <Document
-                file={previewUrl}
-                loading={
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                    {t("previewLoading")}
-                  </div>
-                }
-                onLoadSuccess={() => setIsPdfLoading(false)}
-                onLoadError={() => {
-                  setIsPdfLoading(false);
-                  setPdfError(t("previewError"));
-                }}
-              >
-                <Page pageNumber={1} width={360} />
-              </Document>
-            )}
+          <div className="bg-slate-100 p-4">
+            <PDFViewer fileUrl={previewUrl} />
           </div>
         </div>
       ) : null}

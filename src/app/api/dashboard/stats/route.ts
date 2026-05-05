@@ -4,7 +4,7 @@ import { requireRole } from "@/lib/auth-helpers";
 import { NextRequest } from "next/server";
 import { startOfMonth } from "date-fns";
 
-const interviewStatuses = ["interview_1", "interview_2", "interview_3"] as const;
+const interviewStages = new Set(["interview_internal", "interview_client"]);
 
 export async function GET(req: NextRequest) {
   try {
@@ -22,7 +22,7 @@ export async function GET(req: NextRequest) {
       hiredThisMonth,
       avgAIScoreResult,
       pendingGDPR,
-      pipelineStats,
+      applicationsWithStage,
       recentActivity,
       topOffers
     ] = await Promise.all([
@@ -40,10 +40,12 @@ export async function GET(req: NextRequest) {
         where: { aiScore: { not: null } }
       }),
       db.candidate.count({ where: { consentPersonalData: false, archivedAt: null } }),
-      // Group by status
-      db.application.groupBy({
-        by: ["status"],
-        _count: { _all: true }
+      db.application.findMany({
+        include: {
+          pipelineStage: {
+            select: { name: true, slug: true, color: true, order: true }
+          }
+        }
       }),
       // Recent activity (using communications and status history as proxy)
       db.communication.findMany({
@@ -75,30 +77,22 @@ export async function GET(req: NextRequest) {
             select: { applications: true }
           },
           applications: {
-            select: { id: true, status: true }
+            select: {
+              id: true,
+              status: true,
+              pipelineStage: { select: { slug: true } }
+            }
           }
         }
       })
     ]);
 
     // Format pipeline data
-    const pipeline: Record<string, number> = {
-      prospect: 0,
-      applied: 0,
-      screening: 0,
-      interview: 0,
-      offer: 0,
-      hired: 0
-    };
-
-    pipelineStats.forEach(stat => {
-      const status = stat.status.toLowerCase();
-      if (status.includes("interview")) {
-        pipeline.interview += stat._count._all;
-      } else if (pipeline.hasOwnProperty(status)) {
-        pipeline[status] += stat._count._all;
-      }
-    });
+    const pipeline = applicationsWithStage.reduce((acc, application) => {
+      const stageName = application.pipelineStage?.slug ?? "pending";
+      acc[stageName] = (acc[stageName] ?? 0) + 1;
+      return acc;
+    }, {} as Record<string, number>);
 
     return apiResponse({
       kpis: {
@@ -125,7 +119,9 @@ export async function GET(req: NextRequest) {
         is_urgent: offer.isUrgent,
         total_candidates: offer._count.applications,
         in_interview: offer.applications.filter((application) =>
-          interviewStatuses.includes(application.status as any)
+          application.pipelineStage?.slug
+            ? interviewStages.has(application.pipelineStage.slug)
+            : application.status.includes("interview")
         ).length,
         hired: offer.applications.filter((application) => application.status === "hired").length,
       }))

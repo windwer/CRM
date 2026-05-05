@@ -39,6 +39,7 @@ import { useRouter } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "@/hooks/use-toast";
 import { useTranslations } from "next-intl";
+import { BulkApplyModal } from "@/components/candidates/BulkApplyModal";
 
 interface Candidate {
   id: string;
@@ -71,8 +72,10 @@ export function CandidateTable({ candidates, isLoading }: CandidateTableProps) {
   const toastT = useTranslations("toasts");
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [confirmOpen, setConfirmOpen] = useState(false);
+  const [bulkApplyOpen, setBulkApplyOpen] = useState(false);
   const [bulkAction, setBulkAction] = useState<"archive">("archive");
   const selectedCount = selectedIds.size;
+  const selectedCandidateIds = useMemo(() => Array.from(selectedIds), [selectedIds]);
   const visibleIds = useMemo(
     () => candidates.map((candidate) => candidate.id),
     [candidates]
@@ -251,6 +254,9 @@ export function CandidateTable({ candidates, isLoading }: CandidateTableProps) {
             {t("bulkArchive", { count: selectedCount })}
           </div>
           <div className="flex flex-wrap items-center gap-2">
+            <Button variant="secondary" onClick={() => setBulkApplyOpen(true)}>
+              {t("bulkApply")}
+            </Button>
             <Select
               value={bulkAction}
               onValueChange={(value: "archive") => setBulkAction(value)}
@@ -339,6 +345,13 @@ export function CandidateTable({ candidates, isLoading }: CandidateTableProps) {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      <BulkApplyModal
+        candidateIds={selectedCandidateIds}
+        open={bulkApplyOpen}
+        onOpenChange={setBulkApplyOpen}
+        onSuccess={() => setSelectedIds(new Set())}
+      />
     </>
   );
 }

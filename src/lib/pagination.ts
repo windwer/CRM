@@ -6,6 +6,8 @@ export const PAGINATION_DEFAULTS = {
   MAX_GDPR_BATCH: 50,
 } as const;
 
+export const MAX_GDPR_BATCH = PAGINATION_DEFAULTS.MAX_GDPR_BATCH;
+
 function parsePositiveInt(value: string | null, fallback: number) {
   const parsed = Number.parseInt(value ?? "", 10);
   return Number.isFinite(parsed) ? parsed : fallback;
