@@ -46,7 +46,10 @@ const salaryRefinementError = {
 
 export const offerSchema = offerBaseSchema.refine(salaryRefinement, salaryRefinementError);
 
-export const offerUpdateSchema = offerBaseSchema.partial().refine(salaryRefinement, salaryRefinementError);
+export const offerUpdateSchema = offerBaseSchema
+  .omit({ status: true })
+  .partial()
+  .refine(salaryRefinement, salaryRefinementError);
 
 export const applyOfferSchema = z.union([
   z.object({

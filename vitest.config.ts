@@ -7,9 +7,16 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     globals: true,
-    setupFiles: ["./src/__tests__/setup.ts"],
+    setupFiles: ["./src/__tests__/setup/env.ts"],
     alias: {
       "@": path.resolve(__dirname, "./src"),
+    },
+    testTimeout: 10000,
+    hookTimeout: 10000,
+    pool: "forks",
+    // Vitest 4: forks options are top-level under test (poolOptions removed)
+    forks: {
+      singleFork: true,
     },
     server: {
       deps: {

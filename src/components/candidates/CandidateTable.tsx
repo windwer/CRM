@@ -51,7 +51,6 @@ interface Candidate {
   createdAt: string;
   archivedAt?: string | null;
   applications?: Array<{
-    status: string;
     pipelineStage?: { slug: string } | null;
     offer?: { status: string } | null;
   }>;
@@ -170,7 +169,7 @@ export function CandidateTable({ candidates, isLoading }: CandidateTableProps) {
             {info.row.original.applications?.some(
               (application) =>
                 ["closed_hired", "closed_no_hire"].includes(application.offer?.status || "") &&
-                (application.pipelineStage?.slug === "pending" || application.status === "prospect")
+                application.pipelineStage?.slug === "pending"
             ) && (
               <Badge variant="outline" className="border-amber-300 bg-amber-50 text-[10px] text-amber-800">
                 {t("pendingCommunication")}

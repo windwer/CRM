@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useCandidate } from "@/hooks/useCandidate";
-import { CandidateProfile } from "@/components/candidates/CandidateProfile";
+import { CandidateProfileEditable } from "@/components/candidates/CandidateProfileEditable";
 import { CVUploader } from "@/components/candidates/CVUploader";
 import { CVParsedData } from "@/components/candidates/CVParsedData";
 import { AIScoreCard } from "@/components/candidates/AIScoreCard";
@@ -23,6 +23,7 @@ import { useTranslations } from "next-intl";
 
 export default function CandidateDetailPage({ params }: { params: { id: string } }) {
   const { data: candidate, isLoading } = useCandidate(params.id);
+  const [isEditing, setIsEditing] = useState(false);
   const t = useTranslations("candidates");
   const commonT = useTranslations("common");
 
@@ -59,7 +60,7 @@ export default function CandidateDetailPage({ params }: { params: { id: string }
         </div>
       </div>
 
-      <CandidateProfile candidate={candidate} />
+      <CandidateProfileEditable candidate={candidate} onEditingChange={setIsEditing} />
 
       <Tabs defaultValue="overview" className="w-full">
         <TabsList className="bg-muted/50 p-1 mb-6">
@@ -110,6 +111,11 @@ export default function CandidateDetailPage({ params }: { params: { id: string }
             <div>
               <h3 className="text-lg font-bold mb-4">{t("cv.upload")}</h3>
               <CVUploader candidateId={candidate.id} />
+              {isEditing && (
+                <p className="mt-2 text-xs text-muted-foreground">
+                  Guarda o cancela la edicion del perfil antes de cambiar otros datos.
+                </p>
+              )}
             </div>
             <div className="bg-muted/20 rounded-xl p-8 border-2 border-dashed flex flex-col items-center justify-center text-muted-foreground">
               <FileText size={48} className="mb-4 opacity-20" />

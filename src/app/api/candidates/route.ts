@@ -5,6 +5,14 @@ import { parsePagination, buildMeta } from "@/lib/pagination";
 import { candidateSchema } from "@/lib/validations/candidate";
 import logger from "@/lib/logger";
 import { NextRequest } from "next/server";
+import { Prisma } from "@antigravity/database";
+
+function getDuplicateField(error: Prisma.PrismaClientKnownRequestError) {
+  const target = error.meta?.target;
+  if (Array.isArray(target)) return String(target[0] ?? "campo");
+  if (typeof target === "string") return target;
+  return "campo";
+}
 
 export async function GET(req: NextRequest) {
   try {
@@ -23,7 +31,6 @@ export async function GET(req: NextRequest) {
         include: {
           applications: {
             select: {
-              status: true,
               pipelineStage: { select: { slug: true } },
               offer: { select: { status: true } },
             },
@@ -38,6 +45,17 @@ export async function GET(req: NextRequest) {
 
     return apiResponse(candidates, buildMeta(total, page, limit));
   } catch (error) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2002") {
+      const target = getDuplicateField(error);
+      return handleApiError(
+        new ApiError(
+          "CONFLICT",
+          target === "email" ? "Email ya existe en el sistema" : `Valor duplicado en ${target}`,
+          409
+        )
+      );
+    }
+
     return handleApiError(error);
   }
 }

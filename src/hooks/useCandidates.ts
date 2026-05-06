@@ -4,6 +4,10 @@ import { useFilterStore } from "@/stores/filterStore";
 import { toast } from "@/hooks/use-toast";
 import api from "@/lib/api";
 import { useTranslations } from "next-intl";
+import type { z } from "zod";
+import type { candidateUpdateSchema } from "@/lib/validations/candidate";
+
+type CandidateUpdateInput = z.infer<typeof candidateUpdateSchema>;
 
 export function useCandidates(page = 1, limit = 20) {
   const queryClient = useQueryClient();
@@ -106,6 +110,22 @@ export function useBulkApplyCandidates() {
           error?.response?.data?.error?.message ?? t("serverError"),
         variant: "destructive",
       });
+    },
+  });
+}
+
+export function useUpdateCandidate(candidateId: string) {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (data: CandidateUpdateInput) => {
+      const response = await api.put(`/candidates/${candidateId}`, data);
+      return response.data.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["candidates"] });
+      queryClient.invalidateQueries({ queryKey: ["candidate", candidateId] });
+      queryClient.invalidateQueries({ queryKey: ["dashboard-stats"] });
     },
   });
 }

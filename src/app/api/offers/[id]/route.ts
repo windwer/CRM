@@ -33,7 +33,6 @@ export async function GET(
           orderBy: { createdAt: "desc" },
           select: {
             id: true,
-            status: true,
             candidate: { select: { id: true, fullName: true, email: true } },
             pipelineStage: { select: { id: true, name: true, color: true, slug: true } },
           },
@@ -68,10 +67,32 @@ export async function PUT(
 
     const body = await req.json();
     const validatedData = offerUpdateSchema.parse(body);
+    delete (validatedData as { status?: unknown }).status;
 
-    const offer = await db.offer.update({
-      where: { id: params.id },
-      data: validatedData,
+    const offer = await db.$transaction(async (tx) => {
+      const before = await tx.offer.findUnique({
+        where: { id: params.id },
+        select: { id: true },
+      });
+
+      if (!before) throw new ApiError("NOT_FOUND", "Offer not found", 404);
+
+      const updated = await tx.offer.update({
+        where: { id: params.id },
+        data: validatedData,
+      });
+
+      await tx.offerChange.create({
+        data: {
+          offerId: params.id,
+          changedBy: session.user.id!,
+          fieldName: "general_edit",
+          oldValue: null,
+          newValue: null,
+        },
+      });
+
+      return updated;
     });
 
     logger.info("Offer updated", { offerId: offer.id, userId: session.user.id });

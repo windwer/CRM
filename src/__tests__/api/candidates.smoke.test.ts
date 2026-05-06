@@ -1,8 +1,35 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, beforeEach } from "vitest";
 import { GET, POST } from "@/app/api/candidates/route";
 import { NextRequest } from "next/server";
+import { prismaMock, setupTransactionMock } from "@/__tests__/setup/prisma-mock";
+import "@/__tests__/setup/auth-mock";
 
 describe("Candidates API Smoke Tests", () => {
+  beforeEach(() => {
+    setupTransactionMock();
+    // GET /api/candidates usa $transaction([findMany, count])
+    prismaMock.candidate.findMany.mockResolvedValue([]);
+    prismaMock.candidate.count.mockResolvedValue(0);
+    // POST /api/candidates usa $transaction(callback) con tx.candidate.create + tx.gDPRDeletionQueue.create
+    prismaMock.candidate.create.mockResolvedValue({
+      id: "test-candidate-id",
+      email: "test@example.com",
+      fullName: "Test Candidate",
+      consentPersonalData: true,
+      consentDate: new Date(),
+      skillsArray: [],
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    } as any);
+    prismaMock.gDPRDeletionQueue.create.mockResolvedValue({
+      id: "test-queue-id",
+      candidateId: "test-candidate-id",
+      status: "pending",
+      deletionDate: new Date(),
+      createdAt: new Date(),
+    } as any);
+  });
+
   it("GET /api/candidates should return 200 and success format", async () => {
     const req = new NextRequest("http://localhost/api/candidates");
     const response = await GET(req);

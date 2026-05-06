@@ -92,7 +92,6 @@ export async function POST(req: NextRequest) {
             candidateId: candidate.id,
             offerId: body.offerId,
             pipelineStageId: fallbackStage.id,
-            status: "prospect",
             appliedAt: now,
           })),
         })

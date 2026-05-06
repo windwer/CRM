@@ -1,5 +1,5 @@
 import { db } from "@/lib/db";
-import { Prisma, ApplicationStatus } from "@antigravity/database";
+import { Prisma } from "@antigravity/database";
 import { apiResponse, handleApiError } from "@/lib/errors";
 import { requireRole } from "@/lib/auth-helpers";
 import { parsePagination, buildMeta } from "@/lib/pagination";
@@ -13,13 +13,13 @@ export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const offerId = searchParams.get("offer_id");
     const candidateId = searchParams.get("candidate_id");
-    const status = searchParams.get("status");
+    const stage = searchParams.get("stage");
     const { page, limit, skip, take } = parsePagination(searchParams);
 
     const where: Prisma.ApplicationWhereInput = {};
     if (offerId) where.offerId = offerId;
     if (candidateId) where.candidateId = candidateId;
-    if (status) where.status = status as ApplicationStatus;
+    if (stage) where.pipelineStage = { slug: stage };
 
     const [applications, total] = await db.$transaction([
       db.application.findMany({

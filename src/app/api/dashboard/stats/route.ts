@@ -14,7 +14,6 @@ export async function GET(req: NextRequest) {
     const now = new Date();
     const monthStart = startOfMonth(now);
 
-    // Fetch all stats in parallel for efficiency
     const [
       activeOffers,
       totalCandidates,
@@ -22,32 +21,39 @@ export async function GET(req: NextRequest) {
       hiredThisMonth,
       avgAIScoreResult,
       pendingGDPR,
-      applicationsWithStage,
+      stages,
+      applicationStageCounts,
       recentActivity,
       topOffers
     ] = await Promise.all([
       db.offer.count({ where: { status: { in: ["published", "draft", "paused"] } } }),
       db.candidate.count({ where: { archivedAt: null } }),
       db.application.count(),
-      db.application.count({ 
-        where: { 
-          status: "hired",
+      db.application.count({
+        where: {
+          pipelineStage: { slug: "hired" },
           updatedAt: { gte: monthStart }
-        } 
+        }
       }),
       db.application.aggregate({
         _avg: { aiScore: true },
         where: { aiScore: { not: null } }
       }),
-      db.candidate.count({ where: { consentPersonalData: false, archivedAt: null } }),
-      db.application.findMany({
-        include: {
-          pipelineStage: {
-            select: { name: true, slug: true, color: true, order: true }
-          }
-        }
+      db.gDPRDeletionQueue.count({
+        where: {
+          status: "pending",
+          deletionDate: { lte: now },
+        },
       }),
-      // Recent activity (using communications and status history as proxy)
+      db.pipelineStage.findMany({
+        where: { isActive: true },
+        orderBy: { order: "asc" },
+        select: { id: true, slug: true, name: true, color: true, category: true, order: true },
+      }),
+      db.application.groupBy({
+        by: ["pipelineStageId"],
+        _count: { _all: true },
+      }),
       db.communication.findMany({
         take: 10,
         orderBy: { sentAt: "desc" },
@@ -60,7 +66,6 @@ export async function GET(req: NextRequest) {
           }
         }
       }),
-      // Top offers by candidate count
       db.offer.findMany({
         where: { status: { in: ["published", "draft", "paused"] } },
         take: 5,
@@ -79,7 +84,6 @@ export async function GET(req: NextRequest) {
           applications: {
             select: {
               id: true,
-              status: true,
               pipelineStage: { select: { slug: true } }
             }
           }
@@ -87,12 +91,18 @@ export async function GET(req: NextRequest) {
       })
     ]);
 
-    // Format pipeline data
-    const pipeline = applicationsWithStage.reduce((acc, application) => {
-      const stageName = application.pipelineStage?.slug ?? "pending";
-      acc[stageName] = (acc[stageName] ?? 0) + 1;
-      return acc;
-    }, {} as Record<string, number>);
+    const countsByStageId = new Map(
+      applicationStageCounts.map((entry) => [entry.pipelineStageId, entry._count._all])
+    );
+
+    const pipeline = stages.map((stage) => ({
+      slug: stage.slug,
+      name: stage.name,
+      color: stage.color,
+      category: stage.category,
+      order: stage.order,
+      count: countsByStageId.get(stage.id) ?? 0,
+    }));
 
     return apiResponse({
       kpis: {
@@ -104,6 +114,7 @@ export async function GET(req: NextRequest) {
         candidates_pending_gdpr: pendingGDPR
       },
       pipeline,
+      pendingGDPR,
       recent_activity: recentActivity.map(comm => ({
         type: comm.isOutbound ? "email_sent" : "email_received",
         candidate_name: comm.application.candidate.fullName,
@@ -121,9 +132,11 @@ export async function GET(req: NextRequest) {
         in_interview: offer.applications.filter((application) =>
           application.pipelineStage?.slug
             ? interviewStages.has(application.pipelineStage.slug)
-            : application.status.includes("interview")
+            : false
         ).length,
-        hired: offer.applications.filter((application) => application.status === "hired").length,
+        hired: offer.applications.filter((application) =>
+          application.pipelineStage?.slug === "hired"
+        ).length,
       }))
     });
   } catch (error) {

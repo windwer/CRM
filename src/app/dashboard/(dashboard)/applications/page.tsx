@@ -22,24 +22,27 @@ import {
   Briefcase
 } from "lucide-react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { formatDistanceToNow } from "date-fns";
 import { es } from "date-fns/locale";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslations } from "next-intl";
 
 export default function ApplicationsPage() {
-  const { applications, isLoading } = useApplications();
+  const searchParams = useSearchParams();
+  const stage = searchParams.get("stage") ?? undefined;
+  const { applications, isLoading } = useApplications({ stage });
   const t = useTranslations("applications");
   const commonT = useTranslations("common");
 
-  const getStatusColor = (status: string) => {
-    switch (status.toLowerCase()) {
+  const getStatusColor = (slug: string) => {
+    switch (slug.toLowerCase()) {
       case "hired": return "bg-emerald-500/10 text-emerald-600 border-emerald-500/20";
       case "rejected": return "bg-rose-500/10 text-rose-600 border-rose-500/20";
-      case "offer": return "bg-indigo-500/10 text-indigo-600 border-indigo-500/20";
-      case "interview_1":
-      case "interview_2":
-      case "interview_3": return "bg-amber-500/10 text-amber-600 border-amber-500/20";
+      case "sent_to_client":
+      case "sent_to_review": return "bg-indigo-500/10 text-indigo-600 border-indigo-500/20";
+      case "interview_internal":
+      case "interview_client": return "bg-amber-500/10 text-amber-600 border-amber-500/20";
       default: return "bg-muted text-muted-foreground";
     }
   };
@@ -106,8 +109,8 @@ export default function ApplicationsPage() {
                   </div>
                 </TableCell>
                 <TableCell className="text-center">
-                  <Badge variant="outline" className={`capitalize font-bold text-[9px] tracking-widest border-2 ${getStatusColor(app.status)}`}>
-                    {t(`status.${app.status}`)}
+                  <Badge variant="outline" className={`capitalize font-bold text-[9px] tracking-widest border-2 ${getStatusColor(app.pipelineStage?.slug ?? "")}`}>
+                    {app.pipelineStage?.name ?? "—"}
                   </Badge>
                 </TableCell>
                 <TableCell className="text-center">

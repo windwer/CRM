@@ -88,7 +88,7 @@ export async function syncInboxForUser(userId: string) {
       where: { email: { in: senderEmails } },
       include: {
         applications: {
-          where: { status: { not: "rejected" } },
+          where: { pipelineStage: { slug: { not: "rejected" } } },
           orderBy: { appliedAt: "desc" },
           take: 1,
           include: { offer: { select: { id: true, title: true } } },

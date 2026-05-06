@@ -18,7 +18,6 @@ export function ApplicationTimeline({
   aiLogs = [],
 }: ApplicationTimelineProps) {
   const t = useTranslations("applications.timeline");
-  const statusT = useTranslations("applications.status");
 
   const events = [
     ...communications.map((communication) => ({
@@ -33,19 +32,17 @@ export function ApplicationTimeline({
       color: communication.isOutbound ? "bg-blue-500" : "bg-indigo-500",
       user: communication.sender?.name || communication.emailFrom,
     })),
-    ...statusHistory.map((status) => ({
-      id: status.id,
+    ...statusHistory.map((entry) => ({
+      id: entry.id,
       type: "status_change",
-      date: new Date(status.changedAt),
-      title: t("statusChanged", { status: statusT(status.newStatus) }),
-      description:
-        status.reason ||
-        t("statusChanged", {
-          status: status.oldStatus ? statusT(status.oldStatus) : "",
-        }),
+      date: new Date(entry.changedAt),
+      title: t("statusChanged", { status: entry.newStage?.name ?? "" }),
+      description: entry.previousStage
+        ? `${entry.previousStage.name} → ${entry.newStage?.name ?? ""}`
+        : entry.newStage?.name ?? "",
       icon: ArrowRightLeft,
       color: "bg-slate-700",
-      user: status.author?.name,
+      user: entry.changedBy?.name,
     })),
     ...aiLogs
       .filter((log) => log.status === "success")

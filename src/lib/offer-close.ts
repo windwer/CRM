@@ -35,7 +35,6 @@ export async function closeOffer(params: {
       where: { id: hiredApplicationId },
       data: {
         pipelineStageId: hiredStage?.id,
-        status: "hired",
         lastContactAt: now,
       },
     });
@@ -51,10 +50,7 @@ export async function closeOffer(params: {
     if (otherApplicationIds.length > 0) {
       await tx.application.updateMany({
         where: { id: { in: otherApplicationIds } },
-        data: {
-          pipelineStageId: pendingStage?.id,
-          status: "prospect",
-        },
+        data: { pipelineStageId: pendingStage?.id },
       });
     }
 
@@ -64,7 +60,7 @@ export async function closeOffer(params: {
         status: "closed_hired",
         closedAt: now,
         closedById,
-        hiredCandidateId: hiredApplicationId,
+        hiredApplicationId: hiredApplicationId,
       },
     });
   } else {
@@ -75,10 +71,7 @@ export async function closeOffer(params: {
     if (toMoveIds.length > 0) {
       await tx.application.updateMany({
         where: { id: { in: toMoveIds } },
-        data: {
-          pipelineStageId: pendingStage?.id,
-          status: "prospect",
-        },
+        data: { pipelineStageId: pendingStage?.id },
       });
     }
 
@@ -88,7 +81,7 @@ export async function closeOffer(params: {
         status: "closed_no_hire",
         closedAt: now,
         closedById,
-        hiredCandidateId: null,
+        hiredApplicationId: null,
       },
     });
   }

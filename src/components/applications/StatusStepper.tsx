@@ -15,18 +15,6 @@ import { Button } from "@/components/ui/button";
 import { usePipelineStages } from "@/hooks/usePipelineStages";
 import { useTranslations } from "next-intl";
 
-const legacyStatusToSlug: Record<string, string> = {
-  prospect: "pending",
-  applied: "pending",
-  screening: "sent_to_review",
-  interview_1: "interview_internal",
-  interview_2: "interview_client",
-  interview_3: "interview_client",
-  offer: "sent_to_review",
-  hired: "hired",
-  rejected: "rejected",
-};
-
 const categoryLabels: Record<string, string> = {
   todo: "todo",
   in_progress: "inProgress",
@@ -34,14 +22,12 @@ const categoryLabels: Record<string, string> = {
 };
 
 interface StatusStepperProps {
-  currentStatus: string;
   currentPipelineStageId?: string | null;
   onStatusChange: (payload: { pipelineStageId: string }) => Promise<void>;
   isUpdating: boolean;
 }
 
 export function StatusStepper({
-  currentStatus,
   currentPipelineStageId,
   onStatusChange,
   isUpdating,
@@ -49,10 +35,8 @@ export function StatusStepper({
   const { data: stages = [], isLoading } = usePipelineStages();
   const pipelineT = useTranslations("pipeline");
   const commonT = useTranslations("common");
-  const fallbackSlug = legacyStatusToSlug[currentStatus?.toLowerCase()] || "pending";
-  const activeStage =
-    stages.find((stage: any) => stage.id === currentPipelineStageId) ||
-    stages.find((stage: any) => stage.slug === fallbackSlug);
+
+  const activeStage = stages.find((stage: any) => stage.id === currentPipelineStageId);
   const grouped = ["todo", "in_progress", "done"].map((category) => ({
     category,
     stages: stages.filter((stage: any) => stage.category === category),

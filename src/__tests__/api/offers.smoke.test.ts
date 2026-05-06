@@ -1,8 +1,29 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, beforeEach } from "vitest";
 import { GET, POST } from "@/app/api/offers/route";
 import { NextRequest } from "next/server";
+import { prismaMock, setupTransactionMock } from "@/__tests__/setup/prisma-mock";
+import "@/__tests__/setup/auth-mock";
 
 describe("Offers API Smoke Tests", () => {
+  beforeEach(() => {
+    setupTransactionMock();
+    // GET /api/offers usa $transaction([findMany, count])
+    prismaMock.offer.findMany.mockResolvedValue([]);
+    prismaMock.offer.count.mockResolvedValue(0);
+    // POST /api/offers usa offer.create directamente
+    prismaMock.offer.create.mockResolvedValue({
+      id: "test-offer-id",
+      title: "Software Engineer",
+      description: "A great job for a great engineer",
+      department: "Engineering",
+      location: "Remote",
+      status: "published",
+      createdBy: "test-admin-id",
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    } as any);
+  });
+
   it("GET /api/offers should return 200 and success format", async () => {
     const req = new NextRequest("http://localhost/api/offers");
     const response = await GET(req);

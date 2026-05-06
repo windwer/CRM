@@ -25,11 +25,11 @@ import { Badge } from "@/components/ui/badge";
 import { useTranslations } from "next-intl";
 
 export default function ApplicationDetailPage({ params }: { params: { id: string } }) {
-  const { 
-    application, 
-    isLoading, 
-    updateStatus, 
-    isUpdatingStatus,
+  const {
+    application,
+    isLoading,
+    updateStage,
+    isUpdatingStage,
     updateNotes,
     isUpdatingNotes,
   } = useApplication(params.id);
@@ -69,7 +69,7 @@ export default function ApplicationDetailPage({ params }: { params: { id: string
   }
 
   const handleStatusChange = async (payload: { pipelineStageId: string }) => {
-    await updateStatus(payload);
+    await updateStage(payload);
   };
 
   const handleSaveNotes = async () => {
@@ -80,7 +80,7 @@ export default function ApplicationDetailPage({ params }: { params: { id: string
     await updateNotes({ id: application.id, candidateNotes });
   };
   const isOfferClosed = ["closed_hired", "closed_no_hire"].includes(application.offer.status);
-  const isHiredApplication = application.offer.hiredCandidateId === application.id;
+  const isHiredApplication = application.offer.hiredApplicationId === application.id;
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
@@ -123,11 +123,10 @@ export default function ApplicationDetailPage({ params }: { params: { id: string
       )}
 
       <div className="bg-background border border-muted/50 rounded-3xl p-8 shadow-sm">
-        <StatusStepper 
-          currentStatus={application.status} 
+        <StatusStepper
           currentPipelineStageId={application.pipelineStageId}
           onStatusChange={handleStatusChange}
-          isUpdating={isUpdatingStatus}
+          isUpdating={isUpdatingStage}
         />
       </div>
 

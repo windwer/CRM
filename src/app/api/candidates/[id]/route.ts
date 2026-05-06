@@ -5,6 +5,14 @@ import { validateId } from "@/lib/params";
 import { candidateUpdateSchema } from "@/lib/validations/candidate";
 import logger from "@/lib/logger";
 import { NextRequest } from "next/server";
+import { Prisma } from "@antigravity/database";
+
+function getDuplicateField(error: Prisma.PrismaClientKnownRequestError) {
+  const target = error.meta?.target;
+  if (Array.isArray(target)) return String(target[0] ?? "campo");
+  if (typeof target === "string") return target;
+  return "campo";
+}
 
 export async function GET(
   req: NextRequest,
@@ -55,16 +63,41 @@ export async function PUT(
 
     const body = await req.json();
     const validatedData = candidateUpdateSchema.parse(body);
+    const editableData = { ...validatedData } as Record<string, unknown>;
+    delete editableData.consentPersonalData;
+    delete editableData.consentDate;
+    delete editableData.archivedAt;
+    delete editableData.archivedBy;
+    delete editableData.anonymizedAt;
+    delete editableData.cvBlobId;
+    delete editableData.parsedData;
 
     const candidate = await db.candidate.update({
       where: { id: params.id },
-      data: validatedData,
+      data: editableData,
     });
 
     logger.info("Candidate updated", { candidateId: candidate.id, userId: session.user.id });
 
     return apiResponse(candidate);
   } catch (error) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      if (error.code === "P2002") {
+        const target = getDuplicateField(error);
+        return handleApiError(
+          new ApiError(
+            "CONFLICT",
+            target === "email" ? "Email ya existe en el sistema" : `Valor duplicado en ${target}`,
+            409
+          )
+        );
+      }
+
+      if (error.code === "P2025") {
+        return handleApiError(new ApiError("NOT_FOUND", "Candidate not found", 404));
+      }
+    }
+
     return handleApiError(error);
   }
 }

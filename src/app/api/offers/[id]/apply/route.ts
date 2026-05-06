@@ -6,16 +6,6 @@ import logger from "@/lib/logger";
 import { NextRequest } from "next/server";
 import { applyOfferSchema } from "@/lib/validations/offer";
 
-const stageToLegacyStatus: Record<string, any> = {
-  pending: "applied",
-  awaiting_response: "applied",
-  interview_internal: "interview_1",
-  sent_to_review: "screening",
-  interview_client: "interview_2",
-  hired: "hired",
-  rejected: "rejected",
-};
-
 export async function POST(
   req: NextRequest,
   { params }: { params: { id: string } }
@@ -77,7 +67,6 @@ export async function POST(
       data: {
         offerId: params.id,
         candidateId,
-        status: stageToLegacyStatus[pipelineStage.slug] ?? "applied",
         pipelineStageId: pipelineStage.id,
         assignedToId: assignedToId || null,
         candidateNotes,

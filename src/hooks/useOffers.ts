@@ -1,6 +1,11 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "@/hooks/use-toast";
+import api from "@/lib/api";
+import type { z } from "zod";
+import type { offerUpdateSchema } from "@/lib/validations/offer";
+
+type OfferUpdateInput = z.infer<typeof offerUpdateSchema>;
 
 export function useOffers(status?: string) {
   const queryClient = useQueryClient();
@@ -70,5 +75,22 @@ export function useOfferFunnel(id: string) {
       return data.data;
     },
     enabled: !!id,
+  });
+}
+
+export function useUpdateOffer(offerId: string) {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (data: OfferUpdateInput) => {
+      const response = await api.put(`/offers/${offerId}`, data);
+      return response.data.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["offers"] });
+      queryClient.invalidateQueries({ queryKey: ["offer", offerId] });
+      queryClient.invalidateQueries({ queryKey: ["offer-funnel", offerId] });
+      queryClient.invalidateQueries({ queryKey: ["dashboard-stats"] });
+    },
   });
 }

@@ -1,7 +1,6 @@
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import {
-  ApplicationStatus,
   CandidateSource,
   JobType,
   OfferStatus,
@@ -18,18 +17,6 @@ if (existsSync(envPath)) {
     process.env[match[1]] = match[2].replace(/^"|"$/g, "");
   }
 }
-
-const STATUS_MAP: Record<string, ApplicationStatus> = {
-  pending: ApplicationStatus.prospect,
-  awaiting_response: ApplicationStatus.applied,
-  interview_internal: ApplicationStatus.interview_1,
-  sent_to_review: ApplicationStatus.screening,
-  sent_to_client: ApplicationStatus.screening,
-  sent_to_review_client: ApplicationStatus.screening,
-  interview_client: ApplicationStatus.interview_2,
-  hired: ApplicationStatus.hired,
-  rejected: ApplicationStatus.rejected,
-};
 
 const OFFERS = [
   {
@@ -135,7 +122,7 @@ const REQUIRED_STAGES = [
 ];
 
 async function clearRecruitingData() {
-  await prisma.offer.updateMany({ data: { hiredCandidateId: null } });
+  await prisma.offer.updateMany({ data: { hiredApplicationId: null } });
   await prisma.communication.deleteMany({});
   await prisma.applicationStatusHistory.deleteMany({});
   await prisma.aIProcessingLog.deleteMany({});
@@ -236,10 +223,10 @@ async function importRealData() {
       if (!existingGdprQueue) {
         await prisma.gDPRDeletionQueue.create({
           data: {
-          candidateId: candidate.id,
-          deletionDate: new Date(Date.now() + 2 * 365 * 24 * 60 * 60 * 1000),
-          status: "pending",
-          reason: "Importacion Trello",
+            candidateId: candidate.id,
+            deletionDate: new Date(Date.now() + 2 * 365 * 24 * 60 * 60 * 1000),
+            status: "pending",
+            reason: "Importacion Trello",
           },
         });
       }
@@ -249,7 +236,6 @@ async function importRealData() {
           candidateId: candidate.id,
           offerId: offer.id,
           pipelineStageId: stage.id,
-          status: STATUS_MAP[candidateData.stage],
           candidateNotes: candidateData.candidateNotes,
           appliedAt: new Date(),
         },
@@ -286,10 +272,7 @@ async function importRealData() {
         offerId: offerMap.cellnex_pm.id,
         candidate: { email: "francisco.vargas@import.local" },
       },
-      data: {
-        pipelineStageId: franciscoStage.id,
-        status: ApplicationStatus.interview_2,
-      },
+      data: { pipelineStageId: franciscoStage.id },
     });
     console.log("\n  Oferta Cellnex cerrada: Inaki Santillana Garay CONTRATADO");
   }

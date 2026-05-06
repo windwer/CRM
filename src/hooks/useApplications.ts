@@ -2,13 +2,30 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "@/hooks/use-toast";
 
-export function useApplications(filters?: any) {
+type ApplicationFilters = {
+  offer_id?: string;
+  candidate_id?: string;
+  offerId?: string;
+  candidateId?: string;
+  stage?: string;
+  page?: number;
+  limit?: number;
+};
+
+export function useApplications(filters: ApplicationFilters = {}) {
   const queryClient = useQueryClient();
 
   const { data: applications, isLoading } = useQuery({
     queryKey: ["applications", filters],
     queryFn: async () => {
-      const { data } = await axios.get("/api/applications", { params: filters });
+      const params = {
+        ...filters,
+        offer_id: filters.offer_id ?? filters.offerId,
+        candidate_id: filters.candidate_id ?? filters.candidateId,
+        offerId: undefined,
+        candidateId: undefined,
+      };
+      const { data } = await axios.get("/api/applications", { params });
       return data.data;
     },
   });
@@ -31,19 +48,19 @@ export function useApplication(id: string) {
     enabled: !!id,
   });
 
-  const updateStatusMutation = useMutation({
-    mutationFn: (payload: string | { status?: string; pipelineStageId?: string }) => {
-      const body = typeof payload === "string" ? { status: payload } : payload;
-      return axios.patch(`/api/applications/${id}/status`, body);
-    },
+  const updateStageMutation = useMutation({
+    mutationFn: (payload: { pipelineStageId: string }) =>
+      axios.patch(`/api/applications/${id}/stage`, payload),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["application", id] });
       queryClient.invalidateQueries({ queryKey: ["applications"] });
-      toast({ title: "Application status updated" });
+      queryClient.invalidateQueries({ queryKey: ["offer"] });
+      queryClient.invalidateQueries({ queryKey: ["dashboard-stats"] });
+      toast({ title: "Etapa actualizada" });
     },
     onError: (error: any) => {
       toast({
-        title: "Update failed",
+        title: "Error al actualizar la etapa",
         description: error.response?.data?.error?.message || "Internal error",
         variant: "destructive",
       });
@@ -100,8 +117,8 @@ export function useApplication(id: string) {
     application,
     isLoading,
     error,
-    updateStatus: updateStatusMutation.mutateAsync,
-    isUpdatingStatus: updateStatusMutation.isPending,
+    updateStage: updateStageMutation.mutateAsync,
+    isUpdatingStage: updateStageMutation.isPending,
     updateNotes: updateNotes.mutateAsync,
     isUpdatingNotes: updateNotes.isPending,
     assignUser: assignMutation.mutateAsync,

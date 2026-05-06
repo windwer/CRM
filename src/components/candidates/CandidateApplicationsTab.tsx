@@ -21,7 +21,7 @@ import { useTranslations } from "next-intl";
 
 type CandidateApplication = {
   id: string;
-  status: string;
+  pipelineStage?: { name: string; slug: string; color: string | null } | null;
   aiScore: string | number | null;
   appliedAt: string;
   createdAt: string;
@@ -30,19 +30,20 @@ type CandidateApplication = {
   } | null;
 };
 
-function getStatusClass(status: string) {
-  switch (status) {
+function getStageClass(slug?: string | null) {
+  switch (slug) {
     case "hired":
       return "border-emerald-500/30 bg-emerald-500/10 text-emerald-700";
     case "rejected":
       return "border-rose-500/30 bg-rose-500/10 text-rose-700";
-    case "offer":
+    case "sent_to_client":
+    case "interview_client":
       return "border-indigo-500/30 bg-indigo-500/10 text-indigo-700";
-    case "interview_1":
-    case "interview_2":
-    case "interview_3":
+    case "interview_internal":
+    case "sent_to_review":
+    case "sent_to_review_client":
       return "border-amber-500/30 bg-amber-500/10 text-amber-700";
-    case "screening":
+    case "awaiting_response":
       return "border-sky-500/30 bg-sky-500/10 text-sky-700";
     default:
       return "border-muted-foreground/20 bg-muted text-muted-foreground";
@@ -118,9 +119,9 @@ export function CandidateApplicationsTab({ candidateId }: { candidateId: string 
                 <TableCell className="py-4">
                   <Badge
                     variant="outline"
-                    className={cn("capitalize px-3 py-1 font-medium", getStatusClass(application.status))}
+                    className={cn("capitalize px-3 py-1 font-medium", getStageClass(application.pipelineStage?.slug))}
                   >
-                    {t(`status.${application.status}`)}
+                    {application.pipelineStage?.name ?? "—"}
                   </Badge>
                 </TableCell>
                 <TableCell className="py-4">
@@ -130,9 +131,9 @@ export function CandidateApplicationsTab({ candidateId }: { candidateId: string 
                         {Math.round(numericScore * 100)}%
                       </div>
                       <div className="w-12 h-1.5 bg-muted rounded-full overflow-hidden hidden sm:block">
-                        <div 
-                          className={cn("h-full rounded-full transition-all", 
-                            numericScore >= 0.8 ? "bg-emerald-500" : 
+                        <div
+                          className={cn("h-full rounded-full transition-all",
+                            numericScore >= 0.8 ? "bg-emerald-500" :
                             numericScore >= 0.6 ? "bg-amber-500" : "bg-rose-500"
                           )}
                           style={{ width: `${numericScore * 100}%` }}

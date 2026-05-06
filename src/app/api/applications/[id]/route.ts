@@ -37,7 +37,9 @@ export async function GET(
         statusHistory: {
           orderBy: { changedAt: "desc" },
           include: {
-            author: { select: { name: true } },
+            previousStage: { select: { name: true, slug: true, color: true } },
+            newStage: { select: { name: true, slug: true, color: true } },
+            changedBy: { select: { name: true } },
           },
         },
         communications: {
