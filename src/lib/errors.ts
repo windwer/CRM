@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { ZodError } from "zod";
 
 export type ApiErrorResponse = {
   success: false;
@@ -32,6 +33,16 @@ export function handleApiError(error: unknown) {
         error: { code: error.code, message: error.message },
       },
       { status: error.status }
+    );
+  }
+
+  if (error instanceof ZodError) {
+    return NextResponse.json(
+      {
+        success: false,
+        error: { code: "VALIDATION_ERROR", message: error.issues[0]?.message ?? "Validation error" },
+      },
+      { status: 400 }
     );
   }
 

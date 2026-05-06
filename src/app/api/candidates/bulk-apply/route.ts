@@ -94,6 +94,7 @@ export async function POST(req: NextRequest) {
             pipelineStageId: fallbackStage.id,
             appliedAt: now,
           })),
+          skipDuplicates: true,
         })
       : { count: 0 };
 

@@ -8,6 +8,10 @@
     "start": "next start",
     "lint": "next lint",
     "test": "vitest run",
+    "test:watch": "vitest",
+    "test:integration": "vitest run integration",
+    "test:smoke": "vitest run smoke",
+    "test:setup": "cd ../database && pnpm prisma db push --skip-generate && pnpm prisma db seed",
     "trello:import-real": "tsx scripts/trello-import/import-real.ts",
     "cleanup:gdpr-fixtures": "tsx scripts/cleanup-gdpr-test-fixtures.ts"
   },
