@@ -38,3 +38,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Trello export con PII — nunca commitear
+scripts/trello-import/*.json
