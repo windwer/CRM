@@ -32,6 +32,8 @@ export async function GET(
 
         if (slug === "hired") {
           acc.hired++;
+        } else if (slug === "bbdd_smartway") {
+          acc.smartway++;
         } else if (slug === "rejected") {
           acc.rejected++;
         } else if (slug === "interview_internal" || slug === "interview_client") {
@@ -56,6 +58,7 @@ export async function GET(
         interviewing: 0,
         offers: 0,
         hired: 0,
+        smartway: 0,
         rejected: 0,
       }
     );

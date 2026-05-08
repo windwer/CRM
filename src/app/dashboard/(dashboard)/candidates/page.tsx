@@ -2,12 +2,13 @@
 
 import React, { useState } from "react";
 import { CandidateTable } from "@/components/candidates/CandidateTable";
+import { CandidateCsvImportModal } from "@/components/candidates/CandidateCsvImportModal";
 import { SearchAdvanced } from "@/components/candidates/SearchAdvanced";
 import { useCandidates } from "@/hooks/useCandidates";
 import { useFilterStore } from "@/stores/filterStore";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
-import { UserPlus, Download } from "lucide-react";
+import { UserPlus, Download, Upload } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { 
@@ -24,6 +25,7 @@ export default function CandidatesPage() {
   const toastT = useTranslations("toasts");
   const [page, setPage] = useState(1);
   const [isExporting, setIsExporting] = useState(false);
+  const [importOpen, setImportOpen] = useState(false);
   const router = useRouter();
   const limit = 20;
   const { data, isLoading } = useCandidates(page, limit);
@@ -106,6 +108,14 @@ export default function CandidatesPage() {
             {t("export")}
           </Button>
           <Button
+            variant="outline"
+            className="hidden sm:flex"
+            onClick={() => setImportOpen(true)}
+          >
+            <Upload className="mr-2 h-4 w-4" />
+            Importar CSV
+          </Button>
+          <Button
             className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/20"
             onClick={() => router.push("/dashboard/candidates/new")}
           >
@@ -163,6 +173,8 @@ export default function CandidatesPage() {
           </div>
         )}
       </div>
+
+      <CandidateCsvImportModal open={importOpen} onOpenChange={setImportOpen} />
     </div>
   );
 }

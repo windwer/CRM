@@ -119,6 +119,7 @@ const REQUIRED_STAGES = [
   "interview_client",
   "hired",
   "rejected",
+  "bbdd_smartway",
 ];
 
 async function clearRecruitingData() {
@@ -146,8 +147,8 @@ async function importRealData() {
       throw new Error(`Stage '${slug}' no encontrado. Ejecuta el seed primero.`);
     }
   }
-  if (stages.length !== 9) {
-    throw new Error(`Se esperaban exactamente 9 stages activos y hay ${stages.length}. Ejecuta el seed actualizado.`);
+  if (stages.length !== REQUIRED_STAGES.length) {
+    throw new Error(`Se esperaban exactamente ${REQUIRED_STAGES.length} stages activos y hay ${stages.length}. Ejecuta el seed actualizado.`);
   }
   console.log(`Stages OK: ${stages.length} encontrados`);
 

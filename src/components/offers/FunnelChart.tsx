@@ -23,6 +23,7 @@ interface FunnelChartProps {
     interviewing: number;
     offers: number;
     hired: number;
+    smartway?: number;
     rejected: number;
   };
 }
@@ -35,6 +36,7 @@ export function FunnelChart({ data }: FunnelChartProps) {
     { name: t("applications.status.interview_1"), value: data.interviewing, fill: "#8b5cf6" },
     { name: t("applications.status.offer"), value: data.offers, fill: "#ec4899" },
     { name: t("applications.status.hired"), value: data.hired, fill: "#10b981" },
+    { name: "BB.DD. SmartWay", value: data.smartway ?? 0, fill: "#0ea5e9" },
   ];
 
   return (

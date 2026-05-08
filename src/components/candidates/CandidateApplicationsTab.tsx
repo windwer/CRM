@@ -34,6 +34,8 @@ function getStageClass(slug?: string | null) {
   switch (slug) {
     case "hired":
       return "border-emerald-500/30 bg-emerald-500/10 text-emerald-700";
+    case "bbdd_smartway":
+      return "border-sky-500/30 bg-sky-500/10 text-sky-700";
     case "rejected":
       return "border-rose-500/30 bg-rose-500/10 text-rose-700";
     case "sent_to_client":
