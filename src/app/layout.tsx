@@ -7,11 +7,16 @@ import AuthProvider from "@/components/providers/AuthProvider";
 import QueryProvider from "@/components/providers/QueryProvider";
 import { Toaster } from "@/components/ui/toaster";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
 
 export const metadata: Metadata = {
-  title: "AntiGravity CRM",
-  description: "Plataforma moderna de captación de talento",
+  title: "SmartCRM",
+  description: "Talent Acquisition Platform",
+  applicationName: "SmartCRM",
 };
 
 export default async function RootLayout({
@@ -23,8 +28,8 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
-      <body className={inter.className}>
+    <html lang={locale} className={inter.variable}>
+      <body className="font-sans">
         <NextIntlClientProvider messages={messages}>
           <AuthProvider>
             <QueryProvider>

@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import CredentialsProvider from "next-auth/providers/credentials";
 import MicrosoftEntraID from "next-auth/providers/microsoft-entra-id";
-import { prisma } from "@antigravity/database";
+import { prisma } from "@smartcrm/database";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
 

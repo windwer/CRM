@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { Prisma } from "@antigravity/database";
+import { Prisma } from "@smartcrm/database";
 import { db } from "@/lib/db";
 import { apiResponse, handleApiError, ApiError } from "@/lib/errors";
 import { requireRole } from "@/lib/auth-helpers";

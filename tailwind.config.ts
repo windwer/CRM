@@ -16,31 +16,48 @@ const config: Config = {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
+      },
       colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
+        border: "#E7E6F8",
+        input: "#E7E6F8",
+        ring: "#211CC3",
+        background: "#FFFFFF",
+        foreground: "#0A0944",
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+          DEFAULT: "#211CC3",
+          50: "#EEF0FF",
+          100: "#E0E2FF",
+          200: "#C2C5FF",
+          300: "#9CA0F5",
+          400: "#7176E8",
+          500: "#211CC3",
+          600: "#1B17A6",
+          700: "#161389",
+          800: "#100E66",
+          900: "#0A0944",
+          foreground: "#FFFFFF",
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
+          DEFAULT: "#E7E6F8",
+          foreground: "#211CC3",
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
         },
         muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
+          DEFAULT: "#A4A3A4",
+          foreground: "#A4A3A4",
         },
         accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
+          DEFAULT: "#EAE549",
+          foreground: "#211CC3",
+        },
+        lavender: {
+          DEFAULT: "#9290E2",
+          light: "#E7E6F8",
         },
         popover: {
           DEFAULT: "hsl(var(--popover))",
@@ -59,9 +76,9 @@ const config: Config = {
         },
       },
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        lg: "0.75rem",
+        md: "0.5rem",
+        sm: "0.375rem",
       },
       keyframes: {
         "accordion-down": {

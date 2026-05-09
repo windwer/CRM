@@ -1,5 +1,5 @@
 import { db } from "@/lib/db";
-import { Prisma, SeniorityLevel } from "@antigravity/database";
+import { Prisma, SeniorityLevel } from "@smartcrm/database";
 import { apiResponse, handleApiError } from "@/lib/errors";
 import { requireRole } from "@/lib/auth-helpers";
 import { PAGINATION_DEFAULTS, buildMeta } from "@/lib/pagination";

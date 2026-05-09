@@ -32,7 +32,7 @@ export const useFilterStore = create<FilterState>()(
       clearCandidateFilters: () => set({ candidateFilters: defaultFilters }),
     }),
     {
-      name: "antigravity-filters",
+      name: "smartcrm-filters",
     }
   )
 );

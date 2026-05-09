@@ -1,5 +1,5 @@
 import { db } from "@/lib/db";
-import { OfferStatus } from "@antigravity/database";
+import { OfferStatus } from "@smartcrm/database";
 import { apiResponse, handleApiError, ApiError } from "@/lib/errors";
 import { requireRole } from "@/lib/auth-helpers";
 import { parsePagination, buildMeta } from "@/lib/pagination";

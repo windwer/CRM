@@ -45,6 +45,12 @@ export function PipelineFunnel({ data }: PipelineFunnelProps) {
               data={pipeline}
               margin={{ top: 0, right: 24, left: 12, bottom: 0 }}
             >
+              <defs>
+                <linearGradient id="smartwayPipelineGradient" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stopColor="#211CC3" />
+                  <stop offset="100%" stopColor="#9290E2" />
+                </linearGradient>
+              </defs>
               <XAxis type="number" allowDecimals={false} />
               <YAxis
                 type="category"
@@ -77,7 +83,7 @@ export function PipelineFunnel({ data }: PipelineFunnelProps) {
                 {pipeline.map((entry) => (
                   <Cell
                     key={entry.slug}
-                    fill={entry.color || "#94a3b8"}
+                    fill="url(#smartwayPipelineGradient)"
                     className="cursor-pointer transition-opacity hover:opacity-80"
                   />
                 ))}

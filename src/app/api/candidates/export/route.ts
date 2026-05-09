@@ -2,7 +2,7 @@ import { db } from "@/lib/db";
 import { ApiError, handleApiError } from "@/lib/errors";
 import { requireRole } from "@/lib/auth-helpers";
 import { PAGINATION_DEFAULTS } from "@/lib/pagination";
-import { Prisma, SeniorityLevel } from "@antigravity/database";
+import { Prisma, SeniorityLevel } from "@smartcrm/database";
 import { NextRequest } from "next/server";
 import { z } from "zod";
 

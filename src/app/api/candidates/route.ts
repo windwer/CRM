@@ -5,7 +5,7 @@ import { parsePagination, buildMeta } from "@/lib/pagination";
 import { candidateSchema } from "@/lib/validations/candidate";
 import logger from "@/lib/logger";
 import { NextRequest } from "next/server";
-import { Prisma } from "@antigravity/database";
+import { Prisma } from "@smartcrm/database";
 
 function getDuplicateField(error: Prisma.PrismaClientKnownRequestError) {
   const target = error.meta?.target;

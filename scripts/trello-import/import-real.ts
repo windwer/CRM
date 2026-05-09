@@ -6,7 +6,7 @@ import {
   OfferStatus,
   StageCategory,
   prisma,
-} from "@antigravity/database";
+} from "@smartcrm/database";
 import { closeOffer } from "../../src/lib/offer-close";
 
 const envPath = resolve(process.cwd(), ".env.local");

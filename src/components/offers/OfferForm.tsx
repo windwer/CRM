@@ -122,7 +122,7 @@ export function OfferForm({ initialData, onSubmit, isLoading }: OfferFormProps) 
                     <FormItem>
                       <FormLabel>{offerT("company")}</FormLabel>
                       <FormControl>
-                        <Input placeholder="AntiGravity" maxLength={100} {...field} />
+                        <Input placeholder="SmartCRM" maxLength={100} {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>

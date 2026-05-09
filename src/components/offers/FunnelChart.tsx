@@ -31,12 +31,12 @@ interface FunnelChartProps {
 export function FunnelChart({ data }: FunnelChartProps) {
   const t = useTranslations();
   const chartData = [
-    { name: t("applications.status.prospect"), value: data.prospects, fill: "#64748b" },
-    { name: t("applications.status.applied"), value: data.applied, fill: "#3b82f6" },
-    { name: t("applications.status.interview_1"), value: data.interviewing, fill: "#8b5cf6" },
-    { name: t("applications.status.offer"), value: data.offers, fill: "#ec4899" },
+    { name: t("applications.status.prospect"), value: data.prospects, fill: "#E7E6F8" },
+    { name: t("applications.status.applied"), value: data.applied, fill: "#9290E2" },
+    { name: t("applications.status.interview_1"), value: data.interviewing, fill: "#211CC3" },
+    { name: t("applications.status.offer"), value: data.offers, fill: "#EAE549" },
     { name: t("applications.status.hired"), value: data.hired, fill: "#10b981" },
-    { name: "BB.DD. SmartWay", value: data.smartway ?? 0, fill: "#0ea5e9" },
+    { name: "BB.DD. SmartWay", value: data.smartway ?? 0, fill: "#9290E2" },
   ];
 
   return (

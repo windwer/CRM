@@ -1,8 +1,8 @@
-import { PrismaClient } from "@antigravity/database";
+import { PrismaClient } from "@smartcrm/database";
 
-if (!process.env.DATABASE_URL?.includes("antigravity_test")) {
+if (!process.env.DATABASE_URL?.includes("smartcrm_test")) {
   throw new Error(
-    "SAFETY GUARD: TEST DATABASE_URL must point to antigravity_test. " +
+    "SAFETY GUARD: TEST DATABASE_URL must point to smartcrm_test. " +
       "Refusing to run tests against a non-test DB."
   );
 }

@@ -1,4 +1,4 @@
-import { AIProcessingStatus, Prisma } from "@antigravity/database";
+import { AIProcessingStatus, Prisma } from "@smartcrm/database";
 import { db } from "@/lib/db";
 import { ApiError } from "@/lib/errors";
 import logger from "@/lib/logger";

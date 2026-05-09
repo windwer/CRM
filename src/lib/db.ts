@@ -1,1 +1,1 @@
-export { prisma as db } from "@antigravity/database";
+export { prisma as db } from "@smartcrm/database";

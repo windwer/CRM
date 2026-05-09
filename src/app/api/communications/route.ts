@@ -3,7 +3,7 @@ import { apiResponse, handleApiError, ApiError } from "@/lib/errors";
 import { requireRole } from "@/lib/auth-helpers";
 import { parsePagination, buildMeta } from "@/lib/pagination";
 import { NextRequest } from "next/server";
-import type { Prisma } from "@antigravity/database";
+import type { Prisma } from "@smartcrm/database";
 
 export async function GET(req: NextRequest) {
   try {

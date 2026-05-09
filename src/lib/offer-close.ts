@@ -1,4 +1,4 @@
-import type { Prisma } from "@antigravity/database";
+import type { Prisma } from "@smartcrm/database";
 
 type PrismaTransactionClient = Prisma.TransactionClient;
 

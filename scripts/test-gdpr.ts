@@ -1,4 +1,4 @@
-import { prisma } from "@antigravity/database";
+import { prisma } from "@smartcrm/database";
 import { getBlob, uploadBlob } from "../src/lib/azure/blobService";
 import { runGDPRCleanup } from "../src/lib/gdpr";
 
@@ -36,7 +36,7 @@ async function main() {
     const suffix = `${Date.now()}`;
     const blobId = hasAzureConfig
       ? await uploadBlob(
-          Buffer.from("%PDF-1.4\n% AntiGravity GDPR test PDF\n%%EOF"),
+          Buffer.from("%PDF-1.4\n% SmartCRM GDPR test PDF\n%%EOF"),
           `gdpr-test-${suffix}.pdf`
         )
       : `gdpr-test-${suffix}.pdf`;

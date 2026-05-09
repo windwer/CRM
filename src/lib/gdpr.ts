@@ -1,5 +1,5 @@
 import { db } from "./db";
-import { Prisma } from "@antigravity/database";
+import { Prisma } from "@smartcrm/database";
 import logger from "./logger";
 import { deleteBlob } from "@/lib/azure/blobService";
 import { MAX_GDPR_BATCH } from "@/lib/pagination";

@@ -1,7 +1,7 @@
 import { mockReset, DeepMockProxy } from "vitest-mock-extended";
 import { beforeEach } from "vitest";
 import { prismaMock as _prismaMock } from "./prisma-instance";
-import type { PrismaClient } from "@antigravity/database";
+import type { PrismaClient } from "@smartcrm/database";
 
 // Re-exportamos el singleton — todos los tests reciben la misma instancia
 // que @/lib/db devuelve (gracias al vi.mock en env.ts).

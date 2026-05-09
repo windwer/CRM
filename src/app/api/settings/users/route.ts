@@ -3,7 +3,7 @@ import { db } from "@/lib/db";
 import { apiResponse, handleApiError } from "@/lib/errors";
 import { requireRole } from "@/lib/auth-helpers";
 import { parsePagination, buildMeta } from "@/lib/pagination";
-import { UserRole } from "@antigravity/database";
+import { UserRole } from "@smartcrm/database";
 import { z } from "zod";
 
 const inviteUserSchema = z.object({

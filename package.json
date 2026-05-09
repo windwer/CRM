@@ -1,5 +1,5 @@
 {
-  "name": "web",
+  "name": "@smartcrm/web",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.91.1",
-    "@antigravity/database": "workspace:^",
+    "@smartcrm/database": "workspace:^",
     "@auth/prisma-adapter": "^2.11.2",
     "@azure/identity": "^4.13.1",
     "@azure/storage-blob": "^12.31.0",

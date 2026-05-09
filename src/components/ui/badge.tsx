@@ -15,6 +15,13 @@ const badgeVariants = cva(
         destructive:
           "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
         outline: "text-foreground",
+        applied: "border-transparent bg-lavender-light text-primary",
+        screening: "border-transparent bg-lavender-light text-primary",
+        interview: "border-transparent bg-primary text-white",
+        offer: "border-transparent bg-accent text-primary",
+        hired: "border-transparent bg-emerald-100 text-emerald-800",
+        rejected: "border-transparent bg-red-100 text-red-700",
+        archived: "border-transparent bg-muted/20 text-muted-foreground",
       },
     },
     defaultVariants: {

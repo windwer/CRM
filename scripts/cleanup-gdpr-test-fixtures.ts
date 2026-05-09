@@ -1,4 +1,4 @@
-import { prisma } from "@antigravity/database";
+import { prisma } from "@smartcrm/database";
 
 async function main() {
   console.log("Buscando fixtures residuales del test GDPR...");

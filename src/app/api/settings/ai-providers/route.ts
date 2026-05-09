@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { AIProvider as PrismaAIProvider } from "@antigravity/database";
+import { AIProvider as PrismaAIProvider } from "@smartcrm/database";
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { apiResponse, ApiError, handleApiError } from "@/lib/errors";
