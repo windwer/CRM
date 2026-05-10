@@ -24,6 +24,11 @@ interface CloseOfferModalProps {
   trigger?: React.ReactNode;
 }
 
+interface CandidateToMigrate {
+  candidate_name: string;
+  application_id: string;
+}
+
 export function CloseOfferModal({ offer, trigger }: CloseOfferModalProps) {
   const t = useTranslations("offers");
   const commonT = useTranslations("common");
@@ -32,21 +37,56 @@ export function CloseOfferModal({ offer, trigger }: CloseOfferModalProps) {
   const [mode, setMode] = useState<"closed_hired" | "closed_no_hire">("closed_no_hire");
   const [hiredApplicationId, setHiredApplicationId] = useState("");
   const [isClosing, setIsClosing] = useState(false);
+  const [confirmStep, setConfirmStep] = useState<CandidateToMigrate[] | null>(null);
 
   const applications = offer.applications || [];
+
+  const invalidateAll = async () => {
+    await queryClient.invalidateQueries({ queryKey: ["offer", offer.id] });
+    await queryClient.invalidateQueries({ queryKey: ["offers"] });
+    await queryClient.invalidateQueries({ queryKey: ["dashboard-stats"] });
+  };
 
   const handleCloseOffer = async () => {
     setIsClosing(true);
     try {
-      await axios.patch(`/api/offers/${offer.id}/status`, {
-        status: mode,
-        hiredApplicationId: mode === "closed_hired" ? hiredApplicationId : undefined,
+      if (mode === "closed_hired") {
+        await axios.patch(`/api/offers/${offer.id}/status`, {
+          status: "closed_hired",
+          hiredApplicationId,
+        });
+        await invalidateAll();
+        toast({ title: t("close.success") });
+        setOpen(false);
+      } else {
+        const { data } = await axios.post(`/api/offers/${offer.id}/close`);
+        if (data.data?.requires_confirmation) {
+          setConfirmStep(data.data.candidates_to_migrate ?? []);
+        } else {
+          await invalidateAll();
+          toast({ title: t("close.success") });
+          setOpen(false);
+        }
+      }
+    } catch (error: any) {
+      toast({
+        title: commonT("error"),
+        description: error.response?.data?.error?.message || "No se pudo cerrar la oferta",
+        variant: "destructive",
       });
-      await queryClient.invalidateQueries({ queryKey: ["offer", offer.id] });
-      await queryClient.invalidateQueries({ queryKey: ["offers"] });
-      await queryClient.invalidateQueries({ queryKey: ["dashboard-stats"] });
+    } finally {
+      setIsClosing(false);
+    }
+  };
+
+  const handleConfirm = async () => {
+    setIsClosing(true);
+    try {
+      await axios.post(`/api/offers/${offer.id}/close/confirm`, { confirmed: true });
+      await invalidateAll();
       toast({ title: t("close.success") });
       setOpen(false);
+      setConfirmStep(null);
     } catch (error: any) {
       toast({
         title: commonT("error"),
@@ -139,18 +179,38 @@ export function CloseOfferModal({ offer, trigger }: CloseOfferModalProps) {
           )}
         </div>
 
+        {confirmStep !== null && (
+          <div className="rounded-xl border border-amber-300 bg-amber-50 p-4 space-y-2">
+            <p className="font-bold text-amber-900 text-sm">
+              {confirmStep.length} candidato(s) serán marcados como «Posible fit futuro» en el Talent Pool:
+            </p>
+            <ul className="text-sm text-amber-800 space-y-1 list-disc pl-4">
+              {confirmStep.map((c) => (
+                <li key={c.application_id}>{c.candidate_name}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+
         <DialogFooter>
-          <Button variant="outline" onClick={() => setOpen(false)} disabled={isClosing}>
+          <Button variant="outline" onClick={() => { setOpen(false); setConfirmStep(null); }} disabled={isClosing}>
             {commonT("cancel")}
           </Button>
-          <Button
-            variant={mode === "closed_hired" ? "default" : "secondary"}
-            onClick={handleCloseOffer}
-            disabled={isClosing || (mode === "closed_hired" && !hiredApplicationId)}
-          >
-            {isClosing ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-            {isClosing ? t("close.closing") : t("close.confirm")}
-          </Button>
+          {confirmStep !== null ? (
+            <Button onClick={handleConfirm} disabled={isClosing}>
+              {isClosing ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+              Confirmar y cerrar
+            </Button>
+          ) : (
+            <Button
+              variant={mode === "closed_hired" ? "default" : "secondary"}
+              onClick={handleCloseOffer}
+              disabled={isClosing || (mode === "closed_hired" && !hiredApplicationId)}
+            >
+              {isClosing ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+              {isClosing ? t("close.closing") : t("close.confirm")}
+            </Button>
+          )}
         </DialogFooter>
       </DialogContent>
     </Dialog>

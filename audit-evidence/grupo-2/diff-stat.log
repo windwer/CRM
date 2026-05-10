@@ -1,0 +1,47 @@
+﻿git : warning: in the working copy of 'src/__tests__/api/offers.smoke.test.ts', LF will be replaced by CRLF the next 
+time Git touches it
+En línea: 1 Carácter: 35
++ cd c:\Proyectos\CRM\packages\web; git diff --stat HEAD 2>&1 | Out-Fil ...
++                                   ~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (warning: in the... Git touches it:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+warning: in the working copy of 'src/app/api/dashboard/stats/route.ts', LF will be replaced by CRLF the next time Git 
+touches it
+warning: in the working copy of 'src/app/api/offers/[id]/route.ts', LF will be replaced by CRLF the next time Git 
+touches it
+warning: in the working copy of 'src/app/dashboard/(dashboard)/offers/[id]/page.tsx', LF will be replaced by CRLF the 
+next time Git touches it
+warning: in the working copy of 'src/app/dashboard/(dashboard)/page.tsx', LF will be replaced by CRLF the next time 
+Git touches it
+warning: in the working copy of 'src/app/dashboard/(dashboard)/settings/components/SettingsClient.tsx', LF will be 
+replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/dashboard/KPICards.tsx', LF will be replaced by CRLF the next time Git 
+touches it
+warning: in the working copy of 'src/components/dashboard/RecentActivity.tsx', LF will be replaced by CRLF the next 
+time Git touches it
+warning: in the working copy of 'src/components/dashboard/TopOffers.tsx', LF will be replaced by CRLF the next time 
+Git touches it
+warning: in the working copy of 'src/components/offers/CloseOfferModal.tsx', LF will be replaced by CRLF the next time 
+Git touches it
+warning: in the working copy of 'src/components/offers/OfferForm.tsx', LF will be replaced by CRLF the next time Git 
+touches it
+warning: in the working copy of 'src/hooks/useDashboard.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/lib/validations/offer.ts', LF will be replaced by CRLF the next time Git touches 
+it
+warning: in the working copy of 'src/types/dashboard.ts', LF will be replaced by CRLF the next time Git touches it
+ src/__tests__/api/offers.smoke.test.ts             |   1 +
+ src/app/api/dashboard/stats/route.ts               | 172 +++++++++++++--------
+ src/app/api/offers/[id]/route.ts                   |  15 +-
+ src/app/dashboard/(dashboard)/offers/[id]/page.tsx |   4 +
+ src/app/dashboard/(dashboard)/page.tsx             |  49 +++++-
+ .../settings/components/SettingsClient.tsx         |  12 ++
+ src/components/dashboard/KPICards.tsx              |  34 ++--
+ src/components/dashboard/RecentActivity.tsx        |   3 +-
+ src/components/dashboard/TopOffers.tsx             |  26 ++--
+ src/components/offers/CloseOfferModal.tsx          |  90 +++++++++--
+ src/components/offers/OfferForm.tsx                |  47 ++++++
+ src/hooks/useDashboard.ts                          |  13 +-
+ src/lib/validations/offer.ts                       |   2 +-
+ src/types/dashboard.ts                             |  42 +++--
+ 14 files changed, 359 insertions(+), 151 deletions(-)

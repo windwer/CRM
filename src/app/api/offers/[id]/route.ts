@@ -114,12 +114,21 @@ export async function DELETE(
     const { session, errorResponse } = await requireRole("admin");
     if (errorResponse) return errorResponse;
 
-    const offer = await db.offer.update({
+    const offer = await db.offer.findUnique({
       where: { id: params.id },
-      data: { status: "closed_no_hire", closedAt: new Date(), closedById: session.user.id! },
+      select: { id: true, status: true },
+    });
+    if (!offer) throw new ApiError("NOT_FOUND", "Offer not found", 404);
+    if (offer.status !== "draft") {
+      throw new ApiError("FORBIDDEN", "Solo se pueden eliminar ofertas en borrador", 403);
+    }
+
+    await db.offer.update({
+      where: { id: params.id },
+      data: { archivedAt: new Date() },
     });
 
-    logger.info("Offer archived (soft delete)", { offerId: offer.id, userId: session.user.id });
+    logger.info("Offer soft-deleted (draft archived)", { offerId: params.id, userId: session.user.id });
 
     return apiResponse({ success: true });
   } catch (error) {

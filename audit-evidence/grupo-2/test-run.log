@@ -1,0 +1,106 @@
+﻿node.exe : vitest.config.ts (2:24) [33m[UNRESOLVED_IMPORT] Warning:[0m Could not resolve 'vite' in vitest.config.ts
+En línea: 1 Carácter: 1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (vitest.config.t...itest.config.ts:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m vitest.config.ts:2:25 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m 
+[38;5;249mi[0m[38;5;249mm[0m[38;5;249mp[0m[38;5;249mo[0m[38;5;249mr[0m[38;5;249mt[0m[38;5;249m 
+[0m[38;5;249m{[0m[38;5;249m [0m[38;5;249ml[0m[38;5;249mo[0m[38;5;249ma[0m[38;5;249md[0m[38;5;249mE[0m[3
+8;5;249mn[0m[38;5;249mv[0m[38;5;249m [0m[38;5;249m}[0m[38;5;249m 
+[0m[38;5;249mf[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mm[0m[38;5;249m [0m"vite"[38;5;249m;[0m
+ [38;5;240m  │[0m                         ───┬──  
+ [38;5;240m  │[0m                            ╰──── Module not found, treating it as an external dependency
+[38;5;246m───╯[0m
+
+
+ RUN  v4.1.5 C:/Proyectos/CRM/packages/web
+
+ ✓ src/__tests__/api/dashboard-stats.smoke.test.ts > Dashboard stats API — smoke tests > GET /api/dashboard/stats returns 200 with typed shape 789ms
+ ✓ src/__tests__/api/dashboard-stats.smoke.test.ts > Dashboard stats API — smoke tests > GET returns kpis with expected numeric fields 1ms
+ ✓ src/__tests__/api/dashboard-stats.smoke.test.ts > Dashboard stats API — smoke tests > GET with valid offer_id filter passes without error 1ms
+ ✓ src/__tests__/api/dashboard-stats.smoke.test.ts > Dashboard stats API — smoke tests > GET with invalid offer_id returns 400 1ms
+ ✓ src/__tests__/api/dashboard-stats.smoke.test.ts > Dashboard stats API — smoke tests > Cache-Control header is set 1ms
+ ✓ src/__tests__/integration/bulk-apply.integration.test.ts > bulkApply integration > crea N applications para una oferta 121ms
+ ✓ src/__tests__/integration/bulk-apply.integration.test.ts > bulkApply integration > omite candidatos ya vinculados sin error 52ms
+ ✓ src/__tests__/integration/bulk-apply.integration.test.ts > bulkApply integration > rechaza bulk apply en oferta closed_hired 25ms
+ ✓ src/__tests__/integration/bulk-apply.integration.test.ts > bulkApply integration > rechaza si candidateIds > 50 156ms
+ ✓ src/__tests__/integration/bulk-apply.integration.test.ts > bulkApply integration > respeta pipelineStageId si se pasa 33ms
+ ✓ src/__tests__/integration/bulk-apply.integration.test.ts > bulkApply integration > devuelve 404 si oferta no existe 12ms
+ ✓ src/__tests__/integration/bulk-apply.integration.test.ts > bulkApply integration > bulk apply concurrente sobre la misma oferta no genera duplicados 21ms
+ ✓ src/__tests__/integration/close-offer.integration.test.ts > closeOffer integration > cierra oferta como closed_hired con transaccion atomica 58ms
+ ✓ src/__tests__/integration/close-offer.integration.test.ts > closeOffer integration > cierra oferta sin contratacion (closed_no_hire) 28ms
+ ✓ src/__tests__/integration/close-offer.integration.test.ts > closeOffer integration > reabre oferta closed_no_hire correctamente 19ms
+ ✓ src/__tests__/integration/close-offer.integration.test.ts > closeOffer integration > falla si hiredApplicationId no pertenece a la oferta (rollback) 18ms
+ ✓ src/__tests__/integration/close-offer.integration.test.ts > closeOffer integration > rechaza reabrir una oferta closed_hired (permanente) 13ms
+ ✓ src/__tests__/integration/close-offer.integration.test.ts > closeOffer integration > dos cierres simultaneos en ofertas distintas no interfieren 49ms
+stdout | src/__tests__/scripts/backfill-offer-pipelines.smoke.test.ts
+
+[backfill-offer-pipelines] Active database: smartcrm_test
+
+stdout | src/__tests__/scripts/backfill-offer-pipelines.smoke.test.ts > backfillOfferPipelines smoke > clona 4 stages locked por oferta nueva
+  Offer "Test Offer d8bc9b86" → 4 stages clonados ✅
+
+stdout | src/__tests__/scripts/backfill-offer-pipelines.smoke.test.ts > backfillOfferPipelines smoke > clona 4 stages locked por oferta nueva
+  Offer "Test Offer b15c9b4b" → 4 stages clonados ✅
+
+stdout | src/__tests__/scripts/backfill-offer-pipelines.smoke.test.ts > backfillOfferPipelines smoke > clona 4 stages locked por oferta nueva
+
+[backfill-offer-pipelines] Done.
+  Cloned: 2 | Skipped: 0 | Errors: 0
+
+stdout | src/__tests__/scripts/backfill-offer-pipelines.smoke.test.ts > backfillOfferPipelines smoke > clona 4 stages locked por oferta nueva
+  Offer "Backfill Test Offer" → 4 stages clonados ✅
+
+stdout | src/__tests__/scripts/backfill-offer-pipelines.smoke.test.ts > backfillOfferPipelines smoke > es idempotente: segunda ejecución no duplica stages
+  Offer "Idempotency Test Offer" → 4 stages clonados ✅
+
+stdout | src/__tests__/scripts/backfill-offer-pipelines.smoke.test.ts > backfillOfferPipelines smoke > es idempotente: segunda ejecución no duplica stages
+  Offer "Idempotency Test Offer" → already has pipeline, skip
+
+ ✓ src/__tests__/scripts/backfill-offer-pipelines.smoke.test.ts > backfillOfferPipelines smoke > clona 4 stages locked por oferta nueva 36ms
+ ✓ src/__tests__/scripts/backfill-offer-pipelines.smoke.test.ts > backfillOfferPipelines smoke > es idempotente: segunda ejecución no duplica stages 10ms
+ ✓ src/__tests__/integration/change-application-stage.integration.test.ts > changeApplicationStage integration > cambia el stage y crea entrada en historial 62ms
+ ✓ src/__tests__/integration/change-application-stage.integration.test.ts > changeApplicationStage integration > no-op si la application ya esta en el stage destino 24ms
+ ✓ src/__tests__/integration/change-application-stage.integration.test.ts > changeApplicationStage integration > falla si applicationId no existe 14ms
+ ✓ src/__tests__/integration/change-application-stage.integration.test.ts > changeApplicationStage integration > falla si newStageId no existe o esta inactivo 16ms
+ ✓ src/__tests__/integration/change-application-stage.integration.test.ts > changeApplicationStage integration > crea N entradas coherentes en historial al hacer N cambios consecutivos 104ms
+ ✓ src/__tests__/integration/gdpr-cleanup.integration.test.ts > runGDPRCleanup integration > anonimiza candidatos vencidos en batch 40ms
+ ✓ src/__tests__/integration/gdpr-cleanup.integration.test.ts > runGDPRCleanup integration > es idempotente: re-ejecutar no anonimiza dos veces 11ms
+ ✓ src/__tests__/integration/gdpr-cleanup.integration.test.ts > runGDPRCleanup integration > nullifica subject y body de communications vinculadas al candidato 17ms
+ ✓ src/__tests__/integration/gdpr-cleanup.integration.test.ts > runGDPRCleanup integration > continua con resto del batch si un blob delete falla 15ms
+ ✓ src/__tests__/integration/gdpr-cleanup.integration.test.ts > runGDPRCleanup integration > procesa candidato sin cvBlobId sin llamar deleteBlob 7ms
+ ✓ src/__tests__/integration/gdpr-cleanup.integration.test.ts > runGDPRCleanup integration > NO procesa entradas con deletionDate en el futuro 6ms
+ ✓ src/__tests__/integration/gdpr-cleanup.integration.test.ts > runGDPRCleanup integration > anonymizeCandidate manual registra source=manual con userId correcto 8ms
+ ✓ src/__tests__/api/users.smoke.test.ts > Users API — smoke tests > GET /api/users returns 200 with user list 46ms
+ ✓ src/__tests__/api/users.smoke.test.ts > Users API — smoke tests > GET /api/users returns only id, name, email, role fields 1ms
+ ✓ src/__tests__/api/users.smoke.test.ts > Offer soft delete — smoke tests > DELETE /api/offers/[id] on draft offer returns 200 33ms
+ ✓ src/__tests__/api/users.smoke.test.ts > Offer soft delete — smoke tests > DELETE /api/offers/[id] on published offer returns 403 1ms
+ ✓ src/__tests__/api/users.smoke.test.ts > Offer soft delete — smoke tests > DELETE /api/offers/[id] on non-existent offer returns 404 1ms
+ ✓ src/__tests__/api/settings-pipelines.smoke.test.ts > Pipeline stages API — smoke tests > POST with valid name+position returns 200 62ms
+ ✓ src/__tests__/api/settings-pipelines.smoke.test.ts > Pipeline stages API — smoke tests > POST with position=1 (locked) returns 400 1ms
+ ✓ src/__tests__/api/settings-pipelines.smoke.test.ts > Pipeline stages API — smoke tests > POST when 6 intermediates already exist returns 400 1ms
+ ✓ src/__tests__/api/settings-pipelines.smoke.test.ts > Pipeline stages API — smoke tests > PATCH on locked stage returns 403 18ms
+ ✓ src/__tests__/api/settings-pipelines.smoke.test.ts > Pipeline stages API — smoke tests > DELETE on locked stage returns 403 1ms
+ ✓ src/__tests__/api/settings-pipelines.smoke.test.ts > Pipeline stages API — smoke tests > DELETE with candidates in stage returns 409 with candidate_count 1ms
+ ✓ src/__tests__/api/settings-pipelines.smoke.test.ts > Pipeline stages API — smoke tests > DELETE with no candidates returns 204 0ms
+ ✓ src/__tests__/api/offer-close-migration.smoke.test.ts > Offer close/confirm API — smoke tests > POST /close returns requires_confirmation when may_fit_future candidates exist 54ms
+ ✓ src/__tests__/api/offer-close-migration.smoke.test.ts > Offer close/confirm API — smoke tests > POST /close closes directly when no may_fit_future stage exists 1ms
+ ✓ src/__tests__/api/offer-close-migration.smoke.test.ts > Offer close/confirm API — smoke tests > POST /close/confirm migrates candidates and closes offer 13ms
+ ✓ src/__tests__/api/offer-close-migration.smoke.test.ts > Offer close/confirm API — smoke tests > POST /close/confirm requires confirmed=true 1ms
+ ✓ src/__tests__/api/offers.smoke.test.ts > Offers API Smoke Tests > GET /api/offers should return 200 and success format 6ms
+ ✓ src/__tests__/api/offers.smoke.test.ts > Offers API Smoke Tests > POST /api/offers should return 200 and success format when valid 2ms
+ ✓ src/__tests__/api/candidates.smoke.test.ts > Candidates API Smoke Tests > GET /api/candidates should return 200 and success format 5ms
+ ✓ src/__tests__/api/candidates.smoke.test.ts > Candidates API Smoke Tests > POST /api/candidates should return 200 and success format when valid 3ms
+ ✓ src/__tests__/api/gdpr.smoke.test.ts > GDPR API Smoke Tests > GET /api/gdpr should return 200 and success format 5ms
+ ✓ src/__tests__/api/applications.smoke.test.ts > Applications API Smoke Tests > GET /api/applications should return 200 and success format 5ms
+ ✓ src/__tests__/api/health.smoke.test.ts > Health API > GET /api/health returns 200 with status ok 3ms
+
+ Test Files  14 passed (14)
+      Tests  55 passed (55)
+   Start at  21:24:35
+   Duration  14.94s (transform 440ms, setup 193ms, import 1.01s, tests 2.33s, environment 9.29s)
+

@@ -27,7 +27,7 @@ const offerBaseSchema = z.object({
   isUrgent: z.boolean().default(false),
   customTags: z.array(z.string().max(30)).max(10).default([]),
   mustHaves: z.string().max(2000).optional(),
-  assignedToUserId: z.string().uuid().optional(),
+  assignedToUserId: z.string().uuid("Asignación obligatoria"),
 });
 
 export const offerSchema = offerBaseSchema;

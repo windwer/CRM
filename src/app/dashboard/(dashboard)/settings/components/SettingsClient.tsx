@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
@@ -8,6 +9,7 @@ import { formatDistanceToNow } from "date-fns";
 import { es } from "date-fns/locale";
 import {
   Cloud,
+  GitBranch,
   Mail,
   Plus,
   RefreshCw,
@@ -276,6 +278,16 @@ export function SettingsClient() {
         <p className="text-muted-foreground">
           {t("subtitle")}
         </p>
+      </div>
+
+      <div className="mb-4">
+        <Link
+          href="/dashboard/settings/flujos-de-oferta"
+          className="inline-flex items-center gap-2 rounded-lg border bg-card px-4 py-2.5 text-sm font-medium transition-colors hover:bg-muted/50"
+        >
+          <GitBranch className="h-4 w-4 text-muted-foreground" />
+          Flujos de oferta
+        </Link>
       </div>
 
       <Tabs defaultValue={defaultTab} className="space-y-4">

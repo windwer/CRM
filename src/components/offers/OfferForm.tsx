@@ -28,6 +28,9 @@ import { Loader2, Save } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import { X } from "lucide-react";
+import { useSession } from "next-auth/react";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 interface OfferFormProps {
   initialData?: any;
@@ -39,6 +42,16 @@ export function OfferForm({ initialData, onSubmit, isLoading }: OfferFormProps) 
   const t = useTranslations("offers.form");
   const offerT = useTranslations("offers");
   const commonT = useTranslations("common");
+  const { data: session } = useSession();
+
+  const { data: usersData } = useQuery<{ id: string; name: string; email: string }[]>({
+    queryKey: ["users"],
+    queryFn: async () => {
+      const { data } = await axios.get("/api/users");
+      return data.data;
+    },
+  });
+
   const form = useForm({
     resolver: zodResolver(offerSchema),
     defaultValues: initialData || {
@@ -53,8 +66,18 @@ export function OfferForm({ initialData, onSubmit, isLoading }: OfferFormProps) 
       isUrgent: false,
       customTags: [],
       mustHaves: "",
+      assignedToUserId: (session?.user as any)?.id ?? "",
     },
   });
+  React.useEffect(() => {
+    if (!initialData && (session?.user as any)?.id) {
+      const currentVal = form.getValues("assignedToUserId");
+      if (!currentVal) {
+        form.setValue("assignedToUserId", (session!.user as any).id, { shouldValidate: false });
+      }
+    }
+  }, [session, initialData, form]);
+
   const [tagInput, setTagInput] = React.useState("");
   const customTags = form.watch("customTags") || [];
   const addTag = () => {
@@ -88,6 +111,30 @@ export function OfferForm({ initialData, onSubmit, isLoading }: OfferFormProps) 
                     <FormControl>
                       <Input placeholder={t("placeholders.title")} {...field} />
                     </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="assignedToUserId"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Gestionada por</FormLabel>
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Seleccionar responsable" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {(usersData ?? []).map((u) => (
+                          <SelectItem key={u.id} value={u.id}>
+                            {u.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}

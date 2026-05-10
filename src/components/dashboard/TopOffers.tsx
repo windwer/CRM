@@ -11,31 +11,29 @@ import { Button } from "@/components/ui/button";
 import { ChevronRight, Users, MessageSquare, UserCheck } from "lucide-react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
-import { useTranslations } from "next-intl";
+import type { TopOfferItem } from "@/types/dashboard";
 
 interface TopOffersProps {
-  offers: any[];
+  offers: TopOfferItem[];
 }
 
 export function TopOffers({ offers }: TopOffersProps) {
-  const t = useTranslations("dashboard.topOffers");
-
   return (
     <div className="rounded-xl border border-muted/50 overflow-hidden">
       <Table>
         <TableHeader className="bg-muted/30">
           <TableRow className="hover:bg-transparent border-muted/50">
             <TableHead className="text-[10px] font-black uppercase tracking-widest py-4">
-              {t("columns.offer")}
+              Oferta
             </TableHead>
             <TableHead className="text-[10px] font-black uppercase tracking-widest text-center">
-              {t("columns.candidates")}
+              Candidatos
             </TableHead>
             <TableHead className="text-[10px] font-black uppercase tracking-widest text-center">
-              {t("columns.inInterview")}
+              En entrevista
             </TableHead>
             <TableHead className="text-[10px] font-black uppercase tracking-widest text-center">
-              {t("columns.hired")}
+              Contratados
             </TableHead>
             <TableHead className="text-right" />
           </TableRow>
@@ -55,10 +53,7 @@ export function TopOffers({ offers }: TopOffersProps) {
                 </p>
               </TableCell>
               <TableCell className="text-center">
-                <Badge
-                  variant="secondary"
-                  className="font-black bg-primary/5 text-primary"
-                >
+                <Badge variant="secondary" className="font-black bg-primary/5 text-primary">
                   <Users className="h-3 w-3 mr-1" />
                   {offer.total_candidates}
                 </Badge>
@@ -91,11 +86,8 @@ export function TopOffers({ offers }: TopOffersProps) {
           ))}
           {offers.length === 0 && (
             <TableRow>
-              <TableCell
-                colSpan={5}
-                className="text-center py-8 text-muted-foreground italic"
-              >
-                {t("empty")}
+              <TableCell colSpan={5} className="text-center py-8 text-muted-foreground italic">
+                No hay ofertas activas
               </TableCell>
             </TableRow>
           )}

@@ -18,18 +18,19 @@ const defaultDashboardStats: DashboardStats = {
   top_offers: [],
 };
 
-export function useDashboard() {
+export function useDashboard(offerId?: string) {
   const { status } = useSession();
   const isDev = process.env.NODE_ENV === "development";
   const { data, isLoading, error } = useQuery({
-    queryKey: ["dashboard-stats"],
+    queryKey: ["dashboard-stats", offerId ?? "all"],
     queryFn: async () => {
-      const { data } = await axios.get("/api/dashboard/stats");
-      return data.data;
+      const params = offerId ? { offer_id: offerId } : {};
+      const { data } = await axios.get("/api/dashboard/stats", { params });
+      return data.data as DashboardStats;
     },
     enabled: isDev || status === "authenticated",
-    refetchInterval: 60000, // Every 60 seconds
-    staleTime: 30000,      // 30 seconds
+    staleTime: 5 * 60 * 1000,
+    refetchInterval: 5 * 60 * 1000,
   });
 
   return {

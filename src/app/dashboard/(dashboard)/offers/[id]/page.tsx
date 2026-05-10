@@ -12,6 +12,7 @@ import { FunnelChart } from "@/components/offers/FunnelChart";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
 import { CloseOfferModal } from "@/components/offers/CloseOfferModal";
+import { DeleteDraftConfirmModal } from "@/components/offers/DeleteDraftConfirmModal";
 import { OfferDetailEditable } from "@/components/offers/OfferDetailEditable";
 
 export default function OfferDetailPage({ params }: { params: { id: string } }) {
@@ -81,6 +82,9 @@ export default function OfferDetailPage({ params }: { params: { id: string } }) 
         <div className="flex gap-3">
           {!isEditing && (
             <>
+              {offer.status === "draft" && (
+                <DeleteDraftConfirmModal offerId={params.id} offerTitle={offer.title} />
+              )}
               {offer.allowedTransitions?.includes("paused") && (
                 <Button variant="outline" size="sm" onClick={() => changeStatus("paused")}>
                   <Pause className="mr-2 h-4 w-4" />

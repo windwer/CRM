@@ -40,6 +40,7 @@ describe("Offers API Smoke Tests", () => {
       description: "A great job for a great engineer",
       location: "Remote",
       status: "published",
+      assignedToUserId: "a0000001-0000-4000-8000-000000000001",
     };
 
     const req = new NextRequest("http://localhost/api/offers", {

@@ -9,9 +9,10 @@ import {
   FileText 
 } from "lucide-react";
 import { useTranslations } from "next-intl";
+import type { RecentActivityItem } from "@/types/dashboard";
 
 interface RecentActivityProps {
-  activities: any[];
+  activities: RecentActivityItem[];
 }
 
 export function RecentActivity({ activities }: RecentActivityProps) {

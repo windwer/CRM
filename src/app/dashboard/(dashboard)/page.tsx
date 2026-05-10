@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useDashboard } from "@/hooks/useDashboard";
 import { KPICards } from "@/components/dashboard/KPICards";
 import { PipelineFunnel } from "@/components/dashboard/PipelineFunnel";
@@ -8,18 +8,30 @@ import { RecentActivity } from "@/components/dashboard/RecentActivity";
 import { TopOffers } from "@/components/dashboard/TopOffers";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { OutlookSyncButton } from "@/components/communications/OutlookSyncButton";
+import { useOffers } from "@/hooks/useOffers";
 import { useTranslations } from "next-intl";
 
 export default function DashboardPage() {
-  const { stats, isLoading } = useDashboard();
+  const [selectedOfferId, setSelectedOfferId] = useState<string | undefined>(undefined);
+  const { stats, isLoading } = useDashboard(selectedOfferId);
+  const { data: offersData } = useOffers("active");
   const t = useTranslations("dashboard");
+
+  const offers: Array<{ id: string; title: string }> = (offersData?.data ?? []).slice(0, 20);
 
   if (isLoading) {
     return (
       <div className="space-y-8 p-8">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {[1, 2, 3, 4, 5, 6].map((i) => (
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          {[1, 2, 3, 4, 5].map((i) => (
             <Skeleton key={i} className="h-24 w-full rounded-xl" />
           ))}
         </div>
@@ -49,8 +61,33 @@ export default function DashboardPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-8">
-          <PipelineFunnel data={stats.pipeline} />
-          
+          <Card className="border-none shadow-sm">
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-bold uppercase tracking-widest text-muted-foreground">
+                Funnel de candidatos
+              </CardTitle>
+              <Select
+                value={selectedOfferId ?? "__all__"}
+                onValueChange={(v) => setSelectedOfferId(v === "__all__" ? undefined : v)}
+              >
+                <SelectTrigger className="w-48 h-8 text-xs">
+                  <SelectValue placeholder="Todas las ofertas" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="__all__">Todas las ofertas</SelectItem>
+                  {offers.map((o) => (
+                    <SelectItem key={o.id} value={o.id}>
+                      {o.title}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </CardHeader>
+            <CardContent>
+              <PipelineFunnel data={stats.pipeline} />
+            </CardContent>
+          </Card>
+
           <Card className="border-none shadow-sm">
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle className="text-sm font-bold uppercase tracking-widest text-muted-foreground">
