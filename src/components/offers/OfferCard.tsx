@@ -2,10 +2,9 @@ import React from "react";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { 
-  MapPin, 
-  Building2, 
-  Users, 
+import {
+  MapPin,
+  Users,
   Clock, 
   MoreHorizontal,
   ChevronRight,
@@ -96,10 +95,6 @@ export function OfferCard({ offer }: OfferCardProps) {
           )}
           <div className="flex items-center gap-3 text-sm text-muted-foreground font-medium">
             <span className="flex items-center gap-1">
-              <Building2 size={14} className="text-primary/60" />
-              {offer.department}
-            </span>
-            <span className="flex items-center gap-1">
               <MapPin size={14} className="text-primary/60" />
               {offer.location}
             </span>
@@ -117,9 +112,9 @@ export function OfferCard({ offer }: OfferCardProps) {
               {t(`positionTypes.${offer.positionType}`)}
             </Badge>
           )}
-          {offer.salaryMin && (
+          {offer.salaryMax && (
             <Badge variant="outline" className="text-[10px] font-bold">
-              ${(offer.salaryMin / 1000).toFixed(0)}k - ${(offer.salaryMax / 1000).toFixed(0)}k
+              hasta ${(offer.salaryMax / 1000).toFixed(0)}k
             </Badge>
           )}
         </div>

@@ -14,6 +14,8 @@ export const candidateSchema = z.object({
   experienceYears: z.number().int().min(0).max(50).default(0),
   seniorityLevel: z.enum(["junior", "mid", "senior", "lead"]).default("mid"),
   skillsArray: z.array(z.string().max(50)).max(50).default([]),
+  salaryExpectationMax: z.number().int().min(0).default(0),
+  currency: z.string().max(10).default("EUR"),
   consentPersonalData: z.boolean().refine((val) => val === true, {
     message: "Candidate consent is required",
   }),

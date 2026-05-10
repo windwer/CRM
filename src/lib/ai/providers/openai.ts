@@ -98,8 +98,7 @@ async function getCandidateOffer(candidateId: string, offerId: string) {
       select: {
         title: true,
         description: true,
-        requirements: true,
-        department: true,
+        mustHaves: true,
         location: true,
         jobType: true,
       },

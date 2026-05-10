@@ -51,7 +51,7 @@ export function TopOffers({ offers }: TopOffersProps) {
                   {offer.title}
                 </p>
                 <p className="text-[10px] text-muted-foreground font-medium uppercase tracking-tighter">
-                  {offer.department || "Ingeniería"} - {offer.location || "Remoto"}
+                  {offer.location || "Remoto"}
                 </p>
               </TableCell>
               <TableCell className="text-center">

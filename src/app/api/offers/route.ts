@@ -60,11 +60,39 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const validatedData = offerSchema.parse(body);
 
-    const offer = await db.offer.create({
-      data: {
-        ...validatedData,
-        createdBy: session.user.id!,
-      },
+    const offer = await db.$transaction(async (tx) => {
+      const newOffer = await tx.offer.create({
+        data: {
+          ...validatedData,
+          createdBy: session.user.id!,
+          assignedToUserId: validatedData.assignedToUserId ?? session.user.id!,
+        },
+      });
+
+      // Clone the 4 locked template stages for this offer's pipeline
+      const lockedTemplates = await tx.pipelineStage.findMany({
+        where: { offerId: null, isLocked: true },
+        orderBy: { order: "asc" },
+      });
+
+      if (lockedTemplates.length > 0) {
+        await tx.pipelineStage.createMany({
+          data: lockedTemplates.map((s) => ({
+            name:       s.name,
+            slug:       s.slug,
+            category:   s.category,
+            order:      s.order,
+            color:      s.color,
+            isDefault:  false,
+            isEditable: false,
+            isActive:   true,
+            offerId:    newOffer.id,
+            isLocked:   true,
+          })),
+        });
+      }
+
+      return newOffer;
     });
 
     logger.info("Offer created", { offerId: offer.id, userId: session.user.id });

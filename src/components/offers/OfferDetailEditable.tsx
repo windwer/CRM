@@ -43,14 +43,11 @@ type EditableOffer = {
   id: string;
   title: string;
   description: string;
-  department: string;
   location: string;
   status: string;
   createdAt: string | Date;
   closedAt?: string | Date | null;
-  requirements?: string | null;
   jobType?: (typeof JOB_TYPES)[number] | null;
-  salaryMin?: number | string | null;
   salaryMax?: number | string | null;
   company?: string | null;
   positionType?: (typeof POSITION_TYPES)[number] | null;
@@ -80,12 +77,9 @@ function buildDefaultValues(offer: EditableOffer): OfferUpdateInput {
   return {
     title: offer.title,
     description: offer.description,
-    department: offer.department,
     location: offer.location,
     jobType: offer.jobType ?? undefined,
-    salaryMin: toOptionalNumber(offer.salaryMin),
     salaryMax: toOptionalNumber(offer.salaryMax),
-    requirements: offer.requirements ?? "",
     company: offer.company ?? "",
     positionType: offer.positionType ?? undefined,
     isUrgent: offer.isUrgent ?? false,
@@ -259,9 +253,9 @@ export function OfferDetailEditable({ offer, onEditingChange }: Props) {
               {t(`positionTypes.${offer.positionType}`)}
             </Badge>
           )}
-          {offer.salaryMin && (
+          {offer.salaryMax && (
             <Badge variant="outline" className="font-bold">
-              {formatSalary(offer.salaryMin)} / {formatSalary(offer.salaryMax)}
+              hasta {formatSalary(offer.salaryMax)}
             </Badge>
           )}
         </div>
@@ -314,10 +308,6 @@ export function OfferDetailEditable({ offer, onEditingChange }: Props) {
         </Field>
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          <Field label="Departamento" error={form.formState.errors.department?.message}>
-            {editing ? <Input {...form.register("department")} /> : <p className="text-sm">{offer.department}</p>}
-          </Field>
-
           <Field label="Ubicacion" error={form.formState.errors.location?.message}>
             {editing ? <Input {...form.register("location")} /> : <p className="text-sm">{offer.location}</p>}
           </Field>
@@ -347,41 +337,20 @@ export function OfferDetailEditable({ offer, onEditingChange }: Props) {
             )}
           </Field>
 
-          <Field label="Salario min / max" error={form.formState.errors.salaryMax?.message}>
+          <Field label="Salario maximo" error={form.formState.errors.salaryMax?.message}>
             {editing ? (
-              <div className="flex gap-2">
-                <Input
-                  type="number"
-                  placeholder="min"
-                  {...form.register("salaryMin", {
-                    setValueAs: (value) => (value === "" ? undefined : Number(value)),
-                  })}
-                />
-                <Input
-                  type="number"
-                  placeholder="max"
-                  {...form.register("salaryMax", {
-                    setValueAs: (value) => (value === "" ? undefined : Number(value)),
-                  })}
-                />
-              </div>
+              <Input
+                type="number"
+                placeholder="max"
+                {...form.register("salaryMax", {
+                  setValueAs: (value) => (value === "" ? undefined : Number(value)),
+                })}
+              />
             ) : (
-              <p className="text-sm">
-                {formatSalary(offer.salaryMin)} / {formatSalary(offer.salaryMax)}
-              </p>
+              <p className="text-sm">{formatSalary(offer.salaryMax)}</p>
             )}
           </Field>
         </div>
-
-        <Field label="Requisitos">
-          {editing ? (
-            <Textarea {...form.register("requirements")} rows={4} />
-          ) : (
-            <p className="whitespace-pre-line text-sm text-muted-foreground">
-              {offer.requirements || "-"}
-            </p>
-          )}
-        </Field>
       </section>
 
       <section className="space-y-3">

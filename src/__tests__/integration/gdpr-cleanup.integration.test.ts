@@ -110,14 +110,13 @@ describe("runGDPRCleanup integration", () => {
       data: {
         title: "Test GDPR Offer",
         description: "Test description min 10",
-        department: "Eng",
         location: "Remote",
         status: "published",
         createdBy: user.id,
       },
     });
-    const pendingStage = await testDb.pipelineStage.findUnique({
-      where: { slug: "pending" },
+    const pendingStage = await testDb.pipelineStage.findFirst({
+      where: { slug: "pending", offerId: null },
     });
     const app = await testDb.application.create({
       data: {

@@ -14,10 +14,10 @@ export async function closeOffer(params: {
   const now = new Date();
 
   const pendingStage = await tx.pipelineStage.findFirst({
-    where: { slug: "pending", isActive: true },
+    where: { slug: "pending", isActive: true, offerId: null },
   });
   const hiredStage = await tx.pipelineStage.findFirst({
-    where: { slug: "hired", isActive: true },
+    where: { slug: "hired", isActive: true, offerId: null },
   });
   const doneStages = await tx.pipelineStage.findMany({
     where: { category: "done", isActive: true },

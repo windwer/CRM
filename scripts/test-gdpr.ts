@@ -51,7 +51,6 @@ async function main() {
       data: {
         title: `GDPR Test Offer ${suffix}`,
         description: "Temporary offer for GDPR cleanup verification.",
-        department: "QA",
         location: "Remote",
         status: "published",
         createdBy: admin.id,

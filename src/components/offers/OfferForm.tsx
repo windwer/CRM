@@ -44,12 +44,9 @@ export function OfferForm({ initialData, onSubmit, isLoading }: OfferFormProps) 
     defaultValues: initialData || {
       title: "",
       description: "",
-      department: "",
       location: "",
-      salaryMin: 0,
       salaryMax: 0,
       status: "draft",
-      requirements: "",
       jobType: "full_time",
       company: "",
       positionType: "developer",
@@ -90,19 +87,6 @@ export function OfferForm({ initialData, onSubmit, isLoading }: OfferFormProps) 
                     <FormLabel>{t("title")}</FormLabel>
                     <FormControl>
                       <Input placeholder={t("placeholders.title")} {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="department"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t("department")}</FormLabel>
-                    <FormControl>
-                      <Input placeholder={t("placeholders.department")} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -285,58 +269,21 @@ export function OfferForm({ initialData, onSubmit, isLoading }: OfferFormProps) 
 
             <FormField
               control={form.control}
-              name="requirements"
+              name="salaryMax"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{t("requirements")}</FormLabel>
+                  <FormLabel>{t("salaryMax")}</FormLabel>
                   <FormControl>
-                    <Textarea 
-                      placeholder={t("placeholders.requirements")} 
-                      className="min-h-[100px] resize-none font-mono text-sm"
-                      {...field} 
+                    <Input
+                      type="number"
+                      {...field}
+                      onChange={(e) => field.onChange(e.target.value === "" ? undefined : parseInt(e.target.value))}
                     />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <FormField
-                control={form.control}
-                name="salaryMin"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t("salaryMin")}</FormLabel>
-                    <FormControl>
-                      <Input 
-                        type="number" 
-                        {...field} 
-                        onChange={(e) => field.onChange(e.target.value === "" ? undefined : parseInt(e.target.value))} 
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="salaryMax"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t("salaryMax")}</FormLabel>
-                    <FormControl>
-                      <Input 
-                        type="number" 
-                        {...field} 
-                        onChange={(e) => field.onChange(e.target.value === "" ? undefined : parseInt(e.target.value))} 
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
 
             <div className="flex justify-end pt-6 border-t">
               <Button 

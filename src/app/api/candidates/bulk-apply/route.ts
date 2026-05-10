@@ -40,14 +40,14 @@ export async function POST(req: NextRequest) {
           where: { id: body.pipelineStageId, isActive: true },
         })
       : await db.pipelineStage.findFirst({
-          where: { slug: "pending", isActive: true },
+          where: { slug: "pending", isActive: true, offerId: null },
           orderBy: { order: "asc" },
         });
 
     const fallbackStage =
       pipelineStage ??
       (await db.pipelineStage.findFirst({
-        where: { isActive: true },
+        where: { isActive: true, offerId: null },
         orderBy: { order: "asc" },
       }));
 

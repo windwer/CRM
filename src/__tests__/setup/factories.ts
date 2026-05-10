@@ -37,7 +37,6 @@ export async function createTestOffer(overrides: Record<string, unknown> = {}) {
     data: {
       title: `Test Offer ${randomUUID().slice(0, 8)}`,
       description: "Test description min 10 chars",
-      department: "Engineering",
       location: "Remote",
       status: "published",
       ...(overrides as any),
@@ -55,7 +54,7 @@ export async function createTestApplication(overrides: Record<string, unknown> =
   const offerId =
     (overrides.offerId as string | undefined) ?? (await createTestOffer()).id;
   const pendingStage = await testDb.pipelineStage.findFirst({
-    where: { slug: "pending" },
+    where: { slug: "pending", offerId: null },
   });
   if (!pendingStage)
     throw new Error("Stage 'pending' no existe en DB de test. Ejecuta: pnpm test:setup");
@@ -73,7 +72,7 @@ export async function createTestApplication(overrides: Record<string, unknown> =
 // === Helpers de stages ===
 
 export async function getStage(slug: string) {
-  const stage = await testDb.pipelineStage.findUnique({ where: { slug } });
+  const stage = await testDb.pipelineStage.findFirst({ where: { slug, offerId: null } });
   if (!stage)
     throw new Error(
       `Stage '${slug}' no encontrado en DB de test. Ejecuta: pnpm test:setup`

@@ -255,7 +255,7 @@ export async function POST(req: NextRequest) {
     }
 
     const pendingStage = await db.pipelineStage.findFirst({
-      where: { slug: "pending", isActive: true },
+      where: { slug: "pending", isActive: true, offerId: null },
       orderBy: { order: "asc" },
     });
 
@@ -309,7 +309,7 @@ export async function POST(req: NextRequest) {
 
         const stageSlug = row.pipelineStageSlug?.trim() || "pending";
         const stage = await db.pipelineStage.findFirst({
-          where: { slug: stageSlug, isActive: true },
+          where: { slug: stageSlug, isActive: true, offerId: null },
         });
         if (!stage) {
           throw new Error(`Etapa no encontrada o inactiva: ${stageSlug}.`);

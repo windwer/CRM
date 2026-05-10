@@ -15,13 +15,13 @@ describe("Offers API Smoke Tests", () => {
       id: "test-offer-id",
       title: "Software Engineer",
       description: "A great job for a great engineer",
-      department: "Engineering",
       location: "Remote",
       status: "published",
       createdBy: "test-admin-id",
       createdAt: new Date(),
       updatedAt: new Date(),
     } as any);
+    prismaMock.pipelineStage.findMany.mockResolvedValue([]);
   });
 
   it("GET /api/offers should return 200 and success format", async () => {
@@ -38,7 +38,6 @@ describe("Offers API Smoke Tests", () => {
     const offerData = {
       title: "Software Engineer",
       description: "A great job for a great engineer",
-      department: "Engineering",
       location: "Remote",
       status: "published",
     };
