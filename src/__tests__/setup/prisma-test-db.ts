@@ -15,7 +15,8 @@ export const testDb = new PrismaClient({
 
 /**
  * Limpia todas las tablas en orden FK-safe.
- * No toca User ni PipelineStage (son seed — se preservan entre tests).
+ * No toca User ni PipelineStage de template (offerId IS NULL — son seed).
+ * Sí elimina per-offer stages (offerId IS NOT NULL) creados durante tests.
  */
 export async function resetTestDb() {
   await testDb.$transaction([
@@ -23,6 +24,7 @@ export async function resetTestDb() {
     testDb.applicationStatusHistory.deleteMany(),
     testDb.application.deleteMany(),
     testDb.offerChange.deleteMany(),
+    testDb.pipelineStage.deleteMany({ where: { offerId: { not: null } } }),
     testDb.offer.deleteMany(),
     testDb.gDPRDeletionQueue.deleteMany(),
     testDb.aIProcessingLog.deleteMany(),
