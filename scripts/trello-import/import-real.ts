@@ -119,7 +119,7 @@ const REQUIRED_STAGES = [
   "interview_client",
   "hired",
   "rejected",
-  "bbdd_smartway",
+  "may_fit_future",
 ];
 
 async function clearRecruitingData() {
