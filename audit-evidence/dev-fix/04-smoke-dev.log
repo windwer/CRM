@@ -1,0 +1,14 @@
+
+> @smartcrm/web@0.1.0 dev C:\Proyectos\CRM\packages\web
+> next dev
+
+  ▲ Next.js 14.2.35
+  - Local:        http://localhost:3003
+  - Environments: .env.local
+  - Experiments (use with caution):
+    · instrumentationHook
+
+ ✓ Starting...
+ ○ Compiling /instrumentation ...
+ ✓ Compiled /instrumentation in 1134ms (47 modules)
+ ✓ Ready in 5.2s
