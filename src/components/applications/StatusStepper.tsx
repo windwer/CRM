@@ -23,16 +23,18 @@ const categoryLabels: Record<string, string> = {
 
 interface StatusStepperProps {
   currentPipelineStageId?: string | null;
+  offerId?: string | null;
   onStatusChange: (payload: { pipelineStageId: string }) => Promise<void>;
   isUpdating: boolean;
 }
 
 export function StatusStepper({
   currentPipelineStageId,
+  offerId,
   onStatusChange,
   isUpdating,
 }: StatusStepperProps) {
-  const { data: stages = [], isLoading } = usePipelineStages();
+  const { data: stages = [], isLoading } = usePipelineStages(offerId);
   const pipelineT = useTranslations("pipeline");
   const commonT = useTranslations("common");
 

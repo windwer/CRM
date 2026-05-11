@@ -21,6 +21,7 @@ export async function GET(
     const offer = await db.offer.findUnique({
       where: { id: params.id },
       include: {
+        assignedTo: { select: { id: true, name: true, email: true } },
         closedBy: { select: { name: true } },
         reopenedBy: { select: { name: true } },
         hiredApplication: {

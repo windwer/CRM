@@ -15,55 +15,52 @@ export async function GET(
     const { errorResponse } = await requireRole("viewer");
     if (errorResponse) return errorResponse;
 
-    const applications = await db.application.findMany({
-      where: { offerId: params.id },
+    // Get offer-specific stages ordered by position
+    let stages = await db.pipelineStage.findMany({
+      where: { offerId: params.id, isActive: true },
+      orderBy: { order: "asc" },
       include: {
-        pipelineStage: {
-          select: {
-            slug: true,
-          },
-        },
+        _count: { select: { applications: true } },
       },
     });
 
-    const funnel = applications.reduce(
-      (acc, application) => {
-        const slug = application.pipelineStage?.slug;
+    // Fall back to template stages if offer has no own stages
+    if (stages.length === 0) {
+      stages = await db.pipelineStage.findMany({
+        where: { offerId: null, isActive: true },
+        orderBy: { order: "asc" },
+        include: {
+          _count: { select: { applications: true } },
+        },
+      });
+    }
 
-        if (slug === "hired") {
-          acc.hired++;
-        } else if (slug === "bbdd_smartway") {
-          acc.smartway++;
-        } else if (slug === "rejected") {
-          acc.rejected++;
-        } else if (slug === "interview_internal" || slug === "interview_client") {
-          acc.interviewing++;
-        } else if (
-          slug === "sent_to_review" ||
-          slug === "sent_to_client" ||
-          slug === "sent_to_review_client"
-        ) {
-          acc.offers++;
-        } else if (slug === "awaiting_response") {
-          acc.applied++;
-        } else {
-          acc.prospects++;
-        }
+    const stageData = stages.map((s) => ({
+      id: s.id,
+      name: s.name,
+      slug: s.slug,
+      color: s.color ?? "#94A3B8",
+      position: s.order,
+      count: s._count.applications,
+    }));
 
-        return acc;
-      },
-      {
-        prospects: 0,
-        applied: 0,
-        interviewing: 0,
-        offers: 0,
-        hired: 0,
-        smartway: 0,
-        rejected: 0,
-      }
-    );
+    const totalApplicants = stageData.reduce((sum, s) => sum + s.count, 0);
+    const hired = stageData.find((s) => s.slug === "hired")?.count ?? 0;
+    const rejected = stageData.find((s) => s.slug === "rejected")?.count ?? 0;
 
-    return apiResponse(funnel);
+    // Legacy fields kept for backwards compatibility with existing consumers
+    return apiResponse({
+      stages: stageData,
+      totalApplicants,
+      hired,
+      rejected,
+      // Legacy shape (used by old FunnelChart)
+      applied: totalApplicants,
+      prospects: 0,
+      interviewing: 0,
+      offers: 0,
+      smartway: 0,
+    });
   } catch (error) {
     return handleApiError(error);
   }

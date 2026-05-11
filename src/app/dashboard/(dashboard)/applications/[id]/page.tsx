@@ -125,6 +125,7 @@ export default function ApplicationDetailPage({ params }: { params: { id: string
       <div className="bg-background border border-muted/50 rounded-3xl p-8 shadow-sm">
         <StatusStepper
           currentPipelineStageId={application.pipelineStageId}
+          offerId={application.offerId}
           onStatusChange={handleStatusChange}
           isUpdating={isUpdatingStage}
         />

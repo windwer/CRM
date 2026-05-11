@@ -22,6 +22,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "@/hooks/use-toast";
+import { InitialsAvatar } from "@/components/ui/InitialsAvatar";
 
 const JOB_TYPES = ["full_time", "part_time", "contract", "internship"] as const;
 const POSITION_TYPES = [
@@ -60,6 +61,7 @@ type EditableOffer = {
       email: string;
     };
   } | null;
+  assignedTo?: { id: string; name: string; email: string } | null;
 };
 
 type Props = {
@@ -197,6 +199,9 @@ export function OfferDetailEditable({ offer, onEditingChange }: Props) {
           )}
           {form.formState.errors.title && (
             <p className="text-sm text-destructive">{form.formState.errors.title.message}</p>
+          )}
+          {!editing && offer.company && (
+            <p className="text-sm font-bold text-primary">@ {offer.company}</p>
           )}
         </div>
 
@@ -348,6 +353,17 @@ export function OfferDetailEditable({ offer, onEditingChange }: Props) {
               />
             ) : (
               <p className="text-sm">{formatSalary(offer.salaryMax)}</p>
+            )}
+          </Field>
+
+          <Field label="Gestionada por">
+            {offer.assignedTo ? (
+              <div className="flex items-center gap-2">
+                <InitialsAvatar name={offer.assignedTo.name} size="sm" />
+                <span className="text-sm">{offer.assignedTo.name}</span>
+              </div>
+            ) : (
+              <p className="text-sm text-muted-foreground">Sin asignar</p>
             )}
           </Field>
         </div>
