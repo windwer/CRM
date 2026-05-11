@@ -3,6 +3,7 @@ import { Prisma } from "@smartcrm/database";
 import { db } from "@/lib/db";
 import { apiResponse, handleApiError, ApiError } from "@/lib/errors";
 import { requireRole } from "@/lib/auth-helpers";
+import { z } from "zod";
 
 const TEMPLATE_HEADERS = [
   "fullName",
@@ -19,6 +20,7 @@ const TEMPLATE_HEADERS = [
   "pipelineStageSlug",
   "candidateNotes",
   "consentPersonalData",
+  "salaryExpectationMax",
 ];
 
 const TEMPLATE_ROWS = [
@@ -37,6 +39,7 @@ const TEMPLATE_ROWS = [
     "pending",
     "Importado desde CSV",
     "true",
+    "60000",
   ],
   [
     "Luis Ejemplo",
@@ -53,6 +56,7 @@ const TEMPLATE_ROWS = [
     "awaiting_response",
     "",
     "true",
+    "35000",
   ],
 ];
 
@@ -90,12 +94,24 @@ const HEADER_ALIASES: Record<string, string> = {
   consentimiento: "consentPersonalData",
   consentpersonadata: "consentPersonalData",
   consentpersonaldata: "consentPersonalData",
+  salario: "salaryExpectationMax",
+  salary: "salaryExpectationMax",
+  salaryexpectationmax: "salaryExpectationMax",
+  pretensionsalarial: "salaryExpectationMax",
 };
 
 const VALID_SENIORITIES = new Set(["junior", "mid", "senior", "lead"]);
 const VALID_SOURCES = new Set(["manual", "linkedin", "email", "referral"]);
 
 type CsvRow = Record<string, string>;
+
+// Confirmation decision per-row
+const confirmationRowSchema = z.object({
+  email: z.string().email(),
+  action: z.enum(["import_anyway", "skip", "reactivate_and_import"]),
+});
+
+const confirmationSchema = z.array(confirmationRowSchema);
 
 function csvEscape(value: string) {
   return /[",\n\r]/.test(value) ? `"${value.replace(/"/g, '""')}"` : value;
@@ -109,10 +125,10 @@ function buildTemplateCsv() {
 function normalizeHeader(value: string) {
   const cleaned = value
     .trim()
-    .replace(/^\uFEFF/, "")
+    .replace(/^﻿/, "")
     .toLowerCase()
     .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[̀-ͯ]/g, "")
     .replace(/[\s_-]+/g, "");
 
   return HEADER_ALIASES[cleaned] ?? value.trim();
@@ -220,6 +236,29 @@ async function resolveOffer(row: CsvRow) {
   });
 }
 
+/** Validate a row and return basic parsed data or throw */
+function validateRow(row: CsvRow) {
+  const email = row.email?.trim().toLowerCase();
+  const fullName = row.fullName?.trim();
+
+  if (!fullName || fullName.length < 2)
+    throw new Error("Nombre obligatorio, minimo 2 caracteres.");
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
+    throw new Error("Email obligatorio o invalido.");
+  if (!parseBoolean(row.consentPersonalData ?? ""))
+    throw new Error("Consentimiento GDPR requerido.");
+
+  const seniorityLevel = (row.seniorityLevel || "mid").trim().toLowerCase();
+  if (!VALID_SENIORITIES.has(seniorityLevel))
+    throw new Error("seniorityLevel debe ser junior, mid, senior o lead.");
+
+  const source = (row.source || "manual").trim().toLowerCase();
+  if (!VALID_SOURCES.has(source))
+    throw new Error("source debe ser manual, linkedin, email o referral.");
+
+  return { email, fullName, seniorityLevel, source };
+}
+
 export async function GET() {
   const csv = buildTemplateCsv();
   return new Response(csv, {
@@ -232,11 +271,13 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   try {
-    const { session, errorResponse } = await requireRole("recruiter");
+    const { errorResponse } = await requireRole("recruiter");
     if (errorResponse) return errorResponse;
 
     const formData = await req.formData();
     const file = formData.get("file");
+    const confirmationRaw = formData.get("confirmation");
+
     if (!(file instanceof File)) {
       throw new ApiError("VALIDATION_ERROR", "Sube un archivo CSV.", 400);
     }
@@ -249,9 +290,18 @@ export async function POST(req: NextRequest) {
     if (rows.length === 0) {
       throw new ApiError("VALIDATION_ERROR", "El CSV no contiene candidatos.", 400);
     }
-
     if (rows.length > 500) {
       throw new ApiError("VALIDATION_ERROR", "Maximo 500 candidatos por importacion.", 400);
+    }
+
+    // Parse confirmation decisions if provided
+    let confirmationMap: Map<string, "import_anyway" | "skip" | "reactivate_and_import"> | null = null;
+    if (confirmationRaw) {
+      const parsed = confirmationSchema.safeParse(JSON.parse(String(confirmationRaw)));
+      if (!parsed.success) {
+        throw new ApiError("VALIDATION_ERROR", "Formato de confirmacion invalido.", 400);
+      }
+      confirmationMap = new Map(parsed.data.map((d) => [d.email, d.action]));
     }
 
     const pendingStage = await db.pipelineStage.findFirst({
@@ -263,141 +313,230 @@ export async function POST(req: NextRequest) {
       throw new ApiError("VALIDATION_ERROR", "No existe la etapa pending.", 400);
     }
 
-    const result = {
-      totalRows: rows.length,
-      createdCandidates: 0,
-      existingCandidates: 0,
-      applicationsCreated: 0,
-      applicationsSkipped: 0,
-      errors: [] as Array<{ row: number; email?: string; message: string }>,
-    };
+    // --- CATEGORIZE ROWS ---
+    type CategoryA = { type: "new"; row: CsvRow; email: string; fullName: string; seniorityLevel: string; source: string };
+    type CategoryB = { type: "in_active_offer"; row: CsvRow; email: string; candidateId: string; offerTitle: string };
+    type CategoryC = { type: "discarded"; row: CsvRow; email: string; candidateId: string };
+    type CategoryD = { row: number; email?: string; message: string };
+
+    const categoryA: CategoryA[] = [];
+    const categoryB: CategoryB[] = [];
+    const categoryC: CategoryC[] = [];
+    const categoryD: CategoryD[] = [];
 
     for (let index = 0; index < rows.length; index++) {
       const row = rows[index];
       const rowNumber = index + 2;
-      const email = row.email?.trim().toLowerCase();
-      const fullName = row.fullName?.trim();
 
       try {
-        if (!fullName || fullName.length < 2) {
-          throw new Error("Nombre obligatorio, minimo 2 caracteres.");
-        }
-        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-          throw new Error("Email obligatorio o invalido.");
-        }
-        if (!parseBoolean(row.consentPersonalData ?? "")) {
-          throw new Error("Consentimiento GDPR requerido.");
-        }
+        const { email, fullName, seniorityLevel, source } = validateRow(row);
 
-        const seniorityLevel = (row.seniorityLevel || "mid").trim().toLowerCase();
-        if (!VALID_SENIORITIES.has(seniorityLevel)) {
-          throw new Error("seniorityLevel debe ser junior, mid, senior o lead.");
-        }
+        const existing = await db.candidate.findUnique({
+          where: { email },
+          select: {
+            id: true,
+            talentPoolStatus: true,
+            applications: {
+              where: { offer: { status: "published" } },
+              select: { offer: { select: { title: true } } },
+              take: 1,
+            },
+          },
+        });
 
-        const source = (row.source || "manual").trim().toLowerCase();
-        if (!VALID_SOURCES.has(source)) {
-          throw new Error("source debe ser manual, linkedin, email o referral.");
+        if (!existing) {
+          categoryA.push({ type: "new", row, email, fullName, seniorityLevel, source });
+        } else if (existing.talentPoolStatus === "discarded") {
+          categoryC.push({ type: "discarded", row, email, candidateId: existing.id });
+        } else if (existing.applications.length > 0) {
+          categoryB.push({
+            type: "in_active_offer",
+            row,
+            email,
+            candidateId: existing.id,
+            offerTitle: existing.applications[0]?.offer?.title ?? "Oferta activa",
+          });
         }
+        // else: existing candidate not discarded, not in active offer → already processed, skip quietly
+      } catch (error: any) {
+        categoryD.push({
+          row: rowNumber,
+          email: row.email?.trim().toLowerCase(),
+          message: error?.message ?? "Error desconocido.",
+        });
+      }
+    }
 
-        const offer = await resolveOffer(row);
-        if ((row.offerId || row.offerTitle) && !offer) {
-          throw new Error("Oferta no encontrada para esta fila.");
-        }
-        if (offer?.status === "closed_hired") {
-          throw new Error("No se pueden anadir candidatos a una oferta cerrada con contratacion.");
-        }
+    // --- PROCESS CATEGORY A (always import new candidates) ---
+    let createdCandidates = 0;
+    let applicationsCreated = 0;
 
-        const stageSlug = row.pipelineStageSlug?.trim() || "pending";
+    for (const item of categoryA) {
+      try {
+        const offer = await resolveOffer(item.row);
+        const stageSlug = item.row.pipelineStageSlug?.trim() || "pending";
         const stage = await db.pipelineStage.findFirst({
           where: { slug: stageSlug, isActive: true, offerId: null },
         });
-        if (!stage) {
-          throw new Error(`Etapa no encontrada o inactiva: ${stageSlug}.`);
-        }
+        const effectiveStage = stage ?? pendingStage;
 
-        const candidate = await db.$transaction(async (tx) => {
-          const existing = await tx.candidate.findUnique({ where: { email } });
-          if (existing) {
-            result.existingCandidates++;
-            return existing;
-          }
-
+        await db.$transaction(async (tx) => {
           const created = await tx.candidate.create({
             data: {
-              fullName,
-              email,
-              phone: row.phone?.trim() || null,
-              linkedinUrl: row.linkedinUrl?.trim() || null,
-              experienceYears: Math.min(Math.max(parseInteger(row.experienceYears ?? "0"), 0), 50),
-              seniorityLevel: seniorityLevel as any,
-              skillsArray: parseSkills(row.skills ?? ""),
-              source: source as any,
+              fullName: item.fullName,
+              email: item.email,
+              phone: item.row.phone?.trim() || null,
+              linkedinUrl: item.row.linkedinUrl?.trim() || null,
+              experienceYears: Math.min(Math.max(parseInteger(item.row.experienceYears ?? "0"), 0), 50),
+              seniorityLevel: item.seniorityLevel as any,
+              skillsArray: parseSkills(item.row.skills ?? ""),
+              source: item.source as any,
+              salaryExpectationMax: parseInteger(item.row.salaryExpectationMax ?? "0", 0),
               consentPersonalData: true,
               consentDate: new Date(),
               consentSource: "Importacion CSV",
               importedAt: new Date(),
+              talentPoolStatus: "active" as any,
             },
           });
 
           const deletionDate = new Date();
           deletionDate.setFullYear(deletionDate.getFullYear() + 2);
-
           await tx.gDPRDeletionQueue.create({
-            data: {
-              candidateId: created.id,
-              deletionDate,
-              status: "pending",
-              reason: "Importacion CSV",
-            },
+            data: { candidateId: created.id, deletionDate, status: "pending", reason: "Importacion CSV" },
           });
 
-          result.createdCandidates++;
-          return created;
-        });
+          createdCandidates++;
 
-        if (offer) {
-          const existingApplication = await db.application.findUnique({
-            where: {
-              candidateId_offerId: {
-                candidateId: candidate.id,
-                offerId: offer.id,
-              },
-            },
-          });
-
-          if (existingApplication) {
-            result.applicationsSkipped++;
-          } else {
-            await db.application.create({
-              data: {
-                candidateId: candidate.id,
-                offerId: offer.id,
-                pipelineStageId: stage.id,
-                candidateNotes: row.candidateNotes?.trim() || null,
-                appliedAt: new Date(),
-              },
+          if (offer && offer.status !== "closed_hired") {
+            const exists = await tx.application.findUnique({
+              where: { candidateId_offerId: { candidateId: created.id, offerId: offer.id } },
             });
-            result.applicationsCreated++;
+            if (!exists) {
+              await tx.application.create({
+                data: {
+                  candidateId: created.id,
+                  offerId: offer.id,
+                  pipelineStageId: effectiveStage.id,
+                  candidateNotes: item.row.candidateNotes?.trim() || null,
+                  appliedAt: new Date(),
+                },
+              });
+              applicationsCreated++;
+            }
           }
-        }
+        });
       } catch (error: any) {
         if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2002") {
-          result.errors.push({
-            row: rowNumber,
-            email,
-            message: "Email ya existe en el sistema.",
-          });
-        } else {
-          result.errors.push({
-            row: rowNumber,
-            email,
-            message: error?.message ?? "Error desconocido.",
-          });
+          // duplicate email race — skip
         }
       }
     }
 
-    return apiResponse(result);
+    // --- NO CONFIRMATION: return warnings and require confirmation ---
+    if (!confirmationMap && (categoryB.length > 0 || categoryC.length > 0)) {
+      return apiResponse({
+        imported: createdCandidates,
+        applicationsCreated,
+        warnings: {
+          in_active_offer: categoryB.map((b) => ({
+            email: b.email,
+            offerTitle: b.offerTitle,
+          })),
+          discarded: categoryC.map((c) => ({ email: c.email })),
+        },
+        invalid: categoryD,
+        requires_confirmation: true,
+      });
+    }
+
+    // --- WITH CONFIRMATION: process B and C decisions ---
+    let skipped = 0;
+    let reactivated = 0;
+    let extraApplications = 0;
+
+    if (confirmationMap) {
+      // Process category B (in active offer)
+      for (const item of categoryB) {
+        const action = confirmationMap.get(item.email) ?? "skip";
+        if (action === "skip") {
+          skipped++;
+          continue;
+        }
+        if (action === "import_anyway") {
+          const offer = await resolveOffer(item.row);
+          if (offer && offer.status !== "closed_hired") {
+            const stageSlug = item.row.pipelineStageSlug?.trim() || "pending";
+            const stage = (await db.pipelineStage.findFirst({
+              where: { slug: stageSlug, isActive: true, offerId: null },
+            })) ?? pendingStage;
+            const exists = await db.application.findUnique({
+              where: { candidateId_offerId: { candidateId: item.candidateId, offerId: offer.id } },
+            });
+            if (!exists) {
+              await db.application.create({
+                data: {
+                  candidateId: item.candidateId,
+                  offerId: offer.id,
+                  pipelineStageId: stage.id,
+                  candidateNotes: item.row.candidateNotes?.trim() || null,
+                  appliedAt: new Date(),
+                },
+              });
+              extraApplications++;
+            }
+          }
+        }
+      }
+
+      // Process category C (discarded)
+      for (const item of categoryC) {
+        const action = confirmationMap.get(item.email) ?? "skip";
+        if (action === "skip") {
+          skipped++;
+          continue;
+        }
+        if (action === "reactivate_and_import") {
+          await db.candidate.update({
+            where: { id: item.candidateId },
+            data: { talentPoolStatus: "active" as any },
+          });
+          reactivated++;
+
+          const offer = await resolveOffer(item.row);
+          if (offer && offer.status !== "closed_hired") {
+            const stageSlug = item.row.pipelineStageSlug?.trim() || "pending";
+            const stage = (await db.pipelineStage.findFirst({
+              where: { slug: stageSlug, isActive: true, offerId: null },
+            })) ?? pendingStage;
+            const exists = await db.application.findUnique({
+              where: { candidateId_offerId: { candidateId: item.candidateId, offerId: offer.id } },
+            });
+            if (!exists) {
+              await db.application.create({
+                data: {
+                  candidateId: item.candidateId,
+                  offerId: offer.id,
+                  pipelineStageId: stage.id,
+                  candidateNotes: item.row.candidateNotes?.trim() || null,
+                  appliedAt: new Date(),
+                },
+              });
+              extraApplications++;
+            }
+          }
+        }
+      }
+    }
+
+    return apiResponse({
+      imported: createdCandidates,
+      applicationsCreated: applicationsCreated + extraApplications,
+      skipped,
+      reactivated,
+      invalid: categoryD,
+      requires_confirmation: false,
+    });
   } catch (error) {
     return handleApiError(error);
   }
