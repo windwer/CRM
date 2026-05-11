@@ -1,0 +1,28 @@
+# Schema grep — ApplicationStatus audit
+# Date: 2026-05-11
+
+## grep -n "ApplicationStatus" prisma/schema.prisma
+157:  statusChanges          ApplicationStatusHistory[] @relation("StatusChanger")
+368:  statusHistory   ApplicationStatusHistory[]
+402:  previousInHistory   ApplicationStatusHistory[] @relation("PreviousStage")
+403:  newInHistory        ApplicationStatusHistory[] @relation("NewStage")
+413:model ApplicationStatusHistory {
+429:  @@map("application_status_history")
+
+NOTE: "ApplicationStatusHistory" is the history MODEL (tracks stage changes),
+NOT the legacy "ApplicationStatus" ENUM. These are distinct concepts.
+
+## grep -n "status" prisma/schema.prisma | grep -i "application"
+157:  statusChanges          ApplicationStatusHistory[] @relation("StatusChanger")
+368:  statusHistory   ApplicationStatusHistory[]
+429:  @@map("application_status_history")
+
+## Application model fields (no "status" column):
+id, candidateId, offerId, pipelineStageId, assignedToId, candidateNotes,
+appliedAt, lastContactAt, lastContactedBy, aiScore, aiExplanation,
+aiScoreDetails, aiScoringAt, internalNotes, createdAt, updatedAt
+
+## Enums in schema.prisma (no ApplicationStatus):
+UserRole, OfferStatus, JobType, SeniorityLevel, CommunicationType,
+AIProcessingType, AIProcessingStatus, GDPRDeletionStatus, CandidateSource,
+OutlookSyncStatus, AIProvider, StageCategory, TalentPoolStatus

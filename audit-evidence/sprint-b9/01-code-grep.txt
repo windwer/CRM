@@ -1,0 +1,17 @@
+# Code grep — ApplicationStatus audit
+# Date: 2026-05-11
+
+## grep -rn "ApplicationStatus" src/ --include="*.ts" --include="*.tsx"
+(no output — zero references found)
+
+## grep -rn "application\.status" src/ --include="*.ts" --include="*.tsx"
+src/app/dashboard/(dashboard)/applications/[id]/page.tsx:167:
+  statusHistory={application.statusHistory}
+NOTE: This is "statusHistory" (relation), NOT "status" field. Not a false positive.
+
+## grep -rn "applications\.status" src/ --include="*.ts" --include="*.tsx"
+(no output — zero references found)
+
+## Conclusion:
+Zero references to ApplicationStatus enum in any source file.
+The only "status" reference is statusHistory which is the correct relation name.

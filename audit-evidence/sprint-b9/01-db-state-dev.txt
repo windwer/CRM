@@ -1,0 +1,21 @@
+# DB state audit — smartcrm (dev)
+# Date: 2026-05-11
+# Query: information_schema.columns WHERE table_name='applications' AND column_name='status'
+
+STATUS_COLUMN: [] (empty — column does not exist)
+
+# Query: pg_enum JOIN pg_type WHERE typname ILIKE '%application%'
+
+ENUMS: [] (empty — ApplicationStatus enum does not exist in PostgreSQL)
+
+# Recent migrations (_prisma_migrations ORDER BY finished_at DESC):
+20260509091000_mark_locked_template_stages
+20260509090000_sprint_b1_schema_migration
+20260508120000_add_source_to_audit_logs
+20260508110000_remove_bbdd_smartway_stage
+20260508100000_add_bbdd_smartway_stage
+20260506080000_require_pipeline_stage_id
+20260505200000_rename_offer_hired_candidate_to_application
+20260505190158_remove_application_status_legacy  ← confirms enum was removed in Sprint A1
+20260504130000_update_offer_status_flow
+20260504123000_add_missing_ai_score_details
