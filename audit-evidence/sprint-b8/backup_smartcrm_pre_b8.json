@@ -1,0 +1,4936 @@
+{
+  "timestamp": "2026-05-11T07:42:44.195Z",
+  "database": "smartcrm",
+  "counts": {
+    "candidates": 35,
+    "offers": 7,
+    "applications": 40,
+    "pipelineStages": 38,
+    "history": 80
+  },
+  "data": {
+    "candidates": [
+      {
+        "id": "3ef772b9-36f8-4213-8c9e-4f8df0314b53",
+        "email": "pablo.sanchez@example.com",
+        "fullName": "Pablo Sanchez",
+        "phone": "+34 600 111 008",
+        "linkedinUrl": null,
+        "cvRawText": "Pablo Sanchez - Node.js, Prisma, AWS, Queues, Observability - 9 years experience.",
+        "cvBlobId": "demo/cv/pablo.sanchez@example.com.pdf",
+        "cvParsedAt": "2026-04-28T11:01:01.333Z",
+        "parsedData": {
+          "name": "Pablo Sanchez",
+          "email": "pablo.sanchez@example.com",
+          "skills": [
+            "Node.js",
+            "Prisma",
+            "AWS",
+            "Queues",
+            "Observability"
+          ],
+          "languages": [
+            "Español",
+            "Inglés"
+          ],
+          "seniority": "lead",
+          "experience_years": 9
+        },
+        "skillsArray": [
+          "Node.js",
+          "Prisma",
+          "AWS",
+          "Queues",
+          "Observability"
+        ],
+        "experienceYears": 9,
+        "seniorityLevel": "lead",
+        "consentPersonalData": true,
+        "consentDate": "2026-05-03T11:01:01.333Z",
+        "consentSource": "Formulario web",
+        "archivedAt": null,
+        "archivedReason": null,
+        "archivedBy": null,
+        "anonymizedAt": null,
+        "salaryExpectationMax": 0,
+        "currency": "EUR",
+        "talentPoolStatus": null,
+        "source": "email",
+        "importedAt": "2026-05-03T11:01:01.333Z",
+        "createdAt": "2026-05-03T11:01:01.333Z",
+        "updatedAt": "2026-05-09T11:01:01.335Z"
+      },
+      {
+        "id": "f59a0e68-694c-4397-bfc1-04a9489cac94",
+        "email": "diego.lopez@example.com",
+        "fullName": "Diego Lopez",
+        "phone": "+34 600 111 006",
+        "linkedinUrl": null,
+        "cvRawText": "Diego Lopez - Playwright, Testing, JavaScript, Regression, QA - 2 years experience.",
+        "cvBlobId": "demo/cv/diego.lopez@example.com.pdf",
+        "cvParsedAt": "2026-04-26T11:01:01.333Z",
+        "parsedData": {
+          "name": "Diego Lopez",
+          "email": "diego.lopez@example.com",
+          "skills": [
+            "Playwright",
+            "Testing",
+            "JavaScript",
+            "Regression",
+            "QA"
+          ],
+          "languages": [
+            "Español",
+            "Inglés"
+          ],
+          "seniority": "junior",
+          "experience_years": 2
+        },
+        "skillsArray": [
+          "Playwright",
+          "Testing",
+          "JavaScript",
+          "Regression",
+          "QA"
+        ],
+        "experienceYears": 2,
+        "seniorityLevel": "junior",
+        "consentPersonalData": true,
+        "consentDate": "2026-03-17T12:01:01.333Z",
+        "consentSource": "Formulario web",
+        "archivedAt": null,
+        "archivedReason": null,
+        "archivedBy": null,
+        "anonymizedAt": null,
+        "salaryExpectationMax": 0,
+        "currency": "EUR",
+        "talentPoolStatus": null,
+        "source": "linkedin",
+        "importedAt": "2026-03-17T12:01:01.333Z",
+        "createdAt": "2026-03-17T12:01:01.333Z",
+        "updatedAt": "2026-05-09T11:01:01.335Z"
+      },
+      {
+        "id": "21f7aebb-32d6-4012-938e-70094280f6a6",
+        "email": "elena.torres@example.com",
+        "fullName": "Elena Torres",
+        "phone": "+34 600 111 007",
+        "linkedinUrl": null,
+        "cvRawText": "Elena Torres - React, TypeScript, GraphQL, Tailwind, Accessibility - 5 years experience.",
+        "cvBlobId": "demo/cv/elena.torres@example.com.pdf",
+        "cvParsedAt": "2026-04-27T11:01:01.333Z",
+        "parsedData": {
+          "name": "Elena Torres",
+          "email": "elena.torres@example.com",
+          "skills": [
+            "React",
+            "TypeScript",
+            "GraphQL",
+            "Tailwind",
+            "Accessibility"
+          ],
+          "languages": [
+            "Español",
+            "Inglés"
+          ],
+          "seniority": "mid",
+          "experience_years": 5
+        },
+        "skillsArray": [
+          "React",
+          "TypeScript",
+          "GraphQL",
+          "Tailwind",
+          "Accessibility"
+        ],
+        "experienceYears": 5,
+        "seniorityLevel": "mid",
+        "consentPersonalData": true,
+        "consentDate": "2026-05-01T11:01:01.333Z",
+        "consentSource": "Formulario web",
+        "archivedAt": null,
+        "archivedReason": null,
+        "archivedBy": null,
+        "anonymizedAt": null,
+        "salaryExpectationMax": 0,
+        "currency": "EUR",
+        "talentPoolStatus": null,
+        "source": "referral",
+        "importedAt": "2026-05-01T11:01:01.333Z",
+        "createdAt": "2026-05-01T11:01:01.333Z",
+        "updatedAt": "2026-05-09T11:01:01.335Z"
+      },
+      {
+        "id": "fda45abe-d278-4650-b235-73fb62515225",
+        "email": "ana.garcia@example.com",
+        "fullName": "Ana Garcia",
+        "phone": "+34 600 111 001",
+        "linkedinUrl": "https://www.linkedin.com/in/ana-garcia-fullstack",
+        "cvRawText": "Ana Garcia - React, Next.js, TypeScript, Node.js, PostgreSQL, Prisma - 8 years experience.",
+        "cvBlobId": "demo/cv/ana.garcia@example.com.pdf",
+        "cvParsedAt": "2026-04-21T11:01:01.333Z",
+        "parsedData": {
+          "name": "Ana Garcia",
+          "email": "ana.garcia@example.com",
+          "skills": [
+            "React",
+            "Next.js",
+            "TypeScript",
+            "Node.js",
+            "PostgreSQL",
+            "Prisma"
+          ],
+          "languages": [
+            "Español",
+            "Inglés"
+          ],
+          "seniority": "senior",
+          "experience_years": 8
+        },
+        "skillsArray": [
+          "React",
+          "Next.js",
+          "TypeScript",
+          "Node.js",
+          "PostgreSQL",
+          "Prisma"
+        ],
+        "experienceYears": 8,
+        "seniorityLevel": "senior",
+        "consentPersonalData": true,
+        "consentDate": "2026-04-18T11:01:01.332Z",
+        "consentSource": "Formulario web",
+        "archivedAt": null,
+        "archivedReason": null,
+        "archivedBy": null,
+        "anonymizedAt": null,
+        "salaryExpectationMax": 0,
+        "currency": "EUR",
+        "talentPoolStatus": null,
+        "source": "linkedin",
+        "importedAt": "2026-04-18T11:01:01.332Z",
+        "createdAt": "2026-04-18T11:01:01.332Z",
+        "updatedAt": "2026-05-09T11:01:01.335Z"
+      },
+      {
+        "id": "6088b16f-422a-4ad9-af1f-18273de041f7",
+        "email": "lucia.fernandez@example.com",
+        "fullName": "Lucia Fernandez",
+        "phone": "+34 600 111 003",
+        "linkedinUrl": "https://www.linkedin.com/in/lucia-fernandez-product",
+        "cvRawText": "Lucia Fernandez - Figma, Design Systems, Research, Prototyping, B2B SaaS - 6 years experience.",
+        "cvBlobId": "demo/cv/lucia.fernandez@example.com.pdf",
+        "cvParsedAt": "2026-04-23T11:01:01.333Z",
+        "parsedData": {
+          "name": "Lucia Fernandez",
+          "email": "lucia.fernandez@example.com",
+          "skills": [
+            "Figma",
+            "Design Systems",
+            "Research",
+            "Prototyping",
+            "B2B SaaS"
+          ],
+          "languages": [
+            "Español",
+            "Inglés"
+          ],
+          "seniority": "senior",
+          "experience_years": 6
+        },
+        "skillsArray": [
+          "Figma",
+          "Design Systems",
+          "Research",
+          "Prototyping",
+          "B2B SaaS"
+        ],
+        "experienceYears": 6,
+        "seniorityLevel": "senior",
+        "consentPersonalData": true,
+        "consentDate": "2026-04-22T11:01:01.332Z",
+        "consentSource": "Formulario web",
+        "archivedAt": null,
+        "archivedReason": null,
+        "archivedBy": null,
+        "anonymizedAt": null,
+        "salaryExpectationMax": 0,
+        "currency": "EUR",
+        "talentPoolStatus": null,
+        "source": "linkedin",
+        "importedAt": "2026-04-22T11:01:01.332Z",
+        "createdAt": "2026-04-22T11:01:01.332Z",
+        "updatedAt": "2026-05-09T11:01:01.335Z"
+      },
+      {
+        "id": "e84489e1-53b0-4e2b-9624-60a47f62b217",
+        "email": "sofia.martin@example.com",
+        "fullName": "Sofia Martin",
+        "phone": "+34 600 111 005",
+        "linkedinUrl": null,
+        "cvRawText": "Sofia Martin - Recruiting, Sourcing, ATS, LinkedIn Recruiter, Interviewing - 4 years experience.",
+        "cvBlobId": "demo/cv/sofia.martin@example.com.pdf",
+        "cvParsedAt": "2026-04-25T11:01:01.333Z",
+        "parsedData": {
+          "name": "Sofia Martin",
+          "email": "sofia.martin@example.com",
+          "skills": [
+            "Recruiting",
+            "Sourcing",
+            "ATS",
+            "LinkedIn Recruiter",
+            "Interviewing"
+          ],
+          "languages": [
+            "Español",
+            "Inglés"
+          ],
+          "seniority": "mid",
+          "experience_years": 4
+        },
+        "skillsArray": [
+          "Recruiting",
+          "Sourcing",
+          "ATS",
+          "LinkedIn Recruiter",
+          "Interviewing"
+        ],
+        "experienceYears": 4,
+        "seniorityLevel": "mid",
+        "consentPersonalData": true,
+        "consentDate": "2026-04-05T11:01:01.333Z",
+        "consentSource": "Formulario web",
+        "archivedAt": null,
+        "archivedReason": null,
+        "archivedBy": null,
+        "anonymizedAt": null,
+        "salaryExpectationMax": 0,
+        "currency": "EUR",
+        "talentPoolStatus": null,
+        "source": "manual",
+        "importedAt": "2026-04-05T11:01:01.333Z",
+        "createdAt": "2026-04-05T11:01:01.333Z",
+        "updatedAt": "2026-05-09T11:01:01.335Z"
+      },
+      {
+        "id": "760d603d-d1ea-4925-82e6-d91587ceb3e4",
+        "email": "raul.vega@example.com",
+        "fullName": "Raul Vega",
+        "phone": "+34 600 111 012",
+        "linkedinUrl": null,
+        "cvRawText": "Raul Vega - Java, Spring, PostgreSQL, Kubernetes, APIs - 10 years experience.",
+        "cvBlobId": "demo/cv/raul.vega@example.com.pdf",
+        "cvParsedAt": "2026-05-02T11:01:01.333Z",
+        "parsedData": {
+          "name": "Raul Vega",
+          "email": "raul.vega@example.com",
+          "skills": [
+            "Java",
+            "Spring",
+            "PostgreSQL",
+            "Kubernetes",
+            "APIs"
+          ],
+          "languages": [
+            "Español",
+            "Inglés"
+          ],
+          "seniority": "lead",
+          "experience_years": 10
+        },
+        "skillsArray": [
+          "Java",
+          "Spring",
+          "PostgreSQL",
+          "Kubernetes",
+          "APIs"
+        ],
+        "experienceYears": 10,
+        "seniorityLevel": "lead",
+        "consentPersonalData": true,
+        "consentDate": "2026-05-07T11:01:01.333Z",
+        "consentSource": "Formulario web",
+        "archivedAt": null,
+        "archivedReason": null,
+        "archivedBy": null,
+        "anonymizedAt": null,
+        "salaryExpectationMax": 0,
+        "currency": "EUR",
+        "talentPoolStatus": null,
+        "source": "referral",
+        "importedAt": "2026-05-07T11:01:01.333Z",
+        "createdAt": "2026-05-07T11:01:01.333Z",
+        "updatedAt": "2026-05-09T11:01:01.335Z"
+      },
+      {
+        "id": "83ddc26b-676e-453e-b055-6f4352eeff9e",
+        "email": "miguel.navarro@example.com",
+        "fullName": "Miguel Navarro",
+        "phone": "+34 600 111 010",
+        "linkedinUrl": null,
+        "cvRawText": "Miguel Navarro - Next.js, React, Node.js, MongoDB, CI/CD - 3 years experience.",
+        "cvBlobId": "demo/cv/miguel.navarro@example.com.pdf",
+        "cvParsedAt": "2026-04-30T11:01:01.333Z",
+        "parsedData": {
+          "name": "Miguel Navarro",
+          "email": "miguel.navarro@example.com",
+          "skills": [
+            "Next.js",
+            "React",
+            "Node.js",
+            "MongoDB",
+            "CI/CD"
+          ],
+          "languages": [
+            "Español",
+            "Inglés"
+          ],
+          "seniority": "mid",
+          "experience_years": 3
+        },
+        "skillsArray": [
+          "Next.js",
+          "React",
+          "Node.js",
+          "MongoDB",
+          "CI/CD"
+        ],
+        "experienceYears": 3,
+        "seniorityLevel": "mid",
+        "consentPersonalData": true,
+        "consentDate": "2026-05-05T11:01:01.333Z",
+        "consentSource": "Formulario web",
+        "archivedAt": null,
+        "archivedReason": null,
+        "archivedBy": null,
+        "anonymizedAt": null,
+        "salaryExpectationMax": 0,
+        "currency": "EUR",
+        "talentPoolStatus": null,
+        "source": "manual",
+        "importedAt": "2026-05-05T11:01:01.333Z",
+        "createdAt": "2026-05-05T11:01:01.333Z",
+        "updatedAt": "2026-05-09T11:01:01.335Z"
+      },
+      {
+        "id": "1f108872-2e48-4850-b926-1e706f0046b3",
+        "email": "nuria.ortega@example.com",
+        "fullName": "Nuria Ortega",
+        "phone": "+34 600 111 009",
+        "linkedinUrl": null,
+        "cvRawText": "Nuria Ortega - SQL, dbt, Looker, Python, Recruiting Analytics - 4 years experience.",
+        "cvBlobId": "demo/cv/nuria.ortega@example.com.pdf",
+        "cvParsedAt": "2026-04-29T11:01:01.333Z",
+        "parsedData": {
+          "name": "Nuria Ortega",
+          "email": "nuria.ortega@example.com",
+          "skills": [
+            "SQL",
+            "dbt",
+            "Looker",
+            "Python",
+            "Recruiting Analytics"
+          ],
+          "languages": [
+            "Español",
+            "Inglés"
+          ],
+          "seniority": "mid",
+          "experience_years": 4
+        },
+        "skillsArray": [
+          "SQL",
+          "dbt",
+          "Looker",
+          "Python",
+          "Recruiting Analytics"
+        ],
+        "experienceYears": 4,
+        "seniorityLevel": "mid",
+        "consentPersonalData": true,
+        "consentDate": "2026-05-04T11:01:01.333Z",
+        "consentSource": "Formulario web",
+        "archivedAt": null,
+        "archivedReason": null,
+        "archivedBy": null,
+        "anonymizedAt": null,
+        "salaryExpectationMax": 0,
+        "currency": "EUR",
+        "talentPoolStatus": null,
+        "source": "linkedin",
+        "importedAt": "2026-05-04T11:01:01.333Z",
+        "createdAt": "2026-05-04T11:01:01.333Z",
+        "updatedAt": "2026-05-09T11:01:01.335Z"
+      },
+      {
+        "id": "c4a49f6c-1f7c-4e01-ba3d-54d564751d3c",
+        "email": "hugo.prieto@example.com",
+        "fullName": "Hugo Prieto",
+        "phone": "+34 600 111 014",
+        "linkedinUrl": null,
+        "cvRawText": "Hugo Prieto - Python, Airflow, SQL, Data Quality, Power BI - 6 years experience.",
+        "cvBlobId": "demo/cv/hugo.prieto@example.com.pdf",
+        "cvParsedAt": "2026-05-04T11:01:01.333Z",
+        "parsedData": {
+          "name": "Hugo Prieto",
+          "email": "hugo.prieto@example.com",
+          "skills": [
+            "Python",
+            "Airflow",
+            "SQL",
+            "Data Quality",
+            "Power BI"
+          ],
+          "languages": [
+            "Español",
+            "Inglés"
+          ],
+          "seniority": "senior",
+          "experience_years": 6
+        },
+        "skillsArray": [
+          "Python",
+          "Airflow",
+          "SQL",
+          "Data Quality",
+          "Power BI"
+        ],
+        "experienceYears": 6,
+        "seniorityLevel": "senior",
+        "consentPersonalData": true,
+        "consentDate": "2026-04-27T11:01:01.333Z",
+        "consentSource": "Formulario web",
+        "archivedAt": null,
+        "archivedReason": null,
+        "archivedBy": null,
+        "anonymizedAt": null,
+        "salaryExpectationMax": 0,
+        "currency": "EUR",
+        "talentPoolStatus": null,
+        "source": "linkedin",
+        "importedAt": "2026-04-27T11:01:01.333Z",
+        "createdAt": "2026-04-27T11:01:01.333Z",
+        "updatedAt": "2026-05-09T11:01:01.336Z"
+      },
+      {
+        "id": "0daa495f-7b3c-4504-8292-bc563a5a3220",
+        "email": "carlos.ruiz@example.com",
+        "fullName": "Carlos Ruiz",
+        "phone": "+34 600 111 002",
+        "linkedinUrl": "https://www.linkedin.com/in/carlos-ruiz-backend",
+        "cvRawText": "Carlos Ruiz - Node.js, Azure, Microsoft Graph, PostgreSQL, Docker - 7 years experience.",
+        "cvBlobId": "demo/cv/carlos.ruiz@example.com.pdf",
+        "cvParsedAt": "2026-04-22T11:01:01.333Z",
+        "parsedData": {
+          "name": "Carlos Ruiz",
+          "email": "carlos.ruiz@example.com",
+          "skills": [
+            "Node.js",
+            "Azure",
+            "Microsoft Graph",
+            "PostgreSQL",
+            "Docker"
+          ],
+          "languages": [
+            "Español",
+            "Inglés"
+          ],
+          "seniority": "senior",
+          "experience_years": 7
+        },
+        "skillsArray": [
+          "Node.js",
+          "Azure",
+          "Microsoft Graph",
+          "PostgreSQL",
+          "Docker"
+        ],
+        "experienceYears": 7,
+        "seniorityLevel": "senior",
+        "consentPersonalData": true,
+        "consentDate": "2026-04-26T11:01:01.332Z",
+        "consentSource": "Formulario web",
+        "archivedAt": null,
+        "archivedReason": null,
+        "archivedBy": null,
+        "anonymizedAt": null,
+        "salaryExpectationMax": 0,
+        "currency": "EUR",
+        "talentPoolStatus": null,
+        "source": "referral",
+        "importedAt": "2026-04-26T11:01:01.332Z",
+        "createdAt": "2026-04-26T11:01:01.332Z",
+        "updatedAt": "2026-05-09T11:01:01.336Z"
+      },
+      {
+        "id": "b1267a61-40a2-4773-aef0-68f33e077ebe",
+        "email": "clara.dominguez@example.com",
+        "fullName": "Clara Dominguez",
+        "phone": "+34 600 111 013",
+        "linkedinUrl": null,
+        "cvRawText": "Clara Dominguez - Recruiting, Employer Branding, Onboarding, Stakeholder Management - 6 years experience.",
+        "cvBlobId": "demo/cv/clara.dominguez@example.com.pdf",
+        "cvParsedAt": "2026-05-03T11:01:01.333Z",
+        "parsedData": {
+          "name": "Clara Dominguez",
+          "email": "clara.dominguez@example.com",
+          "skills": [
+            "Recruiting",
+            "Employer Branding",
+            "Onboarding",
+            "Stakeholder Management"
+          ],
+          "languages": [
+            "Español",
+            "Inglés"
+          ],
+          "seniority": "senior",
+          "experience_years": 6
+        },
+        "skillsArray": [
+          "Recruiting",
+          "Employer Branding",
+          "Onboarding",
+          "Stakeholder Management"
+        ],
+        "experienceYears": 6,
+        "seniorityLevel": "senior",
+        "consentPersonalData": true,
+        "consentDate": "2026-04-12T11:01:01.333Z",
+        "consentSource": "Formulario web",
+        "archivedAt": null,
+        "archivedReason": null,
+        "archivedBy": null,
+        "anonymizedAt": null,
+        "salaryExpectationMax": 0,
+        "currency": "EUR",
+        "talentPoolStatus": null,
+        "source": "email",
+        "importedAt": "2026-04-12T11:01:01.333Z",
+        "createdAt": "2026-04-12T11:01:01.333Z",
+        "updatedAt": "2026-05-09T11:01:01.336Z"
+      },
+      {
+        "id": "c49a528d-fb93-4bc8-a4de-d26ef4c3da38",
+        "email": "javier.moreno@example.com",
+        "fullName": "Javier Moreno",
+        "phone": "+34 600 111 004",
+        "linkedinUrl": null,
+        "cvRawText": "Javier Moreno - SQL, Power BI, Python, People Analytics, Dashboards - 5 years experience.",
+        "cvBlobId": "demo/cv/javier.moreno@example.com.pdf",
+        "cvParsedAt": "2026-04-24T11:01:01.333Z",
+        "parsedData": {
+          "name": "Javier Moreno",
+          "email": "javier.moreno@example.com",
+          "skills": [
+            "SQL",
+            "Power BI",
+            "Python",
+            "People Analytics",
+            "Dashboards"
+          ],
+          "languages": [
+            "Español",
+            "Inglés"
+          ],
+          "seniority": "mid",
+          "experience_years": 5
+        },
+        "skillsArray": [
+          "SQL",
+          "Power BI",
+          "Python",
+          "People Analytics",
+          "Dashboards"
+        ],
+        "experienceYears": 5,
+        "seniorityLevel": "mid",
+        "consentPersonalData": true,
+        "consentDate": "2026-04-29T11:01:01.332Z",
+        "consentSource": "Formulario web",
+        "archivedAt": null,
+        "archivedReason": null,
+        "archivedBy": null,
+        "anonymizedAt": null,
+        "salaryExpectationMax": 0,
+        "currency": "EUR",
+        "talentPoolStatus": null,
+        "source": "email",
+        "importedAt": "2026-04-29T11:01:01.332Z",
+        "createdAt": "2026-04-29T11:01:01.332Z",
+        "updatedAt": "2026-05-09T11:01:01.336Z"
+      },
+      {
+        "id": "f424ad1a-ea75-4c70-8969-ab6380ea15e0",
+        "email": "marina.gil@example.com",
+        "fullName": "Marina Gil",
+        "phone": "+34 600 111 015",
+        "linkedinUrl": null,
+        "cvRawText": "Marina Gil - Playwright, TypeScript, API Testing, Test Strategy - 4 years experience.",
+        "cvBlobId": "demo/cv/marina.gil@example.com.pdf",
+        "cvParsedAt": "2026-05-05T11:01:01.333Z",
+        "parsedData": {
+          "name": "Marina Gil",
+          "email": "marina.gil@example.com",
+          "skills": [
+            "Playwright",
+            "TypeScript",
+            "API Testing",
+            "Test Strategy"
+          ],
+          "languages": [
+            "Español",
+            "Inglés"
+          ],
+          "seniority": "mid",
+          "experience_years": 4
+        },
+        "skillsArray": [
+          "Playwright",
+          "TypeScript",
+          "API Testing",
+          "Test Strategy"
+        ],
+        "experienceYears": 4,
+        "seniorityLevel": "mid",
+        "consentPersonalData": false,
+        "consentDate": null,
+        "consentSource": null,
+        "archivedAt": null,
+        "archivedReason": null,
+        "archivedBy": null,
+        "anonymizedAt": null,
+        "salaryExpectationMax": 0,
+        "currency": "EUR",
+        "talentPoolStatus": null,
+        "source": "manual",
+        "importedAt": "2026-03-24T12:01:01.333Z",
+        "createdAt": "2026-03-24T12:01:01.333Z",
+        "updatedAt": "2026-05-09T11:01:01.336Z"
+      },
+      {
+        "id": "5388c442-fb4c-4764-a631-94d1f91f24d4",
+        "email": "irene.castro@example.com",
+        "fullName": "Irene Castro",
+        "phone": "+34 600 111 011",
+        "linkedinUrl": null,
+        "cvRawText": "Irene Castro - Figma, UX Writing, Research, Workshops, Design Systems - 3 years experience.",
+        "cvBlobId": "demo/cv/irene.castro@example.com.pdf",
+        "cvParsedAt": "2026-05-01T11:01:01.333Z",
+        "parsedData": {
+          "name": "Irene Castro",
+          "email": "irene.castro@example.com",
+          "skills": [
+            "Figma",
+            "UX Writing",
+            "Research",
+            "Workshops",
+            "Design Systems"
+          ],
+          "languages": [
+            "Español",
+            "Inglés"
+          ],
+          "seniority": "mid",
+          "experience_years": 3
+        },
+        "skillsArray": [
+          "Figma",
+          "UX Writing",
+          "Research",
+          "Workshops",
+          "Design Systems"
+        ],
+        "experienceYears": 3,
+        "seniorityLevel": "mid",
+        "consentPersonalData": true,
+        "consentDate": "2026-05-06T11:01:01.333Z",
+        "consentSource": "Formulario web",
+        "archivedAt": null,
+        "archivedReason": null,
+        "archivedBy": null,
+        "anonymizedAt": null,
+        "salaryExpectationMax": 0,
+        "currency": "EUR",
+        "talentPoolStatus": null,
+        "source": "linkedin",
+        "importedAt": "2026-05-06T11:01:01.333Z",
+        "createdAt": "2026-05-06T11:01:01.333Z",
+        "updatedAt": "2026-05-09T11:01:01.336Z"
+      },
+      {
+        "id": "15f74246-0d04-4359-a6fc-4ab73f24fd7e",
+        "email": "alba.romero@example.com",
+        "fullName": "Alba Romero",
+        "phone": "+34 611 222 001",
+        "linkedinUrl": "https://www.linkedin.com/in/alba-romero",
+        "cvRawText": "Alba Romero - React, TypeScript, Next.js, Accessibility, Testing - 4 years experience.",
+        "cvBlobId": "demo/cv/alba.romero@example.com.pdf",
+        "cvParsedAt": "2026-04-15T11:01:01.431Z",
+        "parsedData": {
+          "name": "Alba Romero",
+          "email": "alba.romero@example.com",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Accessibility",
+            "Testing"
+          ],
+          "languages": [
+            "Español",
+            "Inglés"
+          ],
+          "seniority": "mid",
+          "experience_years": 4
+        },
+        "skillsArray": [
+          "React",
+          "TypeScript",
+          "Next.js",
+          "Accessibility",
+          "Testing"
+        ],
+        "experienceYears": 4,
+        "seniorityLevel": "mid",
+        "consentPersonalData": true,
+        "consentDate": "2026-04-09T11:01:01.431Z",
+        "consentSource": "Formulario web",
+        "archivedAt": null,
+        "archivedReason": null,
+        "archivedBy": null,
+        "anonymizedAt": null,
+        "salaryExpectationMax": 0,
+        "currency": "EUR",
+        "talentPoolStatus": null,
+        "source": "linkedin",
+        "importedAt": "2026-04-09T11:01:01.431Z",
+        "createdAt": "2026-04-09T11:01:01.431Z",
+        "updatedAt": "2026-05-09T11:01:01.433Z"
+      },
+      {
+        "id": "8000761b-64d0-4869-8a7c-9bdd5154f14c",
+        "email": "victor.molina@example.com",
+        "fullName": "Victor Molina",
+        "phone": "+34 611 222 002",
+        "linkedinUrl": "https://www.linkedin.com/in/victor-molina",
+        "cvRawText": "Victor Molina - Node.js, Graph API, Azure, Queues, Redis - 8 years experience.",
+        "cvBlobId": "demo/cv/victor.molina@example.com.pdf",
+        "cvParsedAt": "2026-04-16T11:01:01.431Z",
+        "parsedData": {
+          "name": "Victor Molina",
+          "email": "victor.molina@example.com",
+          "skills": [
+            "Node.js",
+            "Graph API",
+            "Azure",
+            "Queues",
+            "Redis"
+          ],
+          "languages": [
+            "Español",
+            "Inglés"
+          ],
+          "seniority": "senior",
+          "experience_years": 8
+        },
+        "skillsArray": [
+          "Node.js",
+          "Graph API",
+          "Azure",
+          "Queues",
+          "Redis"
+        ],
+        "experienceYears": 8,
+        "seniorityLevel": "senior",
+        "consentPersonalData": true,
+        "consentDate": "2026-04-10T11:01:01.431Z",
+        "consentSource": "Formulario web",
+        "archivedAt": null,
+        "archivedReason": null,
+        "archivedBy": null,
+        "anonymizedAt": null,
+        "salaryExpectationMax": 0,
+        "currency": "EUR",
+        "talentPoolStatus": null,
+        "source": "referral",
+        "importedAt": "2026-04-10T11:01:01.431Z",
+        "createdAt": "2026-04-10T11:01:01.431Z",
+        "updatedAt": "2026-05-09T11:01:01.433Z"
+      },
+      {
+        "id": "891f8e43-b763-4c87-a487-61094376d955",
+        "email": "patricia.leon@example.com",
+        "fullName": "Patricia Leon",
+        "phone": "+34 611 222 003",
+        "linkedinUrl": "https://www.linkedin.com/in/patricia-leon",
+        "cvRawText": "Patricia Leon - Figma, Research, Design Systems, B2B SaaS, Workshops - 7 years experience.",
+        "cvBlobId": "demo/cv/patricia.leon@example.com.pdf",
+        "cvParsedAt": "2026-04-17T11:01:01.431Z",
+        "parsedData": {
+          "name": "Patricia Leon",
+          "email": "patricia.leon@example.com",
+          "skills": [
+            "Figma",
+            "Research",
+            "Design Systems",
+            "B2B SaaS",
+            "Workshops"
+          ],
+          "languages": [
+            "Español",
+            "Inglés"
+          ],
+          "seniority": "senior",
+          "experience_years": 7
+        },
+        "skillsArray": [
+          "Figma",
+          "Research",
+          "Design Systems",
+          "B2B SaaS",
+          "Workshops"
+        ],
+        "experienceYears": 7,
+        "seniorityLevel": "senior",
+        "consentPersonalData": true,
+        "consentDate": "2026-04-11T11:01:01.431Z",
+        "consentSource": "Formulario web",
+        "archivedAt": null,
+        "archivedReason": null,
+        "archivedBy": null,
+        "anonymizedAt": null,
+        "salaryExpectationMax": 0,
+        "currency": "EUR",
+        "talentPoolStatus": null,
+        "source": "linkedin",
+        "importedAt": "2026-04-11T11:01:01.431Z",
+        "createdAt": "2026-04-11T11:01:01.431Z",
+        "updatedAt": "2026-05-09T11:01:01.433Z"
+      },
+      {
+        "id": "69bd1bda-5f41-4807-a950-dfe220af6cb3",
+        "email": "gonzalo.serrano@example.com",
+        "fullName": "Gonzalo Serrano",
+        "phone": "+34 611 222 008",
+        "linkedinUrl": "https://www.linkedin.com/in/gonzalo-serrano",
+        "cvRawText": "Gonzalo Serrano - Node.js, Prisma, PostgreSQL, Observability, Security - 9 years experience.",
+        "cvBlobId": "demo/cv/gonzalo.serrano@example.com.pdf",
+        "cvParsedAt": "2026-04-22T11:01:01.431Z",
+        "parsedData": {
+          "name": "Gonzalo Serrano",
+          "email": "gonzalo.serrano@example.com",
+          "skills": [
+            "Node.js",
+            "Prisma",
+            "PostgreSQL",
+            "Observability",
+            "Security"
+          ],
+          "languages": [
+            "Español",
+            "Inglés"
+          ],
+          "seniority": "lead",
+          "experience_years": 9
+        },
+        "skillsArray": [
+          "Node.js",
+          "Prisma",
+          "PostgreSQL",
+          "Observability",
+          "Security"
+        ],
+        "experienceYears": 9,
+        "seniorityLevel": "lead",
+        "consentPersonalData": true,
+        "consentDate": "2026-04-16T11:01:01.431Z",
+        "consentSource": "Formulario web",
+        "archivedAt": null,
+        "archivedReason": null,
+        "archivedBy": null,
+        "anonymizedAt": null,
+        "salaryExpectationMax": 0,
+        "currency": "EUR",
+        "talentPoolStatus": null,
+        "source": "email",
+        "importedAt": "2026-04-16T11:01:01.431Z",
+        "createdAt": "2026-04-16T11:01:01.431Z",
+        "updatedAt": "2026-05-09T11:01:01.436Z"
+      },
+      {
+        "id": "0fc4f073-ab3f-46c9-9357-9391d68179c5",
+        "email": "ivan.santos@example.com",
+        "fullName": "Ivan Santos",
+        "phone": "+34 611 222 010",
+        "linkedinUrl": "https://www.linkedin.com/in/ivan-santos",
+        "cvRawText": "Ivan Santos - Next.js, Node.js, TypeScript, Prisma, Docker - 5 years experience.",
+        "cvBlobId": "demo/cv/ivan.santos@example.com.pdf",
+        "cvParsedAt": "2026-04-24T11:01:01.431Z",
+        "parsedData": {
+          "name": "Ivan Santos",
+          "email": "ivan.santos@example.com",
+          "skills": [
+            "Next.js",
+            "Node.js",
+            "TypeScript",
+            "Prisma",
+            "Docker"
+          ],
+          "languages": [
+            "Español",
+            "Inglés"
+          ],
+          "seniority": "mid",
+          "experience_years": 5
+        },
+        "skillsArray": [
+          "Next.js",
+          "Node.js",
+          "TypeScript",
+          "Prisma",
+          "Docker"
+        ],
+        "experienceYears": 5,
+        "seniorityLevel": "mid",
+        "consentPersonalData": true,
+        "consentDate": "2026-04-18T11:01:01.431Z",
+        "consentSource": "Formulario web",
+        "archivedAt": null,
+        "archivedReason": null,
+        "archivedBy": null,
+        "anonymizedAt": null,
+        "salaryExpectationMax": 0,
+        "currency": "EUR",
+        "talentPoolStatus": null,
+        "source": "manual",
+        "importedAt": "2026-04-18T11:01:01.431Z",
+        "createdAt": "2026-04-18T11:01:01.431Z",
+        "updatedAt": "2026-05-09T11:01:01.433Z"
+      },
+      {
+        "id": "1704f58a-d27f-4aa9-a564-fec93d8b2bf8",
+        "email": "miriam.soler@example.com",
+        "fullName": "Miriam Soler",
+        "phone": "+34 611 222 005",
+        "linkedinUrl": "https://www.linkedin.com/in/miriam-soler",
+        "cvRawText": "Miriam Soler - Recruiting, Sourcing, ATS, Stakeholder Management, Employer Branding - 5 years experience.",
+        "cvBlobId": "demo/cv/miriam.soler@example.com.pdf",
+        "cvParsedAt": "2026-04-19T11:01:01.431Z",
+        "parsedData": {
+          "name": "Miriam Soler",
+          "email": "miriam.soler@example.com",
+          "skills": [
+            "Recruiting",
+            "Sourcing",
+            "ATS",
+            "Stakeholder Management",
+            "Employer Branding"
+          ],
+          "languages": [
+            "Español",
+            "Inglés"
+          ],
+          "seniority": "mid",
+          "experience_years": 5
+        },
+        "skillsArray": [
+          "Recruiting",
+          "Sourcing",
+          "ATS",
+          "Stakeholder Management",
+          "Employer Branding"
+        ],
+        "experienceYears": 5,
+        "seniorityLevel": "mid",
+        "consentPersonalData": true,
+        "consentDate": "2026-04-13T11:01:01.431Z",
+        "consentSource": "Formulario web",
+        "archivedAt": null,
+        "archivedReason": null,
+        "archivedBy": null,
+        "anonymizedAt": null,
+        "salaryExpectationMax": 0,
+        "currency": "EUR",
+        "talentPoolStatus": null,
+        "source": "manual",
+        "importedAt": "2026-04-13T11:01:01.431Z",
+        "createdAt": "2026-04-13T11:01:01.431Z",
+        "updatedAt": "2026-05-09T11:01:01.433Z"
+      },
+      {
+        "id": "d7c25fb0-6678-468c-a705-1b826a182059",
+        "email": "teresa.campos@example.com",
+        "fullName": "Teresa Campos",
+        "phone": "+34 611 222 007",
+        "linkedinUrl": "https://www.linkedin.com/in/teresa-campos",
+        "cvRawText": "Teresa Campos - React, GraphQL, Tailwind, Product Engineering, Testing - 6 years experience.",
+        "cvBlobId": "demo/cv/teresa.campos@example.com.pdf",
+        "cvParsedAt": "2026-04-21T11:01:01.431Z",
+        "parsedData": {
+          "name": "Teresa Campos",
+          "email": "teresa.campos@example.com",
+          "skills": [
+            "React",
+            "GraphQL",
+            "Tailwind",
+            "Product Engineering",
+            "Testing"
+          ],
+          "languages": [
+            "Español",
+            "Inglés"
+          ],
+          "seniority": "senior",
+          "experience_years": 6
+        },
+        "skillsArray": [
+          "React",
+          "GraphQL",
+          "Tailwind",
+          "Product Engineering",
+          "Testing"
+        ],
+        "experienceYears": 6,
+        "seniorityLevel": "senior",
+        "consentPersonalData": true,
+        "consentDate": "2026-04-15T11:01:01.431Z",
+        "consentSource": "Formulario web",
+        "archivedAt": null,
+        "archivedReason": null,
+        "archivedBy": null,
+        "anonymizedAt": null,
+        "salaryExpectationMax": 0,
+        "currency": "EUR",
+        "talentPoolStatus": null,
+        "source": "referral",
+        "importedAt": "2026-04-15T11:01:01.431Z",
+        "createdAt": "2026-04-15T11:01:01.431Z",
+        "updatedAt": "2026-05-09T11:01:01.433Z"
+      },
+      {
+        "id": "61d8507b-1fea-4e1f-bd7b-ef59767efc4b",
+        "email": "andres.nieto@example.com",
+        "fullName": "Andres Nieto",
+        "phone": "+34 611 222 004",
+        "linkedinUrl": "https://www.linkedin.com/in/andres-nieto",
+        "cvRawText": "Andres Nieto - SQL, Python, Power BI, dbt, Data Quality - 6 years experience.",
+        "cvBlobId": "demo/cv/andres.nieto@example.com.pdf",
+        "cvParsedAt": "2026-04-18T11:01:01.431Z",
+        "parsedData": {
+          "name": "Andres Nieto",
+          "email": "andres.nieto@example.com",
+          "skills": [
+            "SQL",
+            "Python",
+            "Power BI",
+            "dbt",
+            "Data Quality"
+          ],
+          "languages": [
+            "Español",
+            "Inglés"
+          ],
+          "seniority": "senior",
+          "experience_years": 6
+        },
+        "skillsArray": [
+          "SQL",
+          "Python",
+          "Power BI",
+          "dbt",
+          "Data Quality"
+        ],
+        "experienceYears": 6,
+        "seniorityLevel": "senior",
+        "consentPersonalData": true,
+        "consentDate": "2026-04-12T11:01:01.431Z",
+        "consentSource": "Formulario web",
+        "archivedAt": null,
+        "archivedReason": null,
+        "archivedBy": null,
+        "anonymizedAt": null,
+        "salaryExpectationMax": 0,
+        "currency": "EUR",
+        "talentPoolStatus": null,
+        "source": "email",
+        "importedAt": "2026-04-12T11:01:01.431Z",
+        "createdAt": "2026-04-12T11:01:01.431Z",
+        "updatedAt": "2026-05-09T11:01:01.433Z"
+      },
+      {
+        "id": "6a6b1315-3fdb-4ba5-8e2b-983d1af89886",
+        "email": "noelia.pastor@example.com",
+        "fullName": "Noelia Pastor",
+        "phone": "+34 611 222 011",
+        "linkedinUrl": "https://www.linkedin.com/in/noelia-pastor",
+        "cvRawText": "Noelia Pastor - Figma, UX Writing, Research, Prototyping, Design Ops - 4 years experience.",
+        "cvBlobId": "demo/cv/noelia.pastor@example.com.pdf",
+        "cvParsedAt": "2026-04-25T11:01:01.431Z",
+        "parsedData": {
+          "name": "Noelia Pastor",
+          "email": "noelia.pastor@example.com",
+          "skills": [
+            "Figma",
+            "UX Writing",
+            "Research",
+            "Prototyping",
+            "Design Ops"
+          ],
+          "languages": [
+            "Español",
+            "Inglés"
+          ],
+          "seniority": "mid",
+          "experience_years": 4
+        },
+        "skillsArray": [
+          "Figma",
+          "UX Writing",
+          "Research",
+          "Prototyping",
+          "Design Ops"
+        ],
+        "experienceYears": 4,
+        "seniorityLevel": "mid",
+        "consentPersonalData": true,
+        "consentDate": "2026-04-19T11:01:01.431Z",
+        "consentSource": "Formulario web",
+        "archivedAt": null,
+        "archivedReason": null,
+        "archivedBy": null,
+        "anonymizedAt": null,
+        "salaryExpectationMax": 0,
+        "currency": "EUR",
+        "talentPoolStatus": null,
+        "source": "linkedin",
+        "importedAt": "2026-04-19T11:01:01.431Z",
+        "createdAt": "2026-04-19T11:01:01.431Z",
+        "updatedAt": "2026-05-09T11:01:01.434Z"
+      },
+      {
+        "id": "2e84c67b-7e4c-4fbf-9d2f-62e20bd524c5",
+        "email": "adrian.pardo@example.com",
+        "fullName": "Adrian Pardo",
+        "phone": "+34 611 222 012",
+        "linkedinUrl": "https://www.linkedin.com/in/adrian-pardo",
+        "cvRawText": "Adrian Pardo - Java, Kubernetes, PostgreSQL, APIs, System Design - 11 years experience.",
+        "cvBlobId": "demo/cv/adrian.pardo@example.com.pdf",
+        "cvParsedAt": "2026-04-26T11:01:01.431Z",
+        "parsedData": {
+          "name": "Adrian Pardo",
+          "email": "adrian.pardo@example.com",
+          "skills": [
+            "Java",
+            "Kubernetes",
+            "PostgreSQL",
+            "APIs",
+            "System Design"
+          ],
+          "languages": [
+            "Español",
+            "Inglés"
+          ],
+          "seniority": "lead",
+          "experience_years": 11
+        },
+        "skillsArray": [
+          "Java",
+          "Kubernetes",
+          "PostgreSQL",
+          "APIs",
+          "System Design"
+        ],
+        "experienceYears": 11,
+        "seniorityLevel": "lead",
+        "consentPersonalData": true,
+        "consentDate": "2026-04-20T11:01:01.431Z",
+        "consentSource": "Formulario web",
+        "archivedAt": null,
+        "archivedReason": null,
+        "archivedBy": null,
+        "anonymizedAt": null,
+        "salaryExpectationMax": 0,
+        "currency": "EUR",
+        "talentPoolStatus": null,
+        "source": "referral",
+        "importedAt": "2026-04-20T11:01:01.431Z",
+        "createdAt": "2026-04-20T11:01:01.431Z",
+        "updatedAt": "2026-05-09T11:01:01.434Z"
+      },
+      {
+        "id": "b7f61635-1184-4ada-a58f-c7f8923a04f9",
+        "email": "manuel.arias@example.com",
+        "fullName": "Manuel Arias",
+        "phone": "+34 611 222 020",
+        "linkedinUrl": "https://www.linkedin.com/in/manuel-arias",
+        "cvRawText": "Manuel Arias - QA, Playwright, API Testing, JavaScript, Documentation - 2 years experience.",
+        "cvBlobId": "demo/cv/manuel.arias@example.com.pdf",
+        "cvParsedAt": "2026-05-04T11:01:01.431Z",
+        "parsedData": {
+          "name": "Manuel Arias",
+          "email": "manuel.arias@example.com",
+          "skills": [
+            "QA",
+            "Playwright",
+            "API Testing",
+            "JavaScript",
+            "Documentation"
+          ],
+          "languages": [
+            "Español",
+            "Inglés"
+          ],
+          "seniority": "junior",
+          "experience_years": 2
+        },
+        "skillsArray": [
+          "QA",
+          "Playwright",
+          "API Testing",
+          "JavaScript",
+          "Documentation"
+        ],
+        "experienceYears": 2,
+        "seniorityLevel": "junior",
+        "consentPersonalData": true,
+        "consentDate": "2026-04-28T11:01:01.431Z",
+        "consentSource": "Formulario web",
+        "archivedAt": null,
+        "archivedReason": null,
+        "archivedBy": null,
+        "anonymizedAt": null,
+        "salaryExpectationMax": 0,
+        "currency": "EUR",
+        "talentPoolStatus": null,
+        "source": "manual",
+        "importedAt": "2026-04-28T11:01:01.431Z",
+        "createdAt": "2026-04-28T11:01:01.431Z",
+        "updatedAt": "2026-05-09T11:01:01.434Z"
+      },
+      {
+        "id": "80a55838-a1ad-4eaa-a604-0a5959262759",
+        "email": "beatriz.rivas@example.com",
+        "fullName": "Beatriz Rivas",
+        "phone": "+34 611 222 009",
+        "linkedinUrl": "https://www.linkedin.com/in/beatriz-rivas",
+        "cvRawText": "Beatriz Rivas - SQL, Looker, People Analytics, Python, Experimentation - 5 years experience.",
+        "cvBlobId": "demo/cv/beatriz.rivas@example.com.pdf",
+        "cvParsedAt": "2026-04-23T11:01:01.431Z",
+        "parsedData": {
+          "name": "Beatriz Rivas",
+          "email": "beatriz.rivas@example.com",
+          "skills": [
+            "SQL",
+            "Looker",
+            "People Analytics",
+            "Python",
+            "Experimentation"
+          ],
+          "languages": [
+            "Español",
+            "Inglés"
+          ],
+          "seniority": "mid",
+          "experience_years": 5
+        },
+        "skillsArray": [
+          "SQL",
+          "Looker",
+          "People Analytics",
+          "Python",
+          "Experimentation"
+        ],
+        "experienceYears": 5,
+        "seniorityLevel": "mid",
+        "consentPersonalData": true,
+        "consentDate": "2026-04-17T11:01:01.431Z",
+        "consentSource": "Formulario web",
+        "archivedAt": null,
+        "archivedReason": null,
+        "archivedBy": null,
+        "anonymizedAt": null,
+        "salaryExpectationMax": 0,
+        "currency": "EUR",
+        "talentPoolStatus": null,
+        "source": "linkedin",
+        "importedAt": "2026-04-17T11:01:01.431Z",
+        "createdAt": "2026-04-17T11:01:01.431Z",
+        "updatedAt": "2026-05-09T11:01:01.433Z"
+      },
+      {
+        "id": "e6d6594d-2417-410a-a9d7-32cb306c3aef",
+        "email": "borja.iglesias@example.com",
+        "fullName": "Borja Iglesias",
+        "phone": "+34 611 222 018",
+        "linkedinUrl": "https://www.linkedin.com/in/borja-iglesias",
+        "cvRawText": "Borja Iglesias - SQL, Power BI, Stakeholder Management, Forecasting, Python - 4 years experience.",
+        "cvBlobId": "demo/cv/borja.iglesias@example.com.pdf",
+        "cvParsedAt": "2026-05-02T11:01:01.431Z",
+        "parsedData": {
+          "name": "Borja Iglesias",
+          "email": "borja.iglesias@example.com",
+          "skills": [
+            "SQL",
+            "Power BI",
+            "Stakeholder Management",
+            "Forecasting",
+            "Python"
+          ],
+          "languages": [
+            "Español",
+            "Inglés"
+          ],
+          "seniority": "mid",
+          "experience_years": 4
+        },
+        "skillsArray": [
+          "SQL",
+          "Power BI",
+          "Stakeholder Management",
+          "Forecasting",
+          "Python"
+        ],
+        "experienceYears": 4,
+        "seniorityLevel": "mid",
+        "consentPersonalData": true,
+        "consentDate": "2026-04-26T11:01:01.431Z",
+        "consentSource": "Formulario web",
+        "archivedAt": null,
+        "archivedReason": null,
+        "archivedBy": null,
+        "anonymizedAt": null,
+        "salaryExpectationMax": 0,
+        "currency": "EUR",
+        "talentPoolStatus": null,
+        "source": "email",
+        "importedAt": "2026-04-26T11:01:01.431Z",
+        "createdAt": "2026-04-26T11:01:01.431Z",
+        "updatedAt": "2026-05-09T11:01:01.434Z"
+      },
+      {
+        "id": "309d8293-9163-4fd8-852a-dfd9f90c992e",
+        "email": "sergio.cano@example.com",
+        "fullName": "Sergio Cano",
+        "phone": "+34 611 222 016",
+        "linkedinUrl": "https://www.linkedin.com/in/sergio-cano",
+        "cvRawText": "Sergio Cano - React, Next.js, Node.js, GraphQL, AWS - 7 years experience.",
+        "cvBlobId": "demo/cv/sergio.cano@example.com.pdf",
+        "cvParsedAt": "2026-04-30T11:01:01.431Z",
+        "parsedData": {
+          "name": "Sergio Cano",
+          "email": "sergio.cano@example.com",
+          "skills": [
+            "React",
+            "Next.js",
+            "Node.js",
+            "GraphQL",
+            "AWS"
+          ],
+          "languages": [
+            "Español",
+            "Inglés"
+          ],
+          "seniority": "senior",
+          "experience_years": 7
+        },
+        "skillsArray": [
+          "React",
+          "Next.js",
+          "Node.js",
+          "GraphQL",
+          "AWS"
+        ],
+        "experienceYears": 7,
+        "seniorityLevel": "senior",
+        "consentPersonalData": true,
+        "consentDate": "2026-04-24T11:01:01.431Z",
+        "consentSource": "Formulario web",
+        "archivedAt": null,
+        "archivedReason": null,
+        "archivedBy": null,
+        "anonymizedAt": null,
+        "salaryExpectationMax": 0,
+        "currency": "EUR",
+        "talentPoolStatus": null,
+        "source": "linkedin",
+        "importedAt": "2026-04-24T11:01:01.431Z",
+        "createdAt": "2026-04-24T11:01:01.431Z",
+        "updatedAt": "2026-05-09T11:01:01.434Z"
+      },
+      {
+        "id": "8b37f18a-4932-49dc-84d4-d1708d93fc5c",
+        "email": "eva.herrero@example.com",
+        "fullName": "Eva Herrero",
+        "phone": "+34 611 222 015",
+        "linkedinUrl": "https://www.linkedin.com/in/eva-herrero",
+        "cvRawText": "Eva Herrero - Playwright, Regression, Test Strategy, Accessibility, TypeScript - 6 years experience.",
+        "cvBlobId": "demo/cv/eva.herrero@example.com.pdf",
+        "cvParsedAt": "2026-04-29T11:01:01.431Z",
+        "parsedData": {
+          "name": "Eva Herrero",
+          "email": "eva.herrero@example.com",
+          "skills": [
+            "Playwright",
+            "Regression",
+            "Test Strategy",
+            "Accessibility",
+            "TypeScript"
+          ],
+          "languages": [
+            "Español",
+            "Inglés"
+          ],
+          "seniority": "senior",
+          "experience_years": 6
+        },
+        "skillsArray": [
+          "Playwright",
+          "Regression",
+          "Test Strategy",
+          "Accessibility",
+          "TypeScript"
+        ],
+        "experienceYears": 6,
+        "seniorityLevel": "senior",
+        "consentPersonalData": true,
+        "consentDate": "2026-04-23T11:01:01.431Z",
+        "consentSource": "Formulario web",
+        "archivedAt": null,
+        "archivedReason": null,
+        "archivedBy": null,
+        "anonymizedAt": null,
+        "salaryExpectationMax": 0,
+        "currency": "EUR",
+        "talentPoolStatus": null,
+        "source": "manual",
+        "importedAt": "2026-04-23T11:01:01.431Z",
+        "createdAt": "2026-04-23T11:01:01.431Z",
+        "updatedAt": "2026-05-09T11:01:01.434Z"
+      },
+      {
+        "id": "9f74b0a9-7517-45a7-8ec9-dc916fe75648",
+        "email": "rocio.medina@example.com",
+        "fullName": "Rocio Medina",
+        "phone": "+34 611 222 013",
+        "linkedinUrl": "https://www.linkedin.com/in/rocio-medina",
+        "cvRawText": "Rocio Medina - Recruiting, Onboarding, Interviewing, People Ops, Sourcing - 7 years experience.",
+        "cvBlobId": "demo/cv/rocio.medina@example.com.pdf",
+        "cvParsedAt": "2026-04-27T11:01:01.431Z",
+        "parsedData": {
+          "name": "Rocio Medina",
+          "email": "rocio.medina@example.com",
+          "skills": [
+            "Recruiting",
+            "Onboarding",
+            "Interviewing",
+            "People Ops",
+            "Sourcing"
+          ],
+          "languages": [
+            "Español",
+            "Inglés"
+          ],
+          "seniority": "senior",
+          "experience_years": 7
+        },
+        "skillsArray": [
+          "Recruiting",
+          "Onboarding",
+          "Interviewing",
+          "People Ops",
+          "Sourcing"
+        ],
+        "experienceYears": 7,
+        "seniorityLevel": "senior",
+        "consentPersonalData": true,
+        "consentDate": "2026-04-21T11:01:01.431Z",
+        "consentSource": "Formulario web",
+        "archivedAt": null,
+        "archivedReason": null,
+        "archivedBy": null,
+        "anonymizedAt": null,
+        "salaryExpectationMax": 0,
+        "currency": "EUR",
+        "talentPoolStatus": null,
+        "source": "email",
+        "importedAt": "2026-04-21T11:01:01.431Z",
+        "createdAt": "2026-04-21T11:01:01.431Z",
+        "updatedAt": "2026-05-09T11:01:01.434Z"
+      },
+      {
+        "id": "c15a801d-0164-4d61-81af-419da42f294c",
+        "email": "carmen.vidal@example.com",
+        "fullName": "Carmen Vidal",
+        "phone": "+34 611 222 017",
+        "linkedinUrl": "https://www.linkedin.com/in/carmen-vidal",
+        "cvRawText": "Carmen Vidal - Microsoft Graph, Azure, Node.js, OAuth, APIs - 6 years experience.",
+        "cvBlobId": "demo/cv/carmen.vidal@example.com.pdf",
+        "cvParsedAt": "2026-05-01T11:01:01.431Z",
+        "parsedData": {
+          "name": "Carmen Vidal",
+          "email": "carmen.vidal@example.com",
+          "skills": [
+            "Microsoft Graph",
+            "Azure",
+            "Node.js",
+            "OAuth",
+            "APIs"
+          ],
+          "languages": [
+            "Español",
+            "Inglés"
+          ],
+          "seniority": "senior",
+          "experience_years": 6
+        },
+        "skillsArray": [
+          "Microsoft Graph",
+          "Azure",
+          "Node.js",
+          "OAuth",
+          "APIs"
+        ],
+        "experienceYears": 6,
+        "seniorityLevel": "senior",
+        "consentPersonalData": true,
+        "consentDate": "2026-04-25T11:01:01.431Z",
+        "consentSource": "Formulario web",
+        "archivedAt": null,
+        "archivedReason": null,
+        "archivedBy": null,
+        "anonymizedAt": null,
+        "salaryExpectationMax": 0,
+        "currency": "EUR",
+        "talentPoolStatus": null,
+        "source": "referral",
+        "importedAt": "2026-04-25T11:01:01.431Z",
+        "createdAt": "2026-04-25T11:01:01.431Z",
+        "updatedAt": "2026-05-09T11:01:01.434Z"
+      },
+      {
+        "id": "e0dd2cfb-16ca-424f-990c-3f06fc78f9d3",
+        "email": "lidia.cruz@example.com",
+        "fullName": "Lidia Cruz",
+        "phone": "+34 611 222 019",
+        "linkedinUrl": "https://www.linkedin.com/in/lidia-cruz",
+        "cvRawText": "Lidia Cruz - Product Design, Figma, Research, Accessibility, Design Systems - 8 years experience.",
+        "cvBlobId": "demo/cv/lidia.cruz@example.com.pdf",
+        "cvParsedAt": "2026-05-03T11:01:01.431Z",
+        "parsedData": {
+          "name": "Lidia Cruz",
+          "email": "lidia.cruz@example.com",
+          "skills": [
+            "Product Design",
+            "Figma",
+            "Research",
+            "Accessibility",
+            "Design Systems"
+          ],
+          "languages": [
+            "Español",
+            "Inglés"
+          ],
+          "seniority": "lead",
+          "experience_years": 8
+        },
+        "skillsArray": [
+          "Product Design",
+          "Figma",
+          "Research",
+          "Accessibility",
+          "Design Systems"
+        ],
+        "experienceYears": 8,
+        "seniorityLevel": "lead",
+        "consentPersonalData": true,
+        "consentDate": "2026-04-27T11:01:01.431Z",
+        "consentSource": "Formulario web",
+        "archivedAt": null,
+        "archivedReason": null,
+        "archivedBy": null,
+        "anonymizedAt": null,
+        "salaryExpectationMax": 0,
+        "currency": "EUR",
+        "talentPoolStatus": null,
+        "source": "linkedin",
+        "importedAt": "2026-04-27T11:01:01.431Z",
+        "createdAt": "2026-04-27T11:01:01.431Z",
+        "updatedAt": "2026-05-09T11:01:01.434Z"
+      },
+      {
+        "id": "9500e717-66a8-4819-9f03-aba8689c3748",
+        "email": "oscar.benitez@example.com",
+        "fullName": "Oscar Benitez",
+        "phone": "+34 611 222 006",
+        "linkedinUrl": "https://www.linkedin.com/in/oscar-benitez",
+        "cvRawText": "Oscar Benitez - Playwright, TypeScript, QA, API Testing, CI/CD - 3 years experience.",
+        "cvBlobId": "demo/cv/oscar.benitez@example.com.pdf",
+        "cvParsedAt": "2026-04-20T11:01:01.431Z",
+        "parsedData": {
+          "name": "Oscar Benitez",
+          "email": "oscar.benitez@example.com",
+          "skills": [
+            "Playwright",
+            "TypeScript",
+            "QA",
+            "API Testing",
+            "CI/CD"
+          ],
+          "languages": [
+            "Español",
+            "Inglés"
+          ],
+          "seniority": "mid",
+          "experience_years": 3
+        },
+        "skillsArray": [
+          "Playwright",
+          "TypeScript",
+          "QA",
+          "API Testing",
+          "CI/CD"
+        ],
+        "experienceYears": 3,
+        "seniorityLevel": "mid",
+        "consentPersonalData": true,
+        "consentDate": "2026-04-14T11:01:01.431Z",
+        "consentSource": "Formulario web",
+        "archivedAt": null,
+        "archivedReason": null,
+        "archivedBy": null,
+        "anonymizedAt": null,
+        "salaryExpectationMax": 0,
+        "currency": "EUR",
+        "talentPoolStatus": null,
+        "source": "linkedin",
+        "importedAt": "2026-04-14T11:01:01.431Z",
+        "createdAt": "2026-04-14T11:01:01.431Z",
+        "updatedAt": "2026-05-09T11:01:01.433Z"
+      },
+      {
+        "id": "b5527bbd-4cae-4e3e-a71e-55f8a948651f",
+        "email": "daniel.fuentes@example.com",
+        "fullName": "Daniel Fuentes",
+        "phone": "+34 611 222 014",
+        "linkedinUrl": "https://www.linkedin.com/in/daniel-fuentes",
+        "cvRawText": "Daniel Fuentes - Airflow, Python, SQL, Power BI, Data Governance - 8 years experience.",
+        "cvBlobId": "demo/cv/daniel.fuentes@example.com.pdf",
+        "cvParsedAt": "2026-04-28T11:01:01.431Z",
+        "parsedData": {
+          "name": "Daniel Fuentes",
+          "email": "daniel.fuentes@example.com",
+          "skills": [
+            "Airflow",
+            "Python",
+            "SQL",
+            "Power BI",
+            "Data Governance"
+          ],
+          "languages": [
+            "Español",
+            "Inglés"
+          ],
+          "seniority": "senior",
+          "experience_years": 8
+        },
+        "skillsArray": [
+          "Airflow",
+          "Python",
+          "SQL",
+          "Power BI",
+          "Data Governance"
+        ],
+        "experienceYears": 8,
+        "seniorityLevel": "senior",
+        "consentPersonalData": true,
+        "consentDate": "2026-04-22T11:01:01.431Z",
+        "consentSource": "Formulario web",
+        "archivedAt": null,
+        "archivedReason": null,
+        "archivedBy": null,
+        "anonymizedAt": null,
+        "salaryExpectationMax": 0,
+        "currency": "EUR",
+        "talentPoolStatus": null,
+        "source": "linkedin",
+        "importedAt": "2026-04-22T11:01:01.431Z",
+        "createdAt": "2026-04-22T11:01:01.431Z",
+        "updatedAt": "2026-05-09T11:01:01.434Z"
+      }
+    ],
+    "offers": [
+      {
+        "id": "6428a615-a591-49c7-9e1e-1592d7b7711f",
+        "title": "Senior Fullstack Engineer",
+        "description": "Equipo core de SmartCRM. Buscamos una persona senior capaz de liderar decisiones técnicas de frontend y backend.",
+        "salaryMax": "82000",
+        "location": "Madrid / Remoto",
+        "jobType": "full_time",
+        "company": "SmartCRM",
+        "positionType": "developer",
+        "isUrgent": true,
+        "customTags": [
+          "Next.js",
+          "TypeScript",
+          "SaaS"
+        ],
+        "mustHaves": "- Mas de 5 anos de experiencia fullstack\n- React y TypeScript solidos\n- Experiencia con PostgreSQL y APIs\n\n--- Requisitos adicionales ---\nNext.js, TypeScript, Node.js, PostgreSQL, Prisma, testing y experiencia en producto SaaS.",
+        "status": "published",
+        "publishedAt": "2026-04-17T11:01:01.268Z",
+        "closedAt": null,
+        "archivedAt": null,
+        "closedById": null,
+        "hiredApplicationId": null,
+        "reopenedAt": null,
+        "reopenedById": null,
+        "createdBy": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "assignedToUserId": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "createdAt": "2026-04-15T11:01:01.268Z",
+        "updatedAt": "2026-05-09T11:01:01.269Z",
+        "assignedTo": {
+          "id": "0d5e64f8-df5b-4425-b231-8de264839b20",
+          "name": "Oier Martinez"
+        }
+      },
+      {
+        "id": "b3a22149-352e-4869-89de-49c6e7123089",
+        "title": "Backend Engineer Integrations",
+        "description": "Integraciones de Outlook, Azure Blob Storage y servicios externos para automatizar comunicaciones.",
+        "salaryMax": "76000",
+        "location": "Remoto España",
+        "jobType": "full_time",
+        "company": "SmartCRM Integrations",
+        "positionType": "devops",
+        "isUrgent": true,
+        "customTags": [
+          "Azure",
+          "Graph API",
+          "Node.js"
+        ],
+        "mustHaves": "- Node.js avanzado\n- Integraciones OAuth/Graph\n- Seguridad y observabilidad\n\n--- Requisitos adicionales ---\nNode.js, Graph API, Azure, colas, observabilidad, APIs REST y seguridad.",
+        "status": "published",
+        "publishedAt": "2026-05-03T11:01:01.268Z",
+        "closedAt": null,
+        "archivedAt": null,
+        "closedById": null,
+        "hiredApplicationId": null,
+        "reopenedAt": null,
+        "reopenedById": null,
+        "createdBy": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "assignedToUserId": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "createdAt": "2026-05-02T11:01:01.268Z",
+        "updatedAt": "2026-05-09T11:01:01.270Z",
+        "assignedTo": {
+          "id": "0d5e64f8-df5b-4425-b231-8de264839b20",
+          "name": "Oier Martinez"
+        }
+      },
+      {
+        "id": "a657206a-e904-4f1d-be33-87f2aa0be72a",
+        "title": "Junior QA Automation",
+        "description": "Puesto de entrada para reforzar pruebas E2E y validación de flujos críticos.",
+        "salaryMax": "30000",
+        "location": "Sevilla / Híbrido",
+        "jobType": "internship",
+        "company": "SmartCRM QA",
+        "positionType": "qa",
+        "isUrgent": false,
+        "customTags": [
+          "Playwright",
+          "QA",
+          "Automation"
+        ],
+        "mustHaves": "- Playwright\n- Testing funcional\n- Documentacion clara de bugs\n\n--- Requisitos adicionales ---\nPlaywright, pruebas funcionales, bugs reproducibles, criterio de regresión y documentación.",
+        "status": "closed_hired",
+        "publishedAt": "2026-03-14T12:01:01.268Z",
+        "closedAt": "2026-05-01T11:01:01.268Z",
+        "archivedAt": null,
+        "closedById": null,
+        "hiredApplicationId": "94075bc3-039c-459e-9834-314354fb42f6",
+        "reopenedAt": null,
+        "reopenedById": null,
+        "createdBy": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "assignedToUserId": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "createdAt": "2026-03-12T12:01:01.268Z",
+        "updatedAt": "2026-05-09T11:01:01.577Z",
+        "assignedTo": {
+          "id": "0d5e64f8-df5b-4425-b231-8de264839b20",
+          "name": "Oier Martinez"
+        }
+      },
+      {
+        "id": "3631424c-c485-48ec-a740-fd1c8e0352be",
+        "title": "Data Analyst People Ops",
+        "description": "Construcción de métricas de contratación, tiempos de proceso y conversión por etapa.",
+        "salaryMax": "52000",
+        "location": "Valencia / Híbrido",
+        "jobType": "contract",
+        "company": "People Metrics Lab",
+        "positionType": "data",
+        "isUrgent": false,
+        "customTags": [
+          "SQL",
+          "Analytics",
+          "BI"
+        ],
+        "mustHaves": "- SQL avanzado\n- Reporting ejecutivo\n- Experiencia en People Analytics\n\n--- Requisitos adicionales ---\nSQL, Power BI, Python, reporting ejecutivo, funnel analytics y calidad de datos.",
+        "status": "closed_no_hire",
+        "publishedAt": "2026-04-30T11:01:01.268Z",
+        "closedAt": "2026-05-09T14:05:22.649Z",
+        "archivedAt": null,
+        "closedById": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "hiredApplicationId": null,
+        "reopenedAt": null,
+        "reopenedById": null,
+        "createdBy": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "assignedToUserId": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "createdAt": "2026-04-28T11:01:01.268Z",
+        "updatedAt": "2026-05-09T14:05:22.667Z",
+        "assignedTo": {
+          "id": "0d5e64f8-df5b-4425-b231-8de264839b20",
+          "name": "Oier Martinez"
+        }
+      },
+      {
+        "id": "3d73368c-1bd6-4da1-858c-b85ccaca04c7",
+        "title": "Product Designer B2B",
+        "description": "Diseño de flujos complejos de recruiting para equipos de talento en empresas tecnológicas.",
+        "salaryMax": "60000",
+        "location": "Barcelona",
+        "jobType": "full_time",
+        "company": "Northstar Studio",
+        "positionType": "designer",
+        "isUrgent": false,
+        "customTags": [
+          "Figma",
+          "Research",
+          "B2B"
+        ],
+        "mustHaves": "- Portfolio B2B SaaS\n- Experiencia en design systems\n- Research con usuarios finales\n\n--- Requisitos adicionales ---\nFigma, research, diseño de sistemas, prototipado, métricas de producto y colaboración con ingeniería.",
+        "status": "closed_no_hire",
+        "publishedAt": "2026-04-23T11:01:01.268Z",
+        "closedAt": "2026-05-09T14:05:28.512Z",
+        "archivedAt": null,
+        "closedById": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "hiredApplicationId": null,
+        "reopenedAt": null,
+        "reopenedById": null,
+        "createdBy": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "assignedToUserId": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "createdAt": "2026-04-21T11:01:01.268Z",
+        "updatedAt": "2026-05-09T14:05:28.520Z",
+        "assignedTo": {
+          "id": "0d5e64f8-df5b-4425-b231-8de264839b20",
+          "name": "Oier Martinez"
+        }
+      },
+      {
+        "id": "5015d46a-40f4-45fc-b9b3-15e9aacd315e",
+        "title": "Talent Acquisition Partner",
+        "description": "Rol de reclutamiento end-to-end para perfiles de producto e ingeniería.",
+        "salaryMax": "46000",
+        "location": "Bilbao",
+        "jobType": "full_time",
+        "company": "SmartCRM",
+        "positionType": "manager",
+        "isUrgent": false,
+        "customTags": [
+          "Sourcing",
+          "People",
+          "ATS"
+        ],
+        "mustHaves": "- Experiencia sourcing tecnico\n- Coordinacion con hiring managers\n- Buen criterio de entrevista\n\n--- Requisitos adicionales ---\nSourcing técnico, entrevistas por competencias, coordinación con hiring managers y ATS.",
+        "status": "closed_no_hire",
+        "publishedAt": "2026-04-08T11:01:01.268Z",
+        "closedAt": "2026-05-09T14:05:37.541Z",
+        "archivedAt": null,
+        "closedById": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "hiredApplicationId": null,
+        "reopenedAt": null,
+        "reopenedById": null,
+        "createdBy": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "assignedToUserId": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "createdAt": "2026-04-04T11:01:01.268Z",
+        "updatedAt": "2026-05-09T14:05:37.555Z",
+        "assignedTo": {
+          "id": "0d5e64f8-df5b-4425-b231-8de264839b20",
+          "name": "Oier Martinez"
+        }
+      },
+      {
+        "id": "c9d9b47f-d8c1-4cde-9744-0244fdf46564",
+        "title": "sdf",
+        "description": "sdfsdfsdfsdfsdfsdfsdf",
+        "salaryMax": "0",
+        "location": "sdf",
+        "jobType": "full_time",
+        "company": "",
+        "positionType": "developer",
+        "isUrgent": false,
+        "customTags": [],
+        "mustHaves": "sdf",
+        "status": "draft",
+        "publishedAt": null,
+        "closedAt": null,
+        "archivedAt": "2026-05-11T07:01:26.285Z",
+        "closedById": null,
+        "hiredApplicationId": null,
+        "reopenedAt": null,
+        "reopenedById": null,
+        "createdBy": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "assignedToUserId": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "createdAt": "2026-05-09T14:26:02.333Z",
+        "updatedAt": "2026-05-11T07:01:26.287Z",
+        "assignedTo": {
+          "id": "0d5e64f8-df5b-4425-b231-8de264839b20",
+          "name": "Oier Martinez"
+        }
+      }
+    ],
+    "applications": [
+      {
+        "id": "47dced97-23b3-42da-9237-8acfb92d65bc",
+        "candidateId": "83ddc26b-676e-453e-b055-6f4352eeff9e",
+        "offerId": "6428a615-a591-49c7-9e1e-1592d7b7711f",
+        "pipelineStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "assignedToId": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "candidateNotes": "Candidato cargado para demo. Revisar experiencia principal, disponibilidad y fit cultural.",
+        "appliedAt": "2026-04-28T11:01:01.501Z",
+        "lastContactAt": "2026-05-02T11:01:01.501Z",
+        "lastContactedBy": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "aiScore": "0.64",
+        "aiExplanation": "Encaje limitado para esta oferta concreta; revisar si aplica a otro rol.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Profundizar en experiencia tecnica especifica",
+            "Validar motivacion por el rol"
+          ],
+          "strengths": [
+            "Experiencia relevante para la posicion",
+            "Trayectoria consistente",
+            "Buenas senales de comunicacion"
+          ],
+          "matched_skills": [
+            "Next.js",
+            "React",
+            "Node.js",
+            "MongoDB"
+          ],
+          "missing_skills": [
+            "Experiencia sectorial",
+            "Arquitectura avanzada"
+          ],
+          "recommendation": "Revisar con recruiter",
+          "score_breakdown": {
+            "domain": 54,
+            "skills": 64,
+            "seniority": 59
+          }
+        },
+        "aiScoringAt": "2026-05-03T11:01:01.501Z",
+        "internalNotes": "Perfil interesante para seguimiento. Revisar disponibilidad y expectativas.",
+        "createdAt": "2026-05-09T11:01:01.505Z",
+        "updatedAt": "2026-05-09T11:01:01.505Z"
+      },
+      {
+        "id": "998cce58-aa41-4f2b-ad2f-aa5221e2897b",
+        "candidateId": "9500e717-66a8-4819-9f03-aba8689c3748",
+        "offerId": "a657206a-e904-4f1d-be33-87f2aa0be72a",
+        "pipelineStageId": "9530b987-82e0-4b6a-9c99-a21a204a36b2",
+        "assignedToId": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "candidateNotes": "Perfil añadido al pipeline de demo con notas de contexto para la oferta.",
+        "appliedAt": "2026-04-18T11:01:01.570Z",
+        "lastContactAt": "2026-05-04T11:01:01.570Z",
+        "lastContactedBy": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "aiScore": "0.9",
+        "aiExplanation": "Encaje alto por habilidades clave, seniority y contexto de producto.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Validar expectativa salarial"
+          ],
+          "strengths": [
+            "Perfil alineado con el área de la oferta",
+            "Experiencia verificable en herramientas relevantes",
+            "Buen potencial de comunicación con el equipo"
+          ],
+          "matched_skills": [
+            "Playwright",
+            "TypeScript",
+            "QA",
+            "API Testing"
+          ],
+          "missing_skills": [
+            "Contexto específico de dominio"
+          ],
+          "recommendation": "Avanzar a entrevista",
+          "score_breakdown": {
+            "domain": 82,
+            "skills": 90,
+            "seniority": 86
+          }
+        },
+        "aiScoringAt": "2026-04-22T11:01:01.570Z",
+        "internalNotes": "Descartado para esta vacante, posible fit en otra posición.",
+        "createdAt": "2026-05-09T11:01:01.573Z",
+        "updatedAt": "2026-05-09T11:01:01.573Z"
+      },
+      {
+        "id": "d13b45fd-9878-4316-9e27-bdd862a167e3",
+        "candidateId": "e6d6594d-2417-410a-a9d7-32cb306c3aef",
+        "offerId": "a657206a-e904-4f1d-be33-87f2aa0be72a",
+        "pipelineStageId": "63b32abb-7d26-4d39-ba94-bc8d517e98e4",
+        "assignedToId": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "candidateNotes": "Perfil añadido al pipeline de demo con notas de contexto para la oferta.",
+        "appliedAt": "2026-04-30T11:01:01.570Z",
+        "lastContactAt": "2026-05-02T11:01:01.570Z",
+        "lastContactedBy": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "aiScore": "0.79",
+        "aiExplanation": "Encaje razonable con algunos gaps a validar en entrevista.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Validar motivación",
+            "Contrastar profundidad técnica"
+          ],
+          "strengths": [
+            "Perfil alineado con el área de la oferta",
+            "Experiencia verificable en herramientas relevantes",
+            "Buen potencial de comunicación con el equipo"
+          ],
+          "matched_skills": [
+            "SQL",
+            "Power BI",
+            "Stakeholder Management",
+            "Forecasting"
+          ],
+          "missing_skills": [
+            "Experiencia directa en el stack",
+            "Profundidad en arquitectura"
+          ],
+          "recommendation": "Revisar con recruiter",
+          "score_breakdown": {
+            "domain": 71,
+            "skills": 79,
+            "seniority": 75
+          }
+        },
+        "aiScoringAt": "2026-05-04T11:01:01.570Z",
+        "internalNotes": "Seguimiento recomendado. Revisar disponibilidad y salario.",
+        "createdAt": "2026-05-09T11:01:01.573Z",
+        "updatedAt": "2026-05-09T11:01:01.573Z"
+      },
+      {
+        "id": "a3251581-1d26-4ba6-8cee-b5ae23d9e920",
+        "candidateId": "5388c442-fb4c-4764-a631-94d1f91f24d4",
+        "offerId": "3d73368c-1bd6-4da1-858c-b85ccaca04c7",
+        "pipelineStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "assignedToId": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "candidateNotes": "Candidato cargado para demo. Revisar experiencia principal, disponibilidad y fit cultural.",
+        "appliedAt": "2026-04-29T11:01:01.501Z",
+        "lastContactAt": "2026-05-03T11:01:01.501Z",
+        "lastContactedBy": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "aiScore": "0.76",
+        "aiExplanation": "Encaje medio: buena base tecnica con algunos gaps de dominio o seniority.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Profundizar en experiencia tecnica especifica",
+            "Validar motivacion por el rol"
+          ],
+          "strengths": [
+            "Experiencia relevante para la posicion",
+            "Trayectoria consistente",
+            "Buenas senales de comunicacion"
+          ],
+          "matched_skills": [
+            "Figma",
+            "UX Writing",
+            "Research",
+            "Workshops"
+          ],
+          "missing_skills": [
+            "Experiencia sectorial",
+            "Arquitectura avanzada"
+          ],
+          "recommendation": "Revisar con recruiter",
+          "score_breakdown": {
+            "domain": 66,
+            "skills": 76,
+            "seniority": 71
+          }
+        },
+        "aiScoringAt": "2026-05-04T11:01:01.501Z",
+        "internalNotes": "Perfil interesante para seguimiento. Revisar disponibilidad y expectativas.",
+        "createdAt": "2026-05-09T11:01:01.505Z",
+        "updatedAt": "2026-05-09T14:05:28.518Z"
+      },
+      {
+        "id": "b64c3108-8a0e-4653-b1d3-18c18b8333db",
+        "candidateId": "760d603d-d1ea-4925-82e6-d91587ceb3e4",
+        "offerId": "b3a22149-352e-4869-89de-49c6e7123089",
+        "pipelineStageId": "9530b987-82e0-4b6a-9c99-a21a204a36b2",
+        "assignedToId": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "candidateNotes": "Candidato cargado para demo. Revisar experiencia principal, disponibilidad y fit cultural.",
+        "appliedAt": "2026-04-30T11:01:01.501Z",
+        "lastContactAt": "2026-05-04T11:01:01.501Z",
+        "lastContactedBy": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "aiScore": "0.48",
+        "aiExplanation": "Encaje limitado para esta oferta concreta; revisar si aplica a otro rol.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Profundizar en experiencia tecnica especifica",
+            "Validar motivacion por el rol"
+          ],
+          "strengths": [
+            "Experiencia relevante para la posicion",
+            "Trayectoria consistente",
+            "Buenas senales de comunicacion"
+          ],
+          "matched_skills": [
+            "Java",
+            "Spring",
+            "PostgreSQL",
+            "Kubernetes"
+          ],
+          "missing_skills": [
+            "Experiencia sectorial",
+            "Arquitectura avanzada"
+          ],
+          "recommendation": "Revisar con recruiter",
+          "score_breakdown": {
+            "domain": 38,
+            "skills": 48,
+            "seniority": 43
+          }
+        },
+        "aiScoringAt": "2026-05-05T11:01:01.501Z",
+        "internalNotes": "No encaja con los requisitos principales de esta vacante.",
+        "createdAt": "2026-05-09T11:01:01.505Z",
+        "updatedAt": "2026-05-09T11:01:01.505Z"
+      },
+      {
+        "id": "0b03001b-ea7f-46d4-8935-86219525e081",
+        "candidateId": "309d8293-9163-4fd8-852a-dfd9f90c992e",
+        "offerId": "5015d46a-40f4-45fc-b9b3-15e9aacd315e",
+        "pipelineStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "assignedToId": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "candidateNotes": "Perfil añadido al pipeline de demo con notas de contexto para la oferta.",
+        "appliedAt": "2026-04-28T11:01:01.570Z",
+        "lastContactAt": "2026-05-04T11:01:01.570Z",
+        "lastContactedBy": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "aiScore": "0.68",
+        "aiExplanation": "Encaje razonable con algunos gaps a validar en entrevista.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Validar motivación",
+            "Contrastar profundidad técnica"
+          ],
+          "strengths": [
+            "Perfil alineado con el área de la oferta",
+            "Experiencia verificable en herramientas relevantes",
+            "Buen potencial de comunicación con el equipo"
+          ],
+          "matched_skills": [
+            "React",
+            "Next.js",
+            "Node.js",
+            "GraphQL"
+          ],
+          "missing_skills": [
+            "Experiencia directa en el stack",
+            "Profundidad en arquitectura"
+          ],
+          "recommendation": "Revisar con recruiter",
+          "score_breakdown": {
+            "domain": 60,
+            "skills": 68,
+            "seniority": 64
+          }
+        },
+        "aiScoringAt": "2026-05-02T11:01:01.570Z",
+        "internalNotes": "Seguimiento recomendado. Revisar disponibilidad y salario.",
+        "createdAt": "2026-05-09T11:01:01.572Z",
+        "updatedAt": "2026-05-09T14:05:37.552Z"
+      },
+      {
+        "id": "154709dd-d9aa-42ea-8bb6-88bd769c443f",
+        "candidateId": "fda45abe-d278-4650-b235-73fb62515225",
+        "offerId": "b3a22149-352e-4869-89de-49c6e7123089",
+        "pipelineStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "assignedToId": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "candidateNotes": "Candidato cargado para demo. Revisar experiencia principal, disponibilidad y fit cultural.",
+        "appliedAt": "2026-05-04T11:01:01.501Z",
+        "lastContactAt": "2026-05-08T11:01:01.501Z",
+        "lastContactedBy": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "aiScore": "0.69",
+        "aiExplanation": "Encaje medio: buena base tecnica con algunos gaps de dominio o seniority.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Profundizar en experiencia tecnica especifica",
+            "Validar motivacion por el rol"
+          ],
+          "strengths": [
+            "Experiencia relevante para la posicion",
+            "Trayectoria consistente",
+            "Buenas senales de comunicacion"
+          ],
+          "matched_skills": [
+            "React",
+            "Next.js",
+            "TypeScript",
+            "Node.js"
+          ],
+          "missing_skills": [
+            "Experiencia sectorial",
+            "Arquitectura avanzada"
+          ],
+          "recommendation": "Revisar con recruiter",
+          "score_breakdown": {
+            "domain": 59,
+            "skills": 69,
+            "seniority": 64
+          }
+        },
+        "aiScoringAt": "2026-05-08T11:01:01.501Z",
+        "internalNotes": "Perfil interesante para seguimiento. Revisar disponibilidad y expectativas.",
+        "createdAt": "2026-05-09T11:01:01.506Z",
+        "updatedAt": "2026-05-09T11:01:01.506Z"
+      },
+      {
+        "id": "e55f7f84-5a8d-4be9-bf4b-4988f40c9280",
+        "candidateId": "891f8e43-b763-4c87-a487-61094376d955",
+        "offerId": "3631424c-c485-48ec-a740-fd1c8e0352be",
+        "pipelineStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "assignedToId": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "candidateNotes": "Perfil añadido al pipeline de demo con notas de contexto para la oferta.",
+        "appliedAt": "2026-04-15T11:01:01.570Z",
+        "lastContactAt": "2026-05-07T11:01:01.570Z",
+        "lastContactedBy": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "aiScore": "0.73",
+        "aiExplanation": "Encaje razonable con algunos gaps a validar en entrevista.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Validar motivación",
+            "Contrastar profundidad técnica"
+          ],
+          "strengths": [
+            "Perfil alineado con el área de la oferta",
+            "Experiencia verificable en herramientas relevantes",
+            "Buen potencial de comunicación con el equipo"
+          ],
+          "matched_skills": [
+            "Figma",
+            "Research",
+            "Design Systems",
+            "B2B SaaS"
+          ],
+          "missing_skills": [
+            "Experiencia directa en el stack",
+            "Profundidad en arquitectura"
+          ],
+          "recommendation": "Revisar con recruiter",
+          "score_breakdown": {
+            "domain": 65,
+            "skills": 73,
+            "seniority": 69
+          }
+        },
+        "aiScoringAt": "2026-04-19T11:01:01.570Z",
+        "internalNotes": "Seguimiento recomendado. Revisar disponibilidad y salario.",
+        "createdAt": "2026-05-09T11:01:01.572Z",
+        "updatedAt": "2026-05-09T14:05:22.657Z"
+      },
+      {
+        "id": "347fe404-b194-4850-bbb5-50d9ff595f35",
+        "candidateId": "69bd1bda-5f41-4807-a950-dfe220af6cb3",
+        "offerId": "3d73368c-1bd6-4da1-858c-b85ccaca04c7",
+        "pipelineStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "assignedToId": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "candidateNotes": "Perfil añadido al pipeline de demo con notas de contexto para la oferta.",
+        "appliedAt": "2026-04-20T11:01:01.570Z",
+        "lastContactAt": "2026-05-02T11:01:01.570Z",
+        "lastContactedBy": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "aiScore": "0.62",
+        "aiExplanation": "Encaje bajo para esta vacante, conservar para futuras oportunidades.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Validar motivación",
+            "Contrastar profundidad técnica"
+          ],
+          "strengths": [
+            "Perfil alineado con el área de la oferta",
+            "Experiencia verificable en herramientas relevantes",
+            "Buen potencial de comunicación con el equipo"
+          ],
+          "matched_skills": [
+            "Node.js",
+            "Prisma",
+            "PostgreSQL",
+            "Observability"
+          ],
+          "missing_skills": [
+            "Experiencia directa en el stack",
+            "Profundidad en arquitectura"
+          ],
+          "recommendation": "Revisar con recruiter",
+          "score_breakdown": {
+            "domain": 54,
+            "skills": 62,
+            "seniority": 58
+          }
+        },
+        "aiScoringAt": "2026-04-24T11:01:01.570Z",
+        "internalNotes": "Seguimiento recomendado. Revisar disponibilidad y salario.",
+        "createdAt": "2026-05-09T11:01:01.573Z",
+        "updatedAt": "2026-05-09T14:05:28.518Z"
+      },
+      {
+        "id": "eb3c5820-580a-4a4a-aa06-78c8cd9d6daf",
+        "candidateId": "3ef772b9-36f8-4213-8c9e-4f8df0314b53",
+        "offerId": "b3a22149-352e-4869-89de-49c6e7123089",
+        "pipelineStageId": "eccb49c0-4bbf-4b83-a459-280d48b24b9c",
+        "assignedToId": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "candidateNotes": "Candidato cargado para demo. Revisar experiencia principal, disponibilidad y fit cultural.",
+        "appliedAt": "2026-04-26T11:01:01.501Z",
+        "lastContactAt": "2026-05-08T11:01:01.501Z",
+        "lastContactedBy": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "aiScore": "0.9",
+        "aiExplanation": "Encaje alto por experiencia relevante y habilidades clave alineadas con la oferta.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Validar disponibilidad y expectativa salarial"
+          ],
+          "strengths": [
+            "Experiencia relevante para la posicion",
+            "Trayectoria consistente",
+            "Buenas senales de comunicacion"
+          ],
+          "matched_skills": [
+            "Node.js",
+            "Prisma",
+            "AWS",
+            "Queues"
+          ],
+          "missing_skills": [
+            "Stakeholder management"
+          ],
+          "recommendation": "Avanzar a entrevista",
+          "score_breakdown": {
+            "domain": 80,
+            "skills": 90,
+            "seniority": 85
+          }
+        },
+        "aiScoringAt": "2026-05-01T11:01:01.501Z",
+        "internalNotes": "Perfil interesante para seguimiento. Revisar disponibilidad y expectativas.",
+        "createdAt": "2026-05-09T11:01:01.505Z",
+        "updatedAt": "2026-05-09T11:01:01.505Z"
+      },
+      {
+        "id": "2d136a5f-6af8-478f-8f74-58f5fe210459",
+        "candidateId": "2e84c67b-7e4c-4fbf-9d2f-62e20bd524c5",
+        "offerId": "a657206a-e904-4f1d-be33-87f2aa0be72a",
+        "pipelineStageId": "eccb49c0-4bbf-4b83-a459-280d48b24b9c",
+        "assignedToId": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "candidateNotes": "Perfil añadido al pipeline de demo con notas de contexto para la oferta.",
+        "appliedAt": "2026-04-24T11:01:01.570Z",
+        "lastContactAt": "2026-05-08T11:01:01.570Z",
+        "lastContactedBy": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "aiScore": "0.84",
+        "aiExplanation": "Encaje alto por habilidades clave, seniority y contexto de producto.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Validar expectativa salarial"
+          ],
+          "strengths": [
+            "Perfil alineado con el área de la oferta",
+            "Experiencia verificable en herramientas relevantes",
+            "Buen potencial de comunicación con el equipo"
+          ],
+          "matched_skills": [
+            "Java",
+            "Kubernetes",
+            "PostgreSQL",
+            "APIs"
+          ],
+          "missing_skills": [
+            "Contexto específico de dominio"
+          ],
+          "recommendation": "Avanzar a entrevista",
+          "score_breakdown": {
+            "domain": 76,
+            "skills": 84,
+            "seniority": 80
+          }
+        },
+        "aiScoringAt": "2026-04-28T11:01:01.570Z",
+        "internalNotes": "Seguimiento recomendado. Revisar disponibilidad y salario.",
+        "createdAt": "2026-05-09T11:01:01.572Z",
+        "updatedAt": "2026-05-09T11:01:01.572Z"
+      },
+      {
+        "id": "5e3e7e62-dc12-4266-b7aa-8df4e96aca5b",
+        "candidateId": "9f74b0a9-7517-45a7-8ec9-dc916fe75648",
+        "offerId": "6428a615-a591-49c7-9e1e-1592d7b7711f",
+        "pipelineStageId": "9530b987-82e0-4b6a-9c99-a21a204a36b2",
+        "assignedToId": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "candidateNotes": "Perfil añadido al pipeline de demo con notas de contexto para la oferta.",
+        "appliedAt": "2026-04-25T11:01:01.570Z",
+        "lastContactAt": "2026-05-07T11:01:01.570Z",
+        "lastContactedBy": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "aiScore": "0.9",
+        "aiExplanation": "Encaje alto por habilidades clave, seniority y contexto de producto.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Validar expectativa salarial"
+          ],
+          "strengths": [
+            "Perfil alineado con el área de la oferta",
+            "Experiencia verificable en herramientas relevantes",
+            "Buen potencial de comunicación con el equipo"
+          ],
+          "matched_skills": [
+            "Recruiting",
+            "Onboarding",
+            "Interviewing",
+            "People Ops"
+          ],
+          "missing_skills": [
+            "Contexto específico de dominio"
+          ],
+          "recommendation": "Avanzar a entrevista",
+          "score_breakdown": {
+            "domain": 82,
+            "skills": 90,
+            "seniority": 86
+          }
+        },
+        "aiScoringAt": "2026-04-29T11:01:01.570Z",
+        "internalNotes": "Descartado para esta vacante, posible fit en otra posición.",
+        "createdAt": "2026-05-09T11:01:01.572Z",
+        "updatedAt": "2026-05-09T11:01:01.572Z"
+      },
+      {
+        "id": "803c587d-1198-45be-8f8f-b10be2810842",
+        "candidateId": "b7f61635-1184-4ada-a58f-c7f8923a04f9",
+        "offerId": "3d73368c-1bd6-4da1-858c-b85ccaca04c7",
+        "pipelineStageId": "9530b987-82e0-4b6a-9c99-a21a204a36b2",
+        "assignedToId": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "candidateNotes": "Perfil añadido al pipeline de demo con notas de contexto para la oferta.",
+        "appliedAt": "2026-05-02T11:01:01.570Z",
+        "lastContactAt": "2026-04-30T11:01:01.570Z",
+        "lastContactedBy": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "aiScore": "0.9",
+        "aiExplanation": "Encaje alto por habilidades clave, seniority y contexto de producto.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Validar expectativa salarial"
+          ],
+          "strengths": [
+            "Perfil alineado con el área de la oferta",
+            "Experiencia verificable en herramientas relevantes",
+            "Buen potencial de comunicación con el equipo"
+          ],
+          "matched_skills": [
+            "QA",
+            "Playwright",
+            "API Testing",
+            "JavaScript"
+          ],
+          "missing_skills": [
+            "Contexto específico de dominio"
+          ],
+          "recommendation": "Avanzar a entrevista",
+          "score_breakdown": {
+            "domain": 82,
+            "skills": 90,
+            "seniority": 86
+          }
+        },
+        "aiScoringAt": "2026-05-06T11:01:01.570Z",
+        "internalNotes": "Descartado para esta vacante, posible fit en otra posición.",
+        "createdAt": "2026-05-09T11:01:01.573Z",
+        "updatedAt": "2026-05-09T11:01:01.573Z"
+      },
+      {
+        "id": "381710aa-e612-4b0c-9732-b236552e13f0",
+        "candidateId": "c49a528d-fb93-4bc8-a4de-d26ef4c3da38",
+        "offerId": "3631424c-c485-48ec-a740-fd1c8e0352be",
+        "pipelineStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "assignedToId": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "candidateNotes": "Candidato cargado para demo. Revisar experiencia principal, disponibilidad y fit cultural.",
+        "appliedAt": "2026-04-22T11:01:01.501Z",
+        "lastContactAt": "2026-05-04T11:01:01.501Z",
+        "lastContactedBy": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "aiScore": "0.78",
+        "aiExplanation": "Encaje medio: buena base tecnica con algunos gaps de dominio o seniority.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Profundizar en experiencia tecnica especifica",
+            "Validar motivacion por el rol"
+          ],
+          "strengths": [
+            "Experiencia relevante para la posicion",
+            "Trayectoria consistente",
+            "Buenas senales de comunicacion"
+          ],
+          "matched_skills": [
+            "SQL",
+            "Power BI",
+            "Python",
+            "People Analytics"
+          ],
+          "missing_skills": [
+            "Experiencia sectorial",
+            "Arquitectura avanzada"
+          ],
+          "recommendation": "Revisar con recruiter",
+          "score_breakdown": {
+            "domain": 68,
+            "skills": 78,
+            "seniority": 73
+          }
+        },
+        "aiScoringAt": "2026-04-27T11:01:01.501Z",
+        "internalNotes": "Perfil interesante para seguimiento. Revisar disponibilidad y expectativas.",
+        "createdAt": "2026-05-09T11:01:01.505Z",
+        "updatedAt": "2026-05-09T14:05:22.657Z"
+      },
+      {
+        "id": "504e25cc-4a65-4d01-a5ec-eeb4be2b0fee",
+        "candidateId": "1f108872-2e48-4850-b926-1e706f0046b3",
+        "offerId": "6428a615-a591-49c7-9e1e-1592d7b7711f",
+        "pipelineStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "assignedToId": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "candidateNotes": "Candidato cargado para demo. Revisar experiencia principal, disponibilidad y fit cultural.",
+        "appliedAt": "2026-05-07T11:01:01.502Z",
+        "lastContactAt": "2026-05-03T11:01:01.502Z",
+        "lastContactedBy": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "aiScore": "0.57",
+        "aiExplanation": "Encaje limitado para esta oferta concreta; revisar si aplica a otro rol.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Profundizar en experiencia tecnica especifica",
+            "Validar motivacion por el rol"
+          ],
+          "strengths": [
+            "Experiencia relevante para la posicion",
+            "Trayectoria consistente",
+            "Buenas senales de comunicacion"
+          ],
+          "matched_skills": [
+            "SQL",
+            "dbt",
+            "Looker",
+            "Python"
+          ],
+          "missing_skills": [
+            "Experiencia sectorial",
+            "Arquitectura avanzada"
+          ],
+          "recommendation": "Revisar con recruiter",
+          "score_breakdown": {
+            "domain": 47,
+            "skills": 57,
+            "seniority": 52
+          }
+        },
+        "aiScoringAt": "2026-05-08T11:01:01.502Z",
+        "internalNotes": "Perfil interesante para seguimiento. Revisar disponibilidad y expectativas.",
+        "createdAt": "2026-05-09T11:01:01.507Z",
+        "updatedAt": "2026-05-09T11:01:01.507Z"
+      },
+      {
+        "id": "8b2518bc-f9e2-44c3-889c-9bc02aa399ad",
+        "candidateId": "15f74246-0d04-4359-a6fc-4ab73f24fd7e",
+        "offerId": "6428a615-a591-49c7-9e1e-1592d7b7711f",
+        "pipelineStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "assignedToId": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "candidateNotes": "Perfil añadido al pipeline de demo con notas de contexto para la oferta.",
+        "appliedAt": "2026-04-13T11:01:01.570Z",
+        "lastContactAt": "2026-05-09T11:01:01.570Z",
+        "lastContactedBy": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "aiScore": "0.62",
+        "aiExplanation": "Encaje bajo para esta vacante, conservar para futuras oportunidades.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Validar motivación",
+            "Contrastar profundidad técnica"
+          ],
+          "strengths": [
+            "Perfil alineado con el área de la oferta",
+            "Experiencia verificable en herramientas relevantes",
+            "Buen potencial de comunicación con el equipo"
+          ],
+          "matched_skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Accessibility"
+          ],
+          "missing_skills": [
+            "Experiencia directa en el stack",
+            "Profundidad en arquitectura"
+          ],
+          "recommendation": "Revisar con recruiter",
+          "score_breakdown": {
+            "domain": 54,
+            "skills": 62,
+            "seniority": 58
+          }
+        },
+        "aiScoringAt": "2026-04-17T11:01:01.570Z",
+        "internalNotes": "Seguimiento recomendado. Revisar disponibilidad y salario.",
+        "createdAt": "2026-05-09T11:01:01.572Z",
+        "updatedAt": "2026-05-09T11:01:01.572Z"
+      },
+      {
+        "id": "53b62488-ec82-4a54-a638-7dd4a8ebb8f9",
+        "candidateId": "1f108872-2e48-4850-b926-1e706f0046b3",
+        "offerId": "3631424c-c485-48ec-a740-fd1c8e0352be",
+        "pipelineStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "assignedToId": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "candidateNotes": "Candidato cargado para demo. Revisar experiencia principal, disponibilidad y fit cultural.",
+        "appliedAt": "2026-04-27T11:01:01.501Z",
+        "lastContactAt": "2026-05-01T11:01:01.501Z",
+        "lastContactedBy": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "aiScore": "0.81",
+        "aiExplanation": "Encaje alto por experiencia relevante y habilidades clave alineadas con la oferta.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Validar disponibilidad y expectativa salarial"
+          ],
+          "strengths": [
+            "Experiencia relevante para la posicion",
+            "Trayectoria consistente",
+            "Buenas senales de comunicacion"
+          ],
+          "matched_skills": [
+            "SQL",
+            "dbt",
+            "Looker",
+            "Python"
+          ],
+          "missing_skills": [
+            "Stakeholder management"
+          ],
+          "recommendation": "Avanzar a entrevista",
+          "score_breakdown": {
+            "domain": 71,
+            "skills": 81,
+            "seniority": 76
+          }
+        },
+        "aiScoringAt": "2026-05-02T11:01:01.501Z",
+        "internalNotes": "Perfil interesante para seguimiento. Revisar disponibilidad y expectativas.",
+        "createdAt": "2026-05-09T11:01:01.506Z",
+        "updatedAt": "2026-05-09T14:05:22.657Z"
+      },
+      {
+        "id": "690f7ad7-7873-49f8-8f0b-c7bb7f83d85a",
+        "candidateId": "fda45abe-d278-4650-b235-73fb62515225",
+        "offerId": "6428a615-a591-49c7-9e1e-1592d7b7711f",
+        "pipelineStageId": "63b32abb-7d26-4d39-ba94-bc8d517e98e4",
+        "assignedToId": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "candidateNotes": "Candidato cargado para demo. Revisar experiencia principal, disponibilidad y fit cultural.",
+        "appliedAt": "2026-04-19T11:01:01.501Z",
+        "lastContactAt": "2026-05-01T11:01:01.501Z",
+        "lastContactedBy": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "aiScore": "0.92",
+        "aiExplanation": "Encaje alto por experiencia relevante y habilidades clave alineadas con la oferta.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Validar disponibilidad y expectativa salarial"
+          ],
+          "strengths": [
+            "Experiencia relevante para la posicion",
+            "Trayectoria consistente",
+            "Buenas senales de comunicacion"
+          ],
+          "matched_skills": [
+            "React",
+            "Next.js",
+            "TypeScript",
+            "Node.js"
+          ],
+          "missing_skills": [
+            "Stakeholder management"
+          ],
+          "recommendation": "Avanzar a entrevista",
+          "score_breakdown": {
+            "domain": 82,
+            "skills": 92,
+            "seniority": 87
+          }
+        },
+        "aiScoringAt": "2026-04-24T11:01:01.501Z",
+        "internalNotes": "Perfil interesante para seguimiento. Revisar disponibilidad y expectativas.",
+        "createdAt": "2026-05-09T11:01:01.505Z",
+        "updatedAt": "2026-05-09T11:01:01.505Z"
+      },
+      {
+        "id": "f513ba68-b5c9-43f3-9d63-0bcd0370147d",
+        "candidateId": "6a6b1315-3fdb-4ba5-8e2b-983d1af89886",
+        "offerId": "b3a22149-352e-4869-89de-49c6e7123089",
+        "pipelineStageId": "63b32abb-7d26-4d39-ba94-bc8d517e98e4",
+        "assignedToId": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "candidateNotes": "Perfil añadido al pipeline de demo con notas de contexto para la oferta.",
+        "appliedAt": "2026-04-23T11:01:01.570Z",
+        "lastContactAt": "2026-05-09T11:01:01.570Z",
+        "lastContactedBy": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "aiScore": "0.79",
+        "aiExplanation": "Encaje razonable con algunos gaps a validar en entrevista.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Validar motivación",
+            "Contrastar profundidad técnica"
+          ],
+          "strengths": [
+            "Perfil alineado con el área de la oferta",
+            "Experiencia verificable en herramientas relevantes",
+            "Buen potencial de comunicación con el equipo"
+          ],
+          "matched_skills": [
+            "Figma",
+            "UX Writing",
+            "Research",
+            "Prototyping"
+          ],
+          "missing_skills": [
+            "Experiencia directa en el stack",
+            "Profundidad en arquitectura"
+          ],
+          "recommendation": "Revisar con recruiter",
+          "score_breakdown": {
+            "domain": 71,
+            "skills": 79,
+            "seniority": 75
+          }
+        },
+        "aiScoringAt": "2026-04-27T11:01:01.570Z",
+        "internalNotes": "Seguimiento recomendado. Revisar disponibilidad y salario.",
+        "createdAt": "2026-05-09T11:01:01.572Z",
+        "updatedAt": "2026-05-09T11:01:01.572Z"
+      },
+      {
+        "id": "89565eff-13c5-4878-960f-3ee760d93eec",
+        "candidateId": "8b37f18a-4932-49dc-84d4-d1708d93fc5c",
+        "offerId": "3631424c-c485-48ec-a740-fd1c8e0352be",
+        "pipelineStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "assignedToId": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "candidateNotes": "Perfil añadido al pipeline de demo con notas de contexto para la oferta.",
+        "appliedAt": "2026-04-27T11:01:01.570Z",
+        "lastContactAt": "2026-05-05T11:01:01.570Z",
+        "lastContactedBy": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "aiScore": "0.62",
+        "aiExplanation": "Encaje bajo para esta vacante, conservar para futuras oportunidades.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Validar motivación",
+            "Contrastar profundidad técnica"
+          ],
+          "strengths": [
+            "Perfil alineado con el área de la oferta",
+            "Experiencia verificable en herramientas relevantes",
+            "Buen potencial de comunicación con el equipo"
+          ],
+          "matched_skills": [
+            "Playwright",
+            "Regression",
+            "Test Strategy",
+            "Accessibility"
+          ],
+          "missing_skills": [
+            "Experiencia directa en el stack",
+            "Profundidad en arquitectura"
+          ],
+          "recommendation": "Revisar con recruiter",
+          "score_breakdown": {
+            "domain": 54,
+            "skills": 62,
+            "seniority": 58
+          }
+        },
+        "aiScoringAt": "2026-05-01T11:01:01.570Z",
+        "internalNotes": "Seguimiento recomendado. Revisar disponibilidad y salario.",
+        "createdAt": "2026-05-09T11:01:01.572Z",
+        "updatedAt": "2026-05-09T14:05:22.657Z"
+      },
+      {
+        "id": "6e334332-e482-4047-9111-90c712f769fb",
+        "candidateId": "e84489e1-53b0-4e2b-9624-60a47f62b217",
+        "offerId": "5015d46a-40f4-45fc-b9b3-15e9aacd315e",
+        "pipelineStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "assignedToId": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "candidateNotes": "Candidato cargado para demo. Revisar experiencia principal, disponibilidad y fit cultural.",
+        "appliedAt": "2026-04-23T11:01:01.501Z",
+        "lastContactAt": "2026-05-05T11:01:01.501Z",
+        "lastContactedBy": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "aiScore": "0.74",
+        "aiExplanation": "Encaje medio: buena base tecnica con algunos gaps de dominio o seniority.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Profundizar en experiencia tecnica especifica",
+            "Validar motivacion por el rol"
+          ],
+          "strengths": [
+            "Experiencia relevante para la posicion",
+            "Trayectoria consistente",
+            "Buenas senales de comunicacion"
+          ],
+          "matched_skills": [
+            "Recruiting",
+            "Sourcing",
+            "ATS",
+            "LinkedIn Recruiter"
+          ],
+          "missing_skills": [
+            "Experiencia sectorial",
+            "Arquitectura avanzada"
+          ],
+          "recommendation": "Revisar con recruiter",
+          "score_breakdown": {
+            "domain": 64,
+            "skills": 74,
+            "seniority": 69
+          }
+        },
+        "aiScoringAt": "2026-04-28T11:01:01.501Z",
+        "internalNotes": "Perfil interesante para seguimiento. Revisar disponibilidad y expectativas.",
+        "createdAt": "2026-05-09T11:01:01.505Z",
+        "updatedAt": "2026-05-09T14:05:37.552Z"
+      },
+      {
+        "id": "978089de-7faf-40ac-90e3-861247bf6df6",
+        "candidateId": "c4a49f6c-1f7c-4e01-ba3d-54d564751d3c",
+        "offerId": "3631424c-c485-48ec-a740-fd1c8e0352be",
+        "pipelineStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "assignedToId": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "candidateNotes": "Candidato cargado para demo. Revisar experiencia principal, disponibilidad y fit cultural.",
+        "appliedAt": "2026-05-02T11:01:01.501Z",
+        "lastContactAt": "2026-05-06T11:01:01.501Z",
+        "lastContactedBy": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "aiScore": "0.88",
+        "aiExplanation": "Encaje alto por experiencia relevante y habilidades clave alineadas con la oferta.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Validar disponibilidad y expectativa salarial"
+          ],
+          "strengths": [
+            "Experiencia relevante para la posicion",
+            "Trayectoria consistente",
+            "Buenas senales de comunicacion"
+          ],
+          "matched_skills": [
+            "Python",
+            "Airflow",
+            "SQL",
+            "Data Quality"
+          ],
+          "missing_skills": [
+            "Stakeholder management"
+          ],
+          "recommendation": "Avanzar a entrevista",
+          "score_breakdown": {
+            "domain": 78,
+            "skills": 88,
+            "seniority": 83
+          }
+        },
+        "aiScoringAt": "2026-05-07T11:01:01.501Z",
+        "internalNotes": "Perfil interesante para seguimiento. Revisar disponibilidad y expectativas.",
+        "createdAt": "2026-05-09T11:01:01.505Z",
+        "updatedAt": "2026-05-09T14:05:22.657Z"
+      },
+      {
+        "id": "de875d46-5d7b-425f-ab87-2d602b649a41",
+        "candidateId": "61d8507b-1fea-4e1f-bd7b-ef59767efc4b",
+        "offerId": "5015d46a-40f4-45fc-b9b3-15e9aacd315e",
+        "pipelineStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "assignedToId": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "candidateNotes": "Perfil añadido al pipeline de demo con notas de contexto para la oferta.",
+        "appliedAt": "2026-04-16T11:01:01.570Z",
+        "lastContactAt": "2026-05-06T11:01:01.570Z",
+        "lastContactedBy": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "aiScore": "0.79",
+        "aiExplanation": "Encaje razonable con algunos gaps a validar en entrevista.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Validar motivación",
+            "Contrastar profundidad técnica"
+          ],
+          "strengths": [
+            "Perfil alineado con el área de la oferta",
+            "Experiencia verificable en herramientas relevantes",
+            "Buen potencial de comunicación con el equipo"
+          ],
+          "matched_skills": [
+            "SQL",
+            "Python",
+            "Power BI",
+            "dbt"
+          ],
+          "missing_skills": [
+            "Experiencia directa en el stack",
+            "Profundidad en arquitectura"
+          ],
+          "recommendation": "Revisar con recruiter",
+          "score_breakdown": {
+            "domain": 71,
+            "skills": 79,
+            "seniority": 75
+          }
+        },
+        "aiScoringAt": "2026-04-20T11:01:01.570Z",
+        "internalNotes": "Seguimiento recomendado. Revisar disponibilidad y salario.",
+        "createdAt": "2026-05-09T11:01:01.573Z",
+        "updatedAt": "2026-05-09T14:05:37.552Z"
+      },
+      {
+        "id": "3371180c-f746-4402-a6f6-b94d70e0b052",
+        "candidateId": "d7c25fb0-6678-468c-a705-1b826a182059",
+        "offerId": "6428a615-a591-49c7-9e1e-1592d7b7711f",
+        "pipelineStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "assignedToId": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "candidateNotes": "Perfil añadido al pipeline de demo con notas de contexto para la oferta.",
+        "appliedAt": "2026-04-19T11:01:01.570Z",
+        "lastContactAt": "2026-05-03T11:01:01.570Z",
+        "lastContactedBy": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "aiScore": "0.95",
+        "aiExplanation": "Encaje alto por habilidades clave, seniority y contexto de producto.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Validar expectativa salarial"
+          ],
+          "strengths": [
+            "Perfil alineado con el área de la oferta",
+            "Experiencia verificable en herramientas relevantes",
+            "Buen potencial de comunicación con el equipo"
+          ],
+          "matched_skills": [
+            "React",
+            "GraphQL",
+            "Tailwind",
+            "Product Engineering"
+          ],
+          "missing_skills": [
+            "Contexto específico de dominio"
+          ],
+          "recommendation": "Avanzar a entrevista",
+          "score_breakdown": {
+            "domain": 87,
+            "skills": 95,
+            "seniority": 91
+          }
+        },
+        "aiScoringAt": "2026-04-23T11:01:01.570Z",
+        "internalNotes": "Seguimiento recomendado. Revisar disponibilidad y salario.",
+        "createdAt": "2026-05-09T11:01:01.572Z",
+        "updatedAt": "2026-05-09T11:01:01.572Z"
+      },
+      {
+        "id": "66958465-dc0f-46e8-8a08-324b89096ff6",
+        "candidateId": "80a55838-a1ad-4eaa-a604-0a5959262759",
+        "offerId": "3631424c-c485-48ec-a740-fd1c8e0352be",
+        "pipelineStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "assignedToId": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "candidateNotes": "Perfil añadido al pipeline de demo con notas de contexto para la oferta.",
+        "appliedAt": "2026-04-21T11:01:01.570Z",
+        "lastContactAt": "2026-05-01T11:01:01.570Z",
+        "lastContactedBy": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "aiScore": "0.68",
+        "aiExplanation": "Encaje razonable con algunos gaps a validar en entrevista.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Validar motivación",
+            "Contrastar profundidad técnica"
+          ],
+          "strengths": [
+            "Perfil alineado con el área de la oferta",
+            "Experiencia verificable en herramientas relevantes",
+            "Buen potencial de comunicación con el equipo"
+          ],
+          "matched_skills": [
+            "SQL",
+            "Looker",
+            "People Analytics",
+            "Python"
+          ],
+          "missing_skills": [
+            "Experiencia directa en el stack",
+            "Profundidad en arquitectura"
+          ],
+          "recommendation": "Revisar con recruiter",
+          "score_breakdown": {
+            "domain": 60,
+            "skills": 68,
+            "seniority": 64
+          }
+        },
+        "aiScoringAt": "2026-04-25T11:01:01.570Z",
+        "internalNotes": "Seguimiento recomendado. Revisar disponibilidad y salario.",
+        "createdAt": "2026-05-09T11:01:01.572Z",
+        "updatedAt": "2026-05-09T14:05:22.657Z"
+      },
+      {
+        "id": "a6c742aa-7393-45b1-8734-460b0ebdf249",
+        "candidateId": "0daa495f-7b3c-4504-8292-bc563a5a3220",
+        "offerId": "b3a22149-352e-4869-89de-49c6e7123089",
+        "pipelineStageId": "3dc64ccd-bc39-4abe-932e-5a580884bcfa",
+        "assignedToId": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "candidateNotes": "Candidato cargado para demo. Revisar experiencia principal, disponibilidad y fit cultural.",
+        "appliedAt": "2026-04-20T11:01:01.501Z",
+        "lastContactAt": "2026-05-02T11:01:01.501Z",
+        "lastContactedBy": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "aiScore": "0.86",
+        "aiExplanation": "Encaje alto por experiencia relevante y habilidades clave alineadas con la oferta.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Validar disponibilidad y expectativa salarial"
+          ],
+          "strengths": [
+            "Experiencia relevante para la posicion",
+            "Trayectoria consistente",
+            "Buenas senales de comunicacion"
+          ],
+          "matched_skills": [
+            "Node.js",
+            "Azure",
+            "Microsoft Graph",
+            "PostgreSQL"
+          ],
+          "missing_skills": [
+            "Stakeholder management"
+          ],
+          "recommendation": "Avanzar a entrevista",
+          "score_breakdown": {
+            "domain": 76,
+            "skills": 86,
+            "seniority": 81
+          }
+        },
+        "aiScoringAt": "2026-04-25T11:01:01.501Z",
+        "internalNotes": "Perfil interesante para seguimiento. Revisar disponibilidad y expectativas.",
+        "createdAt": "2026-05-09T11:01:01.505Z",
+        "updatedAt": "2026-05-09T11:01:01.505Z"
+      },
+      {
+        "id": "cf2e0153-09d7-469f-8763-556df1f135dd",
+        "candidateId": "1704f58a-d27f-4aa9-a564-fec93d8b2bf8",
+        "offerId": "b3a22149-352e-4869-89de-49c6e7123089",
+        "pipelineStageId": "eccb49c0-4bbf-4b83-a459-280d48b24b9c",
+        "assignedToId": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "candidateNotes": "Perfil añadido al pipeline de demo con notas de contexto para la oferta.",
+        "appliedAt": "2026-04-17T11:01:01.570Z",
+        "lastContactAt": "2026-05-05T11:01:01.570Z",
+        "lastContactedBy": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "aiScore": "0.84",
+        "aiExplanation": "Encaje alto por habilidades clave, seniority y contexto de producto.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Validar expectativa salarial"
+          ],
+          "strengths": [
+            "Perfil alineado con el área de la oferta",
+            "Experiencia verificable en herramientas relevantes",
+            "Buen potencial de comunicación con el equipo"
+          ],
+          "matched_skills": [
+            "Recruiting",
+            "Sourcing",
+            "ATS",
+            "Stakeholder Management"
+          ],
+          "missing_skills": [
+            "Contexto específico de dominio"
+          ],
+          "recommendation": "Avanzar a entrevista",
+          "score_breakdown": {
+            "domain": 76,
+            "skills": 84,
+            "seniority": 80
+          }
+        },
+        "aiScoringAt": "2026-04-21T11:01:01.570Z",
+        "internalNotes": "Seguimiento recomendado. Revisar disponibilidad y salario.",
+        "createdAt": "2026-05-09T11:01:01.572Z",
+        "updatedAt": "2026-05-09T11:01:01.572Z"
+      },
+      {
+        "id": "a6945f70-243d-400e-ad77-6419087e0f8f",
+        "candidateId": "b5527bbd-4cae-4e3e-a71e-55f8a948651f",
+        "offerId": "3d73368c-1bd6-4da1-858c-b85ccaca04c7",
+        "pipelineStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "assignedToId": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "candidateNotes": "Perfil añadido al pipeline de demo con notas de contexto para la oferta.",
+        "appliedAt": "2026-04-26T11:01:01.570Z",
+        "lastContactAt": "2026-05-06T11:01:01.570Z",
+        "lastContactedBy": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "aiScore": "0.95",
+        "aiExplanation": "Encaje alto por habilidades clave, seniority y contexto de producto.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Validar expectativa salarial"
+          ],
+          "strengths": [
+            "Perfil alineado con el área de la oferta",
+            "Experiencia verificable en herramientas relevantes",
+            "Buen potencial de comunicación con el equipo"
+          ],
+          "matched_skills": [
+            "Airflow",
+            "Python",
+            "SQL",
+            "Power BI"
+          ],
+          "missing_skills": [
+            "Contexto específico de dominio"
+          ],
+          "recommendation": "Avanzar a entrevista",
+          "score_breakdown": {
+            "domain": 87,
+            "skills": 95,
+            "seniority": 91
+          }
+        },
+        "aiScoringAt": "2026-04-30T11:01:01.570Z",
+        "internalNotes": "Seguimiento recomendado. Revisar disponibilidad y salario.",
+        "createdAt": "2026-05-09T11:01:01.572Z",
+        "updatedAt": "2026-05-09T14:05:28.518Z"
+      },
+      {
+        "id": "3722247b-3a4c-4c43-b02d-00daaf67f073",
+        "candidateId": "e0dd2cfb-16ca-424f-990c-3f06fc78f9d3",
+        "offerId": "6428a615-a591-49c7-9e1e-1592d7b7711f",
+        "pipelineStageId": "eccb49c0-4bbf-4b83-a459-280d48b24b9c",
+        "assignedToId": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "candidateNotes": "Perfil añadido al pipeline de demo con notas de contexto para la oferta.",
+        "appliedAt": "2026-05-01T11:01:01.570Z",
+        "lastContactAt": "2026-05-01T11:01:01.570Z",
+        "lastContactedBy": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "aiScore": "0.84",
+        "aiExplanation": "Encaje alto por habilidades clave, seniority y contexto de producto.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Validar expectativa salarial"
+          ],
+          "strengths": [
+            "Perfil alineado con el área de la oferta",
+            "Experiencia verificable en herramientas relevantes",
+            "Buen potencial de comunicación con el equipo"
+          ],
+          "matched_skills": [
+            "Product Design",
+            "Figma",
+            "Research",
+            "Accessibility"
+          ],
+          "missing_skills": [
+            "Contexto específico de dominio"
+          ],
+          "recommendation": "Avanzar a entrevista",
+          "score_breakdown": {
+            "domain": 76,
+            "skills": 84,
+            "seniority": 80
+          }
+        },
+        "aiScoringAt": "2026-05-05T11:01:01.570Z",
+        "internalNotes": "Seguimiento recomendado. Revisar disponibilidad y salario.",
+        "createdAt": "2026-05-09T11:01:01.573Z",
+        "updatedAt": "2026-05-09T11:01:01.573Z"
+      },
+      {
+        "id": "7b308720-e3c6-4486-aece-81607b60be7d",
+        "candidateId": "c49a528d-fb93-4bc8-a4de-d26ef4c3da38",
+        "offerId": "6428a615-a591-49c7-9e1e-1592d7b7711f",
+        "pipelineStageId": "9530b987-82e0-4b6a-9c99-a21a204a36b2",
+        "assignedToId": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "candidateNotes": "Candidato cargado para demo. Revisar experiencia principal, disponibilidad y fit cultural.",
+        "appliedAt": "2026-05-05T11:01:01.501Z",
+        "lastContactAt": "2026-05-01T11:01:01.501Z",
+        "lastContactedBy": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "aiScore": "0.42",
+        "aiExplanation": "Encaje limitado para esta oferta concreta; revisar si aplica a otro rol.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Profundizar en experiencia tecnica especifica",
+            "Validar motivacion por el rol"
+          ],
+          "strengths": [
+            "Experiencia relevante para la posicion",
+            "Trayectoria consistente",
+            "Buenas senales de comunicacion"
+          ],
+          "matched_skills": [
+            "SQL",
+            "Power BI",
+            "Python",
+            "People Analytics"
+          ],
+          "missing_skills": [
+            "Experiencia sectorial",
+            "Arquitectura avanzada"
+          ],
+          "recommendation": "Revisar con recruiter",
+          "score_breakdown": {
+            "domain": 32,
+            "skills": 42,
+            "seniority": 37
+          }
+        },
+        "aiScoringAt": "2026-05-08T11:01:01.501Z",
+        "internalNotes": "No encaja con los requisitos principales de esta vacante.",
+        "createdAt": "2026-05-09T11:01:01.506Z",
+        "updatedAt": "2026-05-09T11:01:01.506Z"
+      },
+      {
+        "id": "94075bc3-039c-459e-9834-314354fb42f6",
+        "candidateId": "f59a0e68-694c-4397-bfc1-04a9489cac94",
+        "offerId": "a657206a-e904-4f1d-be33-87f2aa0be72a",
+        "pipelineStageId": "55c72468-608d-4cea-a1c3-2249e780e92b",
+        "assignedToId": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "candidateNotes": "Candidato cargado para demo. Revisar experiencia principal, disponibilidad y fit cultural.",
+        "appliedAt": "2026-04-24T11:01:01.501Z",
+        "lastContactAt": "2026-05-06T11:01:01.501Z",
+        "lastContactedBy": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "aiScore": "0.83",
+        "aiExplanation": "Encaje alto por experiencia relevante y habilidades clave alineadas con la oferta.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Validar disponibilidad y expectativa salarial"
+          ],
+          "strengths": [
+            "Experiencia relevante para la posicion",
+            "Trayectoria consistente",
+            "Buenas senales de comunicacion"
+          ],
+          "matched_skills": [
+            "Playwright",
+            "Testing",
+            "JavaScript",
+            "Regression"
+          ],
+          "missing_skills": [
+            "Stakeholder management"
+          ],
+          "recommendation": "Avanzar a entrevista",
+          "score_breakdown": {
+            "domain": 73,
+            "skills": 83,
+            "seniority": 78
+          }
+        },
+        "aiScoringAt": "2026-04-29T11:01:01.501Z",
+        "internalNotes": "Perfil interesante para seguimiento. Revisar disponibilidad y expectativas.",
+        "createdAt": "2026-05-09T11:01:01.506Z",
+        "updatedAt": "2026-05-09T11:01:01.506Z"
+      },
+      {
+        "id": "b626437e-1716-4456-a713-1e39a10b9c60",
+        "candidateId": "8000761b-64d0-4869-8a7c-9bdd5154f14c",
+        "offerId": "3d73368c-1bd6-4da1-858c-b85ccaca04c7",
+        "pipelineStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "assignedToId": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "candidateNotes": "Perfil añadido al pipeline de demo con notas de contexto para la oferta.",
+        "appliedAt": "2026-04-14T11:01:01.570Z",
+        "lastContactAt": "2026-05-08T11:01:01.570Z",
+        "lastContactedBy": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "aiScore": "0.68",
+        "aiExplanation": "Encaje razonable con algunos gaps a validar en entrevista.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Validar motivación",
+            "Contrastar profundidad técnica"
+          ],
+          "strengths": [
+            "Perfil alineado con el área de la oferta",
+            "Experiencia verificable en herramientas relevantes",
+            "Buen potencial de comunicación con el equipo"
+          ],
+          "matched_skills": [
+            "Node.js",
+            "Graph API",
+            "Azure",
+            "Queues"
+          ],
+          "missing_skills": [
+            "Experiencia directa en el stack",
+            "Profundidad en arquitectura"
+          ],
+          "recommendation": "Revisar con recruiter",
+          "score_breakdown": {
+            "domain": 60,
+            "skills": 68,
+            "seniority": 64
+          }
+        },
+        "aiScoringAt": "2026-04-18T11:01:01.570Z",
+        "internalNotes": "Seguimiento recomendado. Revisar disponibilidad y salario.",
+        "createdAt": "2026-05-09T11:01:01.572Z",
+        "updatedAt": "2026-05-09T14:05:28.518Z"
+      },
+      {
+        "id": "e6756a84-d05e-4f67-85fe-faee0e64c656",
+        "candidateId": "0fc4f073-ab3f-46c9-9357-9391d68179c5",
+        "offerId": "5015d46a-40f4-45fc-b9b3-15e9aacd315e",
+        "pipelineStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "assignedToId": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "candidateNotes": "Perfil añadido al pipeline de demo con notas de contexto para la oferta.",
+        "appliedAt": "2026-04-22T11:01:01.570Z",
+        "lastContactAt": "2026-04-30T11:01:01.570Z",
+        "lastContactedBy": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "aiScore": "0.73",
+        "aiExplanation": "Encaje razonable con algunos gaps a validar en entrevista.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Validar motivación",
+            "Contrastar profundidad técnica"
+          ],
+          "strengths": [
+            "Perfil alineado con el área de la oferta",
+            "Experiencia verificable en herramientas relevantes",
+            "Buen potencial de comunicación con el equipo"
+          ],
+          "matched_skills": [
+            "Next.js",
+            "Node.js",
+            "TypeScript",
+            "Prisma"
+          ],
+          "missing_skills": [
+            "Experiencia directa en el stack",
+            "Profundidad en arquitectura"
+          ],
+          "recommendation": "Revisar con recruiter",
+          "score_breakdown": {
+            "domain": 65,
+            "skills": 73,
+            "seniority": 69
+          }
+        },
+        "aiScoringAt": "2026-04-26T11:01:01.570Z",
+        "internalNotes": "Seguimiento recomendado. Revisar disponibilidad y salario.",
+        "createdAt": "2026-05-09T11:01:01.573Z",
+        "updatedAt": "2026-05-09T14:05:37.552Z"
+      },
+      {
+        "id": "ac08afc0-9bc7-412c-975c-e8548f72ccab",
+        "candidateId": "c15a801d-0164-4d61-81af-419da42f294c",
+        "offerId": "b3a22149-352e-4869-89de-49c6e7123089",
+        "pipelineStageId": "3dc64ccd-bc39-4abe-932e-5a580884bcfa",
+        "assignedToId": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "candidateNotes": "Perfil añadido al pipeline de demo con notas de contexto para la oferta.",
+        "appliedAt": "2026-04-29T11:01:01.570Z",
+        "lastContactAt": "2026-05-03T11:01:01.570Z",
+        "lastContactedBy": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "aiScore": "0.73",
+        "aiExplanation": "Encaje razonable con algunos gaps a validar en entrevista.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Validar motivación",
+            "Contrastar profundidad técnica"
+          ],
+          "strengths": [
+            "Perfil alineado con el área de la oferta",
+            "Experiencia verificable en herramientas relevantes",
+            "Buen potencial de comunicación con el equipo"
+          ],
+          "matched_skills": [
+            "Microsoft Graph",
+            "Azure",
+            "Node.js",
+            "OAuth"
+          ],
+          "missing_skills": [
+            "Experiencia directa en el stack",
+            "Profundidad en arquitectura"
+          ],
+          "recommendation": "Revisar con recruiter",
+          "score_breakdown": {
+            "domain": 65,
+            "skills": 73,
+            "seniority": 69
+          }
+        },
+        "aiScoringAt": "2026-05-03T11:01:01.570Z",
+        "internalNotes": "Seguimiento recomendado. Revisar disponibilidad y salario.",
+        "createdAt": "2026-05-09T11:01:01.573Z",
+        "updatedAt": "2026-05-09T11:01:01.573Z"
+      },
+      {
+        "id": "bf96d576-b9db-4496-a956-122fd04e9f6d",
+        "candidateId": "21f7aebb-32d6-4012-938e-70094280f6a6",
+        "offerId": "6428a615-a591-49c7-9e1e-1592d7b7711f",
+        "pipelineStageId": "eccb49c0-4bbf-4b83-a459-280d48b24b9c",
+        "assignedToId": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "candidateNotes": "Candidato cargado para demo. Revisar experiencia principal, disponibilidad y fit cultural.",
+        "appliedAt": "2026-04-25T11:01:01.501Z",
+        "lastContactAt": "2026-05-07T11:01:01.501Z",
+        "lastContactedBy": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "aiScore": "0.71",
+        "aiExplanation": "Encaje medio: buena base tecnica con algunos gaps de dominio o seniority.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Profundizar en experiencia tecnica especifica",
+            "Validar motivacion por el rol"
+          ],
+          "strengths": [
+            "Experiencia relevante para la posicion",
+            "Trayectoria consistente",
+            "Buenas senales de comunicacion"
+          ],
+          "matched_skills": [
+            "React",
+            "TypeScript",
+            "GraphQL",
+            "Tailwind"
+          ],
+          "missing_skills": [
+            "Experiencia sectorial",
+            "Arquitectura avanzada"
+          ],
+          "recommendation": "Revisar con recruiter",
+          "score_breakdown": {
+            "domain": 61,
+            "skills": 71,
+            "seniority": 66
+          }
+        },
+        "aiScoringAt": "2026-04-30T11:01:01.501Z",
+        "internalNotes": "Perfil interesante para seguimiento. Revisar disponibilidad y expectativas.",
+        "createdAt": "2026-05-09T11:01:01.506Z",
+        "updatedAt": "2026-05-09T11:01:01.506Z"
+      },
+      {
+        "id": "cfa16505-c1c4-45e6-bec7-8b10aa0f156e",
+        "candidateId": "21f7aebb-32d6-4012-938e-70094280f6a6",
+        "offerId": "b3a22149-352e-4869-89de-49c6e7123089",
+        "pipelineStageId": "3dc64ccd-bc39-4abe-932e-5a580884bcfa",
+        "assignedToId": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "candidateNotes": "Candidato cargado para demo. Revisar experiencia principal, disponibilidad y fit cultural.",
+        "appliedAt": "2026-05-06T11:01:01.502Z",
+        "lastContactAt": "2026-05-02T11:01:01.502Z",
+        "lastContactedBy": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "aiScore": "0.79",
+        "aiExplanation": "Encaje medio: buena base tecnica con algunos gaps de dominio o seniority.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Profundizar en experiencia tecnica especifica",
+            "Validar motivacion por el rol"
+          ],
+          "strengths": [
+            "Experiencia relevante para la posicion",
+            "Trayectoria consistente",
+            "Buenas senales de comunicacion"
+          ],
+          "matched_skills": [
+            "React",
+            "TypeScript",
+            "GraphQL",
+            "Tailwind"
+          ],
+          "missing_skills": [
+            "Experiencia sectorial",
+            "Arquitectura avanzada"
+          ],
+          "recommendation": "Revisar con recruiter",
+          "score_breakdown": {
+            "domain": 69,
+            "skills": 79,
+            "seniority": 74
+          }
+        },
+        "aiScoringAt": "2026-05-08T11:01:01.502Z",
+        "internalNotes": "Perfil interesante para seguimiento. Revisar disponibilidad y expectativas.",
+        "createdAt": "2026-05-09T11:01:01.506Z",
+        "updatedAt": "2026-05-09T11:01:01.506Z"
+      },
+      {
+        "id": "a85bd1ef-db43-4336-a41e-e29bcda26680",
+        "candidateId": "5388c442-fb4c-4764-a631-94d1f91f24d4",
+        "offerId": "6428a615-a591-49c7-9e1e-1592d7b7711f",
+        "pipelineStageId": "eccb49c0-4bbf-4b83-a459-280d48b24b9c",
+        "assignedToId": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "candidateNotes": "Candidato cargado para demo. Revisar experiencia principal, disponibilidad y fit cultural.",
+        "appliedAt": "2026-05-08T11:01:01.502Z",
+        "lastContactAt": "2026-05-04T11:01:01.502Z",
+        "lastContactedBy": "0d5e64f8-df5b-4425-b231-8de264839b20",
+        "aiScore": "0.73",
+        "aiExplanation": "Encaje medio: buena base tecnica con algunos gaps de dominio o seniority.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Profundizar en experiencia tecnica especifica",
+            "Validar motivacion por el rol"
+          ],
+          "strengths": [
+            "Experiencia relevante para la posicion",
+            "Trayectoria consistente",
+            "Buenas senales de comunicacion"
+          ],
+          "matched_skills": [
+            "Figma",
+            "UX Writing",
+            "Research",
+            "Workshops"
+          ],
+          "missing_skills": [
+            "Experiencia sectorial",
+            "Arquitectura avanzada"
+          ],
+          "recommendation": "Revisar con recruiter",
+          "score_breakdown": {
+            "domain": 63,
+            "skills": 73,
+            "seniority": 68
+          }
+        },
+        "aiScoringAt": "2026-05-08T11:01:01.502Z",
+        "internalNotes": "Perfil interesante para seguimiento. Revisar disponibilidad y expectativas.",
+        "createdAt": "2026-05-09T11:01:01.506Z",
+        "updatedAt": "2026-05-09T11:01:01.506Z"
+      },
+      {
+        "id": "eca3d4c0-d045-47a8-a873-72d93938ff2e",
+        "candidateId": "f424ad1a-ea75-4c70-8969-ab6380ea15e0",
+        "offerId": "a657206a-e904-4f1d-be33-87f2aa0be72a",
+        "pipelineStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "assignedToId": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "candidateNotes": "Candidato cargado para demo. Revisar experiencia principal, disponibilidad y fit cultural.",
+        "appliedAt": "2026-05-03T11:01:01.501Z",
+        "lastContactAt": "2026-05-07T11:01:01.501Z",
+        "lastContactedBy": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "aiScore": "0.59",
+        "aiExplanation": "Encaje limitado para esta oferta concreta; revisar si aplica a otro rol.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Profundizar en experiencia tecnica especifica",
+            "Validar motivacion por el rol"
+          ],
+          "strengths": [
+            "Experiencia relevante para la posicion",
+            "Trayectoria consistente",
+            "Buenas senales de comunicacion"
+          ],
+          "matched_skills": [
+            "Playwright",
+            "TypeScript",
+            "API Testing",
+            "Test Strategy"
+          ],
+          "missing_skills": [
+            "Experiencia sectorial",
+            "Arquitectura avanzada"
+          ],
+          "recommendation": "Revisar con recruiter",
+          "score_breakdown": {
+            "domain": 49,
+            "skills": 59,
+            "seniority": 54
+          }
+        },
+        "aiScoringAt": "2026-05-08T11:01:01.501Z",
+        "internalNotes": "Perfil interesante para seguimiento. Revisar disponibilidad y expectativas.",
+        "createdAt": "2026-05-09T11:01:01.507Z",
+        "updatedAt": "2026-05-09T11:01:01.507Z"
+      },
+      {
+        "id": "48975739-8d00-40e3-9c85-7e0839925c2f",
+        "candidateId": "6088b16f-422a-4ad9-af1f-18273de041f7",
+        "offerId": "3d73368c-1bd6-4da1-858c-b85ccaca04c7",
+        "pipelineStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "assignedToId": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "candidateNotes": "Candidato cargado para demo. Revisar experiencia principal, disponibilidad y fit cultural.",
+        "appliedAt": "2026-04-21T11:01:01.501Z",
+        "lastContactAt": "2026-05-03T11:01:01.501Z",
+        "lastContactedBy": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "aiScore": "0.89",
+        "aiExplanation": "Encaje alto por experiencia relevante y habilidades clave alineadas con la oferta.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Validar disponibilidad y expectativa salarial"
+          ],
+          "strengths": [
+            "Experiencia relevante para la posicion",
+            "Trayectoria consistente",
+            "Buenas senales de comunicacion"
+          ],
+          "matched_skills": [
+            "Figma",
+            "Design Systems",
+            "Research",
+            "Prototyping"
+          ],
+          "missing_skills": [
+            "Stakeholder management"
+          ],
+          "recommendation": "Avanzar a entrevista",
+          "score_breakdown": {
+            "domain": 79,
+            "skills": 89,
+            "seniority": 84
+          }
+        },
+        "aiScoringAt": "2026-04-26T11:01:01.501Z",
+        "internalNotes": "Perfil interesante para seguimiento. Revisar disponibilidad y expectativas.",
+        "createdAt": "2026-05-09T11:01:01.505Z",
+        "updatedAt": "2026-05-09T14:05:28.518Z"
+      },
+      {
+        "id": "1e85680f-1274-462b-bbea-dcb2459b2e2e",
+        "candidateId": "b1267a61-40a2-4773-aef0-68f33e077ebe",
+        "offerId": "5015d46a-40f4-45fc-b9b3-15e9aacd315e",
+        "pipelineStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "assignedToId": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "candidateNotes": "Candidato cargado para demo. Revisar experiencia principal, disponibilidad y fit cultural.",
+        "appliedAt": "2026-05-01T11:01:01.501Z",
+        "lastContactAt": "2026-05-05T11:01:01.501Z",
+        "lastContactedBy": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "aiScore": "0.84",
+        "aiExplanation": "Encaje alto por experiencia relevante y habilidades clave alineadas con la oferta.",
+        "aiScoreDetails": {
+          "gaps": [
+            "Validar disponibilidad y expectativa salarial"
+          ],
+          "strengths": [
+            "Experiencia relevante para la posicion",
+            "Trayectoria consistente",
+            "Buenas senales de comunicacion"
+          ],
+          "matched_skills": [
+            "Recruiting",
+            "Employer Branding",
+            "Onboarding",
+            "Stakeholder Management"
+          ],
+          "missing_skills": [
+            "Stakeholder management"
+          ],
+          "recommendation": "Avanzar a entrevista",
+          "score_breakdown": {
+            "domain": 74,
+            "skills": 84,
+            "seniority": 79
+          }
+        },
+        "aiScoringAt": "2026-05-06T11:01:01.501Z",
+        "internalNotes": "Perfil interesante para seguimiento. Revisar disponibilidad y expectativas.",
+        "createdAt": "2026-05-09T11:01:01.505Z",
+        "updatedAt": "2026-05-09T14:05:37.552Z"
+      }
+    ],
+    "pipelineStages": [
+      {
+        "id": "b4f640df-7839-4b1e-a1b3-e1495da494a0",
+        "name": "Pendiente",
+        "slug": "pending",
+        "category": "todo",
+        "order": 1,
+        "color": "#94A3B8",
+        "isDefault": false,
+        "isEditable": false,
+        "isActive": true,
+        "offerId": "3631424c-c485-48ec-a740-fd1c8e0352be",
+        "isLocked": true,
+        "createdAt": "2026-05-10T10:35:57.289Z",
+        "updatedAt": "2026-05-10T10:35:57.289Z"
+      },
+      {
+        "id": "5d37f410-9731-45d7-be3d-43375d8d571a",
+        "name": "Contratado",
+        "slug": "hired",
+        "category": "done",
+        "order": 8,
+        "color": "#10B981",
+        "isDefault": false,
+        "isEditable": false,
+        "isActive": true,
+        "offerId": "3631424c-c485-48ec-a740-fd1c8e0352be",
+        "isLocked": true,
+        "createdAt": "2026-05-10T10:35:57.289Z",
+        "updatedAt": "2026-05-10T10:35:57.289Z"
+      },
+      {
+        "id": "959a98f8-4bfe-45cc-89bf-6f1335675a3a",
+        "name": "Puede encajar a futuro",
+        "slug": "may_fit_future",
+        "category": "done",
+        "order": 9,
+        "color": "#8B5CF6",
+        "isDefault": false,
+        "isEditable": false,
+        "isActive": true,
+        "offerId": "3631424c-c485-48ec-a740-fd1c8e0352be",
+        "isLocked": true,
+        "createdAt": "2026-05-10T10:35:57.289Z",
+        "updatedAt": "2026-05-10T10:35:57.289Z"
+      },
+      {
+        "id": "3d8c2194-cc70-41f4-a129-42ce1732f1ab",
+        "name": "Descartado",
+        "slug": "rejected",
+        "category": "done",
+        "order": 10,
+        "color": "#EF4444",
+        "isDefault": false,
+        "isEditable": false,
+        "isActive": true,
+        "offerId": "3631424c-c485-48ec-a740-fd1c8e0352be",
+        "isLocked": true,
+        "createdAt": "2026-05-10T10:35:57.289Z",
+        "updatedAt": "2026-05-10T10:35:57.289Z"
+      },
+      {
+        "id": "7031d1ec-ebac-4809-bc65-944be81722ff",
+        "name": "Pendiente",
+        "slug": "pending",
+        "category": "todo",
+        "order": 1,
+        "color": "#94A3B8",
+        "isDefault": false,
+        "isEditable": false,
+        "isActive": true,
+        "offerId": "3d73368c-1bd6-4da1-858c-b85ccaca04c7",
+        "isLocked": true,
+        "createdAt": "2026-05-10T10:35:57.292Z",
+        "updatedAt": "2026-05-10T10:35:57.292Z"
+      },
+      {
+        "id": "bf5c5a59-41e5-4e7c-8081-0126255395cb",
+        "name": "Contratado",
+        "slug": "hired",
+        "category": "done",
+        "order": 8,
+        "color": "#10B981",
+        "isDefault": false,
+        "isEditable": false,
+        "isActive": true,
+        "offerId": "3d73368c-1bd6-4da1-858c-b85ccaca04c7",
+        "isLocked": true,
+        "createdAt": "2026-05-10T10:35:57.292Z",
+        "updatedAt": "2026-05-10T10:35:57.292Z"
+      },
+      {
+        "id": "c95142c6-ffe7-4eab-acac-b121465d15a5",
+        "name": "Puede encajar a futuro",
+        "slug": "may_fit_future",
+        "category": "done",
+        "order": 9,
+        "color": "#8B5CF6",
+        "isDefault": false,
+        "isEditable": false,
+        "isActive": true,
+        "offerId": "3d73368c-1bd6-4da1-858c-b85ccaca04c7",
+        "isLocked": true,
+        "createdAt": "2026-05-10T10:35:57.292Z",
+        "updatedAt": "2026-05-10T10:35:57.292Z"
+      },
+      {
+        "id": "2cc4a901-6d93-42e8-acb0-a89526689af0",
+        "name": "Descartado",
+        "slug": "rejected",
+        "category": "done",
+        "order": 10,
+        "color": "#EF4444",
+        "isDefault": false,
+        "isEditable": false,
+        "isActive": true,
+        "offerId": "3d73368c-1bd6-4da1-858c-b85ccaca04c7",
+        "isLocked": true,
+        "createdAt": "2026-05-10T10:35:57.292Z",
+        "updatedAt": "2026-05-10T10:35:57.292Z"
+      },
+      {
+        "id": "a6ed79ca-0cc0-4dc3-b5d7-e792f873aea1",
+        "name": "Pendiente",
+        "slug": "pending",
+        "category": "todo",
+        "order": 1,
+        "color": "#94A3B8",
+        "isDefault": false,
+        "isEditable": false,
+        "isActive": true,
+        "offerId": "5015d46a-40f4-45fc-b9b3-15e9aacd315e",
+        "isLocked": true,
+        "createdAt": "2026-05-10T10:35:57.294Z",
+        "updatedAt": "2026-05-10T10:35:57.294Z"
+      },
+      {
+        "id": "14a05d24-eb55-40ca-8b9d-29378071f667",
+        "name": "Contratado",
+        "slug": "hired",
+        "category": "done",
+        "order": 8,
+        "color": "#10B981",
+        "isDefault": false,
+        "isEditable": false,
+        "isActive": true,
+        "offerId": "5015d46a-40f4-45fc-b9b3-15e9aacd315e",
+        "isLocked": true,
+        "createdAt": "2026-05-10T10:35:57.294Z",
+        "updatedAt": "2026-05-10T10:35:57.294Z"
+      },
+      {
+        "id": "ecc4beda-e716-4a45-9ac0-4dd8e74e8990",
+        "name": "Puede encajar a futuro",
+        "slug": "may_fit_future",
+        "category": "done",
+        "order": 9,
+        "color": "#8B5CF6",
+        "isDefault": false,
+        "isEditable": false,
+        "isActive": true,
+        "offerId": "5015d46a-40f4-45fc-b9b3-15e9aacd315e",
+        "isLocked": true,
+        "createdAt": "2026-05-10T10:35:57.294Z",
+        "updatedAt": "2026-05-10T10:35:57.294Z"
+      },
+      {
+        "id": "dbe976fa-7d2a-407a-be4d-cad79b164d62",
+        "name": "Descartado",
+        "slug": "rejected",
+        "category": "done",
+        "order": 10,
+        "color": "#EF4444",
+        "isDefault": false,
+        "isEditable": false,
+        "isActive": true,
+        "offerId": "5015d46a-40f4-45fc-b9b3-15e9aacd315e",
+        "isLocked": true,
+        "createdAt": "2026-05-10T10:35:57.294Z",
+        "updatedAt": "2026-05-10T10:35:57.294Z"
+      },
+      {
+        "id": "ad11b603-7bc4-4159-b49c-cef5d453ff91",
+        "name": "Pendiente",
+        "slug": "pending",
+        "category": "todo",
+        "order": 1,
+        "color": "#94A3B8",
+        "isDefault": false,
+        "isEditable": false,
+        "isActive": true,
+        "offerId": "6428a615-a591-49c7-9e1e-1592d7b7711f",
+        "isLocked": true,
+        "createdAt": "2026-05-10T10:35:57.279Z",
+        "updatedAt": "2026-05-10T10:35:57.279Z"
+      },
+      {
+        "id": "5cadc3ee-7ae8-45c4-a19d-e1a81ef38853",
+        "name": "Contratado",
+        "slug": "hired",
+        "category": "done",
+        "order": 8,
+        "color": "#10B981",
+        "isDefault": false,
+        "isEditable": false,
+        "isActive": true,
+        "offerId": "6428a615-a591-49c7-9e1e-1592d7b7711f",
+        "isLocked": true,
+        "createdAt": "2026-05-10T10:35:57.279Z",
+        "updatedAt": "2026-05-10T10:35:57.279Z"
+      },
+      {
+        "id": "8590140f-e4a2-4486-85b7-67c0622adab7",
+        "name": "Puede encajar a futuro",
+        "slug": "may_fit_future",
+        "category": "done",
+        "order": 9,
+        "color": "#8B5CF6",
+        "isDefault": false,
+        "isEditable": false,
+        "isActive": true,
+        "offerId": "6428a615-a591-49c7-9e1e-1592d7b7711f",
+        "isLocked": true,
+        "createdAt": "2026-05-10T10:35:57.279Z",
+        "updatedAt": "2026-05-10T10:35:57.279Z"
+      },
+      {
+        "id": "9b25b13c-e3c7-4af8-be66-2c27e8b3c6d7",
+        "name": "Descartado",
+        "slug": "rejected",
+        "category": "done",
+        "order": 10,
+        "color": "#EF4444",
+        "isDefault": false,
+        "isEditable": false,
+        "isActive": true,
+        "offerId": "6428a615-a591-49c7-9e1e-1592d7b7711f",
+        "isLocked": true,
+        "createdAt": "2026-05-10T10:35:57.279Z",
+        "updatedAt": "2026-05-10T10:35:57.279Z"
+      },
+      {
+        "id": "aa8d41ee-c772-474d-a7f2-dad805476b1b",
+        "name": "Pendiente",
+        "slug": "pending",
+        "category": "todo",
+        "order": 1,
+        "color": "#94A3B8",
+        "isDefault": false,
+        "isEditable": false,
+        "isActive": true,
+        "offerId": "a657206a-e904-4f1d-be33-87f2aa0be72a",
+        "isLocked": true,
+        "createdAt": "2026-05-10T10:35:57.287Z",
+        "updatedAt": "2026-05-10T10:35:57.287Z"
+      },
+      {
+        "id": "83bdd381-f280-4042-8a7d-a533c014e303",
+        "name": "Contratado",
+        "slug": "hired",
+        "category": "done",
+        "order": 8,
+        "color": "#10B981",
+        "isDefault": false,
+        "isEditable": false,
+        "isActive": true,
+        "offerId": "a657206a-e904-4f1d-be33-87f2aa0be72a",
+        "isLocked": true,
+        "createdAt": "2026-05-10T10:35:57.287Z",
+        "updatedAt": "2026-05-10T10:35:57.287Z"
+      },
+      {
+        "id": "7aad5475-d12f-49e4-9279-3ef6ff2c43c7",
+        "name": "Puede encajar a futuro",
+        "slug": "may_fit_future",
+        "category": "done",
+        "order": 9,
+        "color": "#8B5CF6",
+        "isDefault": false,
+        "isEditable": false,
+        "isActive": true,
+        "offerId": "a657206a-e904-4f1d-be33-87f2aa0be72a",
+        "isLocked": true,
+        "createdAt": "2026-05-10T10:35:57.287Z",
+        "updatedAt": "2026-05-10T10:35:57.287Z"
+      },
+      {
+        "id": "5d7b67c9-4f21-48e1-9edf-f0a894becdb7",
+        "name": "Descartado",
+        "slug": "rejected",
+        "category": "done",
+        "order": 10,
+        "color": "#EF4444",
+        "isDefault": false,
+        "isEditable": false,
+        "isActive": true,
+        "offerId": "a657206a-e904-4f1d-be33-87f2aa0be72a",
+        "isLocked": true,
+        "createdAt": "2026-05-10T10:35:57.287Z",
+        "updatedAt": "2026-05-10T10:35:57.287Z"
+      },
+      {
+        "id": "bb3e89ce-c159-4ed4-829e-1599e825b198",
+        "name": "Pendiente",
+        "slug": "pending",
+        "category": "todo",
+        "order": 1,
+        "color": "#94A3B8",
+        "isDefault": false,
+        "isEditable": false,
+        "isActive": true,
+        "offerId": "b3a22149-352e-4869-89de-49c6e7123089",
+        "isLocked": true,
+        "createdAt": "2026-05-10T10:35:57.285Z",
+        "updatedAt": "2026-05-10T10:35:57.285Z"
+      },
+      {
+        "id": "83ca6bae-333e-4494-87eb-8078e8b2fbb5",
+        "name": "Contratado",
+        "slug": "hired",
+        "category": "done",
+        "order": 8,
+        "color": "#10B981",
+        "isDefault": false,
+        "isEditable": false,
+        "isActive": true,
+        "offerId": "b3a22149-352e-4869-89de-49c6e7123089",
+        "isLocked": true,
+        "createdAt": "2026-05-10T10:35:57.285Z",
+        "updatedAt": "2026-05-10T10:35:57.285Z"
+      },
+      {
+        "id": "bbc94cde-6ca5-4213-8b7c-b72701da509e",
+        "name": "Puede encajar a futuro",
+        "slug": "may_fit_future",
+        "category": "done",
+        "order": 9,
+        "color": "#8B5CF6",
+        "isDefault": false,
+        "isEditable": false,
+        "isActive": true,
+        "offerId": "b3a22149-352e-4869-89de-49c6e7123089",
+        "isLocked": true,
+        "createdAt": "2026-05-10T10:35:57.285Z",
+        "updatedAt": "2026-05-10T10:35:57.285Z"
+      },
+      {
+        "id": "8c63fc96-b35f-4922-b025-5c2f011fe5a5",
+        "name": "Descartado",
+        "slug": "rejected",
+        "category": "done",
+        "order": 10,
+        "color": "#EF4444",
+        "isDefault": false,
+        "isEditable": false,
+        "isActive": true,
+        "offerId": "b3a22149-352e-4869-89de-49c6e7123089",
+        "isLocked": true,
+        "createdAt": "2026-05-10T10:35:57.285Z",
+        "updatedAt": "2026-05-10T10:35:57.285Z"
+      },
+      {
+        "id": "1fc9ae2d-39e1-482b-9b93-539c10674227",
+        "name": "Pendiente",
+        "slug": "pending",
+        "category": "todo",
+        "order": 1,
+        "color": "#94A3B8",
+        "isDefault": false,
+        "isEditable": false,
+        "isActive": true,
+        "offerId": "c9d9b47f-d8c1-4cde-9744-0244fdf46564",
+        "isLocked": true,
+        "createdAt": "2026-05-10T10:35:57.291Z",
+        "updatedAt": "2026-05-10T10:35:57.291Z"
+      },
+      {
+        "id": "fae8fdcf-d546-45a6-8b33-93b0a306cb26",
+        "name": "Contratado",
+        "slug": "hired",
+        "category": "done",
+        "order": 8,
+        "color": "#10B981",
+        "isDefault": false,
+        "isEditable": false,
+        "isActive": true,
+        "offerId": "c9d9b47f-d8c1-4cde-9744-0244fdf46564",
+        "isLocked": true,
+        "createdAt": "2026-05-10T10:35:57.291Z",
+        "updatedAt": "2026-05-10T10:35:57.291Z"
+      },
+      {
+        "id": "a0bbffbe-b635-4aa8-b5b3-40e39ac73f26",
+        "name": "Puede encajar a futuro",
+        "slug": "may_fit_future",
+        "category": "done",
+        "order": 9,
+        "color": "#8B5CF6",
+        "isDefault": false,
+        "isEditable": false,
+        "isActive": true,
+        "offerId": "c9d9b47f-d8c1-4cde-9744-0244fdf46564",
+        "isLocked": true,
+        "createdAt": "2026-05-10T10:35:57.291Z",
+        "updatedAt": "2026-05-10T10:35:57.291Z"
+      },
+      {
+        "id": "462e3a49-4150-4f5a-8946-c39d79c9ddb2",
+        "name": "Descartado",
+        "slug": "rejected",
+        "category": "done",
+        "order": 10,
+        "color": "#EF4444",
+        "isDefault": false,
+        "isEditable": false,
+        "isActive": true,
+        "offerId": "c9d9b47f-d8c1-4cde-9744-0244fdf46564",
+        "isLocked": true,
+        "createdAt": "2026-05-10T10:35:57.291Z",
+        "updatedAt": "2026-05-10T10:35:57.291Z"
+      },
+      {
+        "id": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "name": "Pendiente",
+        "slug": "pending",
+        "category": "todo",
+        "order": 1,
+        "color": "#94A3B8",
+        "isDefault": true,
+        "isEditable": false,
+        "isActive": true,
+        "offerId": null,
+        "isLocked": true,
+        "createdAt": "2026-05-09T11:01:01.232Z",
+        "updatedAt": "2026-05-09T15:28:10.648Z"
+      },
+      {
+        "id": "9886371e-98ec-4283-968d-1dfa8171ca3a",
+        "name": "Pdte respuesta",
+        "slug": "awaiting_response",
+        "category": "todo",
+        "order": 2,
+        "color": "#64748B",
+        "isDefault": true,
+        "isEditable": false,
+        "isActive": true,
+        "offerId": null,
+        "isLocked": false,
+        "createdAt": "2026-05-09T11:01:01.244Z",
+        "updatedAt": "2026-05-09T15:28:10.658Z"
+      },
+      {
+        "id": "3dc64ccd-bc39-4abe-932e-5a580884bcfa",
+        "name": "Convocado a entrevista",
+        "slug": "interview_internal",
+        "category": "in_progress",
+        "order": 3,
+        "color": "#3B82F6",
+        "isDefault": true,
+        "isEditable": false,
+        "isActive": true,
+        "offerId": null,
+        "isLocked": false,
+        "createdAt": "2026-05-09T11:01:01.245Z",
+        "updatedAt": "2026-05-09T15:28:10.659Z"
+      },
+      {
+        "id": "eccb49c0-4bbf-4b83-a459-280d48b24b9c",
+        "name": "Pdte feedback Victor y Pilar",
+        "slug": "sent_to_review",
+        "category": "in_progress",
+        "order": 4,
+        "color": "#8B5CF6",
+        "isDefault": true,
+        "isEditable": false,
+        "isActive": true,
+        "offerId": null,
+        "isLocked": false,
+        "createdAt": "2026-05-09T11:01:01.246Z",
+        "updatedAt": "2026-05-09T15:28:10.660Z"
+      },
+      {
+        "id": "76349c18-8289-4405-8e37-b82cc5d4af6d",
+        "name": "Enviado a cliente",
+        "slug": "sent_to_client",
+        "category": "in_progress",
+        "order": 5,
+        "color": "#F59E0B",
+        "isDefault": true,
+        "isEditable": false,
+        "isActive": true,
+        "offerId": null,
+        "isLocked": false,
+        "createdAt": "2026-05-09T11:01:01.247Z",
+        "updatedAt": "2026-05-09T15:28:10.661Z"
+      },
+      {
+        "id": "c60796fa-972e-4908-a7e4-cd2bde148033",
+        "name": "Pdte feedback cliente",
+        "slug": "sent_to_review_client",
+        "category": "in_progress",
+        "order": 6,
+        "color": "#F97316",
+        "isDefault": true,
+        "isEditable": false,
+        "isActive": true,
+        "offerId": null,
+        "isLocked": false,
+        "createdAt": "2026-05-09T11:01:01.248Z",
+        "updatedAt": "2026-05-09T15:28:10.662Z"
+      },
+      {
+        "id": "63b32abb-7d26-4d39-ba94-bc8d517e98e4",
+        "name": "Entrevista con cliente agendada",
+        "slug": "interview_client",
+        "category": "in_progress",
+        "order": 7,
+        "color": "#A855F7",
+        "isDefault": true,
+        "isEditable": false,
+        "isActive": true,
+        "offerId": null,
+        "isLocked": false,
+        "createdAt": "2026-05-09T11:01:01.249Z",
+        "updatedAt": "2026-05-09T15:28:10.663Z"
+      },
+      {
+        "id": "55c72468-608d-4cea-a1c3-2249e780e92b",
+        "name": "Contratado",
+        "slug": "hired",
+        "category": "done",
+        "order": 8,
+        "color": "#10B981",
+        "isDefault": true,
+        "isEditable": false,
+        "isActive": true,
+        "offerId": null,
+        "isLocked": true,
+        "createdAt": "2026-05-09T11:01:01.250Z",
+        "updatedAt": "2026-05-09T15:28:10.664Z"
+      },
+      {
+        "id": "e6fb70cb-f072-4a0b-8d5c-3f8cd6345def",
+        "name": "Puede encajar a futuro",
+        "slug": "may_fit_future",
+        "category": "done",
+        "order": 9,
+        "color": "#8B5CF6",
+        "isDefault": true,
+        "isEditable": false,
+        "isActive": true,
+        "offerId": null,
+        "isLocked": true,
+        "createdAt": "2026-05-09T21:49:50.144Z",
+        "updatedAt": "2026-05-09T21:49:50.144Z"
+      },
+      {
+        "id": "9530b987-82e0-4b6a-9c99-a21a204a36b2",
+        "name": "Descartado",
+        "slug": "rejected",
+        "category": "done",
+        "order": 10,
+        "color": "#EF4444",
+        "isDefault": true,
+        "isEditable": false,
+        "isActive": true,
+        "offerId": null,
+        "isLocked": true,
+        "createdAt": "2026-05-09T11:01:01.251Z",
+        "updatedAt": "2026-05-09T15:28:10.666Z"
+      }
+    ],
+    "history": [
+      {
+        "id": "5fc23f64-c2e6-4953-a73e-f86ea716efbe",
+        "applicationId": "a6c742aa-7393-45b1-8734-460b0ebdf249",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-04-18T11:01:01.584Z"
+      },
+      {
+        "id": "a2bdc930-6d68-4e43-89e9-a2a83d86faf2",
+        "applicationId": "48975739-8d00-40e3-9c85-7e0839925c2f",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-04-19T11:01:01.584Z"
+      },
+      {
+        "id": "012f0c9e-249d-42c0-a174-fb81f5653f03",
+        "applicationId": "690f7ad7-7873-49f8-8f0b-c7bb7f83d85a",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-04-17T11:01:01.583Z"
+      },
+      {
+        "id": "d7ad417b-1827-45f3-b7bc-297b971b40b2",
+        "applicationId": "bf96d576-b9db-4496-a956-122fd04e9f6d",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-04-23T11:01:01.584Z"
+      },
+      {
+        "id": "1784eb94-436d-4b08-ac3a-b6c196937351",
+        "applicationId": "a3251581-1d26-4ba6-8cee-b5ae23d9e920",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-04-27T11:01:01.584Z"
+      },
+      {
+        "id": "d2a97ad6-acb3-433c-b241-f9527ef53058",
+        "applicationId": "154709dd-d9aa-42ea-8bb6-88bd769c443f",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-02T11:01:01.584Z"
+      },
+      {
+        "id": "5eba092e-f224-4648-8d73-632a4a6005a4",
+        "applicationId": "b64c3108-8a0e-4653-b1d3-18c18b8333db",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-04-28T11:01:01.584Z"
+      },
+      {
+        "id": "43286a81-f776-4345-bf74-c090c64e4463",
+        "applicationId": "eca3d4c0-d045-47a8-a873-72d93938ff2e",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-01T11:01:01.584Z"
+      },
+      {
+        "id": "7b6c5676-b4aa-4952-bc42-b1863f03601d",
+        "applicationId": "a6c742aa-7393-45b1-8734-460b0ebdf249",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "3dc64ccd-bc39-4abe-932e-5a580884bcfa",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-04-25T11:01:01.584Z"
+      },
+      {
+        "id": "9f23ed24-b898-4f2e-a93d-c09eb868f20a",
+        "applicationId": "a3251581-1d26-4ba6-8cee-b5ae23d9e920",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "eccb49c0-4bbf-4b83-a459-280d48b24b9c",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-04T11:01:01.584Z"
+      },
+      {
+        "id": "46417891-ecb7-4fa9-b87b-2e2a53602143",
+        "applicationId": "b64c3108-8a0e-4653-b1d3-18c18b8333db",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "9530b987-82e0-4b6a-9c99-a21a204a36b2",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-05T11:01:01.584Z"
+      },
+      {
+        "id": "d4442a7d-8ee4-43df-bf4e-6c99bf70916a",
+        "applicationId": "690f7ad7-7873-49f8-8f0b-c7bb7f83d85a",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "63b32abb-7d26-4d39-ba94-bc8d517e98e4",
+        "changedById": "ce819db2-1e86-41e9-9acb-622fc8d7b2d6",
+        "changedAt": "2026-04-24T11:01:01.583Z"
+      },
+      {
+        "id": "469c36e7-86cb-4cf8-bad0-671c6e7597bf",
+        "applicationId": "eca3d4c0-d045-47a8-a873-72d93938ff2e",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-08T11:01:01.584Z"
+      },
+      {
+        "id": "0affc2f8-7e86-40a0-9ee2-5d87903b2ded",
+        "applicationId": "154709dd-d9aa-42ea-8bb6-88bd769c443f",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "ce819db2-1e86-41e9-9acb-622fc8d7b2d6",
+        "changedAt": "2026-05-09T11:01:01.584Z"
+      },
+      {
+        "id": "0de0a3ff-ff35-4e31-8ff0-fa18f8d324fd",
+        "applicationId": "48975739-8d00-40e3-9c85-7e0839925c2f",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "eccb49c0-4bbf-4b83-a459-280d48b24b9c",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-04-26T11:01:01.584Z"
+      },
+      {
+        "id": "23a755b8-e47f-49c6-a519-5bb77661a3b7",
+        "applicationId": "bf96d576-b9db-4496-a956-122fd04e9f6d",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "eccb49c0-4bbf-4b83-a459-280d48b24b9c",
+        "changedById": "ce819db2-1e86-41e9-9acb-622fc8d7b2d6",
+        "changedAt": "2026-04-30T11:01:01.584Z"
+      },
+      {
+        "id": "21c25ce6-207d-4e90-9c75-f77c9cd3643c",
+        "applicationId": "3371180c-f746-4402-a6f6-b94d70e0b052",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-08T11:01:01.584Z"
+      },
+      {
+        "id": "fb751ae9-ceaf-45a8-af0b-eedb69bca4fd",
+        "applicationId": "3371180c-f746-4402-a6f6-b94d70e0b052",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-09T11:01:01.584Z"
+      },
+      {
+        "id": "f0a1d5ee-291e-4f91-8d05-e390d9e69288",
+        "applicationId": "998cce58-aa41-4f2b-ad2f-aa5221e2897b",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-08T11:01:01.584Z"
+      },
+      {
+        "id": "d9540293-f361-4d91-aef2-1a095a1d50bb",
+        "applicationId": "998cce58-aa41-4f2b-ad2f-aa5221e2897b",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "9530b987-82e0-4b6a-9c99-a21a204a36b2",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-09T11:01:01.584Z"
+      },
+      {
+        "id": "fc2ac733-55e1-4b6a-83d9-75dc392bd3cc",
+        "applicationId": "347fe404-b194-4850-bbb5-50d9ff595f35",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-08T11:01:01.584Z"
+      },
+      {
+        "id": "3c94f4ea-114f-4562-a098-e5a59956a83c",
+        "applicationId": "347fe404-b194-4850-bbb5-50d9ff595f35",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "ce819db2-1e86-41e9-9acb-622fc8d7b2d6",
+        "changedAt": "2026-05-09T11:01:01.584Z"
+      },
+      {
+        "id": "abf98f2d-3593-4a42-bcbe-3639ce31d3f5",
+        "applicationId": "f513ba68-b5c9-43f3-9d63-0bcd0370147d",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-08T11:01:01.584Z"
+      },
+      {
+        "id": "b202debf-ce72-4d70-a65e-9a9ffa4eac4f",
+        "applicationId": "f513ba68-b5c9-43f3-9d63-0bcd0370147d",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "63b32abb-7d26-4d39-ba94-bc8d517e98e4",
+        "changedById": "ce819db2-1e86-41e9-9acb-622fc8d7b2d6",
+        "changedAt": "2026-05-09T11:01:01.584Z"
+      },
+      {
+        "id": "fb0f6fb2-8209-4cbc-98a8-1bc4416af06d",
+        "applicationId": "cf2e0153-09d7-469f-8763-556df1f135dd",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-08T11:01:01.584Z"
+      },
+      {
+        "id": "773c18f9-9887-47de-b80a-29dc12fffe92",
+        "applicationId": "cf2e0153-09d7-469f-8763-556df1f135dd",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "eccb49c0-4bbf-4b83-a459-280d48b24b9c",
+        "changedById": "ce819db2-1e86-41e9-9acb-622fc8d7b2d6",
+        "changedAt": "2026-05-09T11:01:01.584Z"
+      },
+      {
+        "id": "4200c5b2-84fd-4cc6-aff3-718cc7fae4d9",
+        "applicationId": "2d136a5f-6af8-478f-8f74-58f5fe210459",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-08T11:01:01.584Z"
+      },
+      {
+        "id": "9be1f3a4-0115-41bb-97ff-53338a8447c2",
+        "applicationId": "2d136a5f-6af8-478f-8f74-58f5fe210459",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "eccb49c0-4bbf-4b83-a459-280d48b24b9c",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-09T11:01:01.584Z"
+      },
+      {
+        "id": "2e22e35a-7ac9-40b3-9cab-58e6d702374b",
+        "applicationId": "89565eff-13c5-4878-960f-3ee760d93eec",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-08T11:01:01.584Z"
+      },
+      {
+        "id": "fd88d71b-46b6-432a-bb07-34a48d4aceff",
+        "applicationId": "89565eff-13c5-4878-960f-3ee760d93eec",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-09T11:01:01.584Z"
+      },
+      {
+        "id": "318ef357-0067-4722-a6bd-f03aa6c26b76",
+        "applicationId": "0b03001b-ea7f-46d4-8935-86219525e081",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-08T11:01:01.584Z"
+      },
+      {
+        "id": "ab318078-f059-4c5f-85a9-1b9294705dcc",
+        "applicationId": "0b03001b-ea7f-46d4-8935-86219525e081",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "eccb49c0-4bbf-4b83-a459-280d48b24b9c",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-09T11:01:01.584Z"
+      },
+      {
+        "id": "fcd17ebf-c542-4310-b5c7-cea3a5998e4e",
+        "applicationId": "d13b45fd-9878-4316-9e27-bdd862a167e3",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-08T11:01:01.584Z"
+      },
+      {
+        "id": "ef1c72a8-26ad-4453-92e3-e6644528dbc0",
+        "applicationId": "d13b45fd-9878-4316-9e27-bdd862a167e3",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "63b32abb-7d26-4d39-ba94-bc8d517e98e4",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-09T11:01:01.584Z"
+      },
+      {
+        "id": "4e5d99d0-0dbf-4701-8a4f-bb4f35b90160",
+        "applicationId": "ac08afc0-9bc7-412c-975c-e8548f72ccab",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-08T11:01:01.584Z"
+      },
+      {
+        "id": "9dd9cc07-546d-4afe-b96d-5a31d45e176e",
+        "applicationId": "ac08afc0-9bc7-412c-975c-e8548f72ccab",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "3dc64ccd-bc39-4abe-932e-5a580884bcfa",
+        "changedById": "ce819db2-1e86-41e9-9acb-622fc8d7b2d6",
+        "changedAt": "2026-05-09T11:01:01.584Z"
+      },
+      {
+        "id": "87cfe7bc-2065-450a-a2f4-ca608a722b44",
+        "applicationId": "3722247b-3a4c-4c43-b02d-00daaf67f073",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-08T11:01:01.584Z"
+      },
+      {
+        "id": "3886bce2-c676-41dd-b7c0-91b1e40cdcd9",
+        "applicationId": "3722247b-3a4c-4c43-b02d-00daaf67f073",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "eccb49c0-4bbf-4b83-a459-280d48b24b9c",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-09T11:01:01.584Z"
+      },
+      {
+        "id": "fcb5f308-c555-4d8b-b3a0-320798d01fb5",
+        "applicationId": "8b2518bc-f9e2-44c3-889c-9bc02aa399ad",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-07T11:01:01.584Z"
+      },
+      {
+        "id": "bfe19366-93b7-4f36-9c05-717b6128fe39",
+        "applicationId": "8b2518bc-f9e2-44c3-889c-9bc02aa399ad",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-09T11:01:01.584Z"
+      },
+      {
+        "id": "4ac1fc4a-8dfe-4d02-b1b7-ac49cfa2bef4",
+        "applicationId": "47dced97-23b3-42da-9237-8acfb92d65bc",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-04-26T11:01:01.584Z"
+      },
+      {
+        "id": "a6e23f0b-4656-4cf4-966c-972ec542e190",
+        "applicationId": "47dced97-23b3-42da-9237-8acfb92d65bc",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "ce819db2-1e86-41e9-9acb-622fc8d7b2d6",
+        "changedAt": "2026-05-03T11:01:01.584Z"
+      },
+      {
+        "id": "7d92682e-f517-488e-9a48-5cc6ce92fa27",
+        "applicationId": "5e3e7e62-dc12-4266-b7aa-8df4e96aca5b",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-08T11:01:01.584Z"
+      },
+      {
+        "id": "cfd08616-b7d2-4dc9-acaa-859fbcfff8b0",
+        "applicationId": "5e3e7e62-dc12-4266-b7aa-8df4e96aca5b",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "9530b987-82e0-4b6a-9c99-a21a204a36b2",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-09T11:01:01.584Z"
+      },
+      {
+        "id": "987d008d-d4b3-4e4b-a455-358c76e74cc3",
+        "applicationId": "381710aa-e612-4b0c-9732-b236552e13f0",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-04-20T11:01:01.584Z"
+      },
+      {
+        "id": "07ec6d29-4388-4640-8104-064847e177a1",
+        "applicationId": "381710aa-e612-4b0c-9732-b236552e13f0",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "eccb49c0-4bbf-4b83-a459-280d48b24b9c",
+        "changedById": "ce819db2-1e86-41e9-9acb-622fc8d7b2d6",
+        "changedAt": "2026-04-27T11:01:01.584Z"
+      },
+      {
+        "id": "bc7f2c1d-0e96-4dd9-9f12-99b198ff46ff",
+        "applicationId": "e6756a84-d05e-4f67-85fe-faee0e64c656",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-08T11:01:01.584Z"
+      },
+      {
+        "id": "f026f2ec-1350-403a-bc02-b8a84713c64b",
+        "applicationId": "e6756a84-d05e-4f67-85fe-faee0e64c656",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "3dc64ccd-bc39-4abe-932e-5a580884bcfa",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-09T11:01:01.584Z"
+      },
+      {
+        "id": "6c1f0d86-58da-4c84-878c-fbce08224229",
+        "applicationId": "978089de-7faf-40ac-90e3-861247bf6df6",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-04-30T11:01:01.584Z"
+      },
+      {
+        "id": "67b4f5d0-b9e1-499e-9447-9e7bc5fc864f",
+        "applicationId": "978089de-7faf-40ac-90e3-861247bf6df6",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "63b32abb-7d26-4d39-ba94-bc8d517e98e4",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-07T11:01:01.584Z"
+      },
+      {
+        "id": "54ad4765-11d9-4ab6-93d2-370b3b4d5f33",
+        "applicationId": "eb3c5820-580a-4a4a-aa06-78c8cd9d6daf",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-04-24T11:01:01.584Z"
+      },
+      {
+        "id": "4c2375c8-1f48-45c1-8556-b41cbe659537",
+        "applicationId": "eb3c5820-580a-4a4a-aa06-78c8cd9d6daf",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "eccb49c0-4bbf-4b83-a459-280d48b24b9c",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-01T11:01:01.584Z"
+      },
+      {
+        "id": "bb632c8c-4481-4c42-b753-f46a40db2d32",
+        "applicationId": "de875d46-5d7b-425f-ab87-2d602b649a41",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-08T11:01:01.584Z"
+      },
+      {
+        "id": "74fee304-980b-4d64-9330-628a190c1d2a",
+        "applicationId": "de875d46-5d7b-425f-ab87-2d602b649a41",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "63b32abb-7d26-4d39-ba94-bc8d517e98e4",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-09T11:01:01.584Z"
+      },
+      {
+        "id": "2e70fca6-73f9-4f65-b503-a6c4e411ccdb",
+        "applicationId": "a85bd1ef-db43-4336-a41e-e29bcda26680",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-06T11:01:01.584Z"
+      },
+      {
+        "id": "33a2d1da-3a93-4742-a1ee-70bcd75e904c",
+        "applicationId": "a85bd1ef-db43-4336-a41e-e29bcda26680",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "eccb49c0-4bbf-4b83-a459-280d48b24b9c",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-09T11:01:01.584Z"
+      },
+      {
+        "id": "74b76d6a-999c-4906-8f26-9709448b3687",
+        "applicationId": "94075bc3-039c-459e-9834-314354fb42f6",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-04-22T11:01:01.584Z"
+      },
+      {
+        "id": "086adf26-da6e-46bb-93c2-32ea6970d150",
+        "applicationId": "94075bc3-039c-459e-9834-314354fb42f6",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "55c72468-608d-4cea-a1c3-2249e780e92b",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-04-29T11:01:01.584Z"
+      },
+      {
+        "id": "4c1dc37d-07ae-436e-a79e-6b4f83ac3472",
+        "applicationId": "7b308720-e3c6-4486-aece-81607b60be7d",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-03T11:01:01.584Z"
+      },
+      {
+        "id": "242ee376-a6ac-4813-be11-d604a2a1e10e",
+        "applicationId": "7b308720-e3c6-4486-aece-81607b60be7d",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "9530b987-82e0-4b6a-9c99-a21a204a36b2",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-09T11:01:01.584Z"
+      },
+      {
+        "id": "0abbbad3-a71a-438b-9d27-4f328e9611c0",
+        "applicationId": "cfa16505-c1c4-45e6-bec7-8b10aa0f156e",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-04T11:01:01.584Z"
+      },
+      {
+        "id": "090e9a30-f67a-4f98-9703-57857f265cfc",
+        "applicationId": "cfa16505-c1c4-45e6-bec7-8b10aa0f156e",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "3dc64ccd-bc39-4abe-932e-5a580884bcfa",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-09T11:01:01.584Z"
+      },
+      {
+        "id": "02cbe107-12ad-4a5d-b733-c36bb4f5ea0d",
+        "applicationId": "b626437e-1716-4456-a713-1e39a10b9c60",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-08T11:01:01.584Z"
+      },
+      {
+        "id": "8ca9f902-23ac-4116-aaf4-8e5c568d0179",
+        "applicationId": "b626437e-1716-4456-a713-1e39a10b9c60",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "eccb49c0-4bbf-4b83-a459-280d48b24b9c",
+        "changedById": "ce819db2-1e86-41e9-9acb-622fc8d7b2d6",
+        "changedAt": "2026-05-09T11:01:01.584Z"
+      },
+      {
+        "id": "0992f93f-135d-47ef-8153-896b64090858",
+        "applicationId": "53b62488-ec82-4a54-a638-7dd4a8ebb8f9",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-04-25T11:01:01.584Z"
+      },
+      {
+        "id": "720a656b-f16d-416f-92a6-d0921e033d8e",
+        "applicationId": "53b62488-ec82-4a54-a638-7dd4a8ebb8f9",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "3dc64ccd-bc39-4abe-932e-5a580884bcfa",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-02T11:01:01.584Z"
+      },
+      {
+        "id": "e5c000cc-f48e-40ac-9aff-952943dfc791",
+        "applicationId": "504e25cc-4a65-4d01-a5ec-eeb4be2b0fee",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-05T11:01:01.584Z"
+      },
+      {
+        "id": "1d973fcf-1944-436b-b71e-afe1ea04afca",
+        "applicationId": "504e25cc-4a65-4d01-a5ec-eeb4be2b0fee",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "ce819db2-1e86-41e9-9acb-622fc8d7b2d6",
+        "changedAt": "2026-05-09T11:01:01.584Z"
+      },
+      {
+        "id": "5c65d075-1274-4c00-9457-a836259bf30b",
+        "applicationId": "6e334332-e482-4047-9111-90c712f769fb",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-04-21T11:01:01.584Z"
+      },
+      {
+        "id": "87ab4e7c-c51a-4044-9471-9c9330014c7c",
+        "applicationId": "6e334332-e482-4047-9111-90c712f769fb",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-04-28T11:01:01.584Z"
+      },
+      {
+        "id": "d5059854-72a6-4ac5-a7be-dee964f9bfff",
+        "applicationId": "e55f7f84-5a8d-4be9-bf4b-4988f40c9280",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-08T11:01:01.584Z"
+      },
+      {
+        "id": "0540d7b1-2ebf-41ab-b3ca-6a2fd8ebf120",
+        "applicationId": "e55f7f84-5a8d-4be9-bf4b-4988f40c9280",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "3dc64ccd-bc39-4abe-932e-5a580884bcfa",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-09T11:01:01.584Z"
+      },
+      {
+        "id": "ff4fc8ea-393d-4a8a-9fee-6872c1a59066",
+        "applicationId": "1e85680f-1274-462b-bbea-dcb2459b2e2e",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-04-29T11:01:01.584Z"
+      },
+      {
+        "id": "80e44cfb-a0f3-4a13-ae8c-f04e539c14ce",
+        "applicationId": "1e85680f-1274-462b-bbea-dcb2459b2e2e",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "63b32abb-7d26-4d39-ba94-bc8d517e98e4",
+        "changedById": "ce819db2-1e86-41e9-9acb-622fc8d7b2d6",
+        "changedAt": "2026-05-06T11:01:01.584Z"
+      },
+      {
+        "id": "762271c1-9ce4-43f2-ab0c-a22005b79edb",
+        "applicationId": "a6945f70-243d-400e-ad77-6419087e0f8f",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-08T11:01:01.584Z"
+      },
+      {
+        "id": "b644a47c-1df2-4927-a146-2a6183e0b240",
+        "applicationId": "a6945f70-243d-400e-ad77-6419087e0f8f",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "ce819db2-1e86-41e9-9acb-622fc8d7b2d6",
+        "changedAt": "2026-05-09T11:01:01.584Z"
+      },
+      {
+        "id": "fa4dca4a-1f9d-420c-9baf-3c5956fe75dc",
+        "applicationId": "66958465-dc0f-46e8-8a08-324b89096ff6",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-08T11:01:01.584Z"
+      },
+      {
+        "id": "beec3c12-2ee5-4e08-ad46-6afa6ce3e55d",
+        "applicationId": "66958465-dc0f-46e8-8a08-324b89096ff6",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "eccb49c0-4bbf-4b83-a459-280d48b24b9c",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-09T11:01:01.584Z"
+      },
+      {
+        "id": "c58aa311-6665-4ef2-a359-dcef4ac3b434",
+        "applicationId": "803c587d-1198-45be-8f8f-b10be2810842",
+        "previousStageId": null,
+        "newStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "changedById": "cfb945ab-a175-4c1c-92bc-b654274d24c2",
+        "changedAt": "2026-05-08T11:01:01.584Z"
+      },
+      {
+        "id": "e5383128-2fe9-414c-9339-472502cb4ec0",
+        "applicationId": "803c587d-1198-45be-8f8f-b10be2810842",
+        "previousStageId": "e917ef14-2ff4-4f50-bf59-ddc155c25894",
+        "newStageId": "9530b987-82e0-4b6a-9c99-a21a204a36b2",
+        "changedById": "ce819db2-1e86-41e9-9acb-622fc8d7b2d6",
+        "changedAt": "2026-05-09T11:01:01.584Z"
+      }
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "dbName": "smartcrm",
+  "timestamp": "2026-05-11T07:55:29.626Z",
+  "result": {
+    "processed": 7,
+    "stagesAdded": 42,
+    "skipped": 0,
+    "errors": 0,
+    "details": [
+      {
+        "offerTitle": "Senior Fullstack Engineer",
+        "added": 6,
+        "skipped": false
+      },
+      {
+        "offerTitle": "Backend Engineer Integrations",
+        "added": 6,
+        "skipped": false
+      },
+      {
+        "offerTitle": "Junior QA Automation",
+        "added": 6,
+        "skipped": false
+      },
+      {
+        "offerTitle": "Data Analyst People Ops",
+        "added": 6,
+        "skipped": false
+      },
+      {
+        "offerTitle": "Product Designer B2B",
+        "added": 6,
+        "skipped": false
+      },
+      {
+        "offerTitle": "Talent Acquisition Partner",
+        "added": 6,
+        "skipped": false
+      },
+      {
+        "offerTitle": "sdf",
+        "added": 6,
+        "skipped": false
+      }
+    ]
+  }
+}

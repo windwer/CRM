@@ -1,0 +1,17 @@
+{
+  "dbName": "smartcrm_test",
+  "timestamp": "2026-05-11T07:55:24.360Z",
+  "result": {
+    "processed": 0,
+    "stagesAdded": 0,
+    "skipped": 1,
+    "errors": 0,
+    "details": [
+      {
+        "offerTitle": "Zero Stages Offer",
+        "added": 0,
+        "skipped": true
+      }
+    ]
+  }
+}

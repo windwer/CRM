@@ -1,0 +1,27 @@
+{
+  "dbName": "smartcrm_pro",
+  "timestamp": "2026-05-11T07:55:37.338Z",
+  "result": {
+    "processed": 3,
+    "stagesAdded": 30,
+    "skipped": 0,
+    "errors": 0,
+    "details": [
+      {
+        "offerTitle": "Jefe de Proyecto de Infraestructura",
+        "added": 10,
+        "skipped": false
+      },
+      {
+        "offerTitle": "Tecnico IT",
+        "added": 10,
+        "skipped": false
+      },
+      {
+        "offerTitle": "Project Manager",
+        "added": 10,
+        "skipped": false
+      }
+    ]
+  }
+}
