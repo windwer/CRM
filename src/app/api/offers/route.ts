@@ -69,15 +69,15 @@ export async function POST(req: NextRequest) {
         },
       });
 
-      // Clone the 4 locked template stages for this offer's pipeline
-      const lockedTemplates = await tx.pipelineStage.findMany({
-        where: { offerId: null, isLocked: true },
+      // Clone the full template pipeline (all 10 stages, preserving locked status)
+      const templateStages = await tx.pipelineStage.findMany({
+        where: { offerId: null },
         orderBy: { order: "asc" },
       });
 
-      if (lockedTemplates.length > 0) {
+      if (templateStages.length > 0) {
         await tx.pipelineStage.createMany({
-          data: lockedTemplates.map((s) => ({
+          data: templateStages.map((s) => ({
             name:       s.name,
             slug:       s.slug,
             category:   s.category,
@@ -87,7 +87,7 @@ export async function POST(req: NextRequest) {
             isEditable: false,
             isActive:   true,
             offerId:    newOffer.id,
-            isLocked:   true,
+            isLocked:   s.isLocked,
           })),
         });
       }
