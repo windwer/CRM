@@ -1,0 +1,34 @@
+
+> @smartcrm/web@0.1.0 dev C:\Proyectos\CRM\packages\web
+> next dev
+
+  ▲ Next.js 14.2.35
+  - Local:        http://localhost:3000
+  - Environments: .env.local
+  - Experiments (use with caution):
+    · instrumentationHook
+
+ ✓ Starting...
+ ✓ Compiled /instrumentation in 388ms (47 modules)
+ ✓ Ready in 1914ms
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Parsing of C:\Proyectos\CRM\node_modules\.pnpm\next-intl@4.11.0_next@14.2.35_@babel+core@7.29.0_react-dom@18.3.1_react@18.3.1__react@18.3.1__w4uvsguf4eioebsngj3unmkpx4\node_modules\next-intl\dist\esm\production\extractor\format\index.js for build dependencies failed at 'import(t)'.
+<w> Build dependencies behind this expression are ignored and might cause incorrect cache invalidation.
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Parsing of C:\Proyectos\CRM\node_modules\.pnpm\next-intl@4.11.0_next@14.2.35_@babel+core@7.29.0_react-dom@18.3.1_react@18.3.1__react@18.3.1__w4uvsguf4eioebsngj3unmkpx4\node_modules\next-intl\dist\esm\production\extractor\format\index.js for build dependencies failed at 'import(t)'.
+<w> Build dependencies behind this expression are ignored and might cause incorrect cache invalidation.
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Parsing of C:\Proyectos\CRM\node_modules\.pnpm\next-intl@4.11.0_next@14.2.35_@babel+core@7.29.0_react-dom@18.3.1_react@18.3.1__react@18.3.1__w4uvsguf4eioebsngj3unmkpx4\node_modules\next-intl\dist\esm\production\extractor\format\index.js for build dependencies failed at 'import(t)'.
+<w> Build dependencies behind this expression are ignored and might cause incorrect cache invalidation.
+ ○ Compiling /api/health ...
+ ✓ Compiled /api/health in 640ms (83 modules)
+ GET /api/health 200 in 860ms
+ ○ Compiling /src/middleware ...
+ ✓ Compiled /src/middleware in 1375ms (199 modules)
+ ○ Compiling /dashboard ...
+ ✓ Compiled /dashboard in 13.3s (3347 modules)
+ GET /dashboard 200 in 14269ms
+ ✓ Compiled in 1140ms (1569 modules)
+ ○ Compiling /dashboard/candidates ...
+ ✓ Compiled /dashboard/candidates in 1320ms (3396 modules)
+ GET /dashboard/candidates 200 in 1693ms
+ ○ Compiling /dashboard/offers ...
+ ✓ Compiled /dashboard/offers in 901ms (3432 modules)
+ GET /dashboard/offers 200 in 1047ms
