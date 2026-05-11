@@ -13,34 +13,52 @@ export function useCandidates(page = 1, limit = 20) {
   const queryClient = useQueryClient();
   const { candidateFilters } = useFilterStore();
 
-  const isFiltering = 
-    candidateFilters.skills.length > 0 || 
-    candidateFilters.experienceMin !== undefined || 
-    candidateFilters.experienceMax !== undefined || 
+  const isFiltering =
+    candidateFilters.skills.length > 0 ||
+    candidateFilters.experienceMin !== undefined ||
+    candidateFilters.experienceMax !== undefined ||
     candidateFilters.seniority !== undefined;
 
   const fetchCandidates = async () => {
-    const endpoint = isFiltering ? "/api/candidates/search" : "/api/candidates";
-    
     const params = new URLSearchParams({
       page: page.toString(),
       limit: limit.toString(),
     });
 
     if (isFiltering) {
-      candidateFilters.skills.forEach(skill => params.append("skills[]", skill));
+      const endpoint = "/api/candidates/search";
+      candidateFilters.skills.forEach((skill) => params.append("skills[]", skill));
       if (candidateFilters.skillsMode) params.append("skills_mode", candidateFilters.skillsMode);
-      if (candidateFilters.experienceMin !== undefined) params.append("exp_min", candidateFilters.experienceMin.toString());
-      if (candidateFilters.experienceMax !== undefined) params.append("exp_max", candidateFilters.experienceMax.toString());
+      if (candidateFilters.experienceMin !== undefined)
+        params.append("exp_min", candidateFilters.experienceMin.toString());
+      if (candidateFilters.experienceMax !== undefined)
+        params.append("exp_max", candidateFilters.experienceMax.toString());
       if (candidateFilters.seniority) params.append("seniority", candidateFilters.seniority);
+
+      const { data } = await axios.get(endpoint, { params });
+      return data;
     }
 
-    const { data } = await axios.get(endpoint, { params });
+    // Base endpoint with new filters
+    params.append("talent_pool_status", candidateFilters.talentPoolStatus);
+    if (candidateFilters.salaryMin !== undefined)
+      params.append("salary_min", candidateFilters.salaryMin.toString());
+    if (candidateFilters.salaryMax !== undefined)
+      params.append("salary_max", candidateFilters.salaryMax.toString());
+    params.append("include_undefined", candidateFilters.includeUndefinedSalary.toString());
+
+    const { data } = await axios.get("/api/candidates", { params });
     return data;
   };
 
   const query = useQuery({
-    queryKey: ["candidates", page, limit, candidateFilters, isFiltering],
+    queryKey: [
+      "candidates",
+      page,
+      limit,
+      candidateFilters,
+      isFiltering,
+    ],
     queryFn: fetchCandidates,
   });
 
@@ -51,16 +69,16 @@ export function useCandidates(page = 1, limit = 20) {
       toast({ title: "Candidate created successfully" });
     },
     onError: (error: any) => {
-      toast({ 
-        title: "Error creating candidate", 
+      toast({
+        title: "Error creating candidate",
         description: error.response?.data?.error?.message || "Unknown error",
-        variant: "destructive" 
+        variant: "destructive",
       });
     },
   });
 
   const updateMutation = useMutation({
-    mutationFn: ({ id, data }: { id: string; data: any }) => 
+    mutationFn: ({ id, data }: { id: string; data: any }) =>
       axios.put(`/api/candidates/${id}`, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["candidates"] });
@@ -106,8 +124,7 @@ export function useBulkApplyCandidates() {
     },
     onError: (error: any) => {
       toast({
-        title:
-          error?.response?.data?.error?.message ?? t("serverError"),
+        title: error?.response?.data?.error?.message ?? t("serverError"),
         variant: "destructive",
       });
     },
@@ -126,6 +143,46 @@ export function useUpdateCandidate(candidateId: string) {
       queryClient.invalidateQueries({ queryKey: ["candidates"] });
       queryClient.invalidateQueries({ queryKey: ["candidate", candidateId] });
       queryClient.invalidateQueries({ queryKey: ["dashboard-stats"] });
+    },
+  });
+}
+
+export function useUpdateTalentPool(candidateId: string) {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (talent_pool_status: string) => {
+      const response = await api.patch(`/candidates/${candidateId}/talent-pool`, {
+        talent_pool_status,
+      });
+      return response.data.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["candidates"] });
+      queryClient.invalidateQueries({ queryKey: ["candidate", candidateId] });
+    },
+  });
+}
+
+export function useBulkTalentPool() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (data: {
+      candidate_ids: string[];
+      talent_pool_status: "active" | "may_fit_future" | "discarded";
+    }) => {
+      const response = await api.patch("/candidates/bulk-talent-pool", data);
+      return response.data.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["candidates"] });
+    },
+    onError: (error: any) => {
+      toast({
+        title: error?.response?.data?.error?.message || "Error al actualizar candidatos",
+        variant: "destructive",
+      });
     },
   });
 }

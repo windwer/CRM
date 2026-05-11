@@ -52,10 +52,10 @@ export function SearchAdvanced() {
                 placeholder={t("skillsPlaceholder")}
                 className="pr-10"
               />
-              <Button 
-                type="button" 
-                variant="ghost" 
-                size="icon" 
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
                 className="absolute right-0 top-0 h-full hover:bg-transparent"
                 onClick={addSkill}
               >
@@ -67,43 +67,6 @@ export function SearchAdvanced() {
             {candidateFilters.skills.map((skill) => (
               <SearchSkillTag key={skill} skill={skill} onRemove={removeSkill} />
             ))}
-          </div>
-        </div>
-
-        {/* Logic Toggle */}
-        <div className="space-y-2">
-          <Label>{t("mode.and")}</Label>
-          <Select
-            value={candidateFilters.skillsMode}
-            onValueChange={(val: "AND" | "OR") => setCandidateFilters({ skillsMode: val })}
-          >
-            <SelectTrigger>
-              <SelectValue placeholder={t("mode.and")} />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="AND">{t("mode.and")}</SelectItem>
-              <SelectItem value="OR">{t("mode.or")}</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-
-        {/* Experience Range */}
-        <div className="space-y-2">
-          <Label>{t("experienceMin")} / {t("experienceMax")}</Label>
-          <div className="flex items-center gap-2">
-            <Input
-              type="number"
-              placeholder={t("experienceMin")}
-              value={candidateFilters.experienceMin ?? ""}
-              onChange={(e) => setCandidateFilters({ experienceMin: e.target.value ? parseInt(e.target.value) : undefined })}
-            />
-            <span className="text-muted-foreground">-</span>
-            <Input
-              type="number"
-              placeholder={t("experienceMax")}
-              value={candidateFilters.experienceMax ?? ""}
-              onChange={(e) => setCandidateFilters({ experienceMax: e.target.value ? parseInt(e.target.value) : undefined })}
-            />
           </div>
         </div>
 
@@ -126,10 +89,120 @@ export function SearchAdvanced() {
             </SelectContent>
           </Select>
         </div>
+
+        {/* Experience Range */}
+        <div className="space-y-2">
+          <Label>{t("experienceMin")} / {t("experienceMax")}</Label>
+          <div className="flex items-center gap-2">
+            <Input
+              type="number"
+              placeholder={t("experienceMin")}
+              value={candidateFilters.experienceMin ?? ""}
+              onChange={(e) =>
+                setCandidateFilters({
+                  experienceMin: e.target.value ? parseInt(e.target.value) : undefined,
+                })
+              }
+            />
+            <span className="text-muted-foreground">-</span>
+            <Input
+              type="number"
+              placeholder={t("experienceMax")}
+              value={candidateFilters.experienceMax ?? ""}
+              onChange={(e) =>
+                setCandidateFilters({
+                  experienceMax: e.target.value ? parseInt(e.target.value) : undefined,
+                })
+              }
+            />
+          </div>
+        </div>
+
+        {/* Talent Pool Status */}
+        <div className="space-y-2">
+          <Label>Estado en pool</Label>
+          <Select
+            value={candidateFilters.talentPoolStatus}
+            onValueChange={(val) =>
+              setCandidateFilters({ talentPoolStatus: val as any })
+            }
+          >
+            <SelectTrigger>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="exclude_discarded">Activos (excl. descartados)</SelectItem>
+              <SelectItem value="active">Solo activos</SelectItem>
+              <SelectItem value="may_fit_future">Encajan a futuro</SelectItem>
+              <SelectItem value="discarded">Descartados</SelectItem>
+              <SelectItem value="all">Todos</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
+        {/* Salary Range */}
+        <div className="space-y-2 lg:col-span-2">
+          <Label>Pretensión salarial (EUR/año)</Label>
+          <div className="flex items-center gap-2">
+            <Input
+              type="number"
+              placeholder="Mínimo"
+              min={0}
+              value={candidateFilters.salaryMin ?? ""}
+              onChange={(e) =>
+                setCandidateFilters({
+                  salaryMin: e.target.value ? parseInt(e.target.value) : undefined,
+                })
+              }
+            />
+            <span className="text-muted-foreground">-</span>
+            <Input
+              type="number"
+              placeholder="Máximo"
+              min={0}
+              value={candidateFilters.salaryMax ?? ""}
+              onChange={(e) =>
+                setCandidateFilters({
+                  salaryMax: e.target.value ? parseInt(e.target.value) : undefined,
+                })
+              }
+            />
+          </div>
+          <label className="flex items-center gap-2 text-xs text-muted-foreground cursor-pointer">
+            <input
+              type="checkbox"
+              checked={candidateFilters.includeUndefinedSalary}
+              onChange={(e) => setCandidateFilters({ includeUndefinedSalary: e.target.checked })}
+              className="h-3.5 w-3.5 accent-primary"
+            />
+            Incluir candidatos sin salario definido
+          </label>
+        </div>
+
+        {/* Skills Logic Toggle */}
+        <div className="space-y-2">
+          <Label>{t("mode.and")}</Label>
+          <Select
+            value={candidateFilters.skillsMode}
+            onValueChange={(val: "AND" | "OR") => setCandidateFilters({ skillsMode: val })}
+          >
+            <SelectTrigger>
+              <SelectValue placeholder={t("mode.and")} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="AND">{t("mode.and")}</SelectItem>
+              <SelectItem value="OR">{t("mode.or")}</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
       </div>
 
       <div className="flex items-center justify-end gap-3 pt-2 border-t">
-        <Button variant="ghost" onClick={clearCandidateFilters} className="text-muted-foreground hover:text-foreground">
+        <Button
+          variant="ghost"
+          onClick={clearCandidateFilters}
+          className="text-muted-foreground hover:text-foreground"
+        >
           <RotateCcw className="mr-2 h-4 w-4" />
           {commonT("clear")}
         </Button>

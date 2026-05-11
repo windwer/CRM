@@ -1,0 +1,4 @@
+ ⚠ Port 3000 is in use, trying 3001 instead.
+<w> [webpack.cache.PackFileCacheStrategy] Restoring pack from C:\Proyectos\CRM\packages\web\.next\cache\webpack\server-development.pack.gz failed: TypeError: Cannot read properties of undefined (reading 'hasStartTime')
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Parsing of C:\Proyectos\CRM\node_modules\.pnpm\next-intl@4.11.0_next@14.2.35_@babel+core@7.29.0_react-dom@18.3.1_react@18.3.1__react@18.3.1__w4uvsguf4eioebsngj3unmkpx4\node_modules\next-intl\dist\esm\production\extractor\format\index.js for build dependencies failed at 'import(t)'.
+<w> Build dependencies behind this expression are ignored and might cause incorrect cache invalidation.

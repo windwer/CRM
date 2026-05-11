@@ -5,8 +5,8 @@ import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AlertCircle, ExternalLink, Pencil, Save, X } from "lucide-react";
 import type { z } from "zod";
-import { candidateUpdateSchema } from "@/lib/validations/candidate";
-import { useUpdateCandidate } from "@/hooks/useCandidates";
+import { candidateUpdateSchema, TALENT_POOL_STATUSES } from "@/lib/validations/candidate";
+import { useUpdateCandidate, useUpdateTalentPool } from "@/hooks/useCandidates";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -35,6 +35,8 @@ type EditableCandidate = {
   consentPersonalData?: boolean | null;
   consentDate?: string | Date | null;
   anonymizedAt?: string | Date | null;
+  salaryExpectationMax?: number | null;
+  talentPoolStatus?: string | null;
 };
 
 type Props = {
@@ -51,13 +53,25 @@ function buildDefaultValues(candidate: EditableCandidate): CandidateUpdateInput 
     experienceYears: candidate.experienceYears ?? 0,
     seniorityLevel: candidate.seniorityLevel ?? "mid",
     skillsArray: candidate.skillsArray ?? [],
+    salaryExpectationMax: candidate.salaryExpectationMax ?? 0,
   };
 }
+
+const TALENT_POOL_LABELS: Record<string, string> = {
+  active: "Activo",
+  may_fit_future: "Encaja a futuro",
+  discarded: "Descartado",
+};
 
 export function CandidateProfileEditable({ candidate, onEditingChange }: Props) {
   const [editing, setEditingState] = useState(false);
   const [skillInput, setSkillInput] = useState("");
+  const [talentPoolStatus, setTalentPoolStatus] = useState(
+    candidate.talentPoolStatus ?? "active"
+  );
+  const [savingTalentPool, setSavingTalentPool] = useState(false);
   const updateCandidate = useUpdateCandidate(candidate.id);
+  const updateTalentPool = useUpdateTalentPool(candidate.id);
   const { toast } = useToast();
 
   const defaultValues = useMemo(() => buildDefaultValues(candidate), [candidate]);
@@ -115,6 +129,23 @@ export function CandidateProfileEditable({ candidate, onEditingChange }: Props) 
     form.reset(defaultValues);
     setSkillInput("");
     setEditing(false);
+  };
+
+  const handleTalentPoolChange = async (newStatus: string) => {
+    setSavingTalentPool(true);
+    try {
+      await updateTalentPool.mutateAsync(newStatus);
+      setTalentPoolStatus(newStatus);
+      toast({ title: `Estado actualizado a "${TALENT_POOL_LABELS[newStatus] ?? newStatus}"` });
+    } catch (error: any) {
+      toast({
+        title: "Error al actualizar estado",
+        description: error?.response?.data?.error?.message ?? "Intentalo de nuevo",
+        variant: "destructive",
+      });
+    } finally {
+      setSavingTalentPool(false);
+    }
   };
 
   const addSkill = () => {
@@ -348,6 +379,63 @@ export function CandidateProfileEditable({ candidate, onEditingChange }: Props) 
             </p>
           </>
         )}
+      </section>
+
+      <section className="space-y-3">
+        <h3 className="text-sm font-semibold uppercase text-muted-foreground">
+          Pretensión salarial
+        </h3>
+        <Field
+          label="Salario máximo deseado (EUR/año bruto)"
+          error={form.formState.errors.salaryExpectationMax?.message}
+        >
+          {editing ? (
+            <Input
+              type="number"
+              min={0}
+              max={999999}
+              placeholder="Ej: 55000"
+              {...form.register("salaryExpectationMax", {
+                setValueAs: (value) => (value === "" ? 0 : Number(value)),
+              })}
+            />
+          ) : (
+            <p className="text-sm">
+              {!candidate.salaryExpectationMax || candidate.salaryExpectationMax === 0 ? (
+                <span className="italic text-muted-foreground">Sin definir</span>
+              ) : (
+                `${candidate.salaryExpectationMax.toLocaleString("es-ES")} EUR/año`
+              )}
+            </p>
+          )}
+        </Field>
+      </section>
+
+      <section className="space-y-3">
+        <h3 className="text-sm font-semibold uppercase text-muted-foreground">
+          Pool de talento
+        </h3>
+        <div className="flex items-center gap-4">
+          <Select
+            value={talentPoolStatus}
+            onValueChange={handleTalentPoolChange}
+            disabled={savingTalentPool}
+          >
+            <SelectTrigger className="w-48">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {TALENT_POOL_STATUSES.map((s) => (
+                <SelectItem key={s} value={s}>
+                  {TALENT_POOL_LABELS[s] ?? s}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          {savingTalentPool && (
+            <span className="text-xs text-muted-foreground">Guardando...</span>
+          )}
+        </div>
       </section>
 
       <section className="space-y-3">

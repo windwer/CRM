@@ -40,6 +40,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "@/hooks/use-toast";
 import { useTranslations } from "next-intl";
 import { BulkApplyModal } from "@/components/candidates/BulkApplyModal";
+import { useBulkTalentPool } from "@/hooks/useCandidates";
+import type { TalentPoolStatus } from "@/lib/validations/candidate";
 
 interface Candidate {
   id: string;
@@ -50,6 +52,8 @@ interface Candidate {
   seniorityLevel: string;
   createdAt: string;
   archivedAt?: string | null;
+  salaryExpectationMax?: number;
+  talentPoolStatus?: string | null;
   applications?: Array<{
     pipelineStage?: { slug: string } | null;
     offer?: { status: string } | null;
@@ -63,6 +67,20 @@ interface CandidateTableProps {
 
 const columnHelper = createColumnHelper<Candidate>();
 
+const TALENT_POOL_LABELS: Record<string, string> = {
+  active: "Activo",
+  may_fit_future: "Futuro",
+  discarded: "Descartado",
+};
+
+function formatSalary(value?: number): string {
+  if (!value || value === 0) return "";
+  if (value >= 1000) {
+    return `${(value / 1000).toLocaleString("es-ES", { maximumFractionDigits: 0 })}K€`;
+  }
+  return `${value}€`;
+}
+
 export function CandidateTable({ candidates, isLoading }: CandidateTableProps) {
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -72,7 +90,9 @@ export function CandidateTable({ candidates, isLoading }: CandidateTableProps) {
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [bulkApplyOpen, setBulkApplyOpen] = useState(false);
+  const [talentPoolOpen, setTalentPoolOpen] = useState(false);
   const [bulkAction, setBulkAction] = useState<"archive">("archive");
+  const [bulkTalentPoolStatus, setBulkTalentPoolStatus] = useState<TalentPoolStatus>("active");
   const selectedCount = selectedIds.size;
   const selectedCandidateIds = useMemo(() => Array.from(selectedIds), [selectedIds]);
   const visibleIds = useMemo(
@@ -111,6 +131,24 @@ export function CandidateTable({ candidates, isLoading }: CandidateTableProps) {
       });
     },
   });
+
+  const bulkTalentPoolMutation = useBulkTalentPool();
+
+  const handleBulkTalentPool = async () => {
+    try {
+      await bulkTalentPoolMutation.mutateAsync({
+        candidate_ids: selectedCandidateIds,
+        talent_pool_status: bulkTalentPoolStatus,
+      });
+      setSelectedIds(new Set());
+      setTalentPoolOpen(false);
+      toast({
+        title: `${selectedCount} candidatos actualizados a "${TALENT_POOL_LABELS[bulkTalentPoolStatus]}"`,
+      });
+    } catch {
+      // error handled by hook
+    }
+  };
 
   const toggleSelection = useCallback((candidateId: string) => {
     setSelectedIds((current) => {
@@ -215,6 +253,18 @@ export function CandidateTable({ candidates, isLoading }: CandidateTableProps) {
           </Badge>
         ),
       }),
+      columnHelper.accessor("salaryExpectationMax", {
+        header: "Salario",
+        cell: (info) => {
+          const val = info.getValue();
+          if (!val || val === 0) {
+            return <span className="text-xs text-muted-foreground italic">Sin definir</span>;
+          }
+          return (
+            <span className="text-sm tabular-nums font-medium">{formatSalary(val)}</span>
+          );
+        },
+      }),
       columnHelper.accessor("createdAt", {
         header: t("registered"),
         cell: (info) => (
@@ -256,6 +306,9 @@ export function CandidateTable({ candidates, isLoading }: CandidateTableProps) {
             <Button variant="secondary" onClick={() => setBulkApplyOpen(true)}>
               {t("bulkApply")}
             </Button>
+            <Button variant="outline" onClick={() => setTalentPoolOpen(true)}>
+              Cambiar estado pool
+            </Button>
             <Select
               value={bulkAction}
               onValueChange={(value: "archive") => setBulkAction(value)}
@@ -268,10 +321,7 @@ export function CandidateTable({ candidates, isLoading }: CandidateTableProps) {
               </SelectContent>
             </Select>
             <Button onClick={() => setConfirmOpen(true)}>{commonT("confirm")}</Button>
-            <Button
-              variant="outline"
-              onClick={() => setSelectedIds(new Set())}
-            >
+            <Button variant="outline" onClick={() => setSelectedIds(new Set())}>
               {commonT("cancel")}
             </Button>
           </div>
@@ -322,6 +372,7 @@ export function CandidateTable({ candidates, isLoading }: CandidateTableProps) {
         </Table>
       </div>
 
+      {/* Archive confirm dialog */}
       <Dialog open={confirmOpen} onOpenChange={setConfirmOpen}>
         <DialogContent>
           <DialogHeader>
@@ -340,6 +391,42 @@ export function CandidateTable({ candidates, isLoading }: CandidateTableProps) {
               onClick={() => bulkArchiveMutation.mutate()}
             >
               {t("archive")}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Bulk talent pool dialog */}
+      <Dialog open={talentPoolOpen} onOpenChange={setTalentPoolOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Cambiar estado en pool de talento</DialogTitle>
+          </DialogHeader>
+          <p className="text-sm text-muted-foreground">
+            Cambiarás el estado de <strong>{selectedCount}</strong> candidato(s) a:
+          </p>
+          <Select
+            value={bulkTalentPoolStatus}
+            onValueChange={(val) => setBulkTalentPoolStatus(val as TalentPoolStatus)}
+          >
+            <SelectTrigger>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="active">Activo</SelectItem>
+              <SelectItem value="may_fit_future">Encaja a futuro</SelectItem>
+              <SelectItem value="discarded">Descartado</SelectItem>
+            </SelectContent>
+          </Select>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setTalentPoolOpen(false)}>
+              {commonT("cancel")}
+            </Button>
+            <Button
+              disabled={bulkTalentPoolMutation.isPending}
+              onClick={handleBulkTalentPool}
+            >
+              Confirmar cambio
             </Button>
           </DialogFooter>
         </DialogContent>

@@ -5,7 +5,7 @@ import { parsePagination, buildMeta } from "@/lib/pagination";
 import { candidateSchema } from "@/lib/validations/candidate";
 import logger from "@/lib/logger";
 import { NextRequest } from "next/server";
-import { Prisma } from "@smartcrm/database";
+import { Prisma, TalentPoolStatus } from "@smartcrm/database";
 
 function getDuplicateField(error: Prisma.PrismaClientKnownRequestError) {
   const target = error.meta?.target;
@@ -23,7 +23,42 @@ export async function GET(req: NextRequest) {
     const includeArchived = searchParams.get("archived") === "true";
     const { page, limit, skip, take } = parsePagination(searchParams);
 
-    const where = includeArchived ? {} : { archivedAt: null };
+    const talentPoolStatus = searchParams.get("talent_pool_status");
+    const salaryMin = searchParams.get("salary_min") ? Number(searchParams.get("salary_min")) : undefined;
+    const salaryMax = searchParams.get("salary_max") ? Number(searchParams.get("salary_max")) : undefined;
+    const includeUndefined = searchParams.get("include_undefined") !== "false";
+
+    const where: Prisma.CandidateWhereInput = includeArchived ? {} : { archivedAt: null };
+
+    // Talent pool filter
+    if (talentPoolStatus === "exclude_discarded" || !talentPoolStatus) {
+      where.NOT = { talentPoolStatus: "discarded" as TalentPoolStatus };
+    } else if (talentPoolStatus && talentPoolStatus !== "all") {
+      where.talentPoolStatus = talentPoolStatus as TalentPoolStatus;
+    }
+
+    // Salary range filter
+    if (salaryMin !== undefined || salaryMax !== undefined) {
+      const salaryConditions: Prisma.CandidateWhereInput[] = [];
+
+      if (salaryMin !== undefined && salaryMax !== undefined) {
+        salaryConditions.push({
+          salaryExpectationMax: { gte: salaryMin, lte: salaryMax },
+        });
+      } else if (salaryMin !== undefined) {
+        salaryConditions.push({ salaryExpectationMax: { gte: salaryMin } });
+      } else if (salaryMax !== undefined) {
+        salaryConditions.push({ salaryExpectationMax: { lte: salaryMax } });
+      }
+
+      if (includeUndefined) {
+        salaryConditions.push({ salaryExpectationMax: 0 });
+      }
+
+      if (salaryConditions.length > 0) {
+        where.OR = salaryConditions;
+      }
+    }
 
     const [candidates, total] = await db.$transaction([
       db.candidate.findMany({
