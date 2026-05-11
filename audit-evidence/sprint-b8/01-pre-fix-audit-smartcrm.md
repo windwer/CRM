@@ -1,9 +1,9 @@
 # Sprint B8 — Pre-fix Audit
 **Database:** smartcrm
-**Timestamp:** 2026-05-11T07:42:44.276Z
+**Timestamp:** 2026-05-11T08:24:27.267Z
 
 ## Backup
-- File: backup_smartcrm_pre_b8.json (178 KB) ✅
+- File: backup_smartcrm_pre_b8.json (199 KB) ✅
 
 ## Counts
 | Table | Count |
@@ -11,19 +11,19 @@
 | candidates | 35 |
 | offers | 7 |
 | applications | 40 |
-| pipeline_stages | 38 |
+| pipeline_stages | 80 |
 | history | 80 |
 
 ## Stages per offer
 | Title | Status | AssignedTo | Total Stages | Locked |
 |---|---|---|---|---|
-| Junior QA Automation | closed_hired | 0d5e64f8-df5b-4425-b231-8de264839b20 | 4 | 4 |
-| Talent Acquisition Partner | closed_no_hire | 0d5e64f8-df5b-4425-b231-8de264839b20 | 4 | 4 |
-| Senior Fullstack Engineer | published | 0d5e64f8-df5b-4425-b231-8de264839b20 | 4 | 4 |
-| Product Designer B2B | closed_no_hire | 0d5e64f8-df5b-4425-b231-8de264839b20 | 4 | 4 |
-| Data Analyst People Ops | closed_no_hire | 0d5e64f8-df5b-4425-b231-8de264839b20 | 4 | 4 |
-| Backend Engineer Integrations | published | 0d5e64f8-df5b-4425-b231-8de264839b20 | 4 | 4 |
-| sdf | draft | 0d5e64f8-df5b-4425-b231-8de264839b20 | 4 | 4 |
+| Junior QA Automation | closed_hired | 0d5e64f8-df5b-4425-b231-8de264839b20 | 10 | 4 |
+| Talent Acquisition Partner | closed_no_hire | 0d5e64f8-df5b-4425-b231-8de264839b20 | 10 | 4 |
+| Senior Fullstack Engineer | published | 0d5e64f8-df5b-4425-b231-8de264839b20 | 10 | 4 |
+| Product Designer B2B | closed_no_hire | 0d5e64f8-df5b-4425-b231-8de264839b20 | 10 | 4 |
+| Data Analyst People Ops | closed_no_hire | 0d5e64f8-df5b-4425-b231-8de264839b20 | 10 | 4 |
+| Backend Engineer Integrations | published | 0d5e64f8-df5b-4425-b231-8de264839b20 | 10 | 4 |
+| sdf | draft | 0d5e64f8-df5b-4425-b231-8de264839b20 | 10 | 4 |
 
 ## Template stages
 | Pos | Slug | Name | Locked | Color |

@@ -1,17 +1,11 @@
 {
   "dbName": "smartcrm_test",
-  "timestamp": "2026-05-11T08:01:15.896Z",
+  "timestamp": "2026-05-11T09:58:09.924Z",
   "result": {
-    "processed": 1,
-    "stagesAdded": 6,
+    "processed": 0,
+    "stagesAdded": 0,
     "skipped": 0,
     "errors": 0,
-    "details": [
-      {
-        "offerTitle": "Idempotency Test Offer",
-        "added": 6,
-        "skipped": false
-      }
-    ]
+    "details": []
   }
 }
