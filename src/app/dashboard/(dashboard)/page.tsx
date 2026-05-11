@@ -22,7 +22,7 @@ import { useTranslations } from "next-intl";
 export default function DashboardPage() {
   const [selectedOfferId, setSelectedOfferId] = useState<string | undefined>(undefined);
   const { stats, isLoading } = useDashboard(selectedOfferId);
-  const { data: offersData } = useOffers("active");
+  const { data: offersData } = useOffers();
   const t = useTranslations("dashboard");
 
   const offers: Array<{ id: string; title: string }> = (offersData?.data ?? []).slice(0, 20);
