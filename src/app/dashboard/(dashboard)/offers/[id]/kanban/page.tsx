@@ -2,94 +2,176 @@
 
 import React from "react";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, UserCircle2 } from "lucide-react";
-import { useApplications } from "@/hooks/useApplications";
-import { useOffer } from "@/hooks/useOffers";
-import { usePipelineStages } from "@/hooks/usePipelineStages";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { InitialsAvatar } from "@/components/ui/InitialsAvatar";
+import { Skeleton } from "@/components/ui/skeleton";
+
+type KanbanApp = {
+  id: string;
+  applied_at: string;
+  ai_score: number | null;
+  candidate: { id: string; full_name: string; email: string; initials: string };
+};
+
+type KanbanStage = {
+  id: string;
+  name: string;
+  position: number;
+  color: string;
+  is_locked: boolean;
+  applications: KanbanApp[];
+};
+
+type KanbanData = {
+  offer: {
+    id: string;
+    title: string;
+    status: string;
+    assignee: { id: string; name: string; initials: string } | null;
+  };
+  stages: KanbanStage[];
+};
+
+function AiScoreBadge({ score }: { score: number | null }) {
+  if (score === null) return null;
+  const pct = Math.round(score * 100);
+  const color =
+    pct >= 80
+      ? "bg-emerald-100 text-emerald-800"
+      : pct >= 60
+      ? "bg-amber-100 text-amber-800"
+      : "bg-rose-100 text-rose-800";
+  return (
+    <span className={`rounded px-1.5 py-0.5 text-[10px] font-medium ${color}`}>
+      IA {pct}%
+    </span>
+  );
+}
 
 export default function OfferKanbanPage({ params }: { params: { id: string } }) {
   const router = useRouter();
-  const { data: offer } = useOffer(params.id);
-  const { applications = [], isLoading } = useApplications({ offer_id: params.id, limit: 100 });
-  const { data: stages = [] } = usePipelineStages();
+
+  const { data, isLoading } = useQuery<{ success: boolean; data: KanbanData }>({
+    queryKey: ["kanban", params.id],
+    queryFn: () => axios.get(`/api/offers/${params.id}/kanban`).then((r) => r.data),
+  });
+
+  const kanban = data?.data;
 
   return (
-    <div className="space-y-8 p-8">
-      <div className="flex items-center gap-4">
-        <Button variant="ghost" size="icon" onClick={() => router.push(`/dashboard/offers/${params.id}`)}>
-          <ArrowLeft className="h-5 w-5" />
-        </Button>
-        <div>
-          <h1 className="text-3xl font-black">Kanban</h1>
-          <p className="text-sm text-muted-foreground">{offer?.title}</p>
+    <div className="space-y-6 p-6">
+      {/* Header */}
+      <div className="flex items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => router.push(`/dashboard/offers/${params.id}`)}
+          >
+            <ArrowLeft className="h-5 w-5" />
+          </Button>
+          <div>
+            <h1 className="text-2xl font-black">Kanban</h1>
+            {kanban ? (
+              <p className="text-sm text-muted-foreground">{kanban.offer.title}</p>
+            ) : (
+              <Skeleton className="h-4 w-48 mt-1" />
+            )}
+          </div>
         </div>
+
+        {/* Assignee */}
+        {kanban?.offer.assignee ? (
+          <div className="flex items-center gap-2 rounded-full border px-3 py-1.5">
+            <InitialsAvatar
+              name={kanban.offer.assignee.name}
+              size="xs"
+              className="bg-primary/10 text-primary"
+            />
+            <span className="text-sm font-medium">{kanban.offer.assignee.name}</span>
+          </div>
+        ) : kanban ? (
+          <span className="text-sm text-muted-foreground">Sin asignar</span>
+        ) : null}
       </div>
 
+      {/* Kanban board */}
       <div
-        className="flex flex-row gap-4 overflow-x-auto overflow-y-visible pb-4"
+        className="flex flex-row gap-4 overflow-x-auto pb-6"
         style={{ minHeight: "calc(100vh - 200px)" }}
       >
-        {stages.map((stage: any) => {
-          const stageApplications = applications.filter((application: any) => {
-            if (application.pipelineStageId) return application.pipelineStageId === stage.id;
-            return application.pipelineStage?.slug === stage.slug;
-          });
+        {isLoading &&
+          [1, 2, 3, 4].map((i) => (
+            <div key={i} className="w-[280px] min-w-[280px] shrink-0 space-y-3">
+              <Skeleton className="h-10 w-full rounded-xl" />
+              <Skeleton className="h-24 w-full rounded-xl" />
+              <Skeleton className="h-24 w-full rounded-xl" />
+            </div>
+          ))}
 
-          return (
-            <Card key={stage.id} className="h-fit min-h-[520px] w-[280px] min-w-[280px] flex-shrink-0">
-              <CardHeader className="space-y-2">
-                <CardTitle className="flex items-center justify-between text-sm font-black">
-                  <span className="flex items-center gap-2">
-                    <span
-                      className="h-2.5 w-2.5 rounded-full"
-                      style={{ backgroundColor: stage.color || "#94A3B8" }}
+        {kanban?.stages.map((stage) => (
+          <Card
+            key={stage.id}
+            className="h-fit min-h-[480px] w-[280px] min-w-[280px] flex-shrink-0"
+          >
+            <CardHeader className="pb-3 pt-4">
+              <CardTitle className="flex items-center justify-between text-sm font-black">
+                <span className="flex items-center gap-2">
+                  <span
+                    className="h-2.5 w-2.5 rounded-full"
+                    style={{ backgroundColor: stage.color }}
+                  />
+                  {stage.name}
+                  {stage.is_locked && (
+                    <span className="text-[10px] text-muted-foreground">🔒</span>
+                  )}
+                </span>
+                <Badge variant="secondary">{stage.applications.length}</Badge>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              {stage.applications.map((app) => (
+                <button
+                  key={app.id}
+                  type="button"
+                  onClick={() => router.push(`/dashboard/applications/${app.id}`)}
+                  className="w-full rounded-xl border bg-background p-4 text-left shadow-sm transition hover:border-primary/50 hover:shadow-md"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate font-semibold text-sm">
+                        {app.candidate.full_name}
+                      </p>
+                      <p className="truncate text-xs text-muted-foreground" title={app.candidate.email}>
+                        {app.candidate.email}
+                      </p>
+                    </div>
+                    <InitialsAvatar
+                      name={app.candidate.full_name}
+                      size="xs"
                     />
-                    {stage.name}
-                  </span>
-                  <Badge variant="secondary">{stageApplications.length}</Badge>
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                {isLoading ? (
-                  <div className="h-24 animate-pulse rounded-xl bg-muted" />
-                ) : (
-                  stageApplications.map((application: any) => (
-                    <button
-                      key={application.id}
-                      type="button"
-                      onClick={() => router.push(`/dashboard/applications/${application.id}`)}
-                      className="w-full rounded-xl border bg-background p-4 text-left shadow-sm transition hover:border-primary/50 hover:shadow-md"
-                    >
-                      <div className="flex items-start justify-between gap-3">
-                        <div>
-                          <p className="font-black">{application.candidate.fullName}</p>
-                          <p className="text-xs text-muted-foreground">{application.candidate.email}</p>
-                        </div>
-                        {application.assignedTo ? (
-                          <Avatar className="h-7 w-7">
-                            <AvatarImage src={application.assignedTo.avatarUrl || undefined} />
-                            <AvatarFallback>{application.assignedTo.name?.slice(0, 2).toUpperCase()}</AvatarFallback>
-                          </Avatar>
-                        ) : (
-                          <UserCircle2 className="h-7 w-7 text-muted-foreground" />
-                        )}
-                      </div>
-                      {application.aiScore && (
-                        <Badge variant="outline" className="mt-3">
-                          IA {Math.round(Number(application.aiScore) * 100)}%
-                        </Badge>
-                      )}
-                    </button>
-                  ))
-                )}
-              </CardContent>
-            </Card>
-          );
-        })}
+                  </div>
+                  {app.ai_score !== null && (
+                    <div className="mt-2">
+                      <AiScoreBadge score={app.ai_score} />
+                    </div>
+                  )}
+                </button>
+              ))}
+
+              {stage.applications.length === 0 && (
+                <p className="py-6 text-center text-xs text-muted-foreground">
+                  Sin candidatos
+                </p>
+              )}
+            </CardContent>
+          </Card>
+        ))}
       </div>
     </div>
   );

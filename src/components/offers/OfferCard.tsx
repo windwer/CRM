@@ -22,6 +22,7 @@ import { useTranslations } from "next-intl";
 import axios from "axios";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "@/hooks/use-toast";
+import { InitialsAvatar } from "@/components/ui/InitialsAvatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -144,6 +145,13 @@ export function OfferCard({ offer }: OfferCardProps) {
             <Clock size={14} />
             <span>{formatDistanceToNow(new Date(offer.createdAt), { locale: es, addSuffix: true })}</span>
           </div>
+          {offer.assignedTo && (
+            <InitialsAvatar
+              name={offer.assignedTo.name}
+              size="xs"
+              title={offer.assignedTo.name}
+            />
+          )}
         </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild onClick={(event) => event.stopPropagation()}>
